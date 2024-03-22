@@ -13,6 +13,13 @@
     <!-- Core theme CSS (includes Bootstrap)-->
     <link href="{{asset('css/styles.css')}}" rel="stylesheet" />
 </head>
+<style>
+    #big_div {
+    background-image: url('{{ asset('assets/images/laura.jpg') }}');
+    z-index:999
+}
+
+</style>
 
 <body>
     <!-- Navigation-->
@@ -35,15 +42,34 @@
                             <li><a class="dropdown-item" href="#!">New Arrivals</a></li>
                         </ul>
                     </li>
+                    @guest
                     <li class="nav-item">
-                        <a class="nav-link active custom-btn login-btn" aria-current="page" href="/login">Login</a>
+                        <a class="nav-link active custom-btn login-btn" aria-current="page" href="{{ route('login') }}">Login</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active custom-btn register-btn" aria-current="page" href="/register">Register</a>
+                        <a class="nav-link active custom-btn register-btn" aria-current="page" href="{{ route('register') }}">Register</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link active custom-btn register-btn" aria-current="page" href="/register">log out</a>
+                    @endguest
+                   
+               
+                    @auth
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle btn btn-primary" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Profile</a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <li><span class="dropdown-item">{{ auth()->user()->name }}</span></li>
+                            <li><span class="dropdown-item">{{ auth()->user()->email }}</span></li>
+                            <li><hr class="dropdown-divider" /></li>
+                            <li>
+                                <form action="{{ route('logout') }}" method="POST">
+                                    @csrf
+                                    <button type="submit" class="dropdown-item btn btn-info">Logout</button>
+                                </form>
+                            </li>
+                        </ul>
                     </li>
+                @endauth
+          
+
                 </ul>
                 <form class="d-flex">
                     <button class="btn btn-outline-dark" type="submit">
@@ -52,9 +78,11 @@
                         <span class="badge bg-dark text-white ms-1 rounded-pill">0</span>
                     </button>
                 </form>
+              
             </div>
         </div>
     </nav>
+
     <!-- Header-->
     <header class="bg-dark py-5">
         <div class="container px-4 px-lg-5 my-5">
@@ -65,8 +93,9 @@
             </div>
         </div>
     </header>
-    <br><br><br><br><br><div class="container">
-        <div class="search">
+    <br><br><br><br><br>
+    <div  id="big_div"  class="container">
+        <div  class="search">
             <div class="row justify-content-center">
                 <div class="col-md-6">
                     <div class="d-flex justify-content-center">
@@ -105,7 +134,7 @@
     
     
     <!-- Section-->
-    <section class="py-5">
+    <section  id="big_div"  class="py-5">
         <div class="container px-4 px-lg-5 mt-5">
             <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
                 <div class="col mb-5">

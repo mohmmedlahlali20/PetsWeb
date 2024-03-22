@@ -65,9 +65,8 @@
 
         <div class="card bg-glass">
           <div class="card-body px-4 py-5 px-md-5">
-            <form method="POST" action="">
+            <form method="POST" action="{{ route('register.post') }}">
               @csrf
-              
               <div class="form-outline mb-4">
                 <label class="form-label" for="form3Example3">Name</label>
                 <input type="text" name="name"  id="form3Example3" class="form-control" />

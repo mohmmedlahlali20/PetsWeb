@@ -2,55 +2,69 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\User;
-use Illuminate\Http\Request;
-use App\Http\Requests\UserRequest;
 
+use App\Models\User;
+use Illuminate\Support\Facades\Redirect;
+use Illuminate\Http\Request;
+use App\Http\Requests\AuthRequest;
+use App\Http\Requests\UserRequest;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
 class AuthController extends Controller
 {
-    //login 
-    public function LoginForm(){
-        return view('auth.login');
-
-    }
 
     public function login(){
-        $credentials = $request->validate([
-            'email' => 'required|email',
-            'password' => 'required',
-        ]);
-
-        if (Auth::attempt($credentials)) {
-          
-            return redirect()->intended('welcome');
-        }
-        dd(Auth::attempt($credentials));
-
-              return redirect()->back()->withErrors(['email' => 'Invalid credentials']);
+        return view('auth.login');
     }
 
-//register
-    public function RegisterForm() {
+
+    public function loginPost(Request $request){
+        $request->validate([
+            'email' => 'required',
+            'password' => 'required',
+        ]);
+    
+        $credentials = $request->only('email', 'password');
+    //dd($credentials);
+        if(Auth::attempt($credentials)){
+            return redirect()->route('welcome')->with('success','Login Success');
+        }
+    
+        return redirect()->back()->with('error', 'Login Failed');
+    }
+    
+
+    public function register(){
         return view('auth.register');
     }
 
-    public function Register(UserRequest $request){
-
-
-         $validatedData = $request->validated();
     
-         $name = $validatedData['name'];
-         $email = $validatedData['email'];
-         $password = $validatedData['password'];
-     
 
-         $user = new User();
-         $user->name = $name;
-         $user->email = $email;
-         $user->password = bcrypt($password);
-         $user->save();
- 
-         return redirect()->route('welcome');
+    public function registerPost(AuthRequest $request){
+        $data['name'] = $request->name;
+        $data['email'] = $request->email;
+        $data['password'] = bcrypt($request->password);
+    
+        $user = User::create($data);
+       
+       
+        if(!$user){
+            return redirect()->back()->with('error', 'Registration failed');
+        }
+        auth()->login($user);
+   
+        // Rediriger l'utilisateur vers la page d'accueil (ou toute autre page authentifiée) avec actualisation de la page
+        return redirect()->route('welcome')->with('success', 'Registration successful');
+    }
+    
+
+    public function Logout(){
+        session::flush();
+        Auth::Logout();
+        return redirect()->route('login')->with('success','Logout succes');
 
     }
+
+
+    
 }
