@@ -61,15 +61,15 @@
 
       <div class="col-lg-6 mb-5 mb-lg-0 position-relative">
         <div id="radius-shape-1" class="position-absolute rounded-circle shadow-5-strong">
-          <img style="margin-left: -40px" src="{{ asset('images/cat1.jpg') }}" alt="">
+          <img style="margin-left: -40px" src="{{ asset('assets/images/cat1.jpg') }}" alt="">
         </div>
         <div id="radius-shape-2" class="position-absolute shadow-5-strong">
-          <img style="margin-left: 70px; padding-top:-80px" src="{{ asset('images/pets2.png') }}" alt="">
+          <img style="margin-left: 70px; padding-top:-80px" src="{{ asset('assets/images/arnab1.jpg') }}" alt="">
         </div>
 
         <div class="card bg-glass">
           <div class="card-body px-4 py-5 px-md-5">
-            <form action="{{ route('login')  }}" method="POST">
+            <form action="" method="POST">
               @csrf
 
               <div class="form-outline mb-4">
@@ -112,7 +112,7 @@
               <div class="text-center mt-3">
                 <a href="#" class="link-info me-4">Forgot Password?</a>
                 <span class="text-muted">|</span>
-                <a href="{{ route('register') }}" class="link-info ms-4">Create New Account</a>
+                <a href="" class="link-info ms-4">Create New Account</a>
               </div>
             </form>
           </div>

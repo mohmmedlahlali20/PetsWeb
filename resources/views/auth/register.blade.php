@@ -57,15 +57,15 @@
 
       <div class="col-lg-6 mb-5 mb-lg-0 position-relative">
         <div id="radius-shape-1" class="position-absolute rounded-circle shadow-5-strong">
-          <img style="margin-left: -40px" src="{{ asset('images/cat1.jpg') }}" alt="">
+          <img style="margin-left: -40px" src="{{ asset('assets/images/cat1.jpg') }}" alt="">
         </div>
         <div id="radius-shape-2" class="position-absolute shadow-5-strong">
-          <img style="margin-left: 70px; padding-top:-80px" src="{{ asset('images/pets2.png') }}" alt="">
+          <img style="margin-left: 70px; padding-top:-80px" src="{{ asset('assets/images/arnab.jpg') }}" alt="">
         </div>
 
         <div class="card bg-glass">
           <div class="card-body px-4 py-5 px-md-5">
-            <form method="POST" action="{{ route('register') }}">
+            <form method="POST" action="">
               @csrf
               
               <div class="form-outline mb-4">
