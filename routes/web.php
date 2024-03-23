@@ -1,8 +1,11 @@
 <?php
 
+use App\Models\Products;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\AdminController;
+use App\Http\Controllers\ProductsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,8 +24,9 @@ Route::get('/', function () {
 
 
 
+Route::get('/admin', [AdminController::class, 'index'])->name('products.index');
 
-
+Route::prefix('auth')->group(function () {
     Route::get('/login', [AuthController::class, 'login'])->name('login');
     Route::post('/login', [AuthController::class, 'loginPost'])->name('login.post');
     Route::get('/register', [AuthController::class, 'register'])->name('register');
@@ -32,3 +36,4 @@ Route::get('/', function () {
     Route::post('/Forget-password', [AuthController::class, 'ForgetPassword'])->name('forget');
     Route::get('/reset-password/{token}' , [AuthController::class, 'resetPassword'])->name('reset.password');
     Route::post('/reset-password' , [AuthController::class, 'ResetPasswordPost'])->name('reset.password.post');
+});
