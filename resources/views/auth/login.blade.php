@@ -1,17 +1,8 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Login</title>
-  <!-- Bootstrap CSS -->
-  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-  <!-- Font Awesome for icons -->
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" rel="stylesheet">
 
-</head>
-<body style="overflow: hidden;">
-<!-- Section: Design Block -->
+
+@extends('Layouts.Auth')
+@section('title' , 'login')
+@section('content')
 <section class="background-radial-gradient overflow-hidden">
   <style>
    .background-radial-gradient {
@@ -44,6 +35,7 @@
       backdrop-filter: saturate(200%) blur(25px);
     }
   </style>
+
 
   <div class="container px-4 py-5 px-md-5 text-center text-lg-start my-5">
     <div class="row gx-lg-5 align-items-center mb-5">
@@ -113,7 +105,7 @@
                 </button>
               </div>
               <div class="text-center mt-3">
-                <a href="#" class="link-info me-4">Forgot Password?</a>
+                <a href="{{ route('forget.password') }}" class="link-info me-4">Forgot Password?</a>
                 <span class="text-muted">|</span>
                 <a href="" class="link-info ms-4">Create New Account</a>
               </div>
@@ -125,9 +117,6 @@
     </div>
   </div>
 </section>
+@endsection
 
-  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-</body>
-</html>
+
