@@ -8,11 +8,12 @@ use App\Models\commends;
 use App\Models\comments;
 use App\Models\Categories;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Products extends Model
 {
-    use HasFactory;
+    use HasFactory,SoftDeletes;
 
 
     public function category()
@@ -40,4 +41,14 @@ class Products extends Model
     {
         return $this->hasMany(rates::class);
     }
+
+    protected $fillable = [
+        'name',
+        'price',
+        'description',
+        'quantity',
+        'image',
+        
+    ];
+
 }

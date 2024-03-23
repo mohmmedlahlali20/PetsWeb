@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Products;
 use Illuminate\Http\Request;
+use App\Http\Requests\ProductsRequest;
 
 class AdminController extends Controller
 {
@@ -12,7 +13,7 @@ class AdminController extends Controller
      */
     public function index()
     {
-        $products = Products::all();
+        $products = Products::paginate(1);
         return view('DashbordAdmin.Products.index', compact('products'));
 
     }
@@ -22,15 +23,23 @@ class AdminController extends Controller
      */
     public function create()
     {
-        //
+        return view('DashbordAdmin.Products.create');
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(ProductsRequest $admin)
     {
-        //
+        $data = $admin->validated();
+        if($admin->hasFile('image')){
+        $data['image'] = $admin->file('image')->store('Products', 'public');
+
+        }
+
+        Products::create($data);
+        //dd($data);
+        return  redirect()->route('admin.index')->with('success' , 'Product is add successfuly');
     }
 
     /**
@@ -60,8 +69,8 @@ class AdminController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy($admin)
     {
-        //
+$admin->delete();
     }
 }

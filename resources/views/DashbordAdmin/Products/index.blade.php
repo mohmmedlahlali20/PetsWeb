@@ -21,11 +21,15 @@
             <tr>
                 <td>{{ $product->id }}</td>
                 <td>{{ $product->name }}</td>
-                <td>{{ Str::limit($product->discription) }}</td>
+                <td>{{ Str::limit($product->description, 20) }}</td>
                 <td>{{ $product->price }}</td>
                 <td>{{ $product->quantity }}</td>
-                <td>{{ $product->image }}</td>
-                <td>{{ $product->category->name }}</td>
+                <td>
+                    <div style="text-align: center;">
+                        <img width="30%" height="30%" src="{{ Storage::url($product->image) }}" alt="">
+                    </div>
+                                    </td>
+                <td>No Category Exist</td> 
                 <td>
                     <button class="btn btn-primary">Add to Cart</button>
                     <button class="btn btn-outline-secondary">Details</button>
@@ -38,6 +42,7 @@
             @endforelse
         </tbody>
     </table>
+    {{ $products->links() }}
 </div>
 
 @endsection

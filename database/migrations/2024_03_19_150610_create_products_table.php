@@ -18,12 +18,13 @@ return new class extends Migration
             $table->text('description')->nullable(); 
             $table->integer('quantity')->default(10);
             $table->string('image')->nullable();
-            $table->foreignId('category_id')
-            ->constrained('categories')
-            ->onDelete('cascade'); 
-            $table->foreignId('user_id')
-            ->constrained('users')
-            ->onDelete('cascade');  
+            // $table->foreignId('category_id')
+            // ->default(1)    
+            // ->constrained('categories')
+            // ->onDelete('cascade');
+            // $table->foreignId('user_id')
+            // ->constrained('users')
+            // ->onDelete('cascade');  
             $table->timestamps();
             $table->softDeletes();
         });

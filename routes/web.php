@@ -24,8 +24,8 @@ Route::get('/', function () {
 
 
 
-Route::get('/admin', [AdminController::class, 'index'])->name('products.index');
-
+//Route::get('/admin', [AdminController::class, 'index'])->name('products.index');
+Route::resource('/admin', AdminController::class);
 Route::prefix('auth')->group(function () {
     Route::get('/login', [AuthController::class, 'login'])->name('login');
     Route::post('/login', [AuthController::class, 'loginPost'])->name('login.post');
