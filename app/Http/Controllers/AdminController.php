@@ -30,11 +30,11 @@ class AdminController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(ProductsRequest $admin)
+    public function store(ProductsRequest $product)
     {
-        $data = $admin->validated();
-        if($admin->hasFile('image')){
-        $data['image'] = $admin->file('image')->store('Products', 'public');
+        $data = $product->validated();
+        if($product->hasFile('image')){
+        $data['image'] = $product->file('image')->store('Products', 'public');
 
         }
 
@@ -64,9 +64,12 @@ class AdminController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(ProductsRequest $request, Products $product)
     {
-        //
+        $validatedData = $request->validated();
+        $product->update($validatedData);
+        $product->update($validatedData);
+         return redirect()->route('product.index')->with('success' , 'Product is update successfuly');;
     }
 
     /**
