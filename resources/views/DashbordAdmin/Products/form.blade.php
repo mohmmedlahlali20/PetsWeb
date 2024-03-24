@@ -1,19 +1,24 @@
-<form action="{{ route('admin.store') }}" method="POST" class="form-group" enctype="multipart/form-data" >
+@extends('Layouts.Admin')
+@section('title' , ($IsUpdte? 'Update' : 'Create')  .  ' Products')
+
+@section('content')
+<h1 class="text-center mb-5 mt-5 font-bold">@yield('title')</h1>
+<form action="{{ route('product.store') }}" method="POST" class="form-group" enctype="multipart/form-data" >
     @csrf
     <div class="row mb-3">
         <div class="col">
-            <input type="text" class="form-control border" value="{{ old('name') }}" placeholder="Product name" name="name">
+            <input type="text" class="form-control border" value="{{ old('name') ?? $product->name }}" placeholder="Product name" name="name">
         </div>
         <div class="col">
-            <input type="text" class="form-control border" value="{{ old('price') }}" placeholder="Price" name="price">
+            <input type="text" class="form-control border" value="{{ old('price') ?? $product->price }}" placeholder="Price" name="price">
         </div>
     </div>
     <div class="row mb-3">
         <div class="col">
-            <textarea class="form-control border"  placeholder="Description" name="description">{{ old('Description') }}</textarea>
+            <textarea class="form-control border" placeholder="Description" name="description">{{ old('description') ?? $product->description }}</textarea>
         </div>
         <div class="col">
-            <input type="number" class="form-control border" value="{{ old('quantity') }}" placeholder="Quantity" name="quantity">
+            <input type="number" class="form-control border" value="{{ old('quantity') ?? $product->quantity }}" placeholder="Quantity" name="quantity">
         </div>
     </div>
     <div class="row mb-3">
@@ -28,7 +33,16 @@
     </div>
     <div class="row">
         <div class="col">
-            <button type="submit" class="btn btn-primary">Submit</button>
+            @if($IsUpdte)
+                <button type="submit" class="btn btn-primary">Update Products</button>
+            @else
+                <button type="submit" class="btn btn-primary">Add New Products</button>
+            @endif
+           
         </div>
     </div>
 </form>
+
+
+
+@endsection

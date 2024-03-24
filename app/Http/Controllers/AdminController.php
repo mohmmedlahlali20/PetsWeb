@@ -13,7 +13,7 @@ class AdminController extends Controller
      */
     public function index()
     {
-        $products = Products::paginate(1);
+        $products = Products::paginate(10);
         return view('DashbordAdmin.Products.index', compact('products'));
 
     }
@@ -21,9 +21,10 @@ class AdminController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create(Products $product)
     {
-        return view('DashbordAdmin.Products.create');
+        $IsUpdte = false;
+        return view('DashbordAdmin.Products.form' , compact('IsUpdte' , 'product'));
     }
 
     /**
@@ -39,7 +40,7 @@ class AdminController extends Controller
 
         Products::create($data);
         //dd($data);
-        return  redirect()->route('admin.index')->with('success' , 'Product is add successfuly');
+        return  redirect()->route('product.index')->with('success' , 'Product is add successfuly');
     }
 
     /**
@@ -53,9 +54,11 @@ class AdminController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Products $product)
     {
-        //
+        $IsUpdte = true;
+        //dd( $product);
+        return view('DashbordAdmin.Products.form' , compact('IsUpdte' , 'product'));
     }
 
     /**
@@ -69,8 +72,11 @@ class AdminController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy($admin)
+    public function destroy(Products $product)
     {
-$admin->delete();
+        //dd($product);
+        $product->delete();
+        return redirect()->back()->with('success', 'Product deleted successfully');
     }
+    
 }

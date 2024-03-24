@@ -6,11 +6,9 @@
     <meta name="description" content="" />
     <meta name="author" content="" />
     <title>{{ config('app.name')  }} </title>
-    <!-- Favicon-->
+
     <link rel="icon" type="image/x-icon" href="{{asset('assets/favicon.ico')}}" />
-    <!-- Bootstrap icons-->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
-    <!-- Core theme CSS (includes Bootstrap)-->
     <link href="{{asset('css/styles.css')}}" rel="stylesheet" />
 </head>
 <style>
@@ -100,19 +98,18 @@
                     <div class="d-flex justify-content-center">
                         <div class="search-2"> 
                             <i class='bx bxs-map'></i> 
-                            <select class="form-control"> <!-- Added form-control class -->
+                            <select class="form-control"> 
                                 <option value="">Select an option</option>
                                 <option value="option1">Option 1</option>
                                 <option value="option2">Option 2</option>
                                 <option value="option3">Option 3</option>
-                                <!-- Add more options as needed -->
                             </select>
                         </div>
                         &nbsp;&nbsp;&nbsp;
                         <div class="search-2"> 
                             <i class='bx bxs-map'></i> 
-                            <input type="search" class="form-control" placeholder="Search 2"> <!-- Added form-control class -->
-                            <button class="btn btn-primary">Search</button> <!-- Added btn btn-primary classes -->
+                            <input type="search" class="form-control" placeholder="Search 2"> 
+                            <button class="btn btn-primary">Search</button> 
                         </div>
                     </div>
                     <br>
