@@ -33,7 +33,7 @@ class AuthController extends Controller
         $credentials = $request->only('email', 'password');
     //dd($credentials);
         if(Auth::attempt($credentials)){
-            return redirect()->route('welcome')->with('success','Login Success');
+            return redirect()->route('Home.index')->with('success','Login Success');
         }
     
         return redirect()->back()->with('error', 'Login Failed');
@@ -59,7 +59,7 @@ class AuthController extends Controller
         }
         auth()->login($user);
    
-        return redirect()->route('welcome')->with('success', 'Registration successful');
+        return redirect()->route('Home.index')->with('success', 'Registration successful');
     }
     
 

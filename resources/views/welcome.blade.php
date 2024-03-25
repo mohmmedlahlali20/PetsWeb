@@ -9,12 +9,23 @@
 
     <link rel="icon" type="image/x-icon" href="{{asset('assets/favicon.ico')}}" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
+    <script src="https://kit.fontawesome.com/c0bae2ffa6.js" crossorigin="anonymous"></script>
+
     <link href="{{asset('css/styles.css')}}" rel="stylesheet" />
+    <link href="{{asset('css/card.css')}}" rel="stylesheet" />
+    <link href="{{asset('css/responsive.css')}}" rel="stylesheet" />
+    <link href="{{asset('css/font-awesome.min.css')}}" rel="stylesheet" />
 </head>
 <style>
     #big_div {
     background-image: url('{{ asset('assets/images/laura.jpg') }}');
     z-index:999
+}
+.custom-card {
+    /* Add your custom styles here */
+    border: 2px solid #ccc;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
 }
 
 </style>
@@ -96,15 +107,6 @@
             <div class="row justify-content-center">
                 <div class="col-md-6">
                     <div class="d-flex justify-content-center">
-                        <div class="search-2"> 
-                            <i class='bx bxs-map'></i> 
-                            <select class="form-control"> 
-                                <option value="">Select an option</option>
-                                <option value="option1">Option 1</option>
-                                <option value="option2">Option 2</option>
-                                <option value="option3">Option 3</option>
-                            </select>
-                        </div>
                         &nbsp;&nbsp;&nbsp;
                         <div class="search-2"> 
                             <i class='bx bxs-map'></i> 
@@ -113,226 +115,143 @@
                         </div>
                     </div>
                     <br>
-                    <form class="range">
-                        <div class="form-group range__slider">
-                          <input type="range" step="100">
-                        </div>
-                        <div class="form-group range__value">
-                          <label>Loan Amount</label>
-                          <span></span>            
-                        </div>
-                      </form>
+                  
                 </div>
             </div>
         </div>
     </div>
-    
-    
-    
-    <!-- Section-->
-    <section  id="big_div"  class="py-5">
-        <div class="container px-4 px-lg-5 mt-5">
-            <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
-                <div class="col mb-5">
-                    <div class="card h-100">
-                        <!-- Product image-->
-                        <img class="card-img-top" src="{{asset('assets/images/kelb.png')}}" alt="..." />
-                        <!-- Product details-->
-                        <div class="card-body p-4">
-                            <div class="text-center">
-                                <!-- Product name-->
-                                <h5 class="fw-bolder">Fancy Product</h5>
-                                <!-- Product price-->
-                                $40.00 - $80.00
-                            </div>
+
+    <section class="cat_product_area section_gap">
+      <div class="container">
+        <div class="row flex-row-reverse">
+          <div class="col-lg-9">
+            
+            
+            <div class="latest_product_inner">
+              <div class="row">
+                @forelse ($products as $product)
+                <div class="col-lg-4 col-md-6">
+                    <div class="single-product">
+                      <div class="product-img">
+                        <img
+                          class="card-img"
+                          src="{{ Storage::url($product->image) }}"
+                          alt=""
+                        />
+                        <div class="p_icon">
+                          <a href="#">
+                            <i class="fas fa-eye"></i>
+                          </a>
+                          <a href="#">
+                            <i class="	fas fa-search"></i>
+                          </a>
+                          <a href="#">
+                            <i class="	fas fa-shopping-basket"></i>
+                          </a>
                         </div>
-                        <!-- Product actions-->
-                        <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                            <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#">View options</a></div>
+                      </div>
+                      <div class="product-btm">
+                        <a href="#" class="d-block">
+                          <h4>{{ $product->name }}</h4>
+                        </a>
+                        <div class="mt-3">
+                          <span class="mr-4 badge bg-primary">${{$product->price }}</span>
+                          <span class=" badge bg-success"> Stock : {{ $product->quantity }}</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                @empty
+                    <div class="container">
+                        <div class="alert alert-warning">
+                            no Products exist
                         </div>
                     </div>
-                </div>
-                <div class="col mb-5">
-                    <div class="card h-100">
-                        <!-- Sale badge-->
-                        <div class="badge bg-dark text-white position-absolute" style="top: 0.5rem; right: 0.5rem">Sale</div>
-                        <!-- Product image-->
-                        <img class="card-img-top" src="{{asset('assets/images/kelb.png')}}" alt="..." />
-                        <!-- Product details-->
-                        <div class="card-body p-4">
-                            <div class="text-center">
-                                <!-- Product name-->
-                                <h5 class="fw-bolder">Special Item</h5>
-                                <!-- Product reviews-->
-                                <div class="d-flex justify-content-center small text-warning mb-2">
-                                    <div class="bi-star-fill"></div>
-                                    <div class="bi-star-fill"></div>
-                                    <div class="bi-star-fill"></div>
-                                    <div class="bi-star-fill"></div>
-                                    <div class="bi-star-fill"></div>
-                                </div>
-                                <!-- Product price-->
-                                <span class="text-muted text-decoration-line-through">$20.00</span>
-                                $18.00
-                            </div>
-                        </div>
-                        <!-- Product actions-->
-                        <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                            <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#">Add to cart</a></div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col mb-5">
-                    <div class="card h-100">
-                        <!-- Sale badge-->
-                        <div class="badge bg-dark text-white position-absolute" style="top: 0.5rem; right: 0.5rem">Sale</div>
-                        <!-- Product image-->
-                        <img class="card-img-top" src="{{asset('assets/images/kelb.png')}}" alt="..." />
-                        <!-- Product details-->
-                        <div class="card-body p-4">
-                            <div class="text-center">
-                                <!-- Product name-->
-                                <h5 class="fw-bolder">Sale Item</h5>
-                                <!-- Product price-->
-                                <span class="text-muted text-decoration-line-through">$50.00</span>
-                                $25.00
-                            </div>
-                        </div>
-                        <!-- Product actions-->
-                        <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                            <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#">Add to cart</a></div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col mb-5">
-                    <div class="card h-100">
-                        <!-- Product image-->
-                        <img class="card-img-top" src="{{asset('assets/images/kelb.png')}}" alt="..." />
-                        <!-- Product details-->
-                        <div class="card-body p-4">
-                            <div class="text-center">
-                                <!-- Product name-->
-                                <h5 class="fw-bolder">Popular Item</h5>
-                                <!-- Product reviews-->
-                                <div class="d-flex justify-content-center small text-warning mb-2">
-                                    <div class="bi-star-fill"></div>
-                                    <div class="bi-star-fill"></div>
-                                    <div class="bi-star-fill"></div>
-                                    <div class="bi-star-fill"></div>
-                                    <div class="bi-star-fill"></div>
-                                </div>
-                                <!-- Product price-->
-                                $40.00
-                            </div>
-                        </div>
-                        <!-- Product actions-->
-                        <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                            <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#">Add to cart</a></div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col mb-5">
-                    <div class="card h-100">
-                        <!-- Sale badge-->
-                        <div class="badge bg-dark text-white position-absolute" style="top: 0.5rem; right: 0.5rem">Sale</div>
-                        <!-- Product image-->
-                        <img class="card-img-top" src="{{asset('assets/images/kelb.png')}}" alt="..." />
-                        <!-- Product details-->
-                        <div class="card-body p-4">
-                            <div class="text-center">
-                                <!-- Product name-->
-                                <h5 class="fw-bolder">Sale Item</h5>
-                                <!-- Product price-->
-                                <span class="text-muted text-decoration-line-through">$50.00</span>
-                                $25.00
-                            </div>
-                        </div>
-                        <!-- Product actions-->
-                        <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                            <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#">Add to cart</a></div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col mb-5">
-                    <div class="card h-100">
-                        <!-- Product image-->
-                        <img class="card-img-top" src="{{asset('assets/images/kelb.png')}}" alt="..." />
-                        <!-- Product details-->
-                        <div class="card-body p-4">
-                            <div class="text-center">
-                                <!-- Product name-->
-                                <h5 class="fw-bolder">Fancy Product</h5>
-                                <!-- Product price-->
-                                $120.00 - $280.00
-                            </div>
-                        </div>
-                        <!-- Product actions-->
-                        <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                            <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#">View options</a></div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col mb-5">
-                    <div class="card h-100">
-                        <!-- Sale badge-->
-                        <div class="badge bg-dark text-white position-absolute" style="top: 0.5rem; right: 0.5rem">Sale</div>
-                        <!-- Product image-->
-                        <img class="card-img-top" src="{{asset('assets/images/kelb.png')}}" alt="..." />
-                        <!-- Product details-->
-                        <div class="card-body p-4">
-                            <div class="text-center">
-                                <!-- Product name-->
-                                <h5 class="fw-bolder">Special Item</h5>
-                                <!-- Product reviews-->
-                                <div class="d-flex justify-content-center small text-warning mb-2">
-                                    <div class="bi-star-fill"></div>
-                                    <div class="bi-star-fill"></div>
-                                    <div class="bi-star-fill"></div>
-                                    <div class="bi-star-fill"></div>
-                                    <div class="bi-star-fill"></div>
-                                </div>
-                                <!-- Product price-->
-                                <span class="text-muted text-decoration-line-through">$20.00</span>
-                                $18.00
-                            </div>
-                        </div>
-                        <!-- Product actions-->
-                        <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                            <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#">Add to cart</a></div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col mb-5">
-                    <div class="card h-100">
-                        <!-- Product image-->
-                        <img class="card-img-top" src="{{asset('assets/images/kelb.png')}}" alt="..." />
-                        <!-- Product details-->
-                        <div class="card-body p-4">
-                            <div class="text-center">
-                                <!-- Product name-->
-                                <h5 class="fw-bolder">Popular Item</h5>
-                                <!-- Product reviews-->
-                                <div class="d-flex justify-content-center small text-warning mb-2">
-                                    <div class="bi-star-fill"></div>
-                                    <div class="bi-star-fill"></div>
-                                    <div class="bi-star-fill"></div>
-                                    <div class="bi-star-fill"></div>
-                                    <div class="bi-star-fill"></div>
-                                </div>
-                                <!-- Product price-->
-                                $40.00
-                            </div>
-                        </div>
-                        <!-- Product actions-->
-                        <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                            <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#">Add to cart</a></div>
-                        </div>
-                    </div>
-                </div>
+                @endforelse
+               
+              </div>
             </div>
+          </div>
+
+          <div class="col-lg-3">
+            <div class="left_sidebar_area">
+              <aside class="left_widgets p_filter_widgets">
+                <div class="l_w_title">
+                  <h3>Browse Categories</h3>
+                </div>
+                <div class="widgets_inner">
+                  <ul class="list">
+                    <li>
+                      <a href="#">Frozen Fish</a>
+                    </li>
+                    <li>
+                      <a href="#">Dried Fish</a>
+                    </li>
+                    <li>
+                      <a href="#">Fresh Fish</a>
+                    </li>
+                    <li>
+                      <a href="#">Meat Alternatives</a>
+                    </li>
+                    <li>
+                      <a href="#">Fresh Fish</a>
+                    </li>
+                    <li>
+                      <a href="#">Meat Alternatives</a>
+                    </li>
+                    <li>
+                      <a href="#">Meat</a>
+                    </li>
+                  </ul>
+                </div>
+              </aside>
+
+              <aside class="left_widgets p_filter_widgets">
+                <div class="l_w_title">
+                  <h3>Product Brand</h3>
+                </div>
+                <div class="widgets_inner">
+                  <ul class="list">
+                    <li>
+                      <a href="#">Apple</a>
+                    </li>
+                    <li>
+                      <a href="#">Asus</a>
+                    </li>
+                    <li class="active">
+                      <a href="#">Gionee</a>
+                    </li>
+                    <li>
+                      <a href="#">Micromax</a>
+                    </li>
+                    <li>
+                      <a href="#">Samsung</a>
+                    </li>
+                  </ul>
+                </div>
+              </aside>
+
+              <aside class="left_widgets p_filter_widgets">
+                <div class="l_w_title">
+                  <h3>Price Filter</h3>
+                </div>
+                <div class="widgets_inner">
+                  <div class="range_item">
+                    <div id="slider-range"></div>
+                    <div class="">
+                      <label for="amount">Price : </label>
+                      <input type="text" id="amount" readonly />
+                    </div>
+                  </div>
+                </div>
+              </aside>
+            </div>
+          </div>
         </div>
+      </div>
     </section>
-    <!-- Footer-->
+    
+    
     <footer class="py-5 bg-dark">
         <div class="container">
             <p class="m-0 text-center text-white">Copyright &copy; Your Website 2023</p>

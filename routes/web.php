@@ -18,13 +18,9 @@ use App\Http\Controllers\ProductsController;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-})->name('welcome');
+Route::resource('/Home', ProductsController::class);
 
 
-
-//Route::get('/admin', [AdminController::class, 'index'])->name('products.index');
 Route::resource('/product', AdminController::class);
 Route::prefix('auth')->group(function () {
     Route::get('/login', [AuthController::class, 'login'])->name('login');

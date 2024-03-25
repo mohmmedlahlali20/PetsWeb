@@ -45,7 +45,7 @@
             </tr>
             @empty
                 <tr>
-                    <td colspan="10" align="center"> fuck you</td>
+                    <td colspan="10" align="center"> no products exist</td>
                 </tr>
             @endforelse
         </tbody>
