@@ -129,6 +129,7 @@
             
             <div class="latest_product_inner">
               <div class="row">
+                {{ $products->links() }}
                 @forelse ($products as $product)
                 <div class="col-lg-4 col-md-6">
                     <div class="single-product">
@@ -156,7 +157,9 @@
                         </a>
                         <div class="mt-3">
                           <span class="mr-4 badge bg-primary">${{$product->price }}</span>
-                          <span class=" badge bg-success"> Stock : {{ $product->quantity }}</span>
+                          <span class="badge {{ $product->quantity <= 5 ? 'bg-danger' : 'bg-success' }}">Stock: {{ $product->quantity }}</span>
+                          <hr>
+                          <span class="mr-4">created at :{{ $product->created_at }}</span>
                         </div>
                       </div>
                     </div>
@@ -168,7 +171,7 @@
                         </div>
                     </div>
                 @endforelse
-               
+              
               </div>
             </div>
           </div>

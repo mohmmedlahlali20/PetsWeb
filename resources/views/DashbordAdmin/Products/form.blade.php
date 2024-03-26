@@ -34,8 +34,11 @@
                     @endif
                 </div>
                 <div class="col">
-                    <select class="form-control border" name="category_id">
+                    <select class="form-control border" name="category">
                         <option value="">Select Category</option>
+                        @foreach($category as $cate)
+                            <option value="{{ $cate->id }}">{{ $cate->name }}</option>
+                        @endforeach
                     </select>
                 </div>
             </div>

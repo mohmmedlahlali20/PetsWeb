@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Products;
+use App\Models\Categories;
 use Illuminate\Http\Request;
 use App\Http\Requests\ProductsRequest;
 
@@ -14,6 +15,7 @@ class AdminController extends Controller
     public function index()
     {
         $products = Products::paginate(10);
+       
         return view('DashbordAdmin.Products.index', compact('products'));
 
     }
@@ -24,7 +26,8 @@ class AdminController extends Controller
     public function create(Products $product)
     {
         $IsUpdte = false;
-        return view('DashbordAdmin.Products.form' , compact('IsUpdte' , 'product'));
+        $category = Categories::all();
+        return view('DashbordAdmin.Products.form' , compact('IsUpdte' , 'product' , 'category'));
     }
 
     /**
@@ -33,6 +36,8 @@ class AdminController extends Controller
     public function store(ProductsRequest $product)
     {
         $data = $product->validated();
+        $categoryId = $product->input('category');
+        $data['category_id'] = $categoryId;
         if($product->hasFile('image')){
         $data['image'] = $product->file('image')->store('Products', 'public');
 

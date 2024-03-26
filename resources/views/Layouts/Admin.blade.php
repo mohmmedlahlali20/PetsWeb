@@ -77,7 +77,7 @@
                             data-bs-parent="#sidenavAccordion">
                             <nav class="sb-sidenav-menu-nested nav">
                                 <a class="nav-link" href="{{ route('product.create') }}">Add New Products</a>
-                                <a class="nav-link" href="">Light Sidenav</a>
+                                <a class="nav-link" href="{{ route('category.create') }}">Add New Category</a>
                             </nav>
                         </div>
                         <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapsePages"

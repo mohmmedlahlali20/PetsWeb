@@ -19,6 +19,8 @@
             </tr>
         </thead>
         <tbody>
+            {{-- @dd( $products) --}}
+           
             @forelse ($products as $product)
             <tr>
                 <td>{{ $product->id }}</td>
@@ -31,7 +33,13 @@
                         <img width="20%"  src="{{ Storage::url($product->image) }}" alt="">
                     </div>
                                     </td>
-                <td>No Category Exist</td> 
+                                    <td>
+                                        @if ($product->category)
+                                            {{ $product->category->name }}
+                                        @else
+                                            No Category Assigned
+                                        @endif
+                                    </td>
                 <td>{{ $product->created_at }}</td>
                 <td>{{ $product->deleted_at }}</td>
                 <td>

@@ -6,6 +6,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ProductsController;
+use App\Http\Controllers\CategoriesController;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,6 +20,8 @@ use App\Http\Controllers\ProductsController;
 */
 
 Route::resource('/Home', ProductsController::class);
+
+Route::resource('/category' , CategoriesController::class);
 
 
 Route::resource('/product', AdminController::class);
