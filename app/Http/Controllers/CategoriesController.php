@@ -46,7 +46,8 @@ class CategoriesController extends Controller
     public function show(Categories $category)
 {
     $products = $category->products()->get();
-   dd($products);
+   //dd($products);
+   return view('DashbordAdmin.category.categoryShow' , compact('products'));
 }
 
 
