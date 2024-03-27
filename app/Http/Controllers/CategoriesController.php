@@ -47,9 +47,9 @@ class CategoriesController extends Controller
 {
     $products = $category->products()->get();
    //dd($products);
-   return view('DashbordAdmin.category.categoryShow' , compact('products'));
+   return view('DashbordAdmin.category.categoryShow' , compact('products' , 'category'));
 }
-
+ 
 
     /**
      * Show the form for editing the specified resource.

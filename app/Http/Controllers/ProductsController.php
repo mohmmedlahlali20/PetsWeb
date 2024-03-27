@@ -11,12 +11,30 @@ class ProductsController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-       $products = Products::OrderBy('created_at','DESC')->paginate(4);
-       $categories = Categories::all();
-       return view('welcome' , compact('products' , 'categories'));
+        $search = $request->input('query');
+        $category = $request->input('category');
+        
+        if (!empty($search)) {
+            $productsQuery = Products::where('name', 'LIKE', '%' . $search . '%')
+                                      ->orWhere('price', 'LIKE', '%' . $search . '%');
+        } else {
+            $productsQuery = Products::orderBy('created_at', 'DESC');
+        }
+        
+        if (!empty($category)) {
+            //dd($category);
+            $productsQuery = Products::whereIn('category_id', $category);
+        }
+        
+        $products = $productsQuery->paginate(4);
+        $categories = Categories::with('Products')->has('Products')->get();
+        
+        return view('welcome', compact('products', 'categories'));
     }
+    
+    
 
     /**
      * Show the form for creating a new resource.
@@ -65,4 +83,7 @@ class ProductsController extends Controller
     {
         //
     }
+
+
+  
 }

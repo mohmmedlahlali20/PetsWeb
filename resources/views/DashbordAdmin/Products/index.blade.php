@@ -33,13 +33,16 @@
                         <img width="20%"  src="{{ Storage::url($product->image) }}" alt="">
                     </div>
                                     </td>
-                                    <td class=" m-5 badge bg-primary">
+                                    <td class="m-5">
                                         @if ($product->category)
-                                            {{ $product->category->name }}
+                                            <span class="badge bg-primary">
+                                                <a href="{{ route('category.show', $product->category->id) }}" class="text-decoration-none text-white">{{ $product->category->name }}</a>
+                                            </span>
                                         @else
-                                            No Category Assigned
+                                            <span class="badge bg-secondary">No Category Assigned</span>
                                         @endif
                                     </td>
+                                    
                 <td>{{ $product->created_at }}</td>
                 <td>{{ $product->deleted_at }}</td>
                 <td>
@@ -49,6 +52,7 @@
                         <button class="btn btn-danger"><i class="fas fa-trash-alt"></i></button>
                     </form><br>
                     <a href="{{ route('product.edit', $product->id) }}" class="btn btn-info"><i class="fas fa-edit"></i></a>
+                   
                 </td>
             </tr>
             @empty

@@ -38,9 +38,12 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
 
-                      <li class="nav-item"><a class="nav-link active" aria-current="page" href="#!">Home</a></li>
-                      
-                    <li class="nav-item"><a class="nav-link" href="#!">About</a></li>
+                      <li class="nav-item"><a class="nav-link active" aria-current="page" href="">Home</a></li>
+                      @if(Auth::check() && Auth::user()->role == 'admin')
+                      <li class="nav-item"><a class="nav-link" href="{{ route('product.index') }}">Dashboard</a></li>
+                  @endif
+                  
+                    
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Shop</a>
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
@@ -104,7 +107,8 @@
         </div>
     </header>
     <br><br><br><br><br>
-    <div  id="big_div"  class="container">
+    <form method="get">
+       <div  id="big_div"  class="container">
         <div  class="search">
             <div class="row justify-content-center">
                 <div class="col-md-6">
@@ -112,17 +116,19 @@
                         &nbsp;&nbsp;&nbsp;
                         <div class="search-2"> 
                             <i class='bx bxs-map'></i> 
-                            <input type="search" class="form-control" placeholder="Search 2"> 
+                            <input type="search" class="form-control" name='query' placeholder="Search 2"> 
                             <button class="btn btn-primary">Search</button> 
                         </div>
                     </div>
                     <br>
-                  
+
                 </div>
             </div>
         </div>
     </div>
 
+    </form>
+   
     <section class="cat_product_area section_gap">
       <div class="container">
         <div class="row flex-row-reverse">
@@ -188,39 +194,30 @@
             <div class="left_sidebar_area">
               <aside class="left_widgets p_filter_widgets">
                 <div class="l_w_title">
-                  <h3>Browse Categories</h3>
+                    <h3>Browse Categories</h3>
                 </div>
                 <div class="widgets_inner">
-                  <ul class="list">
-                    @forelse ($categories as $cat)
-                    <li>
-                      <a href="#">{{ $cat->name }}</a>
-                    </li>
-                    @empty
-                    <li>
-                      <a href="#">No category Exist</a>
-                    </li>
-                    @endforelse
-                   
-                  </ul>
+                    <form action="" method="GET">
+                        @csrf
+                        <ul class="list">
+                            @forelse ($categories as $cat)
+                            <li>
+                                <input type="checkbox" value="{{ $cat->id }}" id="category_{{ $cat->id }}" name="category[]" >
+                                <label for="category_{{ $cat->id }}">{{ $cat->name }}</label>
+                            </li>
+                            @empty
+                            <li>
+                              <div class="alert alert-warning">
+                                No categories exist.
+                              </div>
+                            </li>
+                            @endforelse
+                        </ul>
+                        <button style="float: right" class="btn btn-primary mt-5">filtre</button>
+                    </form>
                 </div>
-              </aside>
-
-      
-              <aside class="left_widgets p_filter_widgets">
-                <div class="l_w_title">
-                  <h3>Price Filter</h3>
-                </div>
-                <div class="widgets_inner">
-                  <div class="range_item">
-                    <div id="slider-range"></div>
-                    <div class="">
-                      <label for="amount">Price : </label>
-                      <input type="text" id="amount" readonly />
-                    </div>
-                  </div>
-                </div>
-              </aside>
+             </aside>
+              
             </div>
           </div>
         </div>

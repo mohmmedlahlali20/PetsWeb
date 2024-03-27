@@ -14,7 +14,7 @@ class AdminController extends Controller
      */
     public function index()
     {
-        $products = Products::with('Categories')->paginate(10);
+        $products = Products::paginate(10);
         
        
         return view('DashbordAdmin.Products.index', compact('products'));
