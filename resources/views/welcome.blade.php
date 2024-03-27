@@ -37,7 +37,9 @@
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
-                    <li class="nav-item"><a class="nav-link active" aria-current="page" href="#!">Home</a></li>
+
+                      <li class="nav-item"><a class="nav-link active" aria-current="page" href="#!">Home</a></li>
+                      
                     <li class="nav-item"><a class="nav-link" href="#!">About</a></li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Shop</a>
@@ -135,7 +137,7 @@
                     <div class="single-product">
                       <div class="product-img">
                         <img
-                          class="card-img"
+                          class="card-img "
                           src="{{ Storage::url($product->image) }}"
                           alt=""
                         />
@@ -154,6 +156,12 @@
                       <div class="product-btm">
                         <a href="#" class="d-block">
                           <h4>{{ $product->name }}</h4>
+                          <h6 class="mr-4 badge bg-primary"> category : @if ($product->category)
+                            {{ $product->category->name }}
+                        @else
+                            No Category Assigned
+                        @endif
+                      </h6>
                         </a>
                         <div class="mt-3">
                           <span class="mr-4 badge bg-primary">${{$product->price }}</span>
@@ -184,56 +192,21 @@
                 </div>
                 <div class="widgets_inner">
                   <ul class="list">
+                    @forelse ($categories as $cat)
                     <li>
-                      <a href="#">Frozen Fish</a>
+                      <a href="#">{{ $cat->name }}</a>
                     </li>
+                    @empty
                     <li>
-                      <a href="#">Dried Fish</a>
+                      <a href="#">No category Exist</a>
                     </li>
-                    <li>
-                      <a href="#">Fresh Fish</a>
-                    </li>
-                    <li>
-                      <a href="#">Meat Alternatives</a>
-                    </li>
-                    <li>
-                      <a href="#">Fresh Fish</a>
-                    </li>
-                    <li>
-                      <a href="#">Meat Alternatives</a>
-                    </li>
-                    <li>
-                      <a href="#">Meat</a>
-                    </li>
+                    @endforelse
+                   
                   </ul>
                 </div>
               </aside>
 
-              <aside class="left_widgets p_filter_widgets">
-                <div class="l_w_title">
-                  <h3>Product Brand</h3>
-                </div>
-                <div class="widgets_inner">
-                  <ul class="list">
-                    <li>
-                      <a href="#">Apple</a>
-                    </li>
-                    <li>
-                      <a href="#">Asus</a>
-                    </li>
-                    <li class="active">
-                      <a href="#">Gionee</a>
-                    </li>
-                    <li>
-                      <a href="#">Micromax</a>
-                    </li>
-                    <li>
-                      <a href="#">Samsung</a>
-                    </li>
-                  </ul>
-                </div>
-              </aside>
-
+      
               <aside class="left_widgets p_filter_widgets">
                 <div class="l_w_title">
                   <h3>Price Filter</h3>

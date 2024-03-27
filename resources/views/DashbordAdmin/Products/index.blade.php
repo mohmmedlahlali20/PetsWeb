@@ -33,7 +33,7 @@
                         <img width="20%"  src="{{ Storage::url($product->image) }}" alt="">
                     </div>
                                     </td>
-                                    <td>
+                                    <td class=" m-5 badge bg-primary">
                                         @if ($product->category)
                                             {{ $product->category->name }}
                                         @else

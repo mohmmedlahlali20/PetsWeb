@@ -15,6 +15,7 @@ class AdminController extends Controller
     public function index()
     {
         $products = Products::paginate(10);
+        
        
         return view('DashbordAdmin.Products.index', compact('products'));
 
@@ -63,7 +64,8 @@ class AdminController extends Controller
     {
         $IsUpdte = true;
         //dd( $product);
-        return view('DashbordAdmin.Products.form' , compact('IsUpdte' , 'product'));
+        $category = Categories::all();
+        return view('DashbordAdmin.Products.form' , compact('IsUpdte' , 'product' , 'category'));
     }
 
     /**
@@ -72,9 +74,11 @@ class AdminController extends Controller
     public function update(ProductsRequest $request, Products $product)
     {
         $validatedData = $request->validated();
+        $product->category_id = $validatedData['category'];
         $product->update($validatedData);
-        $product->update($validatedData);
-         return redirect()->route('product.index')->with('success' , 'Product is update successfuly');;
+
+        //$product->update($validatedData);
+         return redirect()->route('product.index')->with('success' , 'Product is update successfuly');
     }
 
     /**

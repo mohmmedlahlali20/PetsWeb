@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Products;
+use App\Models\Categories;
 use Illuminate\Http\Request;
 
 class ProductsController extends Controller
@@ -13,7 +14,8 @@ class ProductsController extends Controller
     public function index()
     {
        $products = Products::OrderBy('created_at','DESC')->paginate(4);
-       return view('welcome' , compact('products'));
+       $categories = Categories::all();
+       return view('welcome' , compact('products' , 'categories'));
     }
 
     /**

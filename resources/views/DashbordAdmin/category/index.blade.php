@@ -19,12 +19,15 @@
                 <td class="">{{ $cat->name }}</td>
                 <td>{{ $cat->created_at }}</td>
                 <td>
+                    
                     <form action="{{ route('category.destroy',$cat->id) }}" method="POST">
                         @csrf
                         @method('DELETE')
                         <button class="btn btn-danger"><i class="fas fa-trash-alt"></i></button>
-                    </form><br>
-                    <a href="" class="btn btn-info"><i class="fas fa-edit"></i></a>
+                    </form>
+                    <br>
+                    <a href="{{ route('category.edit', $cat->id) }}" class="btn btn-info"><i class="fas fa-edit"></i></a>
+                    <a href="{{ route('category.show', $cat->id) }}" class="btn btn-info">SHOW</a>
                 </td>
             </tr>
             @empty

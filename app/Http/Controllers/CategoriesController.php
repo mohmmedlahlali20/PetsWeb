@@ -14,6 +14,7 @@ class CategoriesController extends Controller
     public function index()
     {
         $category = Categories::paginate(5);
+        
         return view('DashbordAdmin.category.index', compact('category'));
     }
 
@@ -22,7 +23,8 @@ class CategoriesController extends Controller
      */
     public function create()
     {
-        return view('DashbordAdmin.category.create');
+        $IsUpdte = false;
+        return view('DashbordAdmin.category.form' , compact('IsUpdte'));
     }
 
     /**
@@ -41,25 +43,34 @@ class CategoriesController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Categories $categories)
-    {
-        //
-    }
+    public function show(Categories $category)
+{
+    $products = $category->products()->get();
+   dd($products);
+}
+
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Categories $categories)
+    public function edit(Categories $category)
     {
-        //
+        $IsUpdte = true;
+        //dd($category);
+        return view('DashbordAdmin.category.form' , compact('IsUpdte' , 'category'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Categories $categories)
+    public function update(CategoryREquest $request, Categories $categories)
     {
-        //
+        $validatedData = $request->validated();
+      
+        $categories->update($validatedData);
+
+        //$product->update($validatedData);
+         return redirect()->route('category.index')->with('success' , 'Category is update successfuly');
     }
 
     /**
@@ -67,6 +78,8 @@ class CategoriesController extends Controller
      */
     public function destroy(Categories $category)
     {
-        dd($category);
+        //dd($category);
+        $category->delete();
+        return redirect()->back()->with('success' , 'Category is deleted');
     }
 }

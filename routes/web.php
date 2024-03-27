@@ -20,11 +20,12 @@ use App\Http\Controllers\CategoriesController;
 */
 
 Route::resource('/Home', ProductsController::class);
-
-Route::resource('/category' , CategoriesController::class);
-
-
+  Route::resource('/category' , CategoriesController::class);
 Route::resource('/product', AdminController::class);
+
+///Route::middleware(['auth', 'admin'])->group(function () {
+  
+//});
 Route::prefix('auth')->group(function () {
     Route::get('/login', [AuthController::class, 'login'])->name('login');
     Route::post('/login', [AuthController::class, 'loginPost'])->name('login.post');

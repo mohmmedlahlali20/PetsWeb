@@ -37,10 +37,11 @@
                     <select class="form-control border" name="category">
                         <option value="">Select Category</option>
                         @foreach($category as $cate)
-                            <option value="{{ $cate->id }}">{{ $cate->name }}</option>
+                            <option {{ old('category', $product->category_id) == $cate->id ? 'selected' : '' }} value="{{ $cate->id }}">{{ $cate->name }}</option>
                         @endforeach
                     </select>
                 </div>
+                
             </div>
             <div class="row">
                 <div class="col">
