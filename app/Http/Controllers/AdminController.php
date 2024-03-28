@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use App\Models\Products;
 use App\Models\Categories;
 use Illuminate\Http\Request;
@@ -89,6 +90,20 @@ class AdminController extends Controller
         //dd($product);
         $product->delete();
         return redirect()->back()->with('success', 'Product deleted successfully');
+    }
+
+
+    public function getStats()
+    {
+        $userCount = User::count();
+        $productCount = Product::count();
+        $categoryCount = Category::count();
+//dd($userCount );
+        return redirect()->route('product')->with([
+            'userCount' => $userCount,
+            'productCount' => $productCount,
+            'categoryCount' => $categoryCount
+        ]);
     }
     
 }

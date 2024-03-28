@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\commends;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class CommendsController extends Controller
 {
@@ -12,7 +13,9 @@ class CommendsController extends Controller
      */
     public function index()
     {
-        //
+        $commands = commends::with('product')->where('user_id', auth()->id())->get();
+        //dd($commands);
+    return view('command.index', compact('commands'));
     }
 
     /**
@@ -28,8 +31,20 @@ class CommendsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
+        $productId = $request->input('product_id');
+        $userId = Auth::id();
+
+        commends::create([
+            'products_id' => $productId,
+            'user_id' => $userId
+        ]);
+
+
+        return redirect()->back()->with('success' , 'kyn');
+
     }
+    
 
     /**
      * Display the specified resource.

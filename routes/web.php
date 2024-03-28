@@ -5,7 +5,9 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\CommendsController;
 use App\Http\Controllers\ProductsController;
+use App\Http\Controllers\AccessoirController;
 use App\Http\Controllers\CategoriesController;
 
 /*
@@ -20,11 +22,13 @@ use App\Http\Controllers\CategoriesController;
 */
 
 Route::resource('/Home', ProductsController::class);
+Route::resource('/Commande', CommendsController::class);
 
-
-Route::middleware(['auth'])->group(function () {
+Route::middleware(['auth' , 'admin'])->group(function () {
   Route::resource('/category' , CategoriesController::class);
   Route::resource('/product', AdminController::class);
+  //Route::get('/product', [AdminController::class, 'getStats'])->name('stats');
+ 
 });
 Route::prefix('auth')->group(function () {
     Route::get('/login', [AuthController::class, 'login'])->name('login');

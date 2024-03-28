@@ -3,6 +3,7 @@
 namespace App\Models;
 
 
+use App\Models\User;
 use App\Models\payments;
 use App\Models\Products;
 use Illuminate\Database\Eloquent\Model;
@@ -12,12 +13,20 @@ class commends extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'products_id',
+        'user_id'
+    ];
+
     public function product()
     {
         return $this->belongsTo(Products::class);
     }
 
-
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 
     public function payment()
     {

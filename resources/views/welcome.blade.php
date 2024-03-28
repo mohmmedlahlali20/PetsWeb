@@ -84,14 +84,12 @@
           
 
                 </ul>
-                <form class="d-flex">
-                    <button class="btn btn-outline-dark" type="submit">
-                        <i class="bi-cart-fill me-1"></i>
-                        Cart
-                        <span class="badge bg-dark text-white ms-1 rounded-pill">0</span>
-                    </button>
-                </form>
-              
+                <form action=""  class="d-flex">
+                  <a id="" class="btn btn-outline-dark"  href="{{ route('Commande.index') }}">
+                      <i class="bi-cart-fill me-1"></i>
+                     My Cards
+                  </a>
+              </form>
             </div>
         </div>
     </nav>
@@ -148,15 +146,12 @@
                           alt=""
                         />
                         <div class="p_icon">
-                          <a href="#">
-                            <i class="fas fa-eye"></i>
-                          </a>
-                          <a href="#">
-                            <i class="	fas fa-search"></i>
-                          </a>
-                          <a href="#">
-                            <i class="	fas fa-shopping-basket"></i>
-                          </a>
+                          <form action="">
+                            <a href="#">
+                              <i class="fas fa-eye"></i>
+                            </a>
+                          </form>
+                         
                         </div>
                       </div>
                       <div class="product-btm">
@@ -174,6 +169,17 @@
                           <span class="badge {{ $product->quantity <= 5 ? 'bg-danger' : 'bg-success' }}">Stock: {{ $product->quantity }}</span>
                           <hr>
                           <span class="mr-4">created at :{{ $product->created_at }}</span>
+                          <form action="{{ route('Commande.store') }}" method="post">
+                            @csrf
+                            <!-- Include the product ID as the value of the button -->
+                            <input type="hidden" name="product_id" value="{{ $product->id }}">
+                            
+                            <button type="submit" class="btn btn-outline-dark btn-product btn-cart">
+                                <i class="fas fa-shopping-basket"></i> Add to Cart
+                            </button>
+                        </form>
+                        
+                        
                         </div>
                       </div>
                     </div>
@@ -234,5 +240,6 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
     <!-- Core theme JS-->
     <script src="{{asset('js/scripts.js')}}"></script>
+    <script src="{{asset('js/AddCart.js')}}"></script>
 </body>
 </html>
