@@ -13,7 +13,7 @@ class CommendsController extends Controller
      */
     public function index()
     {
-        $commands = commends::with('product')->where('user_id', auth()->id())->get();
+        $commands = commends::with('product')->where('user_id', Auth::id())->paginate(4);
         //dd($commands);
     return view('command.index', compact('commands'));
     }
@@ -59,16 +59,26 @@ class CommendsController extends Controller
      */
     public function edit(commends $commends)
     {
-        //
+      
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, commends $commends)
+    public function update(Request $request, commends $command) 
     {
-        //
+        
+ 
+        dd($command);
+    
+        $command->update([
+            'commend' => $request->input('status')
+        ]);
+    
+        //return redirect()->back()->with('status', 'Update successful');
     }
+    
+    
 
     /**
      * Remove the specified resource from storage.

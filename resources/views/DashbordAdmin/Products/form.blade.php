@@ -41,7 +41,18 @@
                         @endforeach
                     </select>
                 </div>
-                
+                <div class="col">
+                    <select class="form-control border" name="sex">
+                        <option value="">Select sex</option>
+                        @foreach(['male', 'female'] as $value)
+                            <option value="{{ $value }}">{{ ucfirst($value) }}</option>
+                        @endforeach
+                    </select>
+                    
+                </div>
+                <div class="col">
+                    <input type="number" class="form-control border" value="{{ old('age') ?? $product->age }}" placeholder="age" name="age">
+                </div>
             </div>
             <div class="row">
                 <div class="col">

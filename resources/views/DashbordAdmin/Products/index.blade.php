@@ -13,8 +13,9 @@
                 <th scope="col">Stock</th>
                 <th scope="col">Image</th>
                 <th scope="col">Category</th>
+                <th scope="col">Sex</th>
+                <th scope="col">Age</th>
                 <th scope="col">Date de creation</th>
-                <th scope="col">Date de delitation</th>
                 <th scope="col">Actions</th>
             </tr>
         </thead>
@@ -42,9 +43,10 @@
                                             <span class="badge bg-secondary">No Category Assigned</span>
                                         @endif
                                     </td>
-                                    
+                                    <td>{{ $product->sex }}</td>           
+                                    <td>{{ $product->age }}</td>
                 <td>{{ $product->created_at }}</td>
-                <td>{{ $product->deleted_at }}</td>
+                
                 <td>
                     <form action="{{ route('product.destroy', $product->id) }}" method="POST">
                         @csrf
@@ -57,7 +59,7 @@
             </tr>
             @empty
                 <tr>
-                    <td colspan="10" align="center"> no products exist</td>
+                    <td colspan="11" align="center"> no products exist</td>
                 </tr>
             @endforelse
         </tbody>

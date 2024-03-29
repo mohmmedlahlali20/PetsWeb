@@ -15,24 +15,46 @@ class ProductsController extends Controller
     {
         $search = $request->input('query');
         $category = $request->input('category');
-        
+        $sex = $request->input('sex');
+        $age = $request->input('age'); 
+    
+        $productsQuery = Products::query();
+    
         if (!empty($search)) {
-            $productsQuery = Products::where('name', 'LIKE', '%' . $search . '%')
-                                      ->orWhere('price', 'LIKE', '%' . $search . '%');
-        } else {
-            $productsQuery = Products::orderBy('created_at', 'DESC');
+            $productsQuery->where('name', 'LIKE', '%' . $search . '%')
+                          ->orWhere('price', 'LIKE', '%' . $search . '%');
         }
-        
+    
         if (!empty($category)) {
-            //dd($category);
-            $productsQuery = Products::whereIn('category_id', $category);
+            $productsQuery->whereIn('category_id', $category);
         }
-        
+    
+        if (!empty($sex)) {
+            $productsQuery->where('sex', $sex);
+        }
+
+        if (!empty($age)) {
+            if ($age == '2-6') {
+                $productsQuery->whereBetween('age', [2, 6]);
+            } elseif ($age == '7-10') {
+                $productsQuery->whereBetween('age', [7, 10]);
+            } elseif ($age == '10+') {
+                $productsQuery->where('age', '>', 10);
+            }
+        }
+    
+
+        $productsQuery->orderBy('created_at', 'DESC');
+
         $products = $productsQuery->paginate(4);
+    
+
         $categories = Categories::with('Products')->has('Products')->get();
-        
+    
+ 
         return view('welcome', compact('products', 'categories'));
     }
+    
     
     
 

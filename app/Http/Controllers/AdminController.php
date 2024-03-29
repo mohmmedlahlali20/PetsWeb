@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Models\commends;
 use App\Models\Products;
 use App\Models\Categories;
 use Illuminate\Http\Request;
@@ -15,11 +16,16 @@ class AdminController extends Controller
      */
     public function index()
     {
-        $products = Products::paginate(10);
+        $products = Products::paginate(5);
         
        
         return view('DashbordAdmin.Products.index', compact('products'));
 
+    }
+
+    public function GetCommands(){
+        $commands = commends::paginate(4);
+        return view('DashbordAdmin.commandAdmin.index', compact('commands'));
     }
 
     /**
@@ -96,14 +102,12 @@ class AdminController extends Controller
     public function getStats()
     {
         $userCount = User::count();
-        $productCount = Product::count();
-        $categoryCount = Category::count();
+        $productCount = Products::count();
+        $categoryCount = Categories::count();
 //dd($userCount );
-        return redirect()->route('product')->with([
-            'userCount' => $userCount,
-            'productCount' => $productCount,
-            'categoryCount' => $categoryCount
-        ]);
+        return view('Layouts.Admin' , compact('userCount',
+        'productCount',
+        'categoryCount'));
     }
     
 }

@@ -49,6 +49,8 @@ class Products extends Model
         'quantity',
         'image',
         'category_id',
+        'age',
+        'sex'
         
     ];
 

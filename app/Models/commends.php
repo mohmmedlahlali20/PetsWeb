@@ -15,17 +15,18 @@ class commends extends Model
 
     protected $fillable = [
         'products_id',
-        'user_id'
+        'user_id',
+        'commend'
     ];
 
     public function product()
     {
-        return $this->belongsTo(Products::class);
+        return $this->belongsTo(Products::class , 'products_id');
     }
 
     public function user()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class , 'user_id');
     }
 
     public function payment()

@@ -22,7 +22,8 @@ return new class extends Migration
             $table->foreignId('category_id')
             ->constrained('categories')
             ->onDelete('cascade'); 
-
+            $table->integer('age');
+            $table->enum('sex', ['male', 'female']);
             // $table->foreignId('user_id')
             // ->constrained('users')
             // ->onDelete('cascade');  

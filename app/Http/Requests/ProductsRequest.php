@@ -28,6 +28,8 @@ class ProductsRequest extends FormRequest
             'description' => 'required|min:20',
             'quantity' => 'required|numeric',
             'category' => 'required',
+            'sex'=> 'required',
+            'age' => 'required'
         ];
         
         if ($this->route()->getActionMethod() !== 'update') {

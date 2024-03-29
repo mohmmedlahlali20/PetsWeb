@@ -6,6 +6,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\CommendsController;
+use App\Http\Controllers\PaymentsController;
 use App\Http\Controllers\ProductsController;
 use App\Http\Controllers\AccessoirController;
 use App\Http\Controllers\CategoriesController;
@@ -23,11 +24,16 @@ use App\Http\Controllers\CategoriesController;
 
 Route::resource('/Home', ProductsController::class);
 Route::resource('/Commande', CommendsController::class);
-
+Route::get('/Commande_stripe' , [PaymentsController::class , 'index'])->name('index');
+Route::post('/checkout' , [PaymentsController::class , 'checkout'])->name('striptPayment');
+Route::get('/Commande_stripe_success',[PaymentsController::class, 'success'])->name('success');
 Route::middleware(['auth' , 'admin'])->group(function () {
   Route::resource('/category' , CategoriesController::class);
   Route::resource('/product', AdminController::class);
-  //Route::get('/product', [AdminController::class, 'getStats'])->name('stats');
+  Route::get('/Command' , [AdminController::class, 'GetCommands'])->name('command');
+  Route::put('/commands/{commend}', [CommendsController::class , 'update'])->name('command.update');
+
+  //Route::get('/products', [AdminController::class, 'getStats'])->name('stats');
  
 });
 Route::prefix('auth')->group(function () {

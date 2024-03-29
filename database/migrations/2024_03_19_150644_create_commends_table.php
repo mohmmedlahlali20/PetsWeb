@@ -19,8 +19,10 @@ return new class extends Migration
             $table->foreignId('user_id')
             ->constrained('users')
             ->onDelete('cascade');
+            
             $table->softDeletes();
-            $table->enum('commend', ['valide', 'invalid']); 
+            $table->enum('status', ['valide', 'invalid']); 
+            $table->float('total_price');
             $table->timestamps();
         });
     }
