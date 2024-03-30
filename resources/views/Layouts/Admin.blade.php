@@ -15,6 +15,12 @@
     <link rel="stylesheet" href="{{ asset('css/stylesAdmin.css') }}">
     <title>{{ config('app.name') }} | @yield('title')</title>
 </head>
+@php
+   $usersCount = App\Models\User::count();
+   $productsCount = App\Models\Products::count();
+   $categoriesCount = App\Models\Categories::count();
+   $commandsCount = App\Models\commends::count();
+@endphp
 
 <body class="sb-nav-fixed">
     <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
@@ -102,7 +108,7 @@
                                         <a class="nav-link" href="{{ route('Home.index') }}">Home</a>
                                         <a class="nav-link" href="{{ route('product.index') }}">Products</a>
                                         <a class="nav-link" href="{{ route('category.index') }}">CAtegory</a>
-                                        <a class="nav-link" href="{{ route('command') }}">Command</a>
+                                        <a class="nav-link" href="{{ route('GetCommand') }}">Command</a>
                                     </nav>
                                 </div>
                                 <a class="nav-link collapsed" href="#" data-bs-toggle="collapse"
@@ -126,7 +132,7 @@
         </div>
         <div id="layoutSidenav_content">
             <main>
-                 <div class="container-fluid px-4">
+                <div class="container-fluid px-4">
                     <h1 class="mt-4">Dashboard</h1>
                     <ol class="breadcrumb mb-4">
                         <li class="breadcrumb-item active">Dashboard</li>
@@ -134,7 +140,7 @@
                     <div class="row">
                         <div class="col-xl-3 col-md-6">
                             <div class="card bg-primary text-white mb-4">
-                                <div class="card-body"></div>
+                                <div class="card-body">{{ $usersCount }}</div>
                                 <div class="card-footer d-flex align-items-center justify-content-between">
                                     <a class="small text-white stretched-link" href="#">show users</a>
                                     <div class="small text-white"><i class="fas fa-angle-right"></i></div>
@@ -143,7 +149,7 @@
                         </div>
                         <div class="col-xl-3 col-md-6">
                             <div class="card bg-warning text-white mb-4">
-                                <div class="card-body"></div>
+                                <div class="card-body">{{ $productsCount }}</div>
                                 <div class="card-footer d-flex align-items-center justify-content-between">
                                     <a class="small text-white stretched-link" href="#">Show Products</a>
                                     <div class="small text-white"><i class="fas fa-angle-right"></i></div>
@@ -152,7 +158,7 @@
                         </div>
                         <div class="col-xl-3 col-md-6">
                             <div class="card bg-success text-white mb-4">
-                                <div class="card-body"></div>
+                                <div class="card-body">{{ $categoriesCount }}</div>
                                 <div class="card-footer d-flex align-items-center justify-content-between">
                                     <a class="small text-white stretched-link" href="#">Show Categories</a>
                                     <div class="small text-white"><i class="fas fa-angle-right"></i></div>
@@ -161,7 +167,7 @@
                         </div>
                         <div class="col-xl-3 col-md-6">
                             <div class="card bg-danger text-white mb-4">
-                                <div class="card-body">Danger Card</div>
+                                <div class="card-body">{{ $commandsCount }}</div>
                                 <div class="card-footer d-flex align-items-center justify-content-between">
                                     <a class="small text-white stretched-link" href="#">View Details</a>
                                     <div class="small text-white"><i class="fas fa-angle-right"></i></div>
@@ -169,11 +175,9 @@
                             </div>
                         </div>
                     </div>
-
-                </div> 
-           
+                </div>
             </main>
-
+            
             <div class="container">
                 @if ($errors->any())
                 <div class="alert alert-danger" role="alert">

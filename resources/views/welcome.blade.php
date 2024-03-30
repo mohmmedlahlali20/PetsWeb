@@ -41,7 +41,7 @@
                       <li class="nav-item"><a class="nav-link active" aria-current="page" href="">Home</a></li>
                       @if(Auth::check() && Auth::user()->role == 'admin')
                       <li class="nav-item"><a class="nav-link" href="{{ route('product.index') }}">Dashboard</a></li>
-                  @endif
+                      @endif
                   
                     
                     <li class="nav-item dropdown">
@@ -127,8 +127,8 @@
 
     </form>
 
-    
-   
+
+
     <section class="cat_product_area section_gap">
       <div class="container">
         <div class="row flex-row-reverse">
@@ -144,11 +144,9 @@
                       <img class="card-img " src="{{ Storage::url($product->image) }}" alt="" />
                       <!-- Icône de vue -->
                       <div class="p_icon">
-                        <form action="">
-                          <a href="#">
-                            <i class="fas fa-eye"></i>
-                          </a>
-                        </form>
+                        <a href="{{ route('Home.show' , $product->id) }}" class="product-details-link" data-toggle="modal" data-target="#productDetailsModal" data-product-id="{{ $product->id }}">
+                          <i class="fas fa-eye"></i> 
+                        </a>                        
                       </div>
                     </div>
                     <!-- Détails du produit -->
@@ -175,10 +173,20 @@
                         <form action="{{ route('Commande.store') }}" method="post">
                           @csrf
                           <input type="hidden" name="product_id" value="{{ $product->id }}">
-                          <button type="submit" class="btn btn-outline-dark btn-product btn-cart">
-                            <i class="fas fa-shopping-basket"></i> Add to Cart
-                          </button>
-                        </form>
+                          @if ($product->quantity == 0)
+                            <div class="alert d-flex justify-content-center alert-warning">
+                              <button type="button" class="btn btn-outline-dark btn-product btn-cart" disabled>
+                                <i class="fas fa-shopping-basket"></i> Out of Stock
+                            </button>
+                           
+                            </div>
+                          @else
+                              <button type="submit" class="btn btn-outline-dark btn-product btn-cart">
+                                  <i class="fas fa-shopping-basket"></i> Add to Cart
+                              </button>
+                          @endif
+                      </form>
+                      
                       </div>
                     </div>
                   </div>
@@ -261,5 +269,6 @@
     <!-- Core theme JS-->
     <script src="{{asset('js/scripts.js')}}"></script>
     <script src="{{asset('js/AddCart.js')}}"></script>
+
 </body>
 </html>

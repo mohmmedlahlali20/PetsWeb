@@ -16,6 +16,7 @@ return new class extends Migration
             $table->foreignId('products_id')
             ->constrained('products');
             $table->text('comments');
+            $table->float('rate_number');
             $table->timestamps();
             $table->softDeletes();
         });

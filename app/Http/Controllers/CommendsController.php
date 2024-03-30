@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\commends;
+use App\Models\Products;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -29,22 +30,41 @@ class CommendsController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
-    {
-
-        $productId = $request->input('product_id');
-        $userId = Auth::id();
-
-        commends::create([
-            'products_id' => $productId,
-            'user_id' => $userId
-        ]);
-
-
-        return redirect()->back()->with('success' , 'kyn');
-
-    }
-    
+   
+     public function store(Request $request)
+     {
+         $productId = $request->input('product_id');
+         $userId = Auth::id();
+     
+         // Récupérer le produit correspondant à partir de la base de données
+         $product = Products::findOrFail($productId);
+     
+         // Vérifier si la quantité disponible est suffisante
+         if ($product->quantity > 0) {
+             // Réduire la quantité disponible du produit
+             $product->quantity -= 1; // Réduire d'une unité
+             $product->save();
+     
+             // Créer une nouvelle commande
+             commends::create([
+                 'products_id' => $productId,
+                 'user_id' => $userId,
+                 'total_price' => $product->price // Utiliser le prix du produit comme prix total de la commande
+             ]);
+     
+             // Vider la commande de l'utilisateur après le paiement
+             $userCommands = commends::where('user_id', $userId)->where('products_id', $productId)->get();
+             foreach ($userCommands as $command) {
+                 $command->delete();
+             }
+     
+             return redirect()->back()->with('success', 'Votre commande a été passée avec succès.');
+         } else {
+             // Rediriger avec un message d'erreur si la quantité disponible est insuffisante
+             return redirect()->back()->with('error', 'Désolé, la quantité disponible de ce produit est insuffisante.');
+         }
+     }
+     
 
     /**
      * Display the specified resource.

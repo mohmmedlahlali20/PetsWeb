@@ -13,6 +13,8 @@ class UserController extends Controller
      */
     public function index()
     {
+        //$usersWithProductsAndCommands = User::all();
+        //dd($usersWithProductsAndCommands);
    
     }
 

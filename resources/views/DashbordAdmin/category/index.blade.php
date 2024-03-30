@@ -27,7 +27,7 @@
                     </form>
                     <br>
                     <a href="{{ route('category.edit', $cat->id) }}" class="btn btn-info"><i class="fas fa-edit"></i></a>
-                    <a href="{{ route('category.show', $cat->id) }}" class="btn btn-info">SHOW</a>
+                    <a href="{{ route('category.show', $cat->id) }}" class="btn btn-info"><i class="fas fa-eye"></i></a>
                 </td>
             </tr>
             @empty

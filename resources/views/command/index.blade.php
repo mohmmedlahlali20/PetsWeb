@@ -93,39 +93,48 @@
             </div>
         </div>
     </nav>
-
+    @if(session('success'))
+    <div class="alert alert-success">
+        {{ session('success') }}
+    </div>
+@endif
     <div class="container mt-5 mb-5">
         <div class="d-flex justify-content-center row">
             <div class="col-md-10">
-                @forelse ($commands as $item)
-                <br>
-                <div class="row p-2 bg-white border rounded">
-                    <div class="col-md-3 mt-1"><img class="img-fluid img-responsive rounded product-image" s src="{{ Storage::url($item->product->image) }}"></div>
-                    <div class="col-md-6 mt-1">
-                        <h5>{{ $item->product->name }}</h5>
-                        <div class="d-flex flex-row">
-                            <div class="ratings mr-2"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i></div><span>310</span>
+                @foreach ($commands->groupBy('products_id') as $productId => $productCommands)
+                    @php
+                        $product = $productCommands->first()->product;
+                        $totalCommands = $productCommands->count();
+                    @endphp
+                    <br>
+                    <div class="row p-2 bg-white border rounded">
+                        <div class="col-md-3 mt-1"><img class="img-fluid img-responsive rounded product-image"  src="{{ Storage::url($product->image) }}"></div>
+                        <div class="col-md-6 mt-1">
+                            <h5>{{ $product->name }}</h5>
+                            <div class="d-flex flex-row">
+                                <div class="ratings mr-2"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i></div><span>310</span>
+                            </div>
+                            <div class="mt-1 mb-1 spec-1"><span class="dot"></span><span>{{ $product->category->name }}</span></div>
+                            <p class="text-justify text-truncate para mb-0"> {{ $product->description }}<br><br></p>
                         </div>
-                        <div class="mt-1 mb-1 spec-1"><span class="dot"></span><span>{{ $item->product->category->name }}</span></div>
-                        <p class="text-justify text-truncate para mb-0"> {{ $item->product->description }}<br><br></p>
-                    </div>
-                    <div class="align-items-center align-content-center col-md-3 border-left mt-1">
-                        <div class="d-flex flex-row align-items-center">
-                            <h4 class="mr-1">{{ $item->product->price }} $</h4>
+                        <div class="align-items-center align-content-center col-md-3 border-left mt-1">
+                            <div class="d-flex flex-row align-items-center">
+                                <h4 class="mr-1">{{ $product->price }} $</h4>
+                            </div>
+                            <h6 class="text-success">{{ $productCommands->first()->user->name }}</h6>
+                            <div class="d-flex flex-column mt-4"><button class="btn btn-outline-success btn-sm mt-2" type="button">Total Commands: {{ $totalCommands }}</button></div>
                         </div>
-                        <h6 class="text-success">{{ $item->user->name }}</h6>
-                        <div class="d-flex flex-column mt-4"><button class="btn btn-outline-success btn-sm mt-2" type="button">{{ $item->commend}}</button></div>
                     </div>
-                </div>
-                @empty
-                    <div class="alert alert-warning">
-                        mkynch
-                    </div>
-                @endforelse
+                @endforeach
                 {{ $commands->links() }}
+                <form action="{{ route('striptPayment') }}" method="POST">
+                    @csrf
+                    <button class="btn mt-5 btn-success" type="submit">Checkout</button>
+                </form> 
             </div>
         </div>
     </div>
+    
     <footer class="py-5 bg-dark">
         <div class="container">
             <p class="m-0 text-center text-white">Copyright &copy; Your Website 2023</p>

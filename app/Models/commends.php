@@ -16,7 +16,8 @@ class commends extends Model
     protected $fillable = [
         'products_id',
         'user_id',
-        'commend'
+        'status',
+        'total_price'
     ];
 
     public function product()

@@ -24,18 +24,28 @@ use App\Http\Controllers\CategoriesController;
 
 Route::resource('/Home', ProductsController::class);
 Route::resource('/Commande', CommendsController::class);
-Route::get('/Commande_stripe' , [PaymentsController::class , 'index'])->name('index');
-Route::post('/checkout' , [PaymentsController::class , 'checkout'])->name('striptPayment');
-Route::get('/Commande_stripe_success',[PaymentsController::class, 'success'])->name('success');
+
 Route::middleware(['auth' , 'admin'])->group(function () {
   Route::resource('/category' , CategoriesController::class);
   Route::resource('/product', AdminController::class);
-  Route::get('/Command' , [AdminController::class, 'GetCommands'])->name('command');
+  Route::get('/Commend', [AdminController::class, 'GetCommands'])->name('GetCommand');
   Route::put('/commands/{commend}', [CommendsController::class , 'update'])->name('command.update');
-
+  Route::resource('user', UserController::class);
   //Route::get('/products', [AdminController::class, 'getStats'])->name('stats');
- 
 });
+
+//payment 
+
+Route::get('/checkout' , [PaymentsController::class , 'index'])->name('GetPayment');
+Route::post('/checkout' , [PaymentsController::class , 'checkout'])->name('striptPayment');
+Route::get('/commend',[PaymentsController::class, 'success'])->name('success'); 
+
+
+
+Route::get('/', function(){
+  return view('firstPage');
+});
+
 Route::prefix('auth')->group(function () {
     Route::get('/login', [AuthController::class, 'login'])->name('login');
     Route::post('/login', [AuthController::class, 'loginPost'])->name('login.post');

@@ -77,9 +77,11 @@ class ProductsController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Products $products)
+    public function show(Request $Home, $id)
     {
-        //
+       $ShowProducts = Products::find($id);
+       //dd($ShowProducts);
+       return view('Pets.Show' , compact('ShowProducts'));
     }
 
     /**
