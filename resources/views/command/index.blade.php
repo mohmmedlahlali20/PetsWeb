@@ -93,15 +93,19 @@
             </div>
         </div>
     </nav>
-    @if(session('success'))
-    <div class="alert alert-success">
-        {{ session('success') }}
+    <div class="container">
+        @if(session('success'))
+        <div class="alert alert-success">
+            {{ session('success') }}
+        </div>
+        @endif
     </div>
-@endif
+   
+
     <div class="container mt-5 mb-5">
         <div class="d-flex justify-content-center row">
             <div class="col-md-10">
-                @foreach ($commands->groupBy('products_id') as $productId => $productCommands)
+                @forelse ($commands->groupBy('products_id') as $productId => $productCommands)
                     @php
                         $product = $productCommands->first()->product;
                         $totalCommands = $productCommands->count();
@@ -123,9 +127,21 @@
                             </div>
                             <h6 class="text-success">{{ $productCommands->first()->user->name }}</h6>
                             <div class="d-flex flex-column mt-4"><button class="btn btn-outline-success btn-sm mt-2" type="button">Total Commands: {{ $totalCommands }}</button></div>
+                            <form action="{{ route('Commande.destroy', $productCommands->first()->id) }}" method="POST">
+                                @csrf
+                                @method('DELETE')
+                                <div class="d-flex flex-column mt-4">
+                                    <button class="btn btn-outline-danger btn-sm mt-2" type="submit">Annuler la commande</button>
+                                </div>
+                            </form>
+                            
                         </div>
                     </div>
-                @endforeach
+                    @empty
+                    <div class="alert alert-warning">
+                        no commed aw
+                    </div>
+                @endforelse
                 {{ $commands->links() }}
                 <form action="{{ route('striptPayment') }}" method="POST">
                     @csrf

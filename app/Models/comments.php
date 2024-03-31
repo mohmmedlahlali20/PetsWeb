@@ -14,4 +14,10 @@ class comments extends Model
     {
         return $this->belongsTo(Products::class);
     }
+    protected $fillable = [
+        'products_id',
+        'comments',
+        'rate_number',
+        'user_id'
+    ];
 }

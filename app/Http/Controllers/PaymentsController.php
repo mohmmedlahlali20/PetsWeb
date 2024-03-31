@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Stripe;
+use App\Models\commends;
 use App\Models\payments;
 use App\Models\Products;
 use Illuminate\Http\Request;
@@ -15,25 +16,22 @@ class PaymentsController extends Controller
      */
     public function index()
     {
-        return view('command.index');
-        }
+        $commands = commends::paginate(4); 
+        return view('command.index', compact('commands'));
+    }
 
 
 
         public function checkout()
 {
-    // Récupérer les produits dans le panier ou toute autre source appropriée
     $products = Products::all(); 
     
     $totalAmount = 0;
 
-    // Calculer le montant total en bouclant à travers chaque produit
     foreach ($products as $product) {
-        // Ajouter le prix du produit fois sa quantité au total
         $totalAmount += $product->price; 
     }
 
-    // Créer une session de paiement Stripe avec le montant total
     \Stripe\Stripe::setApiKey(config('stripe.sk'));
     $session = \Stripe\Checkout\Session::create([
         'payment_method_types' => ['card'],
@@ -43,17 +41,17 @@ class PaymentsController extends Controller
                 'product_data' => [
                     'name' => 'sayft lflus asahbi', 
                 ],
-                'unit_amount' => $totalAmount * 100, // Convertir le montant total en cents
+                'unit_amount' => $totalAmount * 100,
             ],
             'quantity' => 1,
         ]],
         'mode' => 'payment',
-        'success_url' => route('success'),
+        'success_url' => route('Commande.index'),
         'cancel_url' => route('GetPayment'),
     ]);
 
-    // Rediriger l'utilisateur vers l'URL de paiement Stripe
-    return redirect()->away($session->url);
+    
+    return redirect()->to($session->url);
 }
 
 

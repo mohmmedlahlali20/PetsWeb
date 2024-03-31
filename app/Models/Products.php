@@ -37,10 +37,7 @@ class Products extends Model
         return $this->hasMany(commends::class);
     }
 
-    public function rates()
-    {
-        return $this->hasMany(rates::class);
-    }
+
 
     protected $fillable = [
         'name',

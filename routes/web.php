@@ -6,6 +6,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\CommendsController;
+use App\Http\Controllers\CommentsController;
 use App\Http\Controllers\PaymentsController;
 use App\Http\Controllers\ProductsController;
 use App\Http\Controllers\AccessoirController;
@@ -24,11 +25,12 @@ use App\Http\Controllers\CategoriesController;
 
 Route::resource('/Home', ProductsController::class);
 Route::resource('/Commande', CommendsController::class);
+Route::resource('/commentes', CommentsController::class);
 
 Route::middleware(['auth' , 'admin'])->group(function () {
   Route::resource('/category' , CategoriesController::class);
   Route::resource('/product', AdminController::class);
-  Route::get('/Commend', [AdminController::class, 'GetCommands'])->name('GetCommand');
+  //Route::get('/Commend', [AdminController::class, 'GetCommands'])->name('GetCommand');
   Route::put('/commands/{commend}', [CommendsController::class , 'update'])->name('command.update');
   Route::resource('user', UserController::class);
   //Route::get('/products', [AdminController::class, 'getStats'])->name('stats');
@@ -37,8 +39,8 @@ Route::middleware(['auth' , 'admin'])->group(function () {
 //payment 
 
 Route::get('/checkout' , [PaymentsController::class , 'index'])->name('GetPayment');
-Route::post('/checkout' , [PaymentsController::class , 'checkout'])->name('striptPayment');
-Route::get('/commend',[PaymentsController::class, 'success'])->name('success'); 
+Route::post('/checkout', [PaymentsController::class, 'checkout'])->name('striptPayment');
+Route::get('/commend', [PaymentsController::class, 'success'])->name('success');
 
 
 

@@ -44,10 +44,7 @@ class ProductsController extends Controller
         }
     
 
-        $productsQuery->orderBy('created_at', 'DESC');
-
-        $products = $productsQuery->paginate(4);
-    
+        $products =  $productsQuery->orderBy('created_at', 'DESC')->paginate(4);
 
         $categories = Categories::with('Products')->has('Products')->get();
     
@@ -77,11 +74,12 @@ class ProductsController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Request $Home, $id)
+    public function show(Request $request, $id)
     {
-       $ShowProducts = Products::find($id);
-       //dd($ShowProducts);
-       return view('Pets.Show' , compact('ShowProducts'));
+        
+        $products = Products::findOrFail($id);
+    //dd($products);
+        return view('Pets.Show', compact('products'));
     }
 
     /**

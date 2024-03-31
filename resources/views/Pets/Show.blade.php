@@ -77,8 +77,7 @@
         </div>
     </nav>
   
-      
-      <!-- content -->
+
       <section class="py-5">
         <div class="container">
           <div class="row gx-5">
@@ -88,17 +87,16 @@
               </div>
               <div class="d-flex justify-content-center mb-3">
                 <a data-fslightbox="mygalley" class="border mx-1 rounded-2" target="_blank" data-type="image" href="https://bootstrap-ecommerce.com/bootstrap5-ecommerce/images/items/detail1/big1.webp" class="item-thumb">
-                  <img width="60" height="60" class="rounded-2" src="https://bootstrap-ecommerce.com/bootstrap5-ecommerce/images/items/detail1/big1.webp" />
+                  <img width="350" height="350" class="rounded-2" src="{{ Storage::url($products->image) }}" />
                 </a>
               </div>
-              <!-- thumbs-wrap.// -->
-              <!-- gallery-wrap .end// -->
+
             </aside>
             <main class="col-lg-6">
               <div class="ps-lg-3">
                 <h4 class="title text-dark">
-                  Quality Men's Hoodie for Winter, Men's Fashion <br />
-                  Casual Hoodie
+                  {{ $products->name }}<br />
+                
                 </h4>
                 <div class="d-flex flex-row my-3">
                   <div class="text-warning mb-1 me-2">
@@ -111,32 +109,31 @@
                       4.5
                     </span>
                   </div>
-                  <span class="text-muted"><i class="fas fa-shopping-basket fa-sm mx-1"></i>154 orders</span>
+                  <span class="text-muted"><i class="fas fa-shopping-basket fa-sm mx-1"></i>{{ $products->quantity }}</span>
                   <span class="text-success ms-2">In stock</span>
                 </div>
       
                 <div class="mb-3">
-                  <span class="h5">$75.00</span>
+                  <span class="h5">${{ $products->price }}.00</span>
                   <span class="text-muted">/per box</span>
                 </div>
       
                 <p>
-                  Modern look and quality demo item is a streetwear-inspired collection that continues to break away from the conventions of mainstream fashion. Made in Italy, these black and brown clothing low-top shirts for
-                  men.
+                 {{$products->description}}
                 </p>
       
                 <div class="row">
                   <dt class="col-3">Sex:</dt>
-                  <dd class="col-9">Regular</dd>
+                  <dd class="col-9">{{ $products->sex }}</dd>
       
                   <dt class="col-3">Age</dt>
-                  <dd class="col-9">Brown</dd>
+                  <dd class="col-9">{{ $products->age }}</dd>
       
                   <dt class="col-3">Category</dt>
-                  <dd class="col-9">Cotton, Jeans</dd>
+                  <dd class="col-9">{{ $products->category->name }}</dd>
       
-                  <dt class="col-3">Brand</dt>
-                  <dd class="col-9">Reebook</dd>
+                  <dt class="col-3">date du creation </dt>
+                  <dd class="col-9">{{ $products->created_at }}</dd>
                 </div>
       
                 <hr />
@@ -150,6 +147,7 @@
           </div>
         </div>
       </section>
+
    
  <!-- Section des commentaires -->
 <section class="bg-light border-top py-4">
@@ -163,7 +161,19 @@
                             <button class="nav-link active" id="ex1-tab-1" data-bs-toggle="pill" data-bs-target="#ex1-pills-1" type="button" role="tab" aria-controls="ex1-pills-1" aria-selected="true">Comments</button>
                         </li>
                     </ul>
-                    <!-- Contenu des onglets -->
+                   <div>
+                    @if (session('success'))
+    <div class="alert alert-success">
+        {{ session('success') }}
+    </div>
+@endif
+
+@if (session('error'))
+    <div class="alert alert-danger">
+        {{ session('error') }}
+    </div>
+@endif
+                   </div>
                     <div class="tab-pane fade show active" id="ex1-pills-1" role="tabpanel" aria-labelledby="ex1-tab-1">
                         <div class="border rounded-2 p-3">
                             <p>
@@ -174,35 +184,19 @@
                                 <div class="comment border rounded p-2 mb-2">
                                     <p>User1: Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
                                 </div>
-                                <!-- Ajoutez plus de commentaires si nécessaire -->
-                                <div class="comment border rounded p-2 mb-2">
-                                    <p>User2: Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-                                </div>
-                                <div class="comment border rounded p-2 mb-2">
-                                    <p>User3: Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-                                </div>
 
-                                <div class="comment border rounded p-2 mb-2">
-                                    <p>User1: Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                                </div>
-                                <!-- Ajoutez plus de commentaires si nécessaire -->
-                                <div class="comment border rounded p-2 mb-2">
-                                    <p>User2: Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-                                </div>
-                                <div class="comment border rounded p-2 mb-2">
-                                    <p>User3: Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-                                </div>
                             </div>
                         </div>
                     </div>
                     
                         
                             <!-- Formulaire pour ajouter un commentaire -->
-                            <form action="" method="POST">
+                            <form action="{{ route('commentes.store') }}" method="POST">
                                 @csrf
+                                <input type="hidden" name="products_id" value="{{ $products->id }}">
                                 <div class="mb-3">
                                     <label for="comment" class="form-label">Comment</label>
-                                    <textarea class="form-control" id="comment" name="comment" rows="3"></textarea>
+                                    <textarea class="form-control" id="comment" name="comments" rows="3"></textarea>
                                 </div>
                                 <div class="mb-3">
                                     <label for="rating" class="form-label">Rating (out of 10)</label>
@@ -210,6 +204,7 @@
                                 </div>
                                 <button type="submit" class="btn btn-primary">Add Comment</button>
                             </form>
+                            
                         </div>
                     </div>
                 </div>

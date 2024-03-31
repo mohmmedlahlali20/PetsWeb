@@ -14,7 +14,11 @@ class CommendsController extends Controller
      */
     public function index()
     {
-        $commands = commends::with('product')->where('user_id', Auth::id())->paginate(4);
+        $commands = commends::with('product')
+        ->where('user_id', Auth::id())
+        ->paginate(4);
+    
+    //dd($commands);
         //dd($commands);
     return view('command.index', compact('commands'));
     }
@@ -36,35 +40,32 @@ class CommendsController extends Controller
          $productId = $request->input('product_id');
          $userId = Auth::id();
      
-         // Récupérer le produit correspondant à partir de la base de données
+
          $product = Products::findOrFail($productId);
-     
-         // Vérifier si la quantité disponible est suffisante
+//dd($product);
          if ($product->quantity > 0) {
-             // Réduire la quantité disponible du produit
-             $product->quantity -= 1; // Réduire d'une unité
+
+             $product->quantity -= 1; 
              $product->save();
-     
-             // Créer une nouvelle commande
-             commends::create([
+//dd($request);
+              commends::create([
                  'products_id' => $productId,
                  'user_id' => $userId,
-                 'total_price' => $product->price // Utiliser le prix du produit comme prix total de la commande
+                 'total_price' => $product->price 
              ]);
-     
-             // Vider la commande de l'utilisateur après le paiement
-             $userCommands = commends::where('user_id', $userId)->where('products_id', $productId)->get();
-             foreach ($userCommands as $command) {
-                 $command->delete();
-             }
+
+            // $userCommands = commends::where('user_id', $userId)->where('products_id', $productId)->get();
+            // foreach ($userCommands as $command) {
+                 //$command->delete();
+            // }
      
              return redirect()->back()->with('success', 'Votre commande a été passée avec succès.');
          } else {
-             // Rediriger avec un message d'erreur si la quantité disponible est insuffisante
              return redirect()->back()->with('error', 'Désolé, la quantité disponible de ce produit est insuffisante.');
          }
      }
      
+
 
     /**
      * Display the specified resource.
@@ -103,8 +104,10 @@ class CommendsController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(commends $commends)
+    public function destroy(commends $Commande)
     {
-        //
+        $Commande->delete();
+        return redirect()->back()->with('success', 'Votre commande a été suprimer avec succès.');
+
     }
 }

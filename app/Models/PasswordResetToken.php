@@ -13,6 +13,6 @@ class PasswordResetToken extends Model
 
     protected $fillable = [
         'email',
-        'token', // Ajoutez le champ 'token' ici
+        'token', 
     ];
 }

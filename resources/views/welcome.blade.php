@@ -135,7 +135,7 @@
           <div class="col-lg-9">
             <div class="latest_product_inner">
               <div class="row">
-                <!-- Boucle sur les produits -->
+              {{$products->links()}}
                 @forelse ($products as $product)
                 <div class="col-lg-4 col-md-6">
                   <div class="single-product">
@@ -169,7 +169,7 @@
                         <span class="badge {{ $product->quantity <= 5 ? 'bg-danger' : 'bg-success' }}">Stock: {{ $product->quantity }}</span>
                         <hr>
                         <span class="mr-4">created at:{{ $product->created_at }}</span>
-                        <!-- Formulaire pour ajouter au panier -->
+                        
                         <form action="{{ route('Commande.store') }}" method="post">
                           @csrf
                           <input type="hidden" name="product_id" value="{{ $product->id }}">
@@ -185,8 +185,6 @@
                                   <i class="fas fa-shopping-basket"></i> Add to Cart
                               </button>
                           @endif
-                      </form>
-                      
                       </div>
                     </div>
                   </div>
