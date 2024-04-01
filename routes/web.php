@@ -26,12 +26,13 @@ use App\Http\Controllers\CategoriesController;
 Route::resource('/Home', ProductsController::class);
 Route::resource('/Commande', CommendsController::class);
 Route::resource('/commentes', CommentsController::class);
+Route::post('/Commandes', [CommendsController::class, 'store'])->name('command');
 
 Route::middleware(['auth' , 'admin'])->group(function () {
   Route::resource('/category' , CategoriesController::class);
   Route::resource('/product', AdminController::class);
   //Route::get('/Commend', [AdminController::class, 'GetCommands'])->name('GetCommand');
-  Route::put('/commands/{commend}', [CommendsController::class , 'update'])->name('command.update');
+  //Route::put('/commands/{commend}', [CommendsController::class , 'update'])->name('command.update');
   Route::resource('user', UserController::class);
   //Route::get('/products', [AdminController::class, 'getStats'])->name('stats');
 });

@@ -40,24 +40,21 @@ class CommendsController extends Controller
          $productId = $request->input('product_id');
          $userId = Auth::id();
      
-
+//dd($request->input('product_id'));
          $product = Products::findOrFail($productId);
 //dd($product);
          if ($product->quantity > 0) {
 
              $product->quantity -= 1; 
              $product->save();
-//dd($request);
-              commends::create([
+//dd( $product->save());
+              $a = commends::create([
                  'products_id' => $productId,
                  'user_id' => $userId,
                  'total_price' => $product->price 
              ]);
-
-            // $userCommands = commends::where('user_id', $userId)->where('products_id', $productId)->get();
-            // foreach ($userCommands as $command) {
-                 //$command->delete();
-            // }
+//dd($a);
+            
      
              return redirect()->back()->with('success', 'Votre commande a été passée avec succès.');
          } else {
@@ -90,11 +87,7 @@ class CommendsController extends Controller
     {
         
  
-        dd($command);
-    
-        $command->update([
-            'commend' => $request->input('status')
-        ]);
+       
     
         //return redirect()->back()->with('status', 'Update successful');
     }

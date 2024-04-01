@@ -20,7 +20,7 @@ return new class extends Migration
             ->constrained('users')
             ->onDelete('cascade');
             $table->softDeletes();
-            $table->enum('status', ['valide', 'invalid']); 
+            $table->enum('status', ['paid', 'unpaid'])->default('unpaid');
             $table->float('total_price');
             $table->timestamps();
         });
