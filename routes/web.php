@@ -26,6 +26,7 @@ use App\Http\Controllers\CategoriesController;
 Route::resource('/Home', ProductsController::class);
 Route::resource('/Commande', CommendsController::class);
 Route::resource('/commentes', CommentsController::class);
+//Route::get('/commente/{id}', [ProductsController::class, 'show'])->name('show');
 
 Route::middleware(['auth' , 'admin'])->group(function () {
   Route::resource('/category' , CategoriesController::class);

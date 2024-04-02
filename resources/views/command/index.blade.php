@@ -130,7 +130,7 @@
                         </div>
                         <h6 class="text-success">{{ $productCommands->first()->user->name }}</h6>
                         <div class="d-flex flex-column mt-4"><button class="btn btn-outline-success btn-sm mt-2" type="button">Total Commands: {{ $totalCommands }}</button></div>
-                        <form action="{{ route('Commande.destroy', $productCommands->first()->id) }}" method="POST">
+                        <form action="" method="POST">
                             @csrf
                             @method('DELETE')
                             <div class="d-flex flex-column mt-4">
@@ -139,20 +139,19 @@
                         </form>
                     </div>
                 </div>
-                @if($productCommands->isNotEmpty())
-                    <form action="{{ route('striptPayment') }}" method="POST">
-                        @csrf
-                        <input type="hidden" name="command_id" value="{{ $productCommands->first()->id }}">
-                        <button class="btn mt-5 btn-success" type="submit">Checkout</button>
-                    </form>
-                @endif
             @empty
                 <div class="alert alert-warning">
                     no commed aw
                 </div>
             @endforelse
             {{ $commands->links() }}
-            
+            @if($productCommands->isNotEmpty())
+            <form action="{{ route('striptPayment') }}" method="POST">
+                @csrf
+                <input type="hidden" name="command_id" value="{{ $productCommands->first()->id }}">
+                <button class="btn mt-5 btn-success" type="submit">Checkout</button>
+            </form>
+        @endif
             </div>
         </div>
     </div>

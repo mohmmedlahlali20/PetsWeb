@@ -177,10 +177,11 @@
                    <div class="tab-pane fade show active" id="ex1-pills-1" role="tabpanel" aria-labelledby="ex1-tab-1">
                     <div class="border rounded-2 p-3">
                         <p></p>
-                        @forelse ($comments as $item) 
+                   
+                        {{-- @forelse ($comments as $item) 
                             <div class="comments">
                                 <div class="comment border rounded p-2 mb-2">
-                                    <p>: Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                                    <p>{{ $item->user->name }}: Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
                                 </div>
                             </div>
                         @empty 
@@ -189,7 +190,7 @@
                                     <p>No comment exist.</p>
                                 </div>
                             </div>
-                        @endforelse 
+                        @endforelse  --}}
                     </div>
                 </div>
                 

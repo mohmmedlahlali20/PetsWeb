@@ -144,7 +144,7 @@
                       <img class="card-img " src="{{ Storage::url($product->image) }}" alt="" />
                       <!-- Icône de vue -->
                       <div class="p_icon">
-                        <a href="{{ route('Home.show' , $product->id) }}" class="product-details-link" data-toggle="modal" data-target="#productDetailsModal" data-product-id="{{ $product->id }}">
+                        <a href="{{ route('commentes.show' , $product->id) }}" class="product-details-link" data-toggle="modal" data-target="#productDetailsModal" data-product-id="{{ $product->id }}">
                           <i class="fas fa-eye"></i> 
                         </a>                        
                       </div>
