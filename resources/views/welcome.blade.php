@@ -185,6 +185,7 @@
                                   <i class="fas fa-shopping-basket"></i> Add to Cart
                               </button>
                           @endif
+                        </form>
                       </div>
                     </div>
                   </div>

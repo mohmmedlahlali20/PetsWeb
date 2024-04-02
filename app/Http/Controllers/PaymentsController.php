@@ -2,16 +2,19 @@
 
 namespace App\Http\Controllers;
 
-use Stripe;
+use App\Models\payment;
 use App\Models\commends;
-use App\Models\payments;
 use App\Models\Products;
 use Illuminate\Http\Request;
-use Stripe\Checkout\Session;
 
 class PaymentsController extends Controller
 {
-    /**
+   
+
+
+
+
+/**
      * Display a listing of the resource.
      */
     public function index()
@@ -21,43 +24,52 @@ class PaymentsController extends Controller
     }
 
 
-
-        public function checkout()
-{
-    $products = Products::all(); 
+    public function checkout(Request $request)
+    {
+        $products = Products::all(); 
+        $commend = $request->input('command_id');
+        $totalAmount = 0;
     
-    $totalAmount = 0;
-
-    foreach ($products as $product) {
-        $totalAmount += $product->price; 
-    }
-
-    \Stripe\Stripe::setApiKey(config('stripe.sk'));
-    $session = \Stripe\Checkout\Session::create([
-        'payment_method_types' => ['card'],
-        'line_items' => [[
-            'price_data' => [
-                'currency' => 'usd',
-                'product_data' => [
-                    'name' => 'sayft lflus asahbi', 
+        foreach ($products as $product) {
+            $totalAmount += $product->price; 
+        }
+    
+        \Stripe\Stripe::setApiKey(config('stripe.sk'));
+        $session = \Stripe\Checkout\Session::create([
+            'payment_method_types' => ['card'],
+            'line_items' => [[
+                'price_data' => [
+                    'currency' => 'usd',
+                    'product_data' => [
+                        'name' => 'sayft lflus asahbi', 
+                    ],
+                    'unit_amount' => $totalAmount * 100,
                 ],
-                'unit_amount' => $totalAmount * 100,
-            ],
-            'quantity' => 1,
-        ]],
-        'mode' => 'payment',
-        'success_url' => route('Commande.index'),
-        'cancel_url' => route('GetPayment'),
-    ]);
-
+                'quantity' => 1,
+            ]],
+            'mode' => 'payment',
+            'success_url' => route('Commande.index'),
+            'cancel_url' => route('GetPayment'),
+        ]);
     
-    return redirect()->to($session->url);
-}
-
+        payment::create([
+            'amount' => $totalAmount,
+            'payment_status' => 'valider',
+            'stripe_payment_id' => $session->id,
+            'commend_id' =>  $commend
+        ]);
+        return redirect()->to($session->url);
+    }
+    
 
     public function success(){
         return view('command.index');
     }
+
+
+
+
+
 
 
 
@@ -141,7 +153,7 @@ class PaymentsController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(payments $payments)
+    public function show(payment $payment)
     {
         //
     }
@@ -149,7 +161,7 @@ class PaymentsController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(payments $payments)
+    public function edit(payment $payment)
     {
         //
     }
@@ -157,7 +169,7 @@ class PaymentsController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, payments $payments)
+    public function update(Request $request, payment $payment)
     {
         //
     }
@@ -165,10 +177,12 @@ class PaymentsController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(payments $payments)
+    public function destroy(payment $payment)
     {
         //
     }
+
+
 
 
 

@@ -174,20 +174,25 @@
     </div>
 @endif
                    </div>
-                    <div class="tab-pane fade show active" id="ex1-pills-1" role="tabpanel" aria-labelledby="ex1-tab-1">
-                        <div class="border rounded-2 p-3">
-                            <p>
-                            </p>
-                            <!-- Contenu des commentaires -->
+                   <div class="tab-pane fade show active" id="ex1-pills-1" role="tabpanel" aria-labelledby="ex1-tab-1">
+                    <div class="border rounded-2 p-3">
+                        <p></p>
+                        @forelse ($comments as $item) 
                             <div class="comments">
-                                <!-- Liste des commentaires existants -->
                                 <div class="comment border rounded p-2 mb-2">
-                                    <p>User1: Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                                    <p>: Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
                                 </div>
-
                             </div>
-                        </div>
+                        @empty 
+                            <div class="comments">
+                                <div class="comment border rounded p-2 mb-2 alert alert-warning">
+                                    <p>No comment exist.</p>
+                                </div>
+                            </div>
+                        @endforelse 
                     </div>
+                </div>
+                
                     
                         
                             <!-- Formulaire pour ajouter un commentaire -->

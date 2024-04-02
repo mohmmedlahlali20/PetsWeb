@@ -15,6 +15,9 @@ return new class extends Migration
             $table->id();
             $table->foreignId('products_id')
             ->constrained('products');
+            $table->foreignId('user_id')
+            ->constrained('users')
+            ->onDelete('cascade');
             $table->text('comments');
             $table->float('rate_number');
             $table->timestamps();

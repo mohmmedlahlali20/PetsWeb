@@ -15,7 +15,12 @@ class CommentsController extends Controller
      */
     public function index()
     {
-        //
+       // Récupérer les quatre derniers commentaires
+    $conteier = comments::latest()->take(4)->get();
+    //dd($comments);
+    
+    // Passer les commentaires à la vue
+    return view('Pets.Show', compact('conteier'));
     }
 
     /**
@@ -31,28 +36,28 @@ class CommentsController extends Controller
      */
   
 
-     public function store(CommentesRequest $commentes)
-     {
-        dd($commentes);
-         // Vérifie si l'utilisateur est connecté
-         if (Auth::check()) {
-             // Crée un nouveau commentaire en utilisant les données du formulaire
-             $comment = new comments();
-             //dd($comment);
-             $comment->products_id = $commentes->input('products_id');
-             //$comment->user_id = Auth::id(); // Obtient l'ID de l'utilisateur connecté
-             $comment->rate_number = $commentes->input('rating');
-             $comment->comments = $commentes->input('comments');
-     
-             // Enregistre le commentaire dans la base de données
-             $comment->save();
-             dd( $comment->save());
-     
-             return redirect()->back()->with('success', 'Comment added successfully.');
-         } else {
-             return redirect()->back()->with('error', 'You need to be logged in to add a comment.');
-         }
-     }
+     public function store(Request $request)
+{
+    //dd($request);
+    // Valider les données soumises
+    $request->validate([
+        'products_id' => 'required|exists:products,id',
+        'comments' => 'required|string',
+        'rating' => 'required|integer|min:1|max:10',
+    ]);
+
+    // Créer un nouveau commentaire
+    $comment = new comments();
+    $comment->products_id = $request->input('products_id');
+    $comment->user_id = auth()->id(); // ou toute autre méthode pour obtenir l'ID de l'utilisateur
+    $comment->comments = $request->input('comments');
+    $comment->rate_number = $request->input('rating');
+    $comment->save();
+
+    // Rediriger l'utilisateur ou afficher un message de succès
+    return redirect()->back()->with('success', 'Commentaire ajouté avec succès.');
+}
+
      
    
    /**

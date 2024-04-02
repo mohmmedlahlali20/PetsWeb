@@ -108,7 +108,6 @@
                                         <a class="nav-link" href="{{ route('Home.index') }}">Home</a>
                                         <a class="nav-link" href="{{ route('product.index') }}">Products</a>
                                         <a class="nav-link" href="{{ route('category.index') }}">CAtegory</a>
-                                        <a class="nav-link" href="{{ route('GetCommand') }}">Command</a>
                                     </nav>
                                 </div>
                                 <a class="nav-link collapsed" href="#" data-bs-toggle="collapse"

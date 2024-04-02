@@ -12,16 +12,20 @@ class CommendsController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
-    {
-        $commands = commends::with('product')
-        ->where('user_id', Auth::id())
-        ->paginate(4);
-    
-    //dd($commands);
-        //dd($commands);
-    return view('command.index', compact('commands'));
-    }
+
+     public function index()
+     {
+         $commands = commends::with('product')
+             ->leftJoin('payments', function ($join) {
+                 $join->on('commends.id', '=', 'payments.commend_id')
+                      ->where('payments.payment_status', '!=', 'invalide');
+             })
+             ->where('commends.user_id', Auth::id())
+             ->whereNull('payments.id') 
+             ->paginate(4);
+     
+         return view('command.index', compact('commands'));
+     }
 
     /**
      * Show the form for creating a new resource.
@@ -37,33 +41,37 @@ class CommendsController extends Controller
    
      public function store(Request $request)
      {
+
+        if (!Auth::check()) {
+            return redirect()->route('login')->with('error', 'Vous devez vous connecter pour passer une commande.');
+        }
+        
          $productId = $request->input('product_id');
          $userId = Auth::id();
      
-
          $product = Products::findOrFail($productId);
-//dd($product);
+     
          if ($product->quantity > 0) {
-
              $product->quantity -= 1; 
              $product->save();
-//dd($request);
-              commends::create([
+     
+             // Créer une nouvelle commande
+             commends::create([
                  'products_id' => $productId,
                  'user_id' => $userId,
                  'total_price' => $product->price 
              ]);
-
-            // $userCommands = commends::where('user_id', $userId)->where('products_id', $productId)->get();
-            // foreach ($userCommands as $command) {
-                 //$command->delete();
-            // }
      
+                //commends::where('user_id', $userId)->where('products_id', $productId)->delete();
+      
              return redirect()->back()->with('success', 'Votre commande a été passée avec succès.');
-         } else {
+         } elseif ($product->quantity === 0) {
              return redirect()->back()->with('error', 'Désolé, la quantité disponible de ce produit est insuffisante.');
+         } else {
+             return redirect()->back()->with('error', 'Une erreur s\'est produite lors du traitement de votre commande.');
          }
      }
+     
      
 
 

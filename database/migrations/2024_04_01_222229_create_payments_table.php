@@ -13,10 +13,12 @@ return new class extends Migration
     {
         Schema::create('payments', function (Blueprint $table) {
             $table->id();
+            $table->float('amount');
             $table->foreignId('commend_id')
-            ->constrained('commends')
-            ->onDelete('cascade');
-            $table->enum('payment' ,['valider' , 'invalide']);
+                ->constrained('commends')
+                ->onDelete('cascade');
+            $table->enum('payment_status', ['valider', 'invalide'])->default('valider');
+            $table->string('stripe_payment_id')->nullable(); // Champ pour stocker l'ID de paiement Stripe
             $table->timestamps();
         });
     }

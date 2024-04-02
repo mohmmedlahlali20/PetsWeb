@@ -35,7 +35,20 @@
       backdrop-filter: saturate(200%) blur(25px);
     }
   </style>
-
+<div class="container">
+  @if(session('success'))
+  <div class="alert alert-success">
+      {{ session('success') }}
+  </div>
+  @endif
+</div>
+<div class="container mt-5">
+  @if(session('error'))
+  <div class="alert alert-danger">
+      {{ session('error') }}
+  </div>
+  @endif
+</div>
 
   <div class="container px-4 py-5 px-md-5 text-center text-lg-start my-5">
     <div class="row gx-lg-5 align-items-center mb-5">

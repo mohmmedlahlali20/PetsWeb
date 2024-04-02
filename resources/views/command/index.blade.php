@@ -18,15 +18,16 @@
 </head>
 <style>
     #big_div {
-    background-image: url('{{ asset('assets/images/laura.jpg') }}');
-    z-index:999
-}
-.custom-card {
-    /* Add your custom styles here */
-    border: 2px solid #ccc;
-    border-radius: 10px;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-}
+        background-image: url('{{ asset('assets/images/laura.jpg') }}');
+        z-index: 999
+    }
+
+    .custom-card {
+        /* Add your custom styles here */
+        border: 2px solid #ccc;
+        border-radius: 10px;
+        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    }
 
 </style>
 
@@ -38,12 +39,12 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
 
-                      <li class="nav-item"><a class="nav-link active" aria-current="page" href="">Home</a></li>
-                      @if(Auth::check() && Auth::user()->role == 'admin')
-                      <li class="nav-item"><a class="nav-link" href="{{ route('product.index') }}">Dashboard</a></li>
-                  @endif
-                  
-                    
+                    <li class="nav-item"><a class="nav-link active" aria-current="page" href="">Home</a></li>
+                    @if(Auth::check() && Auth::user()->role == 'admin')
+                    <li class="nav-item"><a class="nav-link" href="{{ route('product.index') }}">Dashboard</a></li>
+                    @endif
+
+
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Shop</a>
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
@@ -63,15 +64,17 @@
                         <a class="nav-link active custom-btn register-btn" aria-current="page" href="{{ route('register') }}">Register</a>
                     </li>
                     @endguest
-                   
-               
+
+
                     @auth
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle btn btn-primary" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Profile</a>
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                             <li><span class="dropdown-item">{{ auth()->user()->name }}</span></li>
                             <li><span class="dropdown-item">{{ auth()->user()->email }}</span></li>
-                            <li><hr class="dropdown-divider" /></li>
+                            <li>
+                                <hr class="dropdown-divider" />
+                            </li>
                             <li>
                                 <form action="{{ route('logout') }}" method="POST">
                                     @csrf
@@ -80,16 +83,16 @@
                             </li>
                         </ul>
                     </li>
-                @endauth
-          
+                    @endauth
+
 
                 </ul>
                 <form id="addToCartForm" class="d-flex">
-                  <a  href="{{ route('Home.index') }}" class="btn btn-outline-dark" >
-                     see all products
-                  </a>
-              </form>
-              
+                    <a href="{{ route('Home.index') }}" class="btn btn-outline-dark">
+                        see all products
+                    </a>
+                </form>
+
             </div>
         </div>
     </nav>
@@ -100,57 +103,60 @@
         </div>
         @endif
     </div>
-   
+
 
     <div class="container mt-5 mb-5">
         <div class="d-flex justify-content-center row">
             <div class="col-md-10">
                 @forelse ($commands->groupBy('products_id') as $productId => $productCommands)
-                    @php
-                        $product = $productCommands->first()->product;
-                        $totalCommands = $productCommands->count();
-                    @endphp
-                    <br>
-                    <div class="row p-2 bg-white border rounded">
-                        <div class="col-md-3 mt-1"><img class="img-fluid img-responsive rounded product-image"  src="{{ Storage::url($product->image) }}"></div>
-                        <div class="col-md-6 mt-1">
-                            <h5>{{ $product->name }}</h5>
-                            <div class="d-flex flex-row">
-                                <div class="ratings mr-2"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i></div><span>310</span>
-                            </div>
-                            <div class="mt-1 mb-1 spec-1"><span class="dot"></span><span>{{ $product->category->name }}</span></div>
-                            <p class="text-justify text-truncate para mb-0"> {{ $product->description }}<br><br></p>
+                @php
+                    $product = $productCommands->first()->product;
+                    $totalCommands = $productCommands->count();
+                @endphp
+                <br>
+                <div class="row p-2 bg-white border rounded">
+                    <div class="col-md-3 mt-1"><img class="img-fluid img-responsive rounded product-image" src="{{ Storage::url($product->image) }}"></div>
+                    <div class="col-md-6 mt-1">
+                        <h5>{{ $product->name }}</h5>
+                        <div class="d-flex flex-row">
+                            <div class="ratings mr-2"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i></div><span>310</span>
                         </div>
-                        <div class="align-items-center align-content-center col-md-3 border-left mt-1">
-                            <div class="d-flex flex-row align-items-center">
-                                <h4 class="mr-1">{{ $product->price }} $</h4>
-                            </div>
-                            <h6 class="text-success">{{ $productCommands->first()->user->name }}</h6>
-                            <div class="d-flex flex-column mt-4"><button class="btn btn-outline-success btn-sm mt-2" type="button">Total Commands: {{ $totalCommands }}</button></div>
-                            <form action="{{ route('Commande.destroy', $productCommands->first()->id) }}" method="POST">
-                                @csrf
-                                @method('DELETE')
-                                <div class="d-flex flex-column mt-4">
-                                    <button class="btn btn-outline-danger btn-sm mt-2" type="submit">Annuler la commande</button>
-                                </div>
-                            </form>
-                            
+                        <div class="mt-1 mb-1 spec-1"><span class="dot"></span><span>{{ $product->category->name }}</span></div>
+                        <p class="text-justify text-truncate para mb-0"> {{ $product->description }}<br><br></p>
+                    </div>
+                    <div class="align-items-center align-content-center col-md-3 border-left mt-1">
+                        <div class="d-flex flex-row align-items-center">
+                            <h4 class="mr-1">{{ $product->price }} $</h4>
                         </div>
+                        <h6 class="text-success">{{ $productCommands->first()->user->name }}</h6>
+                        <div class="d-flex flex-column mt-4"><button class="btn btn-outline-success btn-sm mt-2" type="button">Total Commands: {{ $totalCommands }}</button></div>
+                        <form action="{{ route('Commande.destroy', $productCommands->first()->id) }}" method="POST">
+                            @csrf
+                            @method('DELETE')
+                            <div class="d-flex flex-column mt-4">
+                                <button class="btn btn-outline-danger btn-sm mt-2" type="submit">Annuler la commande</button>
+                            </div>
+                        </form>
                     </div>
-                    @empty
-                    <div class="alert alert-warning">
-                        no commed aw
-                    </div>
-                @endforelse
-                {{ $commands->links() }}
-                <form action="{{ route('striptPayment') }}" method="POST">
-                    @csrf
-                    <button class="btn mt-5 btn-success" type="submit">Checkout</button>
-                </form> 
+                </div>
+                @if($productCommands->isNotEmpty())
+                    <form action="{{ route('striptPayment') }}" method="POST">
+                        @csrf
+                        <input type="hidden" name="command_id" value="{{ $productCommands->first()->id }}">
+                        <button class="btn mt-5 btn-success" type="submit">Checkout</button>
+                    </form>
+                @endif
+            @empty
+                <div class="alert alert-warning">
+                    no commed aw
+                </div>
+            @endforelse
+            {{ $commands->links() }}
+            
             </div>
         </div>
     </div>
-    
+
     <footer class="py-5 bg-dark">
         <div class="container">
             <p class="m-0 text-center text-white">Copyright &copy; Your Website 2023</p>
