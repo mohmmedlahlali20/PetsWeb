@@ -27,6 +27,10 @@ Route::resource('/Home', ProductsController::class);
 Route::resource('/Commande', CommendsController::class);
 Route::resource('/commentes', CommentsController::class);
 
+//Route::get('/commente/{id}', [ProductsController::class, 'show'])->name('show');
+
+Route::post('/Commandes', [CommendsController::class, 'store'])->name('command');
+
 Route::middleware(['auth' , 'admin'])->group(function () {
   Route::resource('/category' , CategoriesController::class);
   Route::resource('/product', AdminController::class);
@@ -40,7 +44,7 @@ Route::middleware(['auth' , 'admin'])->group(function () {
 
 Route::get('/checkout' , [PaymentsController::class , 'index'])->name('GetPayment');
 Route::post('/checkout', [PaymentsController::class, 'checkout'])->name('striptPayment');
-Route::get('/commend', [PaymentsController::class, 'success'])->name('success');
+Route::get('/checkout', [PaymentsController::class, 'success'])->name('success');
 
 
 

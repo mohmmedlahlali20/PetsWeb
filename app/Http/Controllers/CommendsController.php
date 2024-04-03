@@ -15,14 +15,7 @@ class CommendsController extends Controller
 
      public function index()
      {
-         $commands = commends::with('product')
-             ->leftJoin('payments', function ($join) {
-                 $join->on('commends.id', '=', 'payments.commend_id')
-                      ->where('payments.payment_status', '!=', 'invalide');
-             })
-             ->where('commends.user_id', Auth::id())
-             ->whereNull('payments.id') 
-             ->paginate(4);
+         $commands = commends::paginate(4);
      
          return view('command.index', compact('commands'));
      }
@@ -55,18 +48,18 @@ class CommendsController extends Controller
          if ($product->quantity > 0) {
              $product->quantity -= 1; 
              $product->save();
-//dd($request);
-              commends::create([
+
+     
+              $a = commends::create([
+
                  'products_id' => $productId,
                  'user_id' => $userId,
                  'total_price' => $product->price 
              ]);
-
-            // $userCommands = commends::where('user_id', $userId)->where('products_id', $productId)->get();
-            // foreach ($userCommands as $command) {
-                 //$command->delete();
-            // }
+//dd($a);
      
+                //commends::where('user_id', $userId)->where('products_id', $productId)->delete();
+      
              return redirect()->back()->with('success', 'Votre commande a été passée avec succès.');
          } elseif ($product->quantity === 0) {
              return redirect()->back()->with('error', 'Désolé, la quantité disponible de ce produit est insuffisante.');

@@ -9,10 +9,6 @@ use Illuminate\Http\Request;
 
 class PaymentsController extends Controller
 {
-   
-
-
-
 
 /**
      * Display a listing of the resource.
@@ -26,8 +22,10 @@ class PaymentsController extends Controller
 
     public function checkout(Request $request)
     {
+        //dd($request);
         $products = Products::all(); 
         $commend = $request->input('command_id');
+        //dd($commend);
         $totalAmount = 0;
     
         foreach ($products as $product) {
@@ -62,69 +60,11 @@ class PaymentsController extends Controller
     }
     
 
-    public function success(){
-        return view('command.index');
-    }
+   
+public function success(Request $request)
+{
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+}
 
 
 

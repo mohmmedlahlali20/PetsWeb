@@ -108,28 +108,25 @@
     <div class="container mt-5 mb-5">
         <div class="d-flex justify-content-center row">
             <div class="col-md-10">
-                @forelse ($commands->groupBy('products_id') as $productId => $productCommands)
-                @php
-                    $product = $productCommands->first()->product;
-                    $totalCommands = $productCommands->count();
-                @endphp
+                @forelse ($commands as $Com)
+               
                 <br>
                 <div class="row p-2 bg-white border rounded">
-                    <div class="col-md-3 mt-1"><img class="img-fluid img-responsive rounded product-image" src="{{ Storage::url($product->image) }}"></div>
+                    <div class="col-md-3 mt-1"><img class="img-fluid img-responsive rounded product-image" src="{{ Storage::url($Com->product->image) }}"></div>
                     <div class="col-md-6 mt-1">
-                        <h5>{{ $product->name }}</h5>
+                        <h5>{{ $Com->product->name }}</h5>
                         <div class="d-flex flex-row">
                             <div class="ratings mr-2"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i></div><span>310</span>
                         </div>
-                        <div class="mt-1 mb-1 spec-1"><span class="dot"></span><span>{{ $product->category->name }}</span></div>
-                        <p class="text-justify text-truncate para mb-0"> {{ $product->description }}<br><br></p>
+                        <div class="mt-1 mb-1 spec-1"><span class="dot"></span><span>{{ $Com->product->category->name }}</span></div>
+                        <p class="text-justify text-truncate para mb-0"> {{ $Com->product->description }}<br><br></p>
                     </div>
                     <div class="align-items-center align-content-center col-md-3 border-left mt-1">
                         <div class="d-flex flex-row align-items-center">
-                            <h4 class="mr-1">{{ $product->price }} $</h4>
+                            <h4 class="mr-1">{{ $Com->product->price }} $</h4>
                         </div>
-                        <h6 class="text-success">{{ $productCommands->first()->user->name }}</h6>
-                        <div class="d-flex flex-column mt-4"><button class="btn btn-outline-success btn-sm mt-2" type="button">Total Commands: {{ $totalCommands }}</button></div>
+                        <h6 class="text-success">{{ $Com->first()->user->name }}</h6>
+                        <div class="d-flex flex-column mt-4"><button class="btn btn-outline-success btn-sm mt-2" type="button">Total Commands:</button></div>
                         <form action="" method="POST">
                             @csrf
                             @method('DELETE')
@@ -144,13 +141,15 @@
                     no commed aw
                 </div>
             @endforelse
-            {{ $commands->links() }}
-            @if($productCommands->isNotEmpty())
+           
+            @if($commands->isNotEmpty())
             <form action="{{ route('striptPayment') }}" method="POST">
                 @csrf
-                <input type="hidden" name="command_id" value="{{ $productCommands->first()->id }}">
+                <input type="hidden" name="command_id" value="{{ $commands->first()->id }}">
                 <button class="btn mt-5 btn-success" type="submit">Checkout</button>
             </form>
+            
+            
         @endif
             </div>
         </div>
