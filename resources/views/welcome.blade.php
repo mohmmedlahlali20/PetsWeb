@@ -170,9 +170,9 @@
                         <hr>
                         <span class="mr-4">created at:{{ $product->created_at }}</span>
                         
-                        <form action="{{ route('Commande.store') }}" method="post">
+                        <form action="{{ route('command') }}" method="post">
                           @csrf
-                          <input type="hidden" name="product_id" value="{{ $product->id }}">
+                          <input type="text" name="product_id" value="{{ $product->id }}">
                           @if ($product->quantity == 0)
                             <div class="alert d-flex justify-content-center alert-warning">
                               <button type="button" class="btn btn-outline-dark btn-product btn-cart" disabled>
