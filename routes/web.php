@@ -22,14 +22,18 @@ use App\Http\Controllers\CategoriesController;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+// Route::get('/Commandes', [CommendsController::class, 'index']);
 
 Route::resource('/Home', ProductsController::class);
 Route::resource('/Commande', CommendsController::class);
 Route::resource('/commentes', CommentsController::class);
 
+
 //Route::get('/commente/{id}', [ProductsController::class, 'show'])->name('show');
 
 Route::post('/Commandes', [CommendsController::class, 'store'])->name('command');
+Route::post('/commentair', [CommentsController::class, 'store'])->name('commentes');
+
 
 Route::middleware(['auth' , 'admin'])->group(function () {
   Route::resource('/category' , CategoriesController::class);
@@ -44,7 +48,7 @@ Route::middleware(['auth' , 'admin'])->group(function () {
 
 Route::get('/checkout' , [PaymentsController::class , 'index'])->name('GetPayment');
 Route::post('/checkout', [PaymentsController::class, 'checkout'])->name('striptPayment');
-Route::get('/checkout', [PaymentsController::class, 'success'])->name('success');
+Route::get('/commend', [PaymentsController::class, 'success'])->name('success');
 
 
 

@@ -57,13 +57,26 @@ class PaymentsController extends Controller
             'commend_id' =>  $commend
         ]);
         return redirect()->to($session->url);
+        //return redirect()->route('success');
+
     }
     
 
    
 public function success(Request $request)
 {
+  
+    $paymentId = Payment::where('stripe_payment_id', $request->stripe_payment_id)->first();
 
+  //dd($paymentId);
+    $payment = payment::where('stripe_payment_id', $paymentId)->first();
+
+    if ($payment && $payment->payment_status == 'valider') {
+
+        Command::where('id', $payment->commend_id)->delete();
+    }
+
+    return view('command.index');
 }
 
 

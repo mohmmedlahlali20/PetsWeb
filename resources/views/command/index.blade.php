@@ -127,7 +127,7 @@
                         </div>
                         <h6 class="text-success">{{ $Com->first()->user->name }}</h6>
                         <div class="d-flex flex-column mt-4"><button class="btn btn-outline-success btn-sm mt-2" type="button">Total Commands:</button></div>
-                        <form action="" method="POST">
+                        <form action="{{ route('Commande.destroy', $Com->id) }}" method="POST">
                             @csrf
                             @method('DELETE')
                             <div class="d-flex flex-column mt-4">
@@ -148,8 +148,6 @@
                 <input type="hidden" name="command_id" value="{{ $commands->first()->id }}">
                 <button class="btn mt-5 btn-success" type="submit">Checkout</button>
             </form>
-            
-            
         @endif
             </div>
         </div>

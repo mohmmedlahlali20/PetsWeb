@@ -5,11 +5,9 @@ class Slider {
       this.valueElement = valueElement
       this.options = options
   
-      // Attach a listener to "change" event
       this.rangeElement.addEventListener('input', this.updateSlider.bind(this))
     }
   
-    // Initialize the slider
     init() {
       this.rangeElement.setAttribute('min', options.min)
       this.rangeElement.setAttribute('max', options.max)

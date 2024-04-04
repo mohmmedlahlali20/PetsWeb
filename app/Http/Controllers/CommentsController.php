@@ -15,8 +15,8 @@ class CommentsController extends Controller
      */
     public function index()
     {
-        $comments = Comment::latest()->take(4)->get();
-        
+        $comments = comments::get();
+     
         return view('Pets.Show', compact('comments'));
     }
     /**
@@ -24,7 +24,7 @@ class CommentsController extends Controller
      */
     public function create()
     {
-        //
+        
     }
 
     /**
@@ -34,23 +34,28 @@ class CommentsController extends Controller
 
      public function store(Request $request)
 {
+    //dd($request);
+   
     
-    $request->validate([
-        'products_id' => 'required|exists:products,id',
-        'comments' => 'required|string',
-        'rating' => 'required|integer|min:1|max:10',
-    ]);
+        $request->validate([
+            'msg' => 'required',
+            'rating' => 'required|numeric|min:1|max:10',
+        ]);
+
+  
+        $comment = new comments();
+       
+        $comment->comments = $request->input('msg');
+        $comment->rate_number = $request->input('rating');
+        $comment->products_id = $request->input('products_id');
+        $comment->user_id = auth()->id(); 
+
+        //dd($comment->save());
+        $comment->save();
 
 
-    $comment = new comments();
-    $comment->products_id = $request->input('products_id');
-    $comment->user_id = auth()->id(); 
-    $comment->comments = $request->input('comments');
-    $comment->rate_number = $request->input('rating');
-    $comment->save();
-
-
-    return redirect()->back()->with('success', 'Commentaire ajouté avec succès.');
+        return redirect()->back()->with('success', 'Commentaire ajouté avec succès.');
+ 
 }
 
      

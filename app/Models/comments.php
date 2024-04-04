@@ -8,18 +8,22 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class comments extends Model
 {
+
+    
     use HasFactory;
 
     public function product()
     {
-        return $this->belongsTo(Products::class);
+        return $this->belongsTo(Products::class, 'product_id');
     }
+    
     public function user()
     {
-        return $this->belongsTo(User::class , 'user_id');
+        return $this->belongsTo(User::class, 'user_id');
     }
+    
     protected $fillable = [
-        'products_id',
+        'product_id', // Corrected the attribute name
         'comments',
         'rate_number',
         'user_id'
