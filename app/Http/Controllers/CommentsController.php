@@ -15,7 +15,7 @@ class CommentsController extends Controller
      */
     public function index()
     {
-        $comments = comments::get();
+        $comments = comments::all();
      
         return view('Pets.Show', compact('comments'));
     }
@@ -65,12 +65,21 @@ class CommentsController extends Controller
      */
     public function show(Request $request, $id)
     {
-        
-        $products = Products::findOrFail($id);
-    //dd($products);
-        return view('Pets.Show', compact('products'));
-    }
 
+        $products = Products::findOrFail($id);
+        $comments = comments::where('products_id', $id)
+                           ->orderBy('created_at', 'desc')
+                           ->take(3)
+                           ->get();
+        $ratingsSum = $comments->sum('rate_number');
+        $ratingsCount = $comments->count();
+        $averageRating = $ratingsCount > 0 ? $ratingsSum / $ratingsCount : 0;
+        $averageRating = number_format($averageRating, 1);
+    
+        return view('Pets.Show', compact('products', 'comments', 'averageRating'));
+    }
+    
+    
     /**
      * Show the form for editing the specified resource.
      */

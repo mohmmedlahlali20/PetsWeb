@@ -10,20 +10,19 @@
     .card {
       margin-bottom: 20px;
     }
-    /* Hero section styles */
+
     .hero-section {
-      background-color: #f8f9fa; /* Light gray background */
-      color: #333; /* Dark text color */
-      padding: 100px 0; /* Top and bottom padding */
+      background-color: #17f0c1;
+      color: #333; 
+      padding: 100px 0; 
       text-align: center;
     }
-    /* Colors for sections */
     #services, #prices, #sales, #contact {
-      background-color: #fff; /* White background for sections */
-      color: #333; /* Dark text color */
-      padding: 80px 0; /* Top and bottom padding */
+      background-color: #fff; 
+      color: #333; 
+      padding: 80px 0; 
     }
-    /* Center images */
+
     .center-image {
       display: flex;
       justify-content: center;
@@ -34,9 +33,9 @@
 
 <!-- Navbar -->
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <div class="container px-4 px-lg-5 ">
+    <div class="container px-4 px-lg-5  ">
         <a class="navbar-brand" href="#!">
-            <img src="{{ asset('assets/images/logo.jpg') }}" alt="" style="max-width: 30%; border-radius: 30px;">
+            <img src="{{ asset('assets/images/logo.jpg') }}" alt=""  style="max-width: 30%; border-radius: 30px;">
         </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -62,7 +61,7 @@
         <p class="lead">We provide effective pest control solutions for your home or business.</p>
         <p class="lead">Call us at <strong>123-456-7890</strong> for a free consultation!</p>
     </div>
-    <div class="center-image">
+    <div class="center-image mt-1   ">
         <img src="{{ asset('assets/images/kelb.png') }}"  alt="Hero Image" class="img-fluid">
     </div>
 </section>

@@ -84,42 +84,13 @@
                             <nav class="sb-sidenav-menu-nested nav">
                                 <a class="nav-link" href="{{ route('product.create') }}">Add New Products</a>
                                 <a class="nav-link" href="{{ route('category.create') }}">Add New Category</a>
-                                
-                            </nav>
-                        </div>
-                        <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapsePages"
-                            aria-expanded="false" aria-controls="collapsePages">
-                            <div class="sb-nav-link-icon"><i class="fas fa-book-open"></i></div>
-                            Pages
-                            <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-                        </a>
-                        <div class="collapse" id="collapsePages" aria-labelledby="headingTwo"
-                            data-bs-parent="#sidenavAccordion">
-                            <nav class="sb-sidenav-menu-nested nav accordion" id="sidenavAccordionPages">
-                                <a class="nav-link collapsed" href="#" data-bs-toggle="collapse"
-                                    data-bs-target="#pagesCollapseAuth" aria-expanded="false"
-                                    aria-controls="pagesCollapseAuth">
-                                   fuck you
-                                    <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-                                </a>
-                                <div class="collapse" id="pagesCollapseAuth" aria-labelledby="headingOne"
-                                    data-bs-parent="#sidenavAccordionPages">
-                                    <nav class="sb-sidenav-menu-nested nav">
-                                        <a class="nav-link" href="{{ route('Home.index') }}">Home</a>
-                                        <a class="nav-link" href="{{ route('product.index') }}">Products</a>
-                                        <a class="nav-link" href="{{ route('category.index') }}">CAtegory</a>
-                                    </nav>
-                                </div>
-                                <a class="nav-link collapsed" href="#" data-bs-toggle="collapse"
-                                    data-bs-target="#pagesCollapseError" aria-expanded="false"
-                                    aria-controls="pagesCollapseError">
-                                    Error
-                                    <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-                                </a>
-                                
+                                <a class="nav-link" href="{{ route('Home.index') }}">Home</a>
+                                <a class="nav-link" href="{{ route('product.index') }}">Products</a>
+                                <a class="nav-link" href="{{ route('category.index') }}">Category</a>
                             </nav>
                         </div>
                         
+             
                 </div>
                 <div class="sb-sidenav-footer">
                     <div class="small"> {{ auth()->user()->role }} : </div>

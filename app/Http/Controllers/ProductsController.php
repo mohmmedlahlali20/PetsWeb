@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\comments;
 use App\Models\Products;
 use App\Models\Categories;
 use Illuminate\Http\Request;
@@ -79,7 +80,8 @@ class ProductsController extends Controller
         
         $products = Products::findOrFail($id);
     //dd($products);
-        return view('Pets.Show', compact('products'));
+         $comments = comments::all();
+        return view('Pets.Show', compact('products','comments'));
     }
 
     /**

@@ -98,7 +98,7 @@
                     </div>
                     <div class="d-flex justify-content-center mb-3">
                         <a data-fslightbox="mygalley" class="border mx-1 rounded-2" target="_blank" data-type="image"
-                            href="https://bootstrap-ecommerce.com/bootstrap5-ecommerce/images/items/detail1/big1.webp"
+                            href=""
                             class="item-thumb">
                             <img width="350" height="350" class="rounded-2"
                                 src="{{ Storage::url($products->image) }}" />
@@ -120,7 +120,7 @@
                                 <i class="fa fa-star"></i>
                                 <i class="fas fa-star-half-alt"></i>
                                 <span class="ms-1">
-                                    4.5
+                                    {{ $averageRating }}
                                 </span>
                             </div>
                             <span class="text-muted"><i
@@ -169,15 +169,15 @@
         <div class="container">
             <div class="row">
                 <div class="col-sm-5 border m-5 col-md-6 col-12 pb-4">
-                    @dd($comments)
+                    
                         <h1>Comments</h1>
                       @forelse ($comments as $item)
                       <div class="comment mt-4 text-justify border bg-light rounded p-3 float-left shadow">
                         <h4>{{ $item->user->name }}</h4>
-                        <span>- 20 October, 2018</span>
+                        <span>{{ $item->created_at }}</span>
                         <br>
-                        <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Accusamus numquam assumenda hic
-                            aliquam vero sequi velit molestias doloremque molestiae dicta?</p>
+                        <p>{{ $item->comments}}</p>
+                        <span>{{ $item->rate_number}}/10</span>
                     </div>
                       @empty
                           
