@@ -27,7 +27,7 @@ use App\Http\Controllers\CategoriesController;
 Route::resource('/Home', ProductsController::class);
 Route::resource('/Commande', CommendsController::class);
 Route::resource('/commentes', CommentsController::class);
-
+Route::get('/payments' , [PaymentsController::class, 'AllPayment'])->name('payment');
 
 //Route::get('/commente/{id}', [ProductsController::class, 'show'])->name('show');
 

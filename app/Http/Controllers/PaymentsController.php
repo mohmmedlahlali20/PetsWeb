@@ -82,7 +82,12 @@ public function success(Request $request)
 
 
 
-
+        public function AllPayment(){
+           $payment =  payment::all();
+           //dd($payment);
+            return view('DashbordAdmin.payment.index',compact('payment'));
+            
+        }
 
 
 

@@ -87,6 +87,7 @@
                                 <a class="nav-link" href="{{ route('Home.index') }}">Home</a>
                                 <a class="nav-link" href="{{ route('product.index') }}">Products</a>
                                 <a class="nav-link" href="{{ route('category.index') }}">Category</a>
+                                <a class="nav-link" href="{{ route('payment') }}">Payments</a>
                             </nav>
                         </div>
                         
