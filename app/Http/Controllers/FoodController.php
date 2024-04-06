@@ -44,19 +44,19 @@ class FoodController extends Controller
         $validatedData = $request->validate([
             'name' => 'required|string|max:255',
             'price' => 'required|numeric',
-            //'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048', 
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048', 
             'quantity' => 'required|integer|min:1',
         ]);
 
     
-        //$imagePath = $request->file('image')->store('public/images'); 
-        //$imageName = basename($imagePath); 
+        $imagePath = $request->file('image')->store('public/images'); 
+        $imageName = basename($imagePath); 
         $food = new Food();
         $food->name = $validatedData['name'];
         $food->price = $validatedData['price'];
-        //$food->image = $imageName; 
+        $food->image = $imageName; 
         $food->quantity = $validatedData['quantity'];
-        $food->user_id = $user->id;
+        //$food->user_id = $user->id;
         $food->save();
 
         // Redirect back with a success message

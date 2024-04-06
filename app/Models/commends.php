@@ -15,11 +15,9 @@ class commends extends Model
     use HasFactory , SoftDeletes;
 
     protected $fillable = [
-        'products_id',
-        'user_id',
-        'status',
-        'total_price'
+        'products_id', 'food_id', 'accessoir_id', 'user_id', 'status', 'total_price'
     ];
+
 
     public function product()
     {
@@ -34,5 +32,15 @@ class commends extends Model
     public function payment()
     {
         return $this->hasOne(payment::class , 'commend_id');
+    }
+
+    public function food()
+    {
+        return $this->belongsTo(Food::class, 'food_id');
+    }
+
+    public function accessoir()
+    {
+        return $this->belongsTo(Accessoir::class, 'accessoir_id');
     }
 }

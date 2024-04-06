@@ -104,31 +104,48 @@
         </div>
         @endif
     </div>
-
-
     <div class="container mt-5 mb-5">
         <div class="d-flex justify-content-center row">
             <div class="col-md-10">
-                @forelse ($commands as $Com)
-               
+                @forelse ($commands as $commend)
                 <br>
                 <div class="row p-2 bg-white border rounded">
-                    <div class="col-md-3 mt-1"><img class="img-fluid img-responsive rounded product-image" src="{{ Storage::url($Com->product->image) }}"></div>
+                    <div class="col-md-3 mt-1">
+                        @if ($commend->food)
+                            <img class="img-fluid img-responsive rounded product-image" src="{{ Storage::url($commend->food->image) }}">
+                        @elseif ($commend->accessoir)
+                            <img class="img-fluid img-responsive rounded product-image" src="{{ Storage::url($commend->accessoir->image) }}">
+                        @elseif ($commend->product)
+                            <img class="img-fluid img-responsive rounded product-image" src="{{ Storage::url($commend->product->image) }}">
+                        @endif
+                    </div>
                     <div class="col-md-6 mt-1">
-                        <h5>{{ $Com->product->name }}</h5>
-                        <div class="d-flex flex-row">
-                            <div class="ratings mr-2"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i></div><span>310</span>
-                        </div>
-                        <div class="mt-1 mb-1 spec-1"><span class="dot"></span><span>{{ $Com->product->category->name }}</span></div>
-                        <p class="text-justify text-truncate para mb-0"> {{ $Com->product->description }}<br><br></p>
+                        @if ($commend->food)
+                            <h5 class="badge bg-success">Food Name: {{ $commend->food->name }}</h5>
+                        @elseif ($commend->accessoir)
+                            <h5 class="badge bg-primary">Accessoir Name: {{ $commend->accessoir->name }}</h5>
+                        @elseif ($commend->product)
+                            <h5 class="badge bg-info">Pets Name: {{ $commend->product->name }}</h5>
+                        @endif
                     </div>
                     <div class="align-items-center align-content-center col-md-3 border-left mt-1">
                         <div class="d-flex flex-row align-items-center">
-                            <h4 class="mr-1">{{ $Com->product->price }} $</h4>
+                            <h4 class="mr-1">
+                                @if ($commend->food)
+                                    {{ $commend->food->price }}
+                                @elseif ($commend->accessoir)
+                                    {{ $commend->accessoir->price }}
+                                @elseif ($commend->product)
+                                    {{ $commend->product->price }}
+                                @endif
+                                $
+                            </h4>
                         </div>
-                        <h6 class="text-success">{{ $Com->first()->user->name }}</h6>
-                        <div class="d-flex flex-column mt-4"><button class="btn btn-outline-success btn-sm mt-2" type="button">Total Commands:</button></div>
-                        <form action="{{ route('Commande.destroy', $Com->id) }}" method="POST">
+                        <h6 class="text-success">{{ $commend->user->name }}</h6>
+                        <div class="d-flex flex-column mt-4">
+                            <button class="btn btn-outline-success btn-sm mt-2" type="button">Total Commands:</button>
+                        </div>
+                        <form action="{{ route('Commande.destroy', $commend->id) }}" method="POST">
                             @csrf
                             @method('DELETE')
                             <div class="d-flex flex-column mt-4">
@@ -137,19 +154,21 @@
                         </form>
                     </div>
                 </div>
-            @empty
-                <div class="alert alert-warning">
-                    no commed aw
-                </div>
-            @endforelse
-           
-            @if($commands->isNotEmpty())
-            <form action="{{ route('striptPayment') }}" method="POST">
-                @csrf
-                <input type="hidden" name="command_id" value="{{ $commands->first()->id }}">
-                <button class="btn mt-5 btn-success" type="submit">Checkout</button>
-            </form>
-        @endif
+                @empty
+                    <div class="alert alert-warning">
+                        No commands available.
+                    </div>
+                @endforelse
+                {{ $commands->links() }}
+                @if($commands->isNotEmpty())
+                    <form action="{{ route('striptPayment') }}" method="POST">
+                        @csrf
+                        <input type="hidden" name="command_id" value="{{ $commands->first()->id }}">
+                        <button class="btn mt-5 btn-success" type="submit">Checkout</button>
+                    </form>
+                @endif
+                    
+
             </div>
         </div>
     </div>

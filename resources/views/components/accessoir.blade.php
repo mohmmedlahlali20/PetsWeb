@@ -40,22 +40,23 @@
                 <hr>
                 <span class="mr-4">created at:{{ $itam->created_at }}</span>
                 
-                <form action="{{ route('command') }}" method="post">
+                <form action="{{ route('order.accessoir') }}" method="POST" class="form-group">
                   @csrf
-                  <input type="text" name="Food_id" value="{{ $itam->id }}">
+                  <input type="hidden" name="accessoir_id" value="{{ $itam->id }}">
                   @if ($itam->quantity == 0)
-                    <div class="alert d-flex justify-content-center alert-warning">
-                      <button type="button" class="btn btn-outline-dark btn-product btn-cart" disabled>
-                        <i class="fas fa-shopping-basket"></i> Out of Stock
-                    </button>
-                   
-                    </div>
+                      <div class="alert d-flex justify-content-center alert-warning">
+                        
+                          <button type="button" class="btn btn-outline-dark btn-product btn-cart" disabled>
+                              <i class="fas fa-shopping-basket"></i> Out of Stock
+                          </button>
+                      </div>
                   @else
                       <button type="submit" class="btn btn-outline-dark btn-product btn-cart">
                           <i class="fas fa-shopping-basket"></i> Add to Cart
                       </button>
                   @endif
-                </form>
+              </form>
+              
               </div>
             </div>
           </div>

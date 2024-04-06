@@ -41,9 +41,9 @@
                 <hr>
                 <span class="mr-4">created at:{{ $itam->created_at }}</span>
                 
-                <form action="{{ route('command') }}" method="post">
+                <form action="{{ route('order.food') }}" method="post">
                   @csrf
-                  <input type="text" name="Food_id" value="{{ $itam->id }}">
+                  <input type="hidden" name="food_id" value="{{ $itam->id }}">
                   @if ($itam->quantity == 0)
                     <div class="alert d-flex justify-content-center alert-warning">
                       <button type="button" class="btn btn-outline-dark btn-product btn-cart" disabled>

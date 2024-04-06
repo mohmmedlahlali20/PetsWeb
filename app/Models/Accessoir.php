@@ -12,5 +12,8 @@ class Accessoir extends Model
     protected $fillable = [
         'name', 'price', 'image', 'quantity', // Add 'user_id' to fillable fields
     ];
-
+    public function commends()
+    {
+        return $this->hasMany(Commend::class, 'accessoir_id');
+    }
 }

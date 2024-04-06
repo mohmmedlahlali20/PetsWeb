@@ -14,11 +14,16 @@ return new class extends Migration
         Schema::create('commends', function (Blueprint $table) {
             $table->id();
             $table->foreignId('products_id')
+            ->nullable()
             ->constrained('products')
             ->onDelete('cascade');
             $table->foreignId('food_id')
             ->nullable()
             ->constrained('food')
+            ->onDelete('cascade');
+            $table->foreignId('accessoir_id')
+            ->nullable()
+            ->constrained('accessoirs')
             ->onDelete('cascade');
             $table->foreignId('user_id')
             ->constrained('users')

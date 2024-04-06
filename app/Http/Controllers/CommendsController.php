@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Food;
 use App\Models\commends;
 use App\Models\Products;
+use App\Models\Accessoir;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -13,13 +15,13 @@ class CommendsController extends Controller
      * Display a listing of the resource.
      */
 
+    
      public function index()
      {
-         $commands = commends::paginate(4);
+         $commands = commends::with(['product', 'food', 'accessoir'])->paginate(4);
      
          return view('command.index', compact('commands'));
      }
-
     /**
      * Show the form for creating a new resource.
      */
@@ -52,9 +54,55 @@ class CommendsController extends Controller
     
         return redirect()->back()->with('success', 'Votre commande a été passée avec succès.');
     }
+
+    public function storeFoods(Request $request)
+{
+   
+}
+public function storeAccessoir(Request $request)
+{
+    if (!Auth::check()) {
+        return redirect()->route('login')->with('error', 'Vous devez vous connecter pour passer une commande.');
+    }
     
+    $accessoirId = $request->input('accessoir_id');
+    $userId = Auth::id();
+
+    // Assuming you have an Accessoir model
+    $accessoir = Accessoir::findOrFail($accessoirId);
+
+    commends::create([
+        
+        'accessoir_id' => $accessoirId,
+        'user_id' => $userId,
+        'total_price' => $accessoir->price, 
+    ]);
+
+    return redirect()->back()->with('success', 'Votre commande d\'accessoire a été passée avec succès.');
      
-     
+}
+
+public function storeFood(Request $request)
+{
+    if (!Auth::check()) {
+        return redirect()->route('login')->with('error', 'Vous devez vous connecter pour passer une commande.');
+    }
+    
+    $foodId = $request->input('food_id');
+    //dd($foodId);
+    $userId = Auth::id();
+
+    // Assuming you have a Food model
+    $food = Food::findOrFail($foodId);
+//dd($food);
+    commends::create([
+        'food_id' => $foodId,
+        'user_id' => $userId,
+        'total_price' => $food->price, 
+    ]);
+
+    return redirect()->back()->with('success', 'Votre commande de nourriture a été passée avec succès.');
+}
 
 
     /**

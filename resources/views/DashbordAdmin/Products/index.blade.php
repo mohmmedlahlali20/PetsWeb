@@ -27,11 +27,7 @@
                 <td>{{ Str::limit($product->description, 20) }}</td>
                 <td>{{ $product->price }}$</td>
                 <td>
-                    @if($is_commender) <!-- Check if product ID exists in commends table -->
-                    <span class="badge bg-success d-block mx-auto text-center">Yes</span> <!-- Display 'Yes' if product is commended -->
-                @else
-                    <span class="badge bg-danger d-block mx-auto text-center">No</span> <!-- Display 'No' if product is not commended -->
-                @endif
+                    fucking
                 
                 </td>
                 <td>

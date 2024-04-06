@@ -20,11 +20,9 @@ class AdminController extends Controller
     {
         $products = Products::paginate(5);
     
-        foreach ($products as $product) {
-            $is_commender[$product->id] = Commends::where('products_id', $product->id)->exists();
-        }
+      
     
-        return view('DashbordAdmin.Products.index', compact('products', 'is_commender'));
+        return view('DashbordAdmin.Products.index', compact('products'));
     }
     
 

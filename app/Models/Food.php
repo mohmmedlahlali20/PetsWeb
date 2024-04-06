@@ -9,4 +9,9 @@ class Food extends Model
 {
     use HasFactory;
     protected $fillable = ['name', 'price', 'image', 'quantity'];
+
+    public function commends()
+    {
+        return $this->hasMany(Commend::class, 'food_id');
+    }
 }

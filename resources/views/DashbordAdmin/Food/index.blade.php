@@ -24,7 +24,7 @@
                 <td>{{ $item->quantity }}</td>
                 <td>
                     @if (!empty($item->image))
-                        <img src="{{ $item->image }}" alt="Food Image" style="max-width: 100px;">
+                        <img src="{{ Storage::url($item->image) }}" alt="Food Image" style="max-width: 100px;">
                     @else
                         No Image
                     @endif
