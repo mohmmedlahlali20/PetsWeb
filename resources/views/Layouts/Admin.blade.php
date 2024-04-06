@@ -82,16 +82,70 @@
                         <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne"
                             data-bs-parent="#sidenavAccordion">
                             <nav class="sb-sidenav-menu-nested nav">
-                                <a class="nav-link" href="{{ route('product.create') }}">Add New Products</a>
-                                <a class="nav-link" href="{{ route('category.create') }}">Add New Category</a>
                                 <a class="nav-link" href="{{ route('Home.index') }}">Home</a>
-                                <a class="nav-link" href="{{ route('product.index') }}">Products</a>
-                                <a class="nav-link" href="{{ route('category.index') }}">Category</a>
                                 <a class="nav-link" href="{{ route('payment') }}">Payments</a>
-                                <a class="nav-link" href="{{ route('create') }}">Foods for Pets</a>
-                                <a class="nav-link" href="{{ route('food') }}">Foods </a>
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">gestion Pets</a>
+                                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                        <li><a class="dropdown-item" href="#!">All Products</a></li>
+                                        <li>
+                                            <hr class="dropdown-divider" />
+                                        </li>
+                                        <a class="dropdown-item" href="{{ route('product.create') }}">Add New Products</a>
+                                        <a class="dropdown-item" href="{{ route('product.index') }}">Products</a>
+                                    </ul>
+                                </li>
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Gestion Category</a>
+                                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                        <li><a class="dropdown-item" href="#!">All Products</a></li>
+                                        <li>
+                                            <hr class="dropdown-divider" />
+                                        </li>
+                                        <a class="dropdown-item" href="{{ route('category.create') }}">Add New Category</a>
+                                        <a class="dropdown-item" href="{{ route('category.index') }}">Category</a>
+                                    </ul>
+                                </li>
+        
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">gestion Food</a>
+                                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                        <li><a class="dropdown-item" href="#!">All Products</a></li>
+                                        <li>
+                                            <hr class="dropdown-divider" />
+                                        </li>
+                                        <a class="dropdown-item" href="{{ route('create') }}">Foods for Pets</a>
+                                        <a class="dropdown-item" href="{{ route('food') }}">Foods </a>
+                                    </ul>
+                                </li>
+
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">gestion Users</a>
+                                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                        <li><a class="dropdown-item" href="#!">All Products</a></li>
+                                        <li>
+                                            <hr class="dropdown-divider" />
+                                        </li>
+                                        <a class="dropdown-item" href="{{ route('user.index') }}">show Users</a>
+                                        {{-- <a class="dropdown-item" href="{{ route('food') }}">Foods </a> --}}
+                                    </ul>
+                                </li>
+
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">gestion Accessoir</a>
+                                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                        <li><a class="dropdown-item" href="{{ route('accessory') }}">All accessory</a></li>
+                                        <li>
+                                            <hr class="dropdown-divider" />
+                                        </li>
+                                        <a class="dropdown-item" href="{{ route('accessoir.name') }}">Add Accessoir</a>
+                                        {{-- <a class="dropdown-item" href="{{ route('food') }}">Foods </a> --}}
+                                    </ul>
+                                </li>
                             </nav>
                         </div>
+
+         
                         
              
                 </div>

@@ -23,7 +23,6 @@
                     <textarea class="form-control border" placeholder="Description" name="description">{{ old('description') ?? $product->description }}</textarea>
                 </div>
                 <div class="col">
-                    <input type="number" class="form-control border" value="{{ old('quantity') ?? $product->quantity }}" placeholder="Quantity" name="quantity">
                 </div>
             </div>
             <div class="row mb-3">

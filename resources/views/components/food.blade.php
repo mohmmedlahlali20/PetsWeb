@@ -65,7 +65,7 @@
         <!-- Aucun produit -->
         <div class="container">
           <div class="alert alert-warning">
-            No Products exist
+            No Foods exist
           </div>
         </div>
         @endforelse

@@ -19,8 +19,10 @@ return new class extends Migration
             $table->foreignId('products_id')
             ->nullable()
             ->constrained('products');
-            $table->foreignId('user_id')
-            ->constrained('users');
+            //$table->foreignId('user_id')
+            //->constrained('users');
+            $table->string('image');
+
             $table->timestamps();
         });
     }

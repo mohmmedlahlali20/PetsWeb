@@ -19,6 +19,7 @@ return new class extends Migration
                 ->onDelete('cascade');
             $table->enum('payment_status', ['valider', 'invalide'])->default('valider');
             $table->string('stripe_payment_id')->nullable(); 
+            $table->string('strip_user_name')->nullable();
             $table->timestamps();
         });
     }

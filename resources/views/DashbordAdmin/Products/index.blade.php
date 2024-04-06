@@ -10,7 +10,7 @@
                 <th scope="col">Product</th>
                 <th scope="col">Description</th>
                 <th scope="col">Price</th>
-                <th scope="col">Stock</th>
+                <th scope="col">is commended</th> <!-- Updated column heading -->
                 <th scope="col">Image</th>
                 <th scope="col">Category</th>
                 <th scope="col">Sex</th>
@@ -20,31 +20,36 @@
             </tr>
         </thead>
         <tbody>
-            {{-- @dd( $products) --}}
-           
             @forelse ($products as $product)
             <tr>
                 <td>{{ $product->id }}</td>
                 <td>{{ $product->name }}</td>
                 <td>{{ Str::limit($product->description, 20) }}</td>
                 <td>{{ $product->price }}$</td>
-                <td>{{ $product->quantity }}</td>
+                <td>
+                    @if($is_commender) <!-- Check if product ID exists in commends table -->
+                    <span class="badge bg-success d-block mx-auto text-center">Yes</span> <!-- Display 'Yes' if product is commended -->
+                @else
+                    <span class="badge bg-danger d-block mx-auto text-center">No</span> <!-- Display 'No' if product is not commended -->
+                @endif
+                
+                </td>
                 <td>
                     <div style="text-align: center;">
                         <img width="20%"  src="{{ Storage::url($product->image) }}" alt="">
                     </div>
-                                    </td>
-                                    <td class="m-5">
-                                        @if ($product->category)
-                                            <span class="badge bg-primary">
-                                                <a href="{{ route('category.show', $product->category->id) }}" class="text-decoration-none text-white">{{ $product->category->name }}</a>
-                                            </span>
-                                        @else
-                                            <span class="badge bg-secondary">No Category Assigned</span>
-                                        @endif
-                                    </td>
-                                    <td>{{ $product->sex }}</td>           
-                                    <td>{{ $product->age }}</td>
+                </td>
+                <td class="m-5">
+                    @if ($product->category)
+                        <span class="badge bg-primary">
+                            <a href="{{ route('category.show', $product->category->id) }}" class="text-decoration-none text-white">{{ $product->category->name }}</a>
+                        </span>
+                    @else
+                        <span class="badge bg-secondary">No Category Assigned</span>
+                    @endif
+                </td>
+                <td>{{ $product->sex }}</td>           
+                <td>{{ $product->age }}</td>
                 <td>{{ $product->created_at }}</td>
                 
                 <td>
@@ -59,7 +64,7 @@
             </tr>
             @empty
                 <tr>
-                    <td colspan="11" align="center"> no products exist</td>
+                    <td colspan="11" align="center">No products exist</td>
                 </tr>
             @endforelse
         </tbody>

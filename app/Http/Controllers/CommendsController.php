@@ -31,42 +31,28 @@ class CommendsController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-   
-     public function store(Request $request)
-     {
-
+    public function store(Request $request)
+    {
         if (!Auth::check()) {
             return redirect()->route('login')->with('error', 'Vous devez vous connecter pour passer une commande.');
         }
         
-         $productId = $request->input('product_id');
-         $userId = Auth::id();
-     
-
-         $product = Products::findOrFail($productId);
-     
-         if ($product->quantity > 0) {
-             $product->quantity -= 1; 
-             $product->save();
-
-     
-             commends::create([
-
-                 'products_id' => $productId,
-                 'user_id' => $userId,
-                 'total_price' => $product->price 
-             ]);
-//dd($a);
-     
-                //commends::where('user_id', $userId)->where('products_id', $productId)->delete();
-      
-             return redirect()->back()->with('success', 'Votre commande a été passée avec succès.');
-         } elseif ($product->quantity === 0) {
-             return redirect()->back()->with('error', 'Désolé, la quantité disponible de ce produit est insuffisante.');
-         } else {
-             return redirect()->back()->with('error', 'Une erreur s\'est produite lors du traitement de votre commande.');
-         }
-     }
+        $productId = $request->input('product_id');
+        $userId = Auth::id();
+    
+        $product = Products::findOrFail($productId);
+    
+        
+        
+        commends::create([
+            'products_id' => $productId,
+            'user_id' => $userId,
+            'total_price' => $product->price 
+        ]);
+    
+        return redirect()->back()->with('success', 'Votre commande a été passée avec succès.');
+    }
+    
      
      
 

@@ -29,32 +29,30 @@ Route::resource('/Home', ProductsController::class);
 Route::resource('/Commande', CommendsController::class);
 Route::resource('/commentes', CommentsController::class);
 Route::get('/payments' , [PaymentsController::class, 'AllPayment'])->name('payment');
-
-//Route::get('/commente/{id}', [ProductsController::class, 'show'])->name('show');
-
+Route::resource('/accessoir', AccessoirController::class);
 Route::post('/Commandes', [CommendsController::class, 'store'])->name('command');
 Route::post('/commentair', [CommentsController::class, 'store'])->name('commentes');
+Route::get('/checkout' , [PaymentsController::class , 'index'])->name('GetPayment');
+Route::post('/checkout', [PaymentsController::class, 'checkout'])->name('striptPayment');
+Route::get('/commend', [PaymentsController::class, 'success'])->name('success');
+
+
+
 
 
 Route::middleware(['auth' , 'admin'])->group(function () {
   Route::resource('/category' , CategoriesController::class);
   Route::resource('/product', AdminController::class);
-  //Route::get('/Commend', [AdminController::class, 'GetCommands'])->name('GetCommand');
-  //Route::put('/commands/{commend}', [CommendsController::class , 'update'])->name('command.update');
+  Route::get('/Accessoir' , [AccessoirController::class, 'create'])->name('accessoir.name');
+  Route::post('/Accessoir', [AccessoirController::class, 'store'])->name('accessoirs.store');
+  Route::get('/Accessory' , [AccessoirController::class, 'getAccessoir'])->name('accessory');
   Route::resource('user', UserController::class);
-  //Route::get('/products', [AdminController::class, 'getStats'])->name('stats');
   Route::get('/food' ,[FoodController::class, 'create'])->name('create');
   Route::resource('/Food', FoodController::class);
- Route::get('/Food-data' ,  [FoodController::class , 'GetFood'])->name('food');
+  Route::get('/Food-data' ,  [FoodController::class , 'GetFood'])->name('food');
+  Route::resource('/user', UserController::class);
 
 });
-
-//payment 
-
-Route::get('/checkout' , [PaymentsController::class , 'index'])->name('GetPayment');
-Route::post('/checkout', [PaymentsController::class, 'checkout'])->name('striptPayment');
-Route::get('/commend', [PaymentsController::class, 'success'])->name('success');
-
 
 
 Route::get('/', function(){

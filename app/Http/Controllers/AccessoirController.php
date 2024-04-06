@@ -3,16 +3,25 @@
 namespace App\Http\Controllers;
 
 use App\Models\Accessoir;
+use App\Models\Categories;
 use Illuminate\Http\Request;
 
 class AccessoirController extends Controller
 {
+
+    public function getAccessoir(){
+        $Accessoir = Accessoir::all();
+        return view('DashbordAdmin.Accessoir.index' , compact('Accessoir'));
+    }
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        //
+        $Accessoir = Accessoir::all();
+        //dd($Accessoir);
+        $categories = Categories::with('Products')->has('Products')->get();
+        return view('welcome' , compact('Accessoir','categories'));
     }
 
     /**
@@ -20,16 +29,34 @@ class AccessoirController extends Controller
      */
     public function create()
     {
-        //
+        return view('DashbordAdmin.Accessoir.form');
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
-    {
-        //
-    }
+
+     public function store(Request $request)
+     {
+        //$user = Auth::user();
+             $validatedData = $request->validate([
+             'name' => 'required|string|max:255',
+             'price' => 'required|numeric',
+             'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+             'quantity' => 'required|integer',
+         ]);
+     
+         if ($request->hasFile('image')) {
+             $imagePath = $request->file('image')->store('public/images');
+             $validatedData['image'] = $imagePath;
+         }
+     
+         $accessory = new Accessoir($validatedData);
+     
+         $accessory->save();
+     
+         return redirect()->back()->with('success', 'Accessory added successfully.');
+     }
 
     /**
      * Display the specified resource.

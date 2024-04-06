@@ -112,21 +112,45 @@
     </div>
 
     </form>
-    <div>
-        <a href="{{ route('Food.index') }}">foods</a>
-    </div>
+
     <section class="cat_product_area section_gap ">
+        {{-- <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <div class="container">
+                <ul class="navbar-nav mx-auto">
+                    <li class="nav-item">
+                        <a class="nav-link btn btn-primary" href="{{ route('Home.index') }}">Pets</a>
+                    </li>
+                    <li class="nav-item">
+                        
+                    </li>
+                    <li class="nav-item">
+                    </li>
+                </ul>
+            </div>
+        </nav> --}}
+        <div class="container text-center bg-light p-4">
+            <div class="d-inline-block">
+                <a class="btn btn-primary mx-2" href="{{ route('Home.index') }}">Pets</a>
+                <a class="btn btn-primary mx-2" href="{{ route('accessoir.index') }}">Accessories</a>
+                <a class="btn btn-primary mx-2" href="{{ route('Food.index') }}">Foods</a>
+            </div>
+        </div>
+        
+
+      
+        
+        
       <div class="row flex-row-reverse">
 
         <div class="col-lg-9">
           
             @if (isset($products ))
-        
             <x-pets :products="$products" />
-
             @elseif (isset($Foods))
             <x-food :Food="$Foods"/>
-          @endif
+            @elseif(isset($Accessoir))
+            <x-accessoir :Accessoir="$Accessoir"/>
+            @endif
           </div>
 
         <!-- Sidebar -->

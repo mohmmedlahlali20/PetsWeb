@@ -22,6 +22,7 @@ class PaymentsController extends Controller
 
     public function checkout(Request $request)
     {
+        $userName = auth()->user()->name;
         //dd($request);
         $products = Products::all(); 
         $commend = $request->input('command_id');
@@ -54,7 +55,8 @@ class PaymentsController extends Controller
             'amount' => $totalAmount,
             'payment_status' => 'valider',
             'stripe_payment_id' => $session->id,
-            'commend_id' =>  $commend
+            'commend_id' =>  $commend,
+            'strip_user_name'=> $userName
         ]);
         return redirect()->to($session->url);
         //return redirect()->route('success');

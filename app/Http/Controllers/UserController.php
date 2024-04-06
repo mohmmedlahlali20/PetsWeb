@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Models\commends;
 use Illuminate\Http\Request;
 use App\Http\Requests\UserRequest;
 
@@ -13,8 +14,9 @@ class UserController extends Controller
      */
     public function index()
     {
-        //$usersWithProductsAndCommands = User::all();
-        //dd($usersWithProductsAndCommands);
+     
+        $users = User::withCount('commands')->paginate(3);   
+             return view('DashbordAdmin.users.index' ,compact('users'));
    
     }
 
@@ -64,9 +66,9 @@ class UserController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(User $user)
     {
-        //
+        dd($user);
     }
 
 

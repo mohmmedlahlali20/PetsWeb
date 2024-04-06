@@ -19,11 +19,14 @@ class AdminController extends Controller
     public function index()
     {
         $products = Products::paginate(5);
-        
-       
-        return view('DashbordAdmin.Products.index', compact('products'));
-
+    
+        foreach ($products as $product) {
+            $is_commender[$product->id] = Commends::where('products_id', $product->id)->exists();
+        }
+    
+        return view('DashbordAdmin.Products.index', compact('products', 'is_commender'));
     }
+    
 
     public function GetCommands(){
         $commands = commends::paginate(4);
@@ -86,7 +89,8 @@ class AdminController extends Controller
     public function update(ProductsRequest $request, Products $product)
     {
         $validatedData = $request->validated();
-        $product->category_id = $validatedData['category'];
+        //$product->category_id = $validatedData['category'];
+        $validatedData['category_id'] = $product->category_id;
         $product->update($validatedData);
 
         //$product->update($validatedData);
