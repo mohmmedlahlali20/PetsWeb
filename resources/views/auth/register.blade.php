@@ -60,8 +60,8 @@
             <form method="POST" action="{{ route('register.post') }}">
               @csrf
               <div class="form-outline mb-4">
-                <label class="form-label" for="form3Example3">Name</label>
-                <input type="text" name="name"  id="form3Example3" class="form-control" />
+                <label class="form-label" for="name">Name</label>
+                <input type="text" name="name"  id="" class="form-control" />
               </div>
               @error('name')
                  <span class="text-danger">{{ $message }}</span>

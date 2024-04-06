@@ -11,14 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('payments', function (Blueprint $table) {
+        Schema::create('accessoirs', function (Blueprint $table) {
             $table->id();
-            $table->float('amount');
-            $table->foreignId('commend_id')
-                ->constrained('commends')
-                ->onDelete('cascade');
-            $table->enum('payment_status', ['valider', 'invalide'])->default('valider');
-            $table->string('stripe_payment_id')->nullable(); 
+            $table->string('name');
+            $table->integer('quantity');
+            $table->float('price');
+            $table->foreignId('products_id')
+            ->constrained('products');
             $table->timestamps();
         });
     }
@@ -28,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('payments');
+        Schema::dropIfExists('accessoirs');
     }
 };

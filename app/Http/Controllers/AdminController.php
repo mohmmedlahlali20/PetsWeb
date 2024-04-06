@@ -41,20 +41,30 @@ class AdminController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(ProductsRequest $product)
-    {
-        $data = $product->validated();
-        $categoryId = $product->input('category');
-        $data['category_id'] = $categoryId;
-        if($product->hasFile('image')){
-        $data['image'] = $product->file('image')->store('Products', 'public');
+   
+public function store(Request $request)
+{
+    $validatedData = $request->validate([
+        'name' => 'required|string|max:255',
+        'price' => 'required|numeric',
+        'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+        'quantity' => 'required|integer|min:1',
+    ]);
 
-        }
+    $categoryId = $request->input('category');
+    
+    $imagePath = $request->file('image')->store('Products', 'public');
 
-        Products::create($data);
-        //dd($data);
-        return  redirect()->route('product.index')->with('success' , 'Product is add successfuly');
-    }
+    $food = new Food();
+    $food->name = $validatedData['name'];
+    $food->price = $validatedData['price'];
+    $food->image = $imagePath;
+    $food->quantity = $validatedData['quantity'];
+    $food->category_id = $categoryId;
+    $food->save();
+
+    return redirect()->route('product.index')->with('success', 'Product added successfully');
+}
 
     /**
      * Display the specified resource.

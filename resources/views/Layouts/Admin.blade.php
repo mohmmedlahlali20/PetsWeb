@@ -88,6 +88,7 @@
                                 <a class="nav-link" href="{{ route('product.index') }}">Products</a>
                                 <a class="nav-link" href="{{ route('category.index') }}">Category</a>
                                 <a class="nav-link" href="{{ route('payment') }}">Payments</a>
+                                <a class="nav-link" href="{{ route('create') }}">Foods for Pets</a>
                             </nav>
                         </div>
                         
@@ -173,7 +174,9 @@
                     <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
                 </div>
                 @endif
+
                 @yield('content')
+                
             </div>
             <footer class="py-4 bg-light mt-auto container">
                 <div class="container-fluid px-4">
@@ -189,6 +192,8 @@
             </footer>
         </div>
     </div>
+
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous">
     </script>
     <script src="{{ asset('demo/chart-area-demo.js') }}"></script>

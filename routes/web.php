@@ -3,6 +3,7 @@
 use App\Models\Products;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\FoodController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\CommendsController;
@@ -42,6 +43,10 @@ Route::middleware(['auth' , 'admin'])->group(function () {
   //Route::put('/commands/{commend}', [CommendsController::class , 'update'])->name('command.update');
   Route::resource('user', UserController::class);
   //Route::get('/products', [AdminController::class, 'getStats'])->name('stats');
+  Route::get('/food' ,[FoodController::class, 'create'])->name('create');
+  Route::resource('/Food', FoodController::class);
+
+
 });
 
 //payment 

@@ -27,7 +27,7 @@ class ProductsController extends Controller
         }
     
         if (!empty($category)) {
-            $productsQuery->whereIn('category_id', $category);
+            $productsQuery->where('category_id', $category);
         }
     
         if (!empty($sex)) {
@@ -45,8 +45,8 @@ class ProductsController extends Controller
         }
     
 
-        $products =  $productsQuery->orderBy('created_at', 'DESC')->paginate(4);
-
+        $products =  $productsQuery->orderBy('created_at', 'DESC')->get();
+//dd($products);
         $categories = Categories::with('Products')->has('Products')->get();
     
  
