@@ -5,9 +5,16 @@ namespace App\Http\Controllers;
 use App\Models\Food;
 use App\Models\Categories;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class FoodController extends Controller
 {
+
+    public function GetFood(){
+        $fod = Food::all();
+        return view('DashbordAdmin.Food.index', compact('fod'));
+    }
+
     /**
      * Display a listing of the resource.
      */
@@ -27,12 +34,13 @@ class FoodController extends Controller
         return view('DashbordAdmin.Food.Form');
     }
 
+ 
     /**
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
     {
-        // Validate the request data
+     $user =Auth::user();
         $validatedData = $request->validate([
             'name' => 'required|string|max:255',
             'price' => 'required|numeric',
@@ -48,6 +56,7 @@ class FoodController extends Controller
         $food->price = $validatedData['price'];
         //$food->image = $imageName; 
         $food->quantity = $validatedData['quantity'];
+        $food->user_id = $user->id;
         $food->save();
 
         // Redirect back with a success message

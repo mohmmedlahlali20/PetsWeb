@@ -50,7 +50,7 @@ class CommendsController extends Controller
              $product->save();
 
      
-              $a = commends::create([
+             commends::create([
 
                  'products_id' => $productId,
                  'user_id' => $userId,

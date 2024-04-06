@@ -43,7 +43,7 @@
                 
                 <form action="{{ route('command') }}" method="post">
                   @csrf
-                  <input type="hidden" name="product_id" value="{{ $itam->id }}">
+                  <input type="text" name="Food_id" value="{{ $itam->id }}">
                   @if ($itam->quantity == 0)
                     <div class="alert d-flex justify-content-center alert-warning">
                       <button type="button" class="btn btn-outline-dark btn-product btn-cart" disabled>

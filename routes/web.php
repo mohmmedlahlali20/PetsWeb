@@ -45,7 +45,7 @@ Route::middleware(['auth' , 'admin'])->group(function () {
   //Route::get('/products', [AdminController::class, 'getStats'])->name('stats');
   Route::get('/food' ,[FoodController::class, 'create'])->name('create');
   Route::resource('/Food', FoodController::class);
-
+ Route::get('/Food-data' ,  [FoodController::class , 'GetFood'])->name('food');
 
 });
 

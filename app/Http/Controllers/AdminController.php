@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Food;
 use App\Models\User;
 use App\Models\commends;
 use App\Models\Products;
 use App\Models\Categories;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\ProductsRequest;
 
 class AdminController extends Controller
@@ -42,30 +44,23 @@ class AdminController extends Controller
      * Store a newly created resource in storage.
      */
    
-public function store(Request $request)
-{
-    $validatedData = $request->validate([
-        'name' => 'required|string|max:255',
-        'price' => 'required|numeric',
-        'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
-        'quantity' => 'required|integer|min:1',
-    ]);
-
-    $categoryId = $request->input('category');
-    
-    $imagePath = $request->file('image')->store('Products', 'public');
-
-    $food = new Food();
-    $food->name = $validatedData['name'];
-    $food->price = $validatedData['price'];
-    $food->image = $imagePath;
-    $food->quantity = $validatedData['quantity'];
-    $food->category_id = $categoryId;
-    $food->save();
-
-    return redirect()->route('product.index')->with('success', 'Product added successfully');
-}
-
+     public function store(ProductsRequest $admin)
+     {
+         //
+         $data = $admin->validated();
+         if ($admin->hasFile('image')) {
+             $data['image'] = $admin->file('image')->store('Products', 'public');
+         }
+     
+         // Ensure 'category_id' is provided in $data
+         $data['category_id'] = $admin->category_id;
+     
+         Products::create($data);
+         //dd($data);
+         return redirect()->back()->with('success', 'Product is added successfully');
+     }
+     
+     
     /**
      * Display the specified resource.
      */

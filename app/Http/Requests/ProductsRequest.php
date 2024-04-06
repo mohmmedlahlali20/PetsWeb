@@ -27,7 +27,7 @@ class ProductsRequest extends FormRequest
             'price' => 'required|numeric',
             'description' => 'required|min:20',
             'quantity' => 'required|numeric',
-            'category' => 'required',
+            'category_id' => 'required',
             'sex'=> 'required',
             'age' => 'required'
         ];

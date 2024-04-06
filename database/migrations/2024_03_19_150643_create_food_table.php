@@ -16,8 +16,11 @@ return new class extends Migration
             $table->string('name');
             $table->integer('quantity');
             $table->float('price');
-            //$table->foreignId('products_id')
-            //->constrained('products')->nullable();
+            $table->foreignId('products_id')
+            ->nullable()
+            ->constrained('products');
+            $table->foreignId('user_id')
+            ->constrained('users');
             $table->timestamps();
         });
     }

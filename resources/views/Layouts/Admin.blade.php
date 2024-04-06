@@ -89,6 +89,7 @@
                                 <a class="nav-link" href="{{ route('category.index') }}">Category</a>
                                 <a class="nav-link" href="{{ route('payment') }}">Payments</a>
                                 <a class="nav-link" href="{{ route('create') }}">Foods for Pets</a>
+                                <a class="nav-link" href="{{ route('food') }}">Foods </a>
                             </nav>
                         </div>
                         

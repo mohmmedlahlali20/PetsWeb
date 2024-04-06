@@ -17,10 +17,7 @@
     <link href="{{asset('css/font-awesome.min.css')}}" rel="stylesheet" />
 </head>
 <style>
-    #big_div {
-    background-image: url('{{ asset('assets/images/laura.jpg') }}');
-    z-index:999
-}
+    
 .custom-card {
     /* Add your custom styles here */
     border: 2px solid #ccc;
@@ -30,7 +27,7 @@
 
 </style>
 
-<body>
+<body style="">
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container px-4 px-lg-5">
             <a class="navbar-brand" href="#!"><img width="30%" src="{{ asset('assets/images/logo.jpg') }}" alt=""></a>
@@ -93,18 +90,7 @@
             </div>
         </div>
     </nav>
-
-    <!-- Header-->
-    <header class="bg-dark py-5">
-        <div class="container px-4 px-lg-5 my-5">
-            <div class="text-center text-white">
-                <img src="{{asset('assets/images/pets1.png')}}" alt="Shop Logo" class="img-fluid mb-4">
-                <h1 class="display-4 fw-bolder">Shop in style</h1>
-                <p class="lead fw-normal text-white-50 mb-0">With this shop homepage template</p>
-            </div>
-        </div>
-    </header>
-    <br><br><br><br><br>
+<br>
     <form method="get">
        <div  id="big_div"  class="container">
         <div  class="search">

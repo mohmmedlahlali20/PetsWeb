@@ -34,7 +34,7 @@
                     @endif
                 </div>
                 <div class="col">
-                    <select class="form-control border" name="category">
+                    <select class="form-control border" name="category_id">
                         <option value="">Select Category</option>
                         @foreach($category as $cate)
                             <option {{ old('category', $product->category_id) == $cate->id ? 'selected' : '' }} value="{{ $cate->id }}">{{ $cate->name }}</option>

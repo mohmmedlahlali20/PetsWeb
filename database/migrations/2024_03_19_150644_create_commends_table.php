@@ -16,6 +16,9 @@ return new class extends Migration
             $table->foreignId('products_id')
             ->constrained('products')
             ->onDelete('cascade');
+            $table->foreignId('food_id')
+            ->constrained('food')
+            ->onDelete('cascade');
             $table->foreignId('user_id')
             ->constrained('users')
             ->onDelete('cascade');
