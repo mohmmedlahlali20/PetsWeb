@@ -11,6 +11,7 @@
         "laravel/framework": "^10.10",
         "laravel/sanctum": "^3.3",
         "laravel/tinker": "^2.8",
+        "munafio/chatify": "^1.6",
         "stripe/stripe-php": "^13.16"
     },
     "require-dev": {

@@ -38,30 +38,28 @@ class FoodController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
-    {
-     $user =Auth::user();
-        $validatedData = $request->validate([
-            'name' => 'required|string|max:255',
-            'price' => 'required|numeric',
-            'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048', 
-            'quantity' => 'required|integer|min:1',
-        ]);
-
-    
-        $imagePath = $request->file('image')->store('public/images'); 
-        $imageName = basename($imagePath); 
-        $food = new Food();
-        $food->name = $validatedData['name'];
-        $food->price = $validatedData['price'];
-        $food->image = $imageName; 
-        $food->quantity = $validatedData['quantity'];
-        //$food->user_id = $user->id;
-        $food->save();
-
-        // Redirect back with a success message
-        return redirect()->back()->with('success', 'Food item added successfully.');
-    }
+   
+     public function store(Request $request)
+     {
+         $validatedData = $request->validate([
+             'name' => 'required|string|max:255',
+             'price' => 'required|numeric',
+             'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048', 
+             'quantity' => 'required|integer|min:1',
+             
+         ]);
+     
+         if ($request->hasFile('image')) {
+             $imagePath = $request->file('image')->store('Foods', 'public');
+             $imageName = basename($imagePath); 
+             $validatedData['image'] = $imageName;
+         }
+     
+         // Create the product
+         Food::create($validatedData);
+     
+         return redirect()->back()->with('success', 'Food added successfully');
+     }
 
     /**
      * Display the specified resource.

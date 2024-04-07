@@ -19,8 +19,11 @@
             <tr>
                 <td>{{ $paid->id }}</td>
                 <td>{{ $paid->amount }}$</td>
-                <td>{{ $paid->command->user->name }}</td>
-                <td>{{ $paid->command->product->name }}</td>
+                <td>{{ optional($paid->command)->user ? $paid->command->user->name : 'fuck' }}</td>
+                <td>{{ optional($paid->command)->product ? $paid->command->product->name : 'fuck' }}</td>
+                
+                
+                
                                     
                 <td>{{ $paid->created_at }}</td>
                 <td>{{ $paid->payment_status }}</td>

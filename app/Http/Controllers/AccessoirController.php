@@ -47,7 +47,7 @@ class AccessoirController extends Controller
          ]);
      
          if ($request->hasFile('image')) {
-             $imagePath = $request->file('image')->store('public/images');
+             $imagePath = $request->file('image')->store('public/Accessoir');
              $validatedData['image'] = $imagePath;
          }
      

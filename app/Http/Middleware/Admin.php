@@ -19,7 +19,7 @@ class Admin
         if (!auth()->check() || auth()->user()->role != 'admin') {
             abort(403, 'Unauthorized action just for admin');
         }
-        //.
+      
         
         return $next($request);
     }

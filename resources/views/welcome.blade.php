@@ -17,8 +17,10 @@
     <link href="{{asset('css/font-awesome.min.css')}}" rel="stylesheet" />
 </head>
 <style>
-    
-.custom-card {
+body {
+    overflow-x: hidden;
+}
+    .custom-card {
     /* Add your custom styles here */
     border: 2px solid #ccc;
     border-radius: 10px;
@@ -28,8 +30,8 @@
 </style>
 
 <body style="">
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <div class="container px-4 px-lg-5">
+    <nav class="navbar navbar-expand-lg navbar-light bg-silver">
+                <div class="container px-4 px-lg-5">
             <a class="navbar-brand" href="#!"><img width="30%" src="{{ asset('assets/images/logo.jpg') }}" alt=""></a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
@@ -74,8 +76,13 @@
                                     @csrf
                                     <button type="submit" class="dropdown-item btn btn-info">Logout</button>
                                 </form>
+                              
                             </li>
                         </ul>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="btn btn-info "  href="{{ url('/chatify') }}">Chat</a>
                     </li>
                 @endauth
           
@@ -202,11 +209,7 @@
         </div>
     </div>
     </section>
-    <footer class="py-5 bg-dark">
-        <div class="container">
-            <p class="m-0 text-center text-white">Copyright &copy; Your Website 2023</p>
-        </div>
-    </footer>
+
     <!-- Bootstrap core JS-->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
     <!-- Core theme JS-->
