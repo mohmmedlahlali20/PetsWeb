@@ -124,8 +124,11 @@
                                 </span>
                             </div>
                             <span class="text-muted"><i
-                                    class="fas fa-shopping-basket fa-sm mx-1"></i>{{ $products->quantity }}</span>
-                            <span class="text-success ms-2">In stock</span>
+                                    class="fas fa-shopping-basket fa-sm mx-1"></i>
+                                    {{-- @auth --}}
+                                        {{-- <span>: {{ auth()->user()->name }}</span> --}}
+                                    {{-- @endauth --}}
+
                         </div>
 
                         <div class="mb-3">

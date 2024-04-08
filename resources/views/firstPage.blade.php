@@ -58,25 +58,17 @@
     </div>
 </nav>
 
-<!-- Hero Section -->
-<section class="hero-section">
-    <div class="container">
-        <div class="row align-items-center">
-            <div class="col-md-6 text-success text-center text-md-start"> <!-- Adjust text alignment for different screen sizes -->
-                <h1 class="display-3  font-bold">Welcome to Pest Control Services</h1>
-                <p class="h4">We provide effective pest control solutions for your home or business.</p>
-                <p class="h4">Call us at <strong>123-456-7890</strong> for a free consultation!</p>
-            </div>
-            <div class="col-md-6">
-                <div class="center-image mt-md-0 mt-4 text-center text-md-end"> <!-- Adjust image alignment for different screen sizes -->
-                    <img src="{{ asset('assets/images/Home1.png') }}" alt="Hero Image" class="img-fluid">
-                </div>
-            </div>
-        </div>
-        
-        </div>
-    </div>
+<section class="position-relative d-flex flex-column justify-content-center align-items-center text-center text-white" style="height: 100vh;">
+  <div class="position-absolute top-0 left-0 w-100 h-100 overflow-hidden">
+      <video class="w-100 h-100 object-cover" src="https://fiverr-res.cloudinary.com/video/upload/t_fiverr_hd/lqzue5xjmctq6pcsgvq1" type="video/mp4" autoplay muted loop></video>
+  </div>
+  <div class="video-content space-y-2 position-relative" style="z-index: 10;">
+      <h1 class="font-light display-1">Welcome to EVENTO</h1>
+      <h3 class="font-light display-4">An unforgettable experience awaits you!</h3>
+      <p class="font-light fs-5">Join us for a spectacular event filled with excitement, entertainment, and amazing surprises.</p>
+  </div>
 </section>
+
 
 <!-- Pets Section -->
 <section class="bsb-pets bg-light py-5 py-xl-8">

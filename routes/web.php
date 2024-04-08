@@ -49,11 +49,8 @@ Route::middleware(['auth' , 'admin'])->group(function () {
   Route::get('/Accessory' , [AccessoirController::class, 'getAccessoir'])->name('accessory');
   Route::resource('user', UserController::class);
   Route::get('/food' ,[FoodController::class, 'create'])->name('create');
- 
   Route::get('/Food-data' ,  [FoodController::class , 'GetFood'])->name('food');
-
   Route::resource('/user', UserController::class);
-
 });
 
 

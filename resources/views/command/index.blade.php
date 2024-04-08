@@ -36,7 +36,8 @@
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container px-4 px-lg-5">
             <a class="navbar-brand" href="#!"><img width="30%" src="{{ asset('assets/images/logo.jpg') }}" alt=""></a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
 
@@ -47,7 +48,8 @@
 
 
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Shop</a>
+                        <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown"
+                            aria-expanded="false">Shop</a>
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                             <li><a class="dropdown-item" href="#!">All Products</a></li>
                             <li>
@@ -69,7 +71,8 @@
 
                     @auth
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle btn btn-primary" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Profile</a>
+                        <a class="nav-link dropdown-toggle btn btn-primary" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown"
+                            aria-expanded="false">Profile</a>
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                             <li><span class="dropdown-item">{{ auth()->user()->name }}</span></li>
                             <li><span class="dropdown-item">{{ auth()->user()->email }}</span></li>
@@ -112,31 +115,34 @@
                 <div class="row p-2 bg-white border rounded">
                     <div class="col-md-3 mt-1">
                         @if ($commend->food)
-                            <img class="img-fluid img-responsive rounded product-image" src="{{ Storage::url($commend->food->image) }}">
+                        <img class="img-fluid img-responsive rounded product-image" src="{{ Storage::url($commend->food->image) }}">
                         @elseif ($commend->accessoir)
-                            <img class="img-fluid img-responsive rounded product-image" src="{{ Storage::url($commend->accessoir->image) }}">
+                        <img class="img-fluid img-responsive rounded product-image" src="{{ Storage::url($commend->accessoir->image) }}">
                         @elseif ($commend->product)
-                            <img class="img-fluid img-responsive rounded product-image" src="{{ Storage::url($commend->product->image) }}">
+                        <img class="img-fluid img-responsive rounded product-image" src="{{ Storage::url($commend->product->image) }}">
                         @endif
                     </div>
                     <div class="col-md-6 mt-1">
                         @if ($commend->food)
-                            <h5 class="badge bg-success">Food Name: {{ $commend->food->name }}</h5>
+                        <h5 class="badge bg-success">Food Name: {{ $commend->food->name }}</h5>
                         @elseif ($commend->accessoir)
-                            <h5 class="badge bg-primary">Accessoir Name: {{ $commend->accessoir->name }}</h5>
+                        <h5 class="badge bg-primary">Accessory Name: {{ $commend->accessoir->name }}</h5>
                         @elseif ($commend->product)
-                            <h5 class="badge bg-info">Pets Name: {{ $commend->product->name }}</h5>
+                        <h5 class="badge bg-info">Pet Name: {{ $commend->product->name }}</h5>
+                        <h5 class="">{{ $commend->product->description }}</h5>
                         @endif
+
                     </div>
+
                     <div class="align-items-center align-content-center col-md-3 border-left mt-1">
                         <div class="d-flex flex-row align-items-center">
                             <h4 class="mr-1">
                                 @if ($commend->food)
-                                    {{ $commend->food->price }}
+                                {{ $commend->food->price }}
                                 @elseif ($commend->accessoir)
-                                    {{ $commend->accessoir->price }}
+                                {{ $commend->accessoir->price }}
                                 @elseif ($commend->product)
-                                    {{ $commend->product->price }}
+                                {{ $commend->product->price }}
                                 @endif
                                 $
                             </h4>
@@ -149,25 +155,25 @@
                             @csrf
                             @method('DELETE')
                             <div class="d-flex flex-column mt-4">
-                                <button class="btn btn-outline-danger btn-sm mt-2" type="submit">Annuler la commande</button>
+                                <button class="btn btn-outline-danger btn-sm mt-2" type="submit">Cancel Order</button>
                             </div>
                         </form>
                     </div>
                 </div>
                 @empty
-                    <div class="alert alert-warning">
-                        No commands available.
-                    </div>
+                <div class="alert alert-warning">
+                    No commands available.
+                </div>
                 @endforelse
                 {{ $commands->links() }}
                 @if($commands->isNotEmpty())
-                    <form action="{{ route('striptPayment') }}" method="POST">
-                        @csrf
-                        <input type="hidden" name="command_id" value="{{ $commands->first()->id }}">
-                        <button class="btn mt-5 btn-success" type="submit">Checkout</button>
-                    </form>
+                <form action="{{ route('striptPayment') }}" method="POST">
+                    @csrf
+                    <input type="hidden" name="command_id" value="{{ $commands->first()->id }}">
+                    <button class="btn mt-5 btn-success" type="submit">Checkout</button>
+                </form>
                 @endif
-                    
+
 
             </div>
         </div>
@@ -181,7 +187,7 @@
     <!-- Bootstrap core JS-->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
     <!-- Core theme JS-->
-    <script src="{{asset('js/scripts.js')}}"></script>
-    <script src="{{asset('js/AddCart.js')}}"></script>
+    <script src="{{ asset('js/scripts.js') }}"></script>
+    <script src="{{ asset('js/AddCart.js') }}"></script>
 </body>
 </html>

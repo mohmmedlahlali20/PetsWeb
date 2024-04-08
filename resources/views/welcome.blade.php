@@ -121,36 +121,8 @@ body {
     </form>
 
     <section class="cat_product_area section_gap ">
-        {{-- <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-            <div class="container">
-                <ul class="navbar-nav mx-auto">
-                    <li class="nav-item">
-                        <a class="nav-link btn btn-primary" href="{{ route('Home.index') }}">Pets</a>
-                    </li>
-                    <li class="nav-item">
-                        
-                    </li>
-                    <li class="nav-item">
-                    </li>
-                </ul>
-            </div>
-        </nav> --}}
-        <div class="container text-center bg-light p-4">
-            <div class="d-inline-block">
-                <a class="btn btn-primary mx-2" href="{{ route('Home.index') }}">Pets</a>
-                <a class="btn btn-primary mx-2" href="{{ route('accessoir.index') }}">Accessories</a>
-                <a class="btn btn-primary mx-2" href="{{ route('Food.index') }}">Foods</a>
-            </div>
-        </div>
-        
-
-      
-        
-        
       <div class="row flex-row-reverse">
-
-        <div class="col-lg-9">
-          
+        <div class="col-lg-9">  
             @if (isset($products ))
             <x-pets :products="$products" />
             @elseif (isset($Foods))
@@ -160,53 +132,64 @@ body {
             @endif
           </div>
 
-        <!-- Sidebar -->
-        <div class="col-lg-3">
-          <div class="left_sidebar_area">
-            <aside class="left_widgets p_filter_widgets">
-              <div class="l_w_title">
-                <h3>Browse Categories</h3>
-              </div>
-              <div class="widgets_inner">
-                <form action="" method="GET">
-                  @csrf
-                  <ul class="list">
-                    @forelse ($categories as $cat)
-                    <li>
-                      <input type="checkbox" value="{{ $cat->id }}" id="category_{{ $cat->id }}" name="category[]">
-                      <label for="category_{{ $cat->id }}">{{ $cat->name }}</label>
-                    </li>
-                    @empty
-                    <li>
-                      <div class="alert alert-warning">
-                        No categories exist.
-                      </div>
-                    </li>
-                    @endforelse
-                    <div class="form-group">
-                      <label for="sex">Sex:</label>
-                      <select class="form-control" id="sex" name="sex">
-                          <option value="">All</option>
-                          <option value="male" {{ request('sex') == 'male' ? 'selected' : '' }}>Male</option>
-                          <option value="female" {{ request('sex') == 'female' ? 'selected' : '' }}>Female</option>
-                      </select>
-                  </div>
-                  <div class="form-group">
-                    <label for="age">Age:</label>
-                    <select class="form-control" id="age" name="age">
-                        <option value="">All</option>
-                        <option value="2-6" {{ request('age') == '2-6' ? 'selected' : '' }}>2-6 years</option>
-                        <option value="7-10" {{ request('age') == '7-10' ? 'selected' : '' }}>7-10 years</option>
-                        <option value="10+" {{ request('age') == '10+' ? 'selected' : '' }}>Over 10 years</option>
-                    </select>
-                </div>
-                  </ul>
-                  <button style="float: right" class="btn btn-primary mt-5">Filter</button>
-                </form>
-              </div>
-            </aside>
-          </div>
+          <div class="col-lg-2">
+            <div class="left_sidebar_area">
+                <aside class="left_widgets p_filter_widgets">
+                    <div class="l_w_title">
+                        <h3 class="m-3">Autre service</h3>
+                    </div>
+                    
+                    <div class="d-grid gap-1 container">
+                        <a class="btn btn-primary" href="{{ route('Home.index') }}">Pets</a>
+                        <a class="btn btn-primary" href="{{ route('accessoir.index') }}">Accessories</a>
+                        <a class="btn btn-primary" href="{{ route('Food.index') }}">Foods</a>
+                    </div>
+                    <hr>
+                    <div class="l_w_title">
+                        <h3>Browse Categories</h3>
+                    </div>
+                    <div class="widgets_inner">
+                        <form action="" method="GET">
+                            @csrf
+                            <ul class="list-group">
+                                @forelse ($categories as $cat)
+                                <li class="list-group-item">
+                                    <input type="checkbox" value="{{ $cat->id }}" id="category_{{ $cat->id }}" name="category[]" class="form-check-input">
+                                    <label for="category_{{ $cat->id }}" class="form-check-label">{{ $cat->name }}</label>
+                                </li>
+                                @empty
+                                <li class="list-group-item">
+                                    <div class="alert alert-warning">
+                                        No categories exist.
+                                    </div>
+                                </li>
+                                @endforelse
+                            </ul>
+                            <hr>
+                            <div class="mb-3">
+                                <label for="sex" class="form-label">Sex:</label>
+                                <select class="form-select" id="sex" name="sex">
+                                    <option value="">All</option>
+                                    <option value="male" {{ request('sex') == 'male' ? 'selected' : '' }}>Male</option>
+                                    <option value="female" {{ request('sex') == 'female' ? 'selected' : '' }}>Female</option>
+                                </select>
+                            </div>
+                            <div class="mb-3">
+                                <label for="age" class="form-label">Age:</label>
+                                <select class="form-select" id="age" name="age">
+                                    <option value="">All</option>
+                                    <option value="2-6" {{ request('age') == '2-6' ? 'selected' : '' }}>2-6 years</option>
+                                    <option value="7-10" {{ request('age') == '7-10' ? 'selected' : '' }}>7-10 years</option>
+                                    <option value="10+" {{ request('age') == '10+' ? 'selected' : '' }}>Over 10 years</option>
+                                </select>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Filter</button>
+                        </form>
+                    </div>
+                </aside>
+            </div>
         </div>
+        
     </div>
     </section>
 
