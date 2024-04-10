@@ -32,32 +32,28 @@ class CommentsController extends Controller
      */
   
 
+
      public function store(Request $request)
-{
-    //dd($request);
-   
-    
-        $request->validate([
-            'msg' => 'required',
-            'rating' => 'required|numeric|min:1|max:10',
-        ]);
-
-  
-        $comment = new comments();
-       
-        $comment->comments = $request->input('msg');
-        $comment->rate_number = $request->input('rating');
-        $comment->products_id = $request->input('products_id');
-        $comment->user_id = auth()->id(); 
-
-        //dd($comment->save());
-        $comment->save();
-
-
-        return redirect()->back()->with('success', 'Commentaire ajouté avec succès.');
- 
-}
-
+     {
+         $request->validate([
+             'msg' => 'required',
+             'rating' => ' required|integer|min:1|max:10',
+         ]);
+     
+         if (Auth::check()) {
+             $comment = new comments();
+             $comment->comments = $request->input('msg');
+             $comment->rate_number = $request->input('rating');
+             $comment->products_id = $request->input('products_id');
+             $comment->user_id = auth()->id(); 
+     
+             $comment->save();
+     
+             return redirect()->back()->with('success', 'Commentaire ajouté avec succès.');
+         } else {
+             return redirect()->route('login')->with('error', 'Vous devez vous connecter pour ajouter un commentaire.');
+         }
+     }
      
    
    /**

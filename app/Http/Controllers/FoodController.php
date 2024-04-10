@@ -48,11 +48,9 @@ class FoodController extends Controller
              'quantity' => 'required|integer|min:1',
              
          ]);
-     
+     //dd($validatedData);
          if ($request->hasFile('image')) {
-             $imagePath = $request->file('image')->store('Foods', 'public');
-             $imageName = basename($imagePath); 
-             $validatedData['image'] = $imageName;
+             $validatedData['image'] = $request->file('image')->store('Foods', 'public');
          }
      
          // Create the product
@@ -64,9 +62,10 @@ class FoodController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Food $food)
+    public function show(Food $Food)
     {
-        //
+        
+        return view('Pets.showFood' , compact('Food'));
     }
 
     /**

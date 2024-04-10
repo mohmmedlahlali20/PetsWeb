@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Food;
 use App\Models\payment;
 use App\Models\commends;
 use App\Models\Products;
+use App\Models\Accessoir;
 use Illuminate\Http\Request;
 
 class PaymentsController extends Controller
@@ -23,15 +25,32 @@ class PaymentsController extends Controller
     public function checkout(Request $request)
     {
         $userName = auth()->user()->name;
-        //dd($request);
-        $products = Products::all(); 
-        $commend = $request->input('command_id');
-        //dd($commend);
-        $totalAmount = 0;
+        $commendId = $request->input('command_id');
+        $foods = Food::all();
     
-        foreach ($products as $product) {
-            $totalAmount += $product->price; 
+        $foodTotalAmount = 0;
+    
+        foreach ($foods as $food) {
+            $foodTotalAmount += $food->price;
         }
+    
+        $accessoires = Accessoir::all();
+    
+        $accessoirTotalAmount = 0;
+    
+        foreach ($accessoires as $accessoir) {
+            $accessoirTotalAmount += $accessoir->price;
+        }
+    
+        $total = $foodTotalAmount + $accessoirTotalAmount;
+    
+        $products = Products::all();
+        $totalAmount = 0;
+        foreach ($products as $product) {
+            $totalAmount += $product->price;
+        }
+    
+        $totalAmount += $total;
     
         \Stripe\Stripe::setApiKey(config('stripe.sk'));
         $session = \Stripe\Checkout\Session::create([
@@ -40,47 +59,51 @@ class PaymentsController extends Controller
                 'price_data' => [
                     'currency' => 'usd',
                     'product_data' => [
-                        'name' => 'sayft lflus asahbi', 
+                        'name' => 'sayft lflus asahbi',
                     ],
                     'unit_amount' => $totalAmount * 100,
                 ],
                 'quantity' => 1,
             ]],
             'mode' => 'payment',
-            'success_url' => route('Commande.index'),
+            'success_url' => route('Commandes.index'),
             'cancel_url' => route('GetPayment'),
         ]);
     
-        payment::create([
+        $payment = payment::create([
             'amount' => $totalAmount,
             'payment_status' => 'valider',
             'stripe_payment_id' => $session->id,
-            'commend_id' =>  $commend,
+            'commend_id' =>  $commendId,
             'strip_user_name'=> $userName
         ]);
+    
+        // Vérifier si le paiement a été créé avec succès avant de supprimer la commande
+        if ($payment) {
+            // Supprimer la commande non payée
+            commends::where('id', $commendId)->delete();
+        }
+    
         return redirect()->to($session->url);
-        //return redirect()->route('success');
-
     }
     
 
    
-public function success(Request $request)
-{
-  
-    $paymentId = Payment::where('stripe_payment_id', $request->stripe_payment_id)->first();
-
-  //dd($paymentId);
-    $payment = payment::where('stripe_payment_id', $paymentId)->first();
-
-    if ($payment && $payment->payment_status == 'valider') {
-
-        Command::where('id', $payment->commend_id)->delete();
+    public function success(Request $request)
+    {
+        dd($request);
+        // Retrieve the payment record based on the provided stripe_payment_id
+        $payment = Payment::where('stripe_payment_id', $request->stripe_payment_id)->first();
+    dd($payment );
+        // Check if the payment record exists and if its payment status is 'valider'
+        if ($payment && $payment->payment_status == 'valider') {
+            // If the payment status is 'valider', delete the corresponding command
+            Command::where('id', $payment->command_id)->delete();
+        }
+    
+        // Redirect or return a view as needed
+        return view('command.index');
     }
-
-    return view('command.index');
-}
-
 
 
 

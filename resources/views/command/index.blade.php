@@ -151,7 +151,7 @@
                         <div class="d-flex flex-column mt-4">
                             <button class="btn btn-outline-success btn-sm mt-2" type="button">Total Commands:</button>
                         </div>
-                        <form action="{{ route('Commande.destroy', $commend->id) }}" method="POST">
+                        <form action="{{ route('Commandes.destroy', $commend->id) }}" method="POST">
                             @csrf
                             @method('DELETE')
                             <div class="d-flex flex-column mt-4">
@@ -173,8 +173,7 @@
                     <button class="btn mt-5 btn-success" type="submit">Checkout</button>
                 </form>
                 @endif
-
-
+                
             </div>
         </div>
     </div>

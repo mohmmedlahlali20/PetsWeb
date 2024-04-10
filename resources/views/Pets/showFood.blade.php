@@ -101,7 +101,7 @@
                             href=""
                             class="item-thumb">
                             <img width="350" height="350" class="rounded-2"
-                                src="{{ Storage::url($products->image) }}" />
+                                src="{{ Storage::url($Food->image) }}" />
                         </a>
                     </div>
 
@@ -109,59 +109,30 @@
                 <main class="col-lg-6">
                     <div class="ps-lg-3">
                         <h4 class="title text-dark">
-                            {{ $products->name }}<br />
-
+                            {{ $Food->name }} <!-- Display the Food name -->
                         </h4>
-                        <div class="d-flex flex-row my-3">
-                            <div class="text-warning mb-1 me-2">
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fas fa-star-half-alt"></i>
-                                <span class="ms-1">
-                                    {{ $averageRating }}
-                                </span>
-                            </div>
-                            <span class="text-muted"><i
-                                    class="fas fa-shopping-basket fa-sm mx-1"></i>
-                                    {{-- @auth --}}
-                                        {{-- <span>: {{ auth()->user()->name }}</span> --}}
-                                    {{-- @endauth --}}
-
-                        </div>
-
                         <div class="mb-3">
-                            <span class="h5">${{ $products->price }}.00</span>
+                            <span class="h5">${{ $Food->price }}.00</span> <!-- Display the Food price -->
                             <span class="text-muted">/per box</span>
                         </div>
-
+                        <img src="{{ Storage::url($Food->image) }}" class="img-fluid rounded mb-3" alt="{{ $Food->name }}"> <!-- Display the Food image -->
                         <p>
-                            {{ $products->description }}
+                            {{-- {{ $Food->description }} <!-- Display the Food description --> --}}
                         </p>
-
+                        <!-- Other details can be displayed similarly -->
                         <div class="row">
-                            <dt class="col-3">Sex:</dt>
-                            <dd class="col-9">{{ $products->sex }}</dd>
-
-                            <dt class="col-3">Age</dt>
-                            <dd class="col-9">{{ $products->age }}</dd>
-
-                            <dt class="col-3">Category</dt>
-                            <dd class="col-9">{{ $products->category->name }}</dd>
-
-                            <dt class="col-3">date du creation </dt>
-                            <dd class="col-9">{{ $products->created_at }}</dd>
+                            <dt class="col-3">quantity:</dt>
+                            <dd class="col-9">{{ $Food->quantity }}</dd> 
+                
+                       
+                
+                            <dt class="col-3">Date of creation</dt>
+                            <dd class="col-9">{{ $Food->created_at }}</dd>
                         </div>
-
                         <hr />
-
-
                     </div>
-            </div>
-
-        </div>
-        </main>
+                </main>
+                
         </div>
         </div>
     </section>
@@ -173,7 +144,7 @@
             <div class="row">
                 <div class="col-sm-5 border m-5 col-md-6 col-12 pb-4">
                     
-                        <h1>Comments</h1>
+                        {{-- <h1>Comments</h1>
                       @forelse ($comments as $item)
                       <div class="comment mt-4 text-justify border bg-light rounded p-3 float-left shadow">
                         <h4>{{ $item->user->name }}</h4>
@@ -185,7 +156,7 @@
                       @empty
                           
                       @endforelse
-                        
+                         --}}
                     </div>
                    
                     <div class="col-lg-4 col-md-5 col-sm-4 offset-md-1 offset-sm-1 col-12 mt-4">
@@ -206,7 +177,7 @@
                             <div class="form-group">
                                 <h4>Leave a comment</h4>
                                 <label for="comments">Message</label>
-                                <input type="hidden" name="products_id" value="{{ $products->id }}">
+                                {{-- <input type="hidden" name="products_id" value="{{ $products->id }}"> --}}
                                 <textarea name="msg" id="comments" cols="30" rows="5" class="form-control"
                                     style="background-color: rgb(221, 217, 217);"></textarea>
                             </div>

@@ -5,14 +5,16 @@
         <div class="col-lg-4 col-md-6">
             <div class="card mb-4">
                 <div class="ratio ratio-16x9">
-                    <img src="{{ asset('storage/' . $item->image) }} class="card-img-top" alt="Product Image">
+                  
+                    <img src="{{ Storage::url($item->image) }}"  class="card-img-top" alt="Product Image">
                 </div>
                 <div class="card-body">
                     <h5 class="card-title">{{ $item->name }}</h5>
                     <p class="card-text">Price: ${{ $item->price }}</p>
+                    <p class="card-text">stock:{{ $item->quantity }}</p>
                     <p class="card-text">Created at: {{ $item->created_at }}</p>
                     <div class="d-flex justify-content-between">
-                        <a href="" class="btn btn-outline-dark">
+                        <a href="   {{ route('Food.show' , $item->id ) }}" class="btn btn-outline-dark">
                             <i class="fas fa-eye"></i> Show More
                         </a>
                         <form action="{{ route('order.food') }}" method="post">

@@ -19,6 +19,7 @@
                     </p>
                     <p class="card-text">Price: ${{ $item->price }}</p>
                     <p class="card-text">Created at: {{ $item->created_at }}</p>
+                    <p class="card-text">stock:{{ $item->quantity }}</p>
                     <div class="d-flex justify-content-between">
                         <a href="{{ route('accessoir.show', $item->id) }}" class="btn btn-outline-dark">
                             <i class="fas fa-eye"></i> Show More

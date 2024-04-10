@@ -26,6 +26,16 @@ body {
     border-radius: 10px;
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
 }
+.btn-icon {
+    display: flex;
+    align-items: center;
+}
+.btn-icon a {
+    flex: 1;
+}
+.btn-icon i {
+    margin-right: 5px; /* Adjust margin as needed */
+}
 
 </style>
 
@@ -37,36 +47,36 @@ body {
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
 
-                      <li class="nav-item"><a class="nav-link active" aria-current="page" href="">Home</a></li>
+                      <li class="nav-item"><a class="nav-link active" aria-current="page" href=""><i class="fas fa--in-alt">Home</i></a></li>
                       @if(Auth::check() && Auth::user()->role == 'admin')
                       <li class="nav-item"><a class="nav-link" href="{{ route('product.index') }}">Dashboard</a></li>
                       @endif
-                  
-                    
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Shop</a>
+                      <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="fas fa-cat	"></i></a>
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <li><a class="dropdown-item" href="#!">All Products</a></li>
                             <li>
-                                <hr class="dropdown-divider" />
+                                <a class="dropdown-item" href="#!">Contact Admin</a>
                             </li>
-                            <li><a class="dropdown-item" href="#!">Popular Items</a></li>
-                            <li><a class="dropdown-item" href="#!">New Arrivals</a></li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li>
+                                <a class="dropdown-item" href="{{ url('/chatify') }}">Chat</a>
+                            </li>
                         </ul>
                     </li>
+                    
                     @guest
                     <li class="nav-item">
-                        <a class="nav-link active custom-btn login-btn" aria-current="page" href="{{ route('login') }}">Login</a>
+                        <a class="nav-link active custom-btn login-btn" aria-current="page" href="{{ route('login') }}"><i class="fas fa-sign-in-alt"> login</i></a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active custom-btn register-btn" aria-current="page" href="{{ route('register') }}">Register</a>
+                        <a class="nav-link active custom-btn register-btn" aria-current="page" href="{{ route('register') }}"><i class="fas fa--in-alt">register</i></a>
                     </li>
                     @endguest
-                   
-               
                     @auth
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle btn btn-primary" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Profile</a>
+                        <a class="nav-link dropdown-toggle " id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="	fas fa-user-alt"></i></a>
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                             <li><span class="dropdown-item">{{ auth()->user()->name }}</span></li>
                             <li><span class="dropdown-item">{{ auth()->user()->email }}</span></li>
@@ -74,22 +84,15 @@ body {
                             <li>
                                 <form action="{{ route('logout') }}" method="POST">
                                     @csrf
-                                    <button type="submit" class="dropdown-item btn btn-info">Logout</button>
+                                    <button type="submit" class="dropdown-item btn btn-info"><i class="fas fa-in-alt">Log out</i></button>
                                 </form>
-                              
                             </li>
                         </ul>
                     </li>
-
-                    <li class="nav-item">
-                        <a class="btn btn-info "  href="{{ url('/chatify') }}">Chat</a>
-                    </li>
                 @endauth
-          
-
                 </ul>
                 <form action=""  class="d-flex">
-                  <a id="" class="btn btn-outline-dark"  href="{{ route('Commande.index') }}">
+                  <a id="" class="btn btn-outline-dark"  href="{{ route('Commandes.index') }}">
                       <i class="bi-cart-fill me-1"></i>
                      My Cards
                   </a>
@@ -112,12 +115,10 @@ body {
                         </div>
                     </div>
                     <br>
-
                 </div>
             </div>
         </div>
     </div>
-
     </form>
 
     <section class="cat_product_area section_gap ">
@@ -131,7 +132,6 @@ body {
             <x-accessoir :Accessoir="$Accessoir"/>
             @endif
           </div>
-
           <div class="col-lg-2">
             <div class="left_sidebar_area">
                 <aside class="left_widgets p_filter_widgets">
@@ -140,9 +140,21 @@ body {
                     </div>
                     
                     <div class="d-grid gap-1 container">
-                        <a class="btn btn-primary" href="{{ route('Home.index') }}">Pets</a>
-                        <a class="btn btn-primary" href="{{ route('accessoir.index') }}">Accessories</a>
-                        <a class="btn btn-primary" href="{{ route('Food.index') }}">Foods</a>
+                        <div class="btn-icon">
+                            <a class="btn btn-primary" href="{{ route('Home.index') }}">
+                                <i class="fas fa-dog material-icons"></i> Pets
+                            </a>
+                        </div>
+                        <div class="btn-icon">
+                            <a class="btn btn-primary" href="{{ route('accessoir.index') }}">
+                                <i class="fas fa-shopping-bag material-icons"></i> Accessories
+                            </a>
+                        </div>
+                        <div class="btn-icon">
+                            <a class="btn btn-primary" href="{{ route('Food.index') }}">
+                                <i class="fas fa-utensils material-icons"></i> Foods
+                            </a>
+                        </div>
                     </div>
                     <hr>
                     <div class="l_w_title">
@@ -189,10 +201,58 @@ body {
                 </aside>
             </div>
         </div>
-        
     </div>
     </section>
-
+    <div class="container-fluid bg-dark text-light">
+        <footer>
+            <div class="row my-5 justify-content-center py-5">
+                <div class="col-lg-11">
+                    <div class="row">
+                        <div class="col-xl-8 col-md-4 col-sm-4 col-12 my-auto mx-auto">
+                            <h3 class="text-muted mb-md-0 mb-5 bold-text">
+                                <img src="{{ asset('assets/images/cat1.jpg') }}" alt="" class="rounded-circle" style="width: 100px; height: 100px;">
+                            </h3>
+                        </div>
+                        <div class="col-xl-2 col-md-4 col-sm-4 col-12">
+                            <h6 class="mb-3 mb-lg-4 bold-text"><b>MENU</b></h6>
+                            <ul class="list-unstyled">
+                                <li>Home</li>
+                                <li>About</li>
+                                <li>Blog</li>
+                                <li>Portfolio</li>
+                            </ul>
+                        </div>
+                        <div class="col-xl-2 col-md-4 col-sm-4 col-12">
+                            <h6 class="mb-3 mb-lg-4 text-muted bold-text mt-sm-0 mt-5"><b>ADDRESS</b></h6>
+                            <p class="mb-1">605, RATAN ICON BUILDING</p>
+                            <p>SEAWOODS SECTOR</p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xl-8 col-md-4 col-sm-4 col-auto my-md-0 mt-5 order-sm-1 order-3 align-self-end">
+                            <p class="social text-muted mb-0 pb-0 bold-text">
+                                <span class="mx-2"><i class="fa fa-facebook" aria-hidden="true"></i></span>
+                                <span class="mx-2"><i class="fa fa-linkedin-square" aria-hidden="true"></i></span>
+                                <span class="mx-2"><i class="fa fa-twitter" aria-hidden="true"></i></span>
+                                <span class="mx-2"><i class="fa fa-instagram" aria-hidden="true"></i></span>
+                            </p>
+                            <small class="rights"><span>&#174;</span> Pepper All Rights Reserved.</small>
+                        </div>
+                        <div class="col-xl-2 col-md-4 col-sm-4 col-auto order-1 align-self-end">
+                            <h6 class="mt-55 mt-2 text-muted bold-text"><b>ANIRUDH SINGLA</b></h6>
+                            <small><span><i class="fa fa-envelope" aria-hidden="true"></i></span> anirudh@gmail.com</small>
+                        </div>
+                        <div class="col-xl-2 col-md-4 col-sm-4 col-auto order-2 align-self-end mt-3">
+                            <h6 class="text-muted bold-text"><b>RISHABH SHEKHAR</b></h6>
+                            <small><span><i class="fa fa-envelope" aria-hidden="true"></i></span> rishab@gmail.com</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </div>
+    
+    
     <!-- Bootstrap core JS-->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
     <!-- Core theme JS-->

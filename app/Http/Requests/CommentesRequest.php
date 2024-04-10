@@ -23,7 +23,6 @@ class CommentesRequest extends FormRequest
     {
         return [
             'comment' => 'required|string',
-            'rating' => 'required|integer|min:1|max:10',
         ];
     }
 }

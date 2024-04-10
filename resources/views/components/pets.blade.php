@@ -19,22 +19,27 @@
                     </p>
                     <p class="card-text">Price: ${{ $product->price }}</p>
                     <p class="card-text">Created at: {{ $product->created_at }}</p>
-                    <a href="{{ route('commentes.show' , $product->id) }}" class="btn btn-outline-dark" data-toggle="modal" data-target="#productDetailsModal" data-product-id="{{ $product->id }}">
-                        <i class="fas fa-eye"></i> Show More
-                    </a>
-                    <form action="{{ route('command') }}" method="post">
-                        @csrf
-                        <input type="hidden" name="product_id" value="{{ $product->id }}">
-                        @if (App\Models\commends::where('products_id', $product->id)->exists())
-                            <button type="button" class="btn btn-outline-dark btn-block mt-2" disabled>
-                                <i class="far fa-check-circle"></i> This product has been sold, you can view the comments
-                            </button>
-                        @else
-                            <button type="submit" class="btn btn-outline-dark btn-block mt-2">
-                                <i class="fas fa-shopping-basket"></i> Add to Cart
-                            </button>
-                        @endif
-                    </form>
+                    <div class="btn-group">
+                        <a href="{{ route('commentes.show', $product->id) }}" class="btn btn-outline-dark" data-toggle="modal" data-target="#productDetailsModal" data-product-id="{{ $product->id }}">
+                            <i class="fas fa-eye"></i> 
+                        </a>&nbsp;&nbsp;
+                        <form action="{{ route('command') }}" method="post" class="d-inline">
+                            @csrf
+                            <input type="hidden" name="product_id" value="{{ $product->id }}">
+                            @if (App\Models\commends::where('products_id', $product->id)->exists())
+                                <button type="button" class="btn btn-outline-dark" disabled>
+                                    <i class="far fa-check-circle"></i> This product is vendor
+                                </button>
+                            @else
+                                <button type="submit" class="btn btn-outline-dark">
+                                    <i class="fas fa-shopping-basket"></i> 
+                                </button>
+                            @endif
+                        </form>
+                    </div>
+                    
+                    
+                    
                 </div>
             </div>
         </div>

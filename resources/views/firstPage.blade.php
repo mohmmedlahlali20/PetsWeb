@@ -6,7 +6,7 @@
   <title>Pest Control Home Page</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
   <link rel="stylesheet" href="https://unpkg.com/bs-brain@2.0.3/components/pricings/pricing-2/assets/css/pricing-2.css">
-
+  <link rel="stylesheet" href="{{ asset('css/styles.css') }}">
   <style>
     .card {
       margin-bottom: 20px;
@@ -58,16 +58,20 @@
     </div>
 </nav>
 
-<section class="position-relative d-flex flex-column justify-content-center align-items-center text-center text-white" style="height: 100vh;">
+{{-- <section class="position-relative d-flex flex-column justify-content-center align-items-center text-center text-white" style="height: 100vh;">
   <div class="position-absolute top-0 left-0 w-100 h-100 overflow-hidden">
-      <video class="w-100 h-100 object-cover" src="https://fiverr-res.cloudinary.com/video/upload/t_fiverr_hd/lqzue5xjmctq6pcsgvq1" type="video/mp4" autoplay muted loop></video>
+    <video class="w-100 h-100" autoplay muted loop>
+      <source src="https://fiverr-res.cloudinary.com/video/upload/t_fiverr_hd/lqzue5xjmctq6pcsgvq1" type="video/mp4">
+      
+  </video>
+  
   </div>
   <div class="video-content space-y-2 position-relative" style="z-index: 10;">
       <h1 class="font-light display-1">Welcome to EVENTO</h1>
-      <h3 class="font-light display-4">An unforgettable experience awaits you!</h3>
-      <p class="font-light fs-5">Join us for a spectacular event filled with excitement, entertainment, and amazing surprises.</p>
+      <h3 class="font-light display-4"></h3>
+      <p class="font-light fs-5"></p>
   </div>
-</section>
+</section> --}}
 
 
 <!-- Pets Section -->
@@ -317,39 +321,54 @@
         <img src="{{ asset('assets/images/Home.png') }}" width="20%" alt="Sales Image" class="img-fluid">
     </div>
 </section>
-
-<!-- Contact Section -->
-<section id="contact">
-    <div class="container">
-        <h2 class="text-center mb-5">Contact Us</h2>
-        <div class="row">
-            <div class="col-md-6">
-                <p>For inquiries and appointments, please contact us:</p>
-                <ul>
-                    <li>Phone: 123-456-7890</li>
-                    <li>Email: info@pestcontrol.com</li>
-                    <li>Address: 123 Main Street, Cityville, USA</li>
-                </ul>
-            </div>
-            <div class="col-md-6">
-                <!-- Contact Form (You can add your own contact form here) -->
-                <form>
-                    <div class="mb-3">
-                        <input type="text" class="form-control" placeholder="Your Name">
-                    </div>
-                    <div class="mb-3">
-                        <input type="email" class="form-control" placeholder="Your Email">
-                    </div>
-                    <div class="mb-3">
-                        <textarea class="form-control" rows="5" placeholder="Your Message"></textarea>
-                    </div>
-                    <button type="submit" class="btn btn-primary">Send Message</button>
-                </form>
-            </div>
-        </div>
-    </div>
-</section>
-
+<div class="container-fluid bg-dark text-light">
+  <footer>
+      <div class="row my-5 justify-content-center py-5">
+          <div class="col-lg-11">
+              <div class="row">
+                  <div class="col-xl-8 col-md-4 col-sm-4 col-12 my-auto mx-auto">
+                      <h3 class="text-muted mb-md-0 mb-5 bold-text">
+                          <img src="{{ asset('assets/images/cat1.jpg') }}" alt="" class="rounded-circle" style="width: 100px; height: 100px;">
+                      </h3>
+                  </div>
+                  <div class="col-xl-2 col-md-4 col-sm-4 col-12">
+                      <h6 class="mb-3 mb-lg-4 bold-text"><b>MENU</b></h6>
+                      <ul class="list-unstyled">
+                          <li>Home</li>
+                          <li>About</li>
+                          <li>Blog</li>
+                          <li>Portfolio</li>
+                      </ul>
+                  </div>
+                  <div class="col-xl-2 col-md-4 col-sm-4 col-12">
+                      <h6 class="mb-3 mb-lg-4 text-muted bold-text mt-sm-0 mt-5"><b>ADDRESS</b></h6>
+                      <p class="mb-1">605, RATAN ICON BUILDING</p>
+                      <p>SEAWOODS SECTOR</p>
+                  </div>
+              </div>
+              <div class="row">
+                  <div class="col-xl-8 col-md-4 col-sm-4 col-auto my-md-0 mt-5 order-sm-1 order-3 align-self-end">
+                      <p class="social text-muted mb-0 pb-0 bold-text">
+                          <span class="mx-2"><i class="fa fa-facebook" aria-hidden="true"></i></span>
+                          <span class="mx-2"><i class="fa fa-linkedin-square" aria-hidden="true"></i></span>
+                          <span class="mx-2"><i class="fa fa-twitter" aria-hidden="true"></i></span>
+                          <span class="mx-2"><i class="fa fa-instagram" aria-hidden="true"></i></span>
+                      </p>
+                      <small class="rights"><span>&#174;</span> Pepper All Rights Reserved.</small>
+                  </div>
+                  <div class="col-xl-2 col-md-4 col-sm-4 col-auto order-1 align-self-end">
+                      <h6 class="mt-55 mt-2 text-muted bold-text"><b>ANIRUDH SINGLA</b></h6>
+                      <small><span><i class="fa fa-envelope" aria-hidden="true"></i></span> anirudh@gmail.com</small>
+                  </div>
+                  <div class="col-xl-2 col-md-4 col-sm-4 col-auto order-2 align-self-end mt-3">
+                      <h6 class="text-muted bold-text"><b>RISHABH SHEKHAR</b></h6>
+                      <small><span><i class="fa fa-envelope" aria-hidden="true"></i></span> rishab@gmail.com</small>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </footer>
+</div>
 
 <!-- Bootstrap Bundle with Popper -->
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>

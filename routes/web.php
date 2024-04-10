@@ -26,7 +26,7 @@ use App\Http\Controllers\CategoriesController;
 // Route::get('/Commandes', [CommendsController::class, 'index']);
 
 Route::resource('/Home', ProductsController::class);
-Route::resource('/Commande', CommendsController::class);
+Route::resource('/Commandes', CommendsController::class);
 Route::resource('/commentes', CommentsController::class);
 Route::get('/payments' , [PaymentsController::class, 'AllPayment'])->name('payment');
 Route::resource('/accessoir', AccessoirController::class);
@@ -34,7 +34,7 @@ Route::post('/Commandes', [CommendsController::class, 'store'])->name('command')
 Route::post('/commentair', [CommentsController::class, 'store'])->name('commentes');
 Route::get('/checkout' , [PaymentsController::class , 'index'])->name('GetPayment');
 Route::post('/checkout', [PaymentsController::class, 'checkout'])->name('striptPayment');
-Route::get('/commend', [PaymentsController::class, 'success'])->name('success');
+Route::get('/Commande', [PaymentsController::class, 'success'])->name('success');
 
 Route::post('/Commandes/foods', [CommendsController::class, 'storeFood'])->name('order.food');
 //Route::post('/order/pets', [CommendsController::class, 'storePets'])->name('order.pets');

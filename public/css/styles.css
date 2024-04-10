@@ -11330,3 +11330,16 @@ textarea.form-control-lg {
       position: relative
   }
 }
+
+
+
+
+
+.container-fluid{
+  overflow:hidden; 
+  background:#262626 ;
+  color: #627482  !important;
+}
+
+
+
