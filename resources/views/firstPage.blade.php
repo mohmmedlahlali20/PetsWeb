@@ -7,6 +7,7 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
   <link rel="stylesheet" href="https://unpkg.com/bs-brain@2.0.3/components/pricings/pricing-2/assets/css/pricing-2.css">
   <link rel="stylesheet" href="{{ asset('css/styles.css') }}">
+  <link rel="stylesheet" href="{{ asset('css/firststyle.css') }}">
   <style>
     .card {
       margin-bottom: 20px;
@@ -58,20 +59,62 @@
     </div>
 </nav>
 
-{{-- <section class="position-relative d-flex flex-column justify-content-center align-items-center text-center text-white" style="height: 100vh;">
-  <div class="position-absolute top-0 left-0 w-100 h-100 overflow-hidden">
-    <video class="w-100 h-100" autoplay muted loop>
-      <source src="https://fiverr-res.cloudinary.com/video/upload/t_fiverr_hd/lqzue5xjmctq6pcsgvq1" type="video/mp4">
-      
-  </video>
-  
+<section class="testimonial">
+  <div class="container">
+      <div class="row">
+          <div class="col-lg-6 d-none d-lg-block">
+              <ol class="carousel-indicators tabs">
+                  <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active">
+                      <figure>
+                          <img src="{{ asset('assets/images/arnab1.jpg') }}" class="img-fluid" alt="">
+                      </figure>
+                  </li>
+                  <li data-target="#carouselExampleIndicators" data-slide-to="1">
+                      <figure>
+                          <img src="{{ asset('assets/images/arnab1.jpg') }}" class="img-fluid" alt="">
+                      </figure>
+                  </li>
+                  <li data-target="#carouselExampleIndicators" data-slide-to="2">
+                      <figure>
+                          <img src="{{ asset('assets/images/arnab1.jpg') }}" class="img-fluid" alt="">
+                      </figure>
+                  </li>
+              </ol>
+          </div>
+          <div class="col-lg-6 d-flex justify-content-center align-items-center">
+              <div id="carouselExampleIndicators" data-interval="false" class="carousel slide" data-ride="carousel">
+                  <h3>WHAT OUR CLIENTS SAY</h3>
+                  <h1>TESTIMONIALS</h1>
+                  <div class="carousel-inner">
+                      <div class="carousel-item active">
+                          <div class="quote-wrapper">
+                              <p>I have tried a lot of food delivery services but Plate is something out of this world! Their food is really healthy and it tastes great, which is why I recommend this company to all my friends!</p>
+                              <h3>peter lee</h3>
+                          </div>
+                      </div>
+                      <div class="carousel-item">
+                          <div class="quote-wrapper">
+                              <p>I have tried a lot of food delivery services but Plate is something out of this world! Their food is really healthy and it tastes great, which is why I recommend this company to all my friends!</p>
+                              <h3>peter lee</h3>
+                          </div>
+                      </div>
+                      <div class="carousel-item">
+                          <div class="quote-wrapper">
+                              <p>I have tried a lot of food delivery services but Plate is something out of this world! Their food is really healthy and it tastes great, which is why I recommend this company to all my friends!</p>
+                              <h3>peter lee</h3>
+                          </div>
+                      </div>
+                  </div>
+                  <ol class="carousel-indicators indicators">
+                      <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+                      <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+                      <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+                  </ol>
+              </div>
+          </div>
+      </div>
   </div>
-  <div class="video-content space-y-2 position-relative" style="z-index: 10;">
-      <h1 class="font-light display-1">Welcome to EVENTO</h1>
-      <h3 class="font-light display-4"></h3>
-      <p class="font-light fs-5"></p>
-  </div>
-</section> --}}
+</section>
 
 
 <!-- Pets Section -->
@@ -373,5 +416,6 @@
 <!-- Bootstrap Bundle with Popper -->
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"></script>
+<script src="{{ asset('js/firstscript.js') }}"></script>
 </body>
 </html>

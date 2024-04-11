@@ -63,7 +63,8 @@ class AccessoirController extends Controller
      */
     public function show(Accessoir $accessoir)
     {
-        //
+        //dd($accessoir);
+        return view('Pets.ShowAccessoir' , compact('accessoir'));
     }
 
     /**
