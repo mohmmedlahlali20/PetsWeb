@@ -6,7 +6,7 @@
         <div class="col-lg-4 col-md-6 mb-4">
             <div class="card">
                 <div class="ratio ratio-16x9">
-                    <img src="{{ Storage::url($product->image) }}" class="card-img-top" alt="Product Image">
+                    <img src="{{ Storage::url($product->image) }}" class="card-img-top " alt="Product Image">
                 </div>
                 <div class="card-body">
                     <h5 class="card-title">{{ $product->name }}</h5>
