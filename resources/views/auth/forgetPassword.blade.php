@@ -18,12 +18,10 @@
 
     </style>
 <main>
-    @if (session()->has('success'))
-        <div class="alert alert-success">fuck you</div>
-    @endif
     <div class="container d-flex justify-content-center align-items-center vh-100">
         <div class="card p-4">
             <div class="card-body">
+               
                 <p class="card-text">We will send a link to your email. Use that link to reset your password.</p>
                 <form action="{{ route('forget') }}" method="POST">
                     @csrf
@@ -36,10 +34,15 @@
                     </div>
                     <button type="submit" class="btn btn-primary">Send Reset Link</button>
                 </form>
+
+                @if(session('success'))
+                <span class="text-success mb-4">{{ session('success') }}</span>
+                @endif
             </div>
         </div>
     </div>
 </main>
+
 
 </section>
 @endsection

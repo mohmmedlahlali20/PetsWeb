@@ -79,57 +79,54 @@ class AuthController extends Controller
         $request->validate([
             'email' => "required|email|exists:users,email",
         ]);
-
+    
         $token = Str::random(64);
+    
+        // Store the token in the database
         PasswordResetToken::updateOrCreate(
             ['email' => $request->email],
             ['token' => $token, 'created_at' => now()]
         );
+    
+        $imagePath = public_path('assets/images/logo.jpg');
 
-        
-        Mail::send("emails.ForgetPasswordEmail", ['token' => $token], function ($message) use ($request) {
+        Mail::send("emails.ForgetPasswordEmail", ['token' => $token, 'imagePath' => $imagePath], function ($message) use ($request, $imagePath) {
             $message->to($request->email)
-                    ->subject('Reset Your Password');
+                    ->subject('Reset Your Password')
+                    ->embed($imagePath);
         });
-        
-        return  redirect()->to(route('forget.password'))->with("success" , "hayd t7awa");
+    
+        return redirect()->to(route('forget.password'))->with("success", "Password reset email sent");
     }
 
-    function resetPassword($token){
-        return view('auth.newPassword' , compact('token'));
-
+    public function resetPassword($token){
+        // Pass the token to the view
+        return view('auth.newPassword', compact('token'));
     }
  
-    public function ResetPasswordPost(Request $request){
 
-        $request->validate([
-              "email" => "required|email|exists:users",
-              "password" => "required|string|min:8|confirmed",
-              "password_confirmed" => "required"
-        ]);
 
-        
+public function ResetPasswordPost(Request $request){
+    $request->validate([
+          "email" => "required|email|exists:users",
+          "password" => "required|string|min:8|confirmed",
+    ]);
 
-        $resetPassword = DB::table('password_reset_tokens')
-        ->where([
-            'email' => $request->email,
-            'token' => $request->token
-        ])->first();
+    // Fetch the reset token from the database
+    $resetPassword = PasswordResetToken::where('email', $request->email)
+                                         ->where('token', $request->token)
+                                         ->first();
 
-        //dd($request);
-
-        if(!$resetPassword){
-         return redirect()->to(route('reset.password'))->with('error' , "fucking invalid");
-        }
-
-        User::where("email" , $request->email)->update(["password" => Hash::make($request->password)]);
-
-        DB::table('password_reset_tokens')
-        ->where(["email" => $request->email])
-        ->delete();
-
-        return redirect()->route('login')->with('success', 'hello');
-
+    if(!$resetPassword){
+        return redirect()->route('reset.password')->with('error', "Invalid or expired token");
     }
-    
+
+    // Update the user's password
+    $dd = User::where("email", $request->email)->update(["password" => Hash::make($request->password)]);
+//dd($dd);
+    // Delete the reset token from the database
+    $resetPassword->delete();
+
+    return redirect()->route('login')->with('success', 'Password reset successfully');
+}
 }

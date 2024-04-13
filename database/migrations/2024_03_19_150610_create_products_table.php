@@ -24,9 +24,10 @@ return new class extends Migration
             ->onDelete('cascade'); 
             $table->integer('age');
             $table->enum('sex', ['male', 'female']);
-            // $table->foreignId('user_id')
-            // ->constrained('users')
-            // ->onDelete('cascade');  
+            $table->foreignId('user_id')
+            ->nullable()
+            ->constrained('users')
+            ->onDelete('cascade');  
             $table->timestamps();
             $table->softDeletes();
         });

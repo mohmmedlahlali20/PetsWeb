@@ -11,10 +11,11 @@
   <link rel="stylesheet" href="{{ asset('css/styles.css') }}">
   <link rel="stylesheet" href="{{ asset('css/firststyle.css') }}">
   <style>
-    .bsb-pets {
-  background-color: #dafde7; /* Light green color */
-}
-    .card {
+  .rbg {
+    background-color: rgba(208, 245, 217, 0.9); /* Adjust the alpha value (0.9 in this case) to change the opacity */
+  }
+  
+  .card {
       margin-bottom: 20px;
     }
 
@@ -38,36 +39,34 @@
 </head>
 <body class="bsb-pets">
 
-<!-- Navbar -->
-<nav class="navbar navbar-expand-lg navbar-dark bg-success">
-  <div class="container-fluid">
-      <a class="navbar-brand" href="#">
-          <img src="{{ asset('assets/images/logo.jpg') }}" alt="" style="max-width: 30%; border-radius: 30px;">
-      </a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-      </button>
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-              <li class="nav-item"><a class="nav-link active" aria-current="page" href="{{ route('Home.index') }}">Home</a></li>
-              <li class="nav-item"><a class="nav-link active" aria-current="page" href="#">Contact</a></li>
-              <li class="nav-item"><a class="nav-link active" aria-current="page" href="#">About</a></li>
-              @auth
-              <li class="nav-item"><a class="nav-link active" aria-current="page" href="#">Upgrade Your Account</a></li>
-              @endauth
-              @guest
-              <li class="nav-item">
-                  <a class="nav-link active custom-btn login-btn" aria-current="page" href="{{ route('login') }}">Login</a>
-              </li>
-              <li class="nav-item">
-                  <a class="nav-link active custom-btn register-btn" aria-current="page" href="{{ route('register') }}">Register</a>
-              </li>
-              @endguest
-          </ul>
-      </div>
-  </div>
-
-</nav>
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="#">
+            <img src="{{ asset('assets/images/logo.jpg') }}" alt="" style="max-width: 30%; border-radius: 30px;">
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                <li class="nav-item"><a class="nav-link active" aria-current="page" href="{{ route('Home.index') }}">Home</a></li>
+                <li class="nav-item"><a class="nav-link active" aria-current="page" href="#">Contact</a></li>
+                <li class="nav-item"><a class="nav-link active" aria-current="page" href="#">About</a></li>
+                @auth
+                <li class="nav-item"><a class="nav-link active" aria-current="page" href="#">Upgrade Your Account</a></li>
+                @endauth
+                @guest
+                <li class="nav-item">
+                    <a class="nav-link active custom-btn login-btn" aria-current="page" href="{{ route('login') }}">Login</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active custom-btn register-btn" aria-current="page" href="{{ route('register') }}">Register</a>
+                </li>
+                @endguest
+            </ul>
+        </div>
+    </div>
+  </nav>
 
 <section class="testimonial">
   <div class="container">
@@ -137,7 +136,7 @@
             <header class="text-center pb-5">
                 <h1 class="h2">PetsWeb</h1>
                 <p>Find motivation and joy in the company of your beloved pets.</p>
-            </header>
+            </header>Age
         </div>
     </div>
 
@@ -172,7 +171,7 @@
     <div class="row gy-5 gy-lg-0 gx-xl-5">
       <div class="col-12 col-lg-4">
         <div class="card border-0 border-bottom border-primary shadow-sm">
-          <img src="{{ asset('assets/images/card1.jpg') }}" class="card-img-top" alt="Pet 1">
+          <img src="{{ asset('assets/images/OIG3.jpeg') }}" class="card-img-top" alt="Pet 1">
           <div class="card-body p-4 p-xxl-5">
             <h5 class="card-title mb-3">Programming Panda</h5>
             <p class="card-text">This panda loves coding and debugging!</p>
@@ -182,7 +181,7 @@
       </div>
       <div class="col-12 col-lg-4">
         <div class="card border-0 border-bottom border-primary shadow-lg">
-          <img src="{{ asset('assets/images/card1.jpg') }}" class="card-img-top" alt="Pet 1">
+          <img src="{{ asset('assets/images/OIG2.jpeg') }}" class="card-img-top" alt="Pet 1">
           <div class="card-body p-4 p-xxl-5">
             <h5 class="card-title mb-3">Meme Doggo</h5>
             <p class="card-text">This doggo fetches memes faster than balls!</p>
@@ -192,7 +191,7 @@
       </div>
       <div class="col-12 col-lg-4">
         <div class="card border-0 border-bottom border-primary shadow-sm">
-          <img src="{{ asset('assets/images/card1.jpg') }}" class="card-img-top" alt="Pet 1">
+          <img src="{{ asset('assets/images/OIG4.jpeg') }}" class="card-img-top" alt="Pet 1">
           <div class="card-body p-4 p-xxl-5">
             <h5 class="card-title mb-3">Cute Coder Cat</h5>
             <p class="card-text">This cat writes purr-fect code!</p>
@@ -205,167 +204,154 @@
 </section>
 
 
-  
-  <section class="bsb-pricing-2 bg-light py-5 py-xl-8">
-    <div class="container">
-      <div class="row justify-content-md-center">
-        <div class="col-12 col-md-10 col-lg-8 col-xl-7 col-xxl-6">
-          <h3 class="fs-6 text-secondary mb-2 text-uppercase text-center">Our Pricing</h3>
-          <h2 class="display-5 mb-4 mb-md-5 text-center">We offer great pricing plans for everyone.</h2>
-          <hr class="w-50 mx-auto mb-5 mb-xl-9 border-dark-subtle">
-        </div>
+<section class="bsb-pricing-2 bg-light py-5 py-xl-8">
+  <div class="container">
+    <div class="row justify-content-md-center">
+      <div class="col-12 col-md-10 col-lg-8 col-xl-7 col-xxl-6">
+        <h3 class="fs-6 text-secondary mb-2 text-uppercase text-center">Our Pet Packages</h3>
+        <h2 class="display-5 mb-4 mb-md-5 text-center">Discover our premium and VIP plans for your furry friends.</h2>
+        <hr class="w-50 mx-auto mb-5 mb-xl-9 border-dark-subtle">
       </div>
     </div>
-  
-    <div class="container">
-      <div class="row gy-5 gy-lg-0 gx-xl-5">
-        <div class="col-12 col-lg-4">
-          <div class="card border-0 border-bottom border-primary shadow-sm">
-            <div class="card-body p-4 p-xxl-5">
-              <h2 class="h4 mb-2">Starter</h2>
-              <h4 class="display-3 fw-bold text-primary mb-0">$45</h4>
-              <p class="text-secondary mb-4">USD / Month</p>
-              <ul class="list-group list-group-flush mb-4">
-                <li class="list-group-item">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-check" viewBox="0 0 16 16">
-                    <path d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425a.267.267 0 0 1 .02-.022z" />
-                  </svg>
-                  <span><strong>5</strong> Bootstrap Install</span>
-                </li>
-                <li class="list-group-item">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-check" viewBox="0 0 16 16">
-                    <path d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425a.267.267 0 0 1 .02-.022z" />
-                  </svg>
-                  <span><strong>100,000</strong> Visits</span>
-                </li>
-                <li class="list-group-item">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-check" viewBox="0 0 16 16">
-                    <path d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425a.267.267 0 0 1 .02-.022z" />
-                  </svg>
-                  <span><strong>30 GB</strong> Disk Space</span>
-                </li>
-                <li class="list-group-item">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-x text-danger" viewBox="0 0 16 16">
-                    <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z" />
-                  </svg>
-                  <span>Free <strong>SSL and CDN</strong></span>
-                </li>
-                <li class="list-group-item">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-x text-danger" viewBox="0 0 16 16">
-                    <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z" />
-                  </svg>
-                  <span>Free <strong>Support</strong></span>
-                </li>
-                <li class="list-group-item">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-x text-danger" viewBox="0 0 16 16">
-                    <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z" />
-                  </svg>
-                  <span><strong>Weekly</strong> Reports</span>
-                </li>
-              </ul>
-              <a href="#!" class="btn bsb-btn-xl btn-primary rounded-pill">Choose Plan</a>
-            </div>
+  </div>
+  <div class="container">
+    <div class="row gy-5 gy-lg-0 gx-xl-5">
+      <div class="col-12 col-lg-4">
+        <div class="card border-0 border-bottom border-primary shadow-sm">
+          <div class="card-body p-4 p-xxl-5">
+            <h2 class="h4 mb-2">Premium</h2>
+            <h4 class="display-3 fw-bold text-primary mb-0">$75</h4>
+            <p class="text-secondary mb-4">USD / Month</p>
+            <ul class="list-group list-group-flush mb-4">
+              <li class="list-group-item">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-check" viewBox="0 0 16 16">
+                  <path d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425a.267.267 0 0 1 .02-.022z" />
+                </svg>
+                <span><strong>10</strong> Grooming Sessions</span>
+              </li>
+              <li class="list-group-item">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-check" viewBox="0 0 16 16">
+                  <path d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425a.267.267 0 0 1 .02-.022z" />
+                </svg>
+                <span><strong>200</strong> Treats</span>
+              </li>
+              <li class="list-group-item">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-check" viewBox="0 0 16 16">
+                  <path d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425a.267.267 0 0 1 .02-.022z" />
+                </svg>
+                <span><strong>50 lbs</strong> of Premium Food</span>
+              </li>
+              <li class="list-group-item">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-check" viewBox="0 0 16 16">
+                  <path d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425a.267.267 0 0 1 .02-.022z" />
+                </svg>
+                <span>Free <strong>Toy</strong></span>
+              </li>
+              <li class="list-group-item">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-check" viewBox="0 0 16 16">
+                  <path d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425a.267.267 0 0 1 .02-.022z" />
+                </svg>
+                <span><strong>Bi-weekly</strong> Vet Check</span>
+              </li>
+            </ul>
+            <a href="#!" class="btn bsb-btn-xl btn-primary rounded-pill">Choose Plan</a>
           </div>
         </div>
-        <div class="col-12 col-lg-4">
-          <div class="card border-0 border-bottom border-primary shadow-lg pt-md-4 pb-md-4 bsb-pricing-popular">
-            <div class="card-body p-4 p-xxl-5">
-              <h2 class="h4 mb-2">Pro</h2>
-              <h4 class="display-3 fw-bold text-primary mb-0">$75</h4>
-              <p class="text-secondary mb-4">USD / Month</p>
-              <ul class="list-group list-group-flush mb-4">
-                <li class="list-group-item">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-check" viewBox="0 0 16 16">
-                    <path d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425a.267.267 0 0 1 .02-.022z" />
-                  </svg>
-                  <span><strong>20</strong> Bootstrap Install</span>
-                </li>
-                <li class="list-group-item">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-check" viewBox="0 0 16 16">
-                    <path d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425a.267.267 0 0 1 .02-.022z" />
-                  </svg>
-                  <span><strong>250,000</strong> Visits</span>
-                </li>
-                <li class="list-group-item">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-check" viewBox="0 0 16 16">
-                    <path d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425a.267.267 0 0 1 .02-.022z" />
-                  </svg>
-                  <span><strong>50 GB</strong> Disk Space</span>
-                </li>
-                <li class="list-group-item">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-check" viewBox="0 0 16 16">
-                    <path d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425a.267.267 0 0 1 .02-.022z" />
-                  </svg>
-                  <span>Free <strong>SSL and CDN</strong></span>
-                </li>
-                <li class="list-group-item">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-check" viewBox="0 0 16 16">
-                    <path d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425a.267.267 0 0 1 .02-.022z" />
-                  </svg>
-                  <span>Free <strong>Support</strong></span>
-                </li>
-                <li class="list-group-item">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-x text-danger" viewBox="0 0 16 16">
-                    <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z" />
-                  </svg>
-                  <span><strong>Weekly</strong> Reports</span>
-                </li>
-              </ul>
-              <a href="#!" class="btn bsb-btn-xl btn-primary rounded-pill">Choose Plan</a>
-            </div>
+      </div>
+      <div class="col-12 col-lg-4">
+        <div class="card border-0 border-bottom border-primary shadow-sm">
+          <div class="card-body p-4 p-xxl-5">
+            <h2 class="h4 mb-2">VIP</h2>
+            <h4 class="display-3 fw-bold text-primary mb-0">$90 </h4>
+            <p class="text-secondary mb-4">USD / Month</p>
+            <ul class="list-group list-group-flush mb-4">
+              <li class="list-group-item">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-check" viewBox="0 0 16 16">
+                  <path d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425a.267.267 0 0 1 .02-.022z" />
+                </svg>
+                <span><strong>10</strong> Grooming Sessions</span>
+              </li>
+              <li class="list-group-item">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-check" viewBox="0 0 16 16">
+                  <path d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425a.267.267 0 0 1 .02-.022z" />
+                </svg>
+                <span><strong>200</strong> Treats</span>
+              </li>
+              <li class="list-group-item">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-check" viewBox="0 0 16 16">
+                  <path d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425a.267.267 0 0 1 .02-.022z" />
+                </svg>
+                <span><strong>50 lbs</strong> of Premium Food</span>
+              </li>
+              <li class="list-group-item">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-check" viewBox="0 0 16 16">
+                  <path d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425a.267.267 0 0 1 .02-.022z" />
+                </svg>
+                <span>Free <strong>Toy</strong></span>
+              </li>
+              <li class="list-group-item">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-check" viewBox="0 0 16 16">
+                  <path d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425a.267.267 0 0 1 .02-.022z" />
+                </svg>
+                <span><strong>Bi-weekly</strong> Vet Check</span>
+              </li>
+            </ul>
+            <a href="#!" class="btn bsb-btn-xl btn-primary rounded-pill">Choose Plan</a>
           </div>
         </div>
-        <div class="col-12 col-lg-4">
-          <div class="card border-0 border-bottom border-primary shadow-sm">
-            <div class="card-body p-4 p-xxl-5">
-              <h2 class="h4 mb-2">Business</h2>
-              <h4 class="display-3 fw-bold text-primary mb-0">$125</h4>
-              <p class="text-secondary mb-4">USD / Month</p>
-              <ul class="list-group list-group-flush mb-4">
-                <li class="list-group-item">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-check" viewBox="0 0 16 16">
-                    <path d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425a.267.267 0 0 1 .02-.022z" />
-                  </svg>
-                  <span><strong>50</strong> Bootstrap Install</span>
-                </li>
-                <li class="list-group-item">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-check" viewBox="0 0 16 16">
-                    <path d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425a.267.267 0 0 1 .02-.022z" />
-                  </svg>
-                  <span><strong>400,000</strong> Visits</span>
-                </li>
-                <li class="list-group-item">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-check" viewBox="0 0 16 16">
-                    <path d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425a.267.267 0 0 1 .02-.022z" />
-                  </svg>
-                  <span><strong>100 GB</strong> Disk Space</span>
-                </li>
-                <li class="list-group-item">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-check" viewBox="0 0 16 16">
-                    <path d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425a.267.267 0 0 1 .02-.022z" />
-                  </svg>
-                  <span>Free <strong>SSL and CDN</strong></span>
-                </li>
-                <li class="list-group-item">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-check" viewBox="0 0 16 16">
-                    <path d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425a.267.267 0 0 1 .02-.022z" />
-                  </svg>
-                  <span>Free <strong>Support</strong></span>
-                </li>
-                <li class="list-group-item">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-check" viewBox="0 0 16 16">
-                    <path d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425a.267.267 0 0 1 .02-.022z" />
-                  </svg>
-                  <span><strong>Weekly</strong> Reports</span>
-                </li>
-              </ul>
-              <a href="#!" class="btn bsb-btn-xl btn-primary rounded-pill">Choose Plan</a>
-            </div>
+      </div>
+      <div class="col-12 col-lg-4">
+        <div class="card border-0 border-bottom border-primary shadow-sm">
+          <div class="card-body p-4 p-xxl-5">
+            <h2 class="h4 mb-2">Premium</h2>
+            <h4 class="display-3 fw-bold text-primary mb-0">$75</h4>
+            <p class="text-secondary mb-4">USD / Month</p>
+            <ul class="list-group list-group-flush mb-4">
+              <li class="list-group-item">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-check" viewBox="0 0 16 16">
+                  <path d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425a.267.267 0 0 1 .02-.022z" />
+                </svg>
+                <span><strong>10</strong> Grooming Sessions</span>
+              </li>
+              <li class="list-group-item">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-check" viewBox="0 0 16 16">
+                  <path d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425a.267.267 0 0 1 .02-.022z" />
+                </svg>
+                <span><strong>200</strong> Treats</span>
+              </li>
+              <li class="list-group-item">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-check" viewBox="0 0 16 16">
+                  <path d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425a.267.267 0 0 1 .02-.022z" />
+                </svg>
+                <span><strong>50 lbs</strong> of Premium Food</span>
+              </li>
+              <li class="list-group-item">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-check" viewBox="0 0 16 16">
+                  <path d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425a.267.267 0 0 1 .02-.022z" />
+                </svg>
+                <span>Free <strong>Toy</strong></span>
+              </li>
+              <li class="list-group-item">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-check" viewBox="0 0 16 16">
+                  <path d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425a.267.267 0 0 1 .02-.022z" />
+                </svg>
+                <span><strong>Bi-weekly</strong> Vet Check</span>
+              </li>
+            </ul>
+            <a href="#!" class="btn bsb-btn-xl btn-primary rounded-pill">Choose Plan</a>
           </div>
         </div>
       </div>
     </div>
-  </section>
+  </div>
+  
+</section>
+
+
+
+
+
+
           
 
 <!-- Sales Section -->
@@ -402,57 +388,59 @@
         </div>
     </div>
     <div class="center-image">
-        <img src="{{ asset('assets/images/Home.png') }}" width="20%" alt="Sales Image" class="img-fluid">
+        <img src="{{ asset('assets/images/OIG1.jpeg') }}" width="20%" alt="Sales Image" class="img-fluid">
     </div>
-</section>
-<div class="container-fluid bg-dark text-light">
-  <footer>
-      <div class="row my-5 justify-content-center py-5">
-          <div class="col-lg-11">
-              <div class="row">
-                  <div class="col-xl-8 col-md-4 col-sm-4 col-12 my-auto mx-auto">
-                      <h3 class="text-muted mb-md-0 mb-5 bold-text">
-                          <img src="{{ asset('assets/images/cat1.jpg') }}" alt="" class="rounded-circle" style="width: 100px; height: 100px;">
-                      </h3>
-                  </div>
-                  <div class="col-xl-2 col-md-4 col-sm-4 col-12">
-                      <h6 class="mb-3 mb-lg-4 bold-text"><b>MENU</b></h6>
-                      <ul class="list-unstyled">
-                          <li>Home</li>
-                          <li>About</li>
-                          <li>Blog</li>
-                          <li>Portfolio</li>
-                      </ul>
-                  </div>
-                  <div class="col-xl-2 col-md-4 col-sm-4 col-12">
-                      <h6 class="mb-3 mb-lg-4 text-muted bold-text mt-sm-0 mt-5"><b>ADDRESS</b></h6>
-                      <p class="mb-1">605, RATAN ICON BUILDING</p>
-                      <p>SEAWOODS SECTOR</p>
-                  </div>
-              </div>
-              <div class="row">
-                  <div class="col-xl-8 col-md-4 col-sm-4 col-auto my-md-0 mt-5 order-sm-1 order-3 align-self-end">
-                      <p class="social text-muted mb-0 pb-0 bold-text">
-                          <span class="mx-2"><i class="fa fa-facebook" aria-hidden="true"></i></span>
-                          <span class="mx-2"><i class="fa fa-linkedin-square" aria-hidden="true"></i></span>
-                          <span class="mx-2"><i class="fa fa-twitter" aria-hidden="true"></i></span>
-                          <span class="mx-2"><i class="fa fa-instagram" aria-hidden="true"></i></span>
-                      </p>
-                      <small class="rights"><span>&#174;</span> Pepper All Rights Reserved.</small>
-                  </div>
-                  <div class="col-xl-2 col-md-4 col-sm-4 col-auto order-1 align-self-end">
-                      <h6 class="mt-55 mt-2 text-muted bold-text"><b>ANIRUDH SINGLA</b></h6>
-                      <small><span><i class="fa fa-envelope" aria-hidden="true"></i></span> anirudh@gmail.com</small>
-                  </div>
-                  <div class="col-xl-2 col-md-4 col-sm-4 col-auto order-2 align-self-end mt-3">
-                      <h6 class="text-muted bold-text"><b>RISHABH SHEKHAR</b></h6>
-                      <small><span><i class="fa fa-envelope" aria-hidden="true"></i></span> rishab@gmail.com</small>
-                  </div>
-              </div>
-          </div>
-      </div>
-  </footer>
-</div>
+  </section>
+  <div class="container-fluid  text-light rbg">
+    <footer>
+        <div class="row my-5 justify-content-center py-5">
+            <div class="col-lg-11">
+                <div class="row">
+                    <div class="col-xl-8 col-md-4 col-sm-4 col-12 my-auto mx-auto">
+                        <h3 class="text-muted mb-md-0 mb-5 bold-text">
+                            <img src="{{ asset('assets/images/cat1.jpg') }}" alt="" class="rounded-circle" style="width: 100px; height: 100px;">
+                        </h3>
+                    </div>
+                    <div class="col-xl-2 col-md-4 col-sm-4 col-12">
+                        <h6 class="mb-3 mb-lg-4 bold-text text-dark"><b>MENU</b></h6>
+                        <ul class="list-unstyled text-dark">
+                            <li>Home</li>
+                            <li>About</li>
+                            <li>Blog</li>
+                            <li>Portfolio</li>
+                        </ul>
+                    </div>
+                    <div class="col-xl-2 col-md-4 col-sm-4 col-12">
+                        <h6 class="mb-3 mb-lg-4 text-muted bold-text mt-sm-0 mt-5"><b>ADDRESS</b></h6>
+                        <p class="mb-1 text-dark">605, RATAN ICON BUILDING</p>
+                        <p class="text-dark">SEAWOODS SECTOR</p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xl-8 col-md-4 col-sm-4 col-auto my-md-0 mt-5 order-sm-1 order-3 align-self-end">
+                        <p class="social text-muted mb-0 pb-0 bold-text">
+                            <span class="mx-2"><i class="fa fa-facebook" aria-hidden="true"></i></span>
+                            <span class="mx-2"><i class="fa fa-linkedin-square" aria-hidden="true"></i></span>
+                            <span class="mx-2"><i class="fa fa-twitter" aria-hidden="true"></i></span>
+                            <span class="mx-2"><i class="fa fa-instagram" aria-hidden="true"></i></span>
+                        </p>
+                        <small class="rights text-dark"><span>&#174;</span> Pepper All Rights Reserved.</small>
+                    </div>
+                    <div class="col-xl-2 col-md-4 col-sm-4 col-auto order-1 align-self-end">
+                        <h6 class="mt-55 mt-2 text-muted bold-text text-dark"><b>ANIRUDH SINGLA</b></h6>
+                        <small><span><i class="fa fa-envelope" aria-hidden="true"></i></span> <span class="text-dark">anirudh@gmail.com</span></small>
+                    </div>
+                    <div class="col-xl-2 col-md-4 col-sm-4 col-auto order-2 align-self-end mt-3">
+                        <h6 class="text-muted bold-text text-dark"><b>RISHABH SHEKHAR</b></h6>
+                        <small><span><i class="fa fa-envelope" aria-hidden="true"></i></span> <span class="text-dark">rishab@gmail.com</span></small>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+  </div>
+  
+
 
 <!-- Bootstrap Bundle with Popper -->
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>

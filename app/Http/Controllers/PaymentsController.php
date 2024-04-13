@@ -79,10 +79,10 @@ class PaymentsController extends Controller
         ]);
     
         // Vérifier si le paiement a été créé avec succès avant de supprimer la commande
-        if ($payment) {
-            // Supprimer la commande non payée
-            commends::where('id', $commendId)->delete();
-        }
+        // if ($payment) {
+        //     // Supprimer la commande non payée
+        //     commends::where('id', $commendId)->delete();
+        // }
     
         return redirect()->to($session->url);
     }
