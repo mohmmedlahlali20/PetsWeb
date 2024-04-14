@@ -34,9 +34,10 @@ class CategoriesController extends Controller
     {
         //dd($category);
         $data = $category->validated();
+        //dd($data);
         Categories::create($data);
         //dd($data);
-        return  redirect()->route('category.index')->with('success' , 'Product is add successfuly');
+        return  redirect()->back()->with('success' , 'Product is add successfuly');
 
     }
 

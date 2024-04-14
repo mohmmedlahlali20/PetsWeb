@@ -35,20 +35,7 @@
       backdrop-filter: saturate(200%) blur(25px);
     }
   </style>
-<div class="container">
-  @if(session('success'))
-  <div class="alert alert-success">
-      {{ session('success') }}
-  </div>
-  @endif
-</div>
-<div class="container mt-5">
-  @if(session('error'))
-  <div class="alert alert-danger">
-      {{ session('error') }}
-  </div>
-  @endif
-</div>
+
 
   <div class="container px-4 py-5 px-md-5 text-center text-lg-start my-5">
     <div class="row gx-lg-5 align-items-center mb-5">
@@ -90,7 +77,7 @@
               </div>
               @error('password')
               <span class="text-danger">{{ $message }}</span>
-           @enderror
+              @enderror
               <div class="form-check d-flex mt-6">
                 <label class="form-check-label" for="form2Example33">
                     remember me
@@ -107,20 +94,19 @@
               <div class="text-center">
                 <p>or sign up with:</p>
                 
-
-                <button type="button" class="btn btn-link btn-floating mx-1">
+                <a href="/auth/google/redirect" class="btn btn-link btn-floating mx-1">
                   <i class="fab fa-google"></i>
-                </button>
-
-
-                <button type="button" class="btn btn-link btn-floating mx-1">
+              </a>
+          
+              <!-- GitHub login -->
+              <a href="/auth/github/redirect" class="btn btn-link btn-floating mx-1">
                   <i class="fab fa-github"></i>
-                </button>
+              </a>
               </div>
               <div class="text-center mt-3">
                 <a href="{{ route('forget.password') }}" class="link-info me-4">Forgot Password?</a>
                 <span class="text-muted">|</span>
-                <a href="" class="link-info ms-4">Create New Account</a>
+                <a href="{{ route('register') }}" class="link-info ms-4">Create New Account</a>
               </div>
             </form>
           </div>

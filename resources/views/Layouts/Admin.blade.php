@@ -43,8 +43,8 @@
                             Dashboard
                         </a>
                         <div class="sb-sidenav-menu-heading">Interface</div>
-                        <a class="nav-link collapsed" href="" data-bs-toggle="collapse"
-                            data-bs-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
+                        <a class="nav-link collapsed" href="" data-bs-toggle="collapse" data-bs-target="#collapseLayouts"
+                            aria-expanded="false" aria-controls="collapseLayouts">
                             <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
                             Gestion Pets
                             <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
@@ -54,83 +54,69 @@
                             <nav class="sb-sidenav-menu-nested nav">
                                 <a class="nav-link" href="{{ route('Home.index') }}">Home</a>
                                 <a class="nav-link" href="{{ route('payment') }}">Payments</a>
-                                <li class="nav-item dropdown">
-                                    <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">gestion Pets</a>
-                                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <div class="dropdown">
+                                    <a class="nav-link dropdown-toggle" href="#" role="button" id="navbarDropdown1"
+                                        data-bs-toggle="dropdown" aria-expanded="false">Gestion Pets</a>
+                                    <ul class="dropdown-menu border rounded mt-2" aria-labelledby="navbarDropdown1">
                                         <li><a class="dropdown-item" href="#!">All Products</a></li>
-                                        <li>
-                                            <hr class="dropdown-divider" />
-                                        </li>
+                                        <li><hr class="dropdown-divider mb-0"></li>
                                         <a class="dropdown-item" href="{{ route('product.create') }}">Add New Products</a>
                                         <a class="dropdown-item" href="{{ route('product.index') }}">Products</a>
                                     </ul>
-                                </li>
-                                <li class="nav-item dropdown">
-                                    <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Gestion Category</a>
+                                </div>
+                                <div class="dropdown">
+                                    <a class="nav-link dropdown-toggle" href="#" role="button" id="navbarDropdown"
+                                        data-bs-toggle="dropdown" aria-expanded="false">Gestion Category</a>
                                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                                         <li><a class="dropdown-item" href="#!">All Products</a></li>
-                                        <li>
-                                            <hr class="dropdown-divider" />
-                                        </li>
+                                        <li><hr class="dropdown-divider"></li>
                                         <a class="dropdown-item" href="{{ route('category.create') }}">Add New Category</a>
                                         <a class="dropdown-item" href="{{ route('category.index') }}">Category</a>
                                     </ul>
-                                </li>
-        
-                                <li class="nav-item dropdown">
-                                    <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">gestion Food</a>
+                                </div>
+                                <div class="dropdown">
+                                    <a class="nav-link dropdown-toggle" href="#" role="button" id="navbarDropdown"
+                                        data-bs-toggle="dropdown" aria-expanded="false">Gestion Food</a>
                                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                                         <li><a class="dropdown-item" href="#!">All Products</a></li>
-                                        <li>
-                                            <hr class="dropdown-divider" />
-                                        </li>
+                                        <li><hr class="dropdown-divider"></li>
                                         <a class="dropdown-item" href="{{ route('create') }}">Foods for Pets</a>
                                         <a class="dropdown-item" href="{{ route('food') }}">Foods </a>
                                     </ul>
-                                </li>
-
-                                <li class="nav-item dropdown">
-                                    <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">gestion Users</a>
+                                </div>
+                                <div class="dropdown">
+                                    <a class="nav-link dropdown-toggle" href="#" role="button" id="navbarDropdown"
+                                        data-bs-toggle="dropdown" aria-expanded="false">Gestion Users</a>
                                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                                         <li><a class="dropdown-item" href="#!">All Products</a></li>
-                                        <li>
-                                            <hr class="dropdown-divider" />
-                                        </li>
-                                        <a class="dropdown-item" href="{{ route('user.index') }}">show Users</a>
-                                        {{-- <a class="dropdown-item" href="{{ route('food') }}">Foods </a> --}}
+                                        <li><hr class="dropdown-divider"></li>
+                                        <a class="dropdown-item" href="{{ route('user.index') }}">Show Users</a>
                                     </ul>
-                                </li>
-
-                                <li class="nav-item dropdown">
-                                    <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">gestion Accessoir</a>
+                                </div>
+                                <div class="dropdown">
+                                    <a class="nav-link dropdown-toggle" href="#" role="button" id="navbarDropdown"
+                                        data-bs-toggle="dropdown" aria-expanded="false">Gestion Accessoir</a>
                                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                        <li><a class="dropdown-item" href="{{ route('accessory') }}">All accessory</a></li>
-                                        <li>
-                                            <hr class="dropdown-divider" />
-                                        </li>
+                                        <li><a class="dropdown-item" href="{{ route('accessory') }}">All Accessory</a></li>
+                                        <li><hr class="dropdown-divider"></li>
                                         <a class="dropdown-item" href="{{ route('accessoir.name') }}">Add Accessoir</a>
-                                        {{-- <a class="dropdown-item" href="{{ route('food') }}">Foods </a> --}}
                                     </ul>
-                                </li>
+                                </div>
                             </nav>
                         </div>
-
-         
-                        
-             
+                    </div>
                 </div>
                 <div class="sb-sidenav-footer p-3 border-top mt-5">
                     <div class="small">{{ auth()->user()->role }}:</div>
                     <span class="font-weight-bold">{{ auth()->user()->name }}</span>
-                    <span>contact support:</span>
+                    <span>Contact Support:</span>
                     <a href="mailto:{{ auth()->user()->email }}" class="text-decoration-none text-info">
                         {{ auth()->user()->email }}
                     </a>
                 </div>
-                
-                
             </nav>
         </div>
+        
         <div id="layoutSidenav_content">
             <main>
                 <div class="container-fluid px-4">
@@ -224,29 +210,7 @@
             </main>
             
             <div class="container">
-                @if ($errors->any())
-                <div class="alert alert-danger" role="alert">
-                    <strong>Errors:</strong>
-                    <ul>
-                        @foreach ($errors->all() as $error)
-                        <li class="">
-                            <div class="alert alert-danger alert-dismissible d-flex align-items-center fade show">
-                                <i class="bi-exclamation-octagon-fill"></i>
-                                <strong class="mx-2">Error!</strong> {{ $error }}
-                                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-                            </div>
-                        </li>
-                        @endforeach
-                    </ul>
-                </div>
-                @endif
-                @if (session('success'))
-                <div class="alert alert-success alert-dismissible d-flex align-items-center fade show">
-                    <i class="bi-check-circle-fill"></i>
-                    <strong class="mx-2">Success!</strong> {{ session('success') }}
-                    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-                </div>
-                @endif
+       
 
                 @yield('content')
                 

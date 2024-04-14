@@ -5,12 +5,14 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\FoodController;
 use App\Http\Controllers\UserController;
+use Laravel\Socialite\Facades\Socialite;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\CommendsController;
 use App\Http\Controllers\CommentsController;
 use App\Http\Controllers\PaymentsController;
 use App\Http\Controllers\ProductsController;
 use App\Http\Controllers\AccessoirController;
+use App\Http\Controllers\SocialiteController;
 use App\Http\Controllers\CategoriesController;
 
 /*
@@ -69,3 +71,17 @@ Route::prefix('auth')->group(function () {
     Route::get('/reset-password/{token}' , [AuthController::class, 'resetPassword'])->name('reset.password');
     Route::post('/reset-password' , [AuthController::class, 'ResetPasswordPost'])->name('reset.password.post');
 });
+
+
+
+
+
+
+
+
+
+
+
+Route::get('/auth/{Provider}/redirect',[SocialiteController::class , 'redirect']);
+
+Route::get('/auth/{Provider}/callback', [SocialiteController::class , 'callback']);

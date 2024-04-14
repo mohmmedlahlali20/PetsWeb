@@ -13,17 +13,16 @@
       width: 220px;
       top: -60px;
       left: -130px;
-      background: radial-gradient(#36f125, #00f521);
+    
       overflow: hidden;
     }
 
     #radius-shape-2 {
-      border-radius: 38% 62% 63% 37% / 70% 33% 67% 30%;
       bottom: -60px;
       right: -110px;
       width: 300px;
       height: 300px;
-      background: radial-gradient(#5df076, #44d809);
+    
       overflow: hidden;
     }
 
@@ -49,10 +48,10 @@
 
       <div class="col-lg-6 mb-5 mb-lg-0 position-relative">
         <div id="radius-shape-1" class="position-absolute rounded-circle shadow-5-strong">
-          <img style="margin-left: -40px" src="{{ asset('assets/images/cat1.jpg') }}" alt="">
+          <img style="margin-left: -40px" src="{{ asset('assets/images/OIG2.jpeg') }}" alt="">
         </div>
-        <div id="radius-shape-2" class="position-absolute shadow-5-strong">
-          <img style="margin-left: 70px; padding-top:-80px" src="{{ asset('assets/images/arnab.jpg') }}" alt="">
+        <div id="radius-shape-2" class="position-absolute rounded-circle shadow-5-strong">
+          <img style="margin-left: 70px; padding-top:-80px" src="{{ asset('assets/images/card1.jpg') }}" alt="">
         </div>
 
         <div class="card bg-glass">
@@ -90,31 +89,30 @@
                   <span class="text-danger">{{ $message }}</span>
               @enderror
               <!-- Checkbox -->
-              <div class="form-check d-flex  mt-6">
-                <label class="form-check-label" for="form2Example33">
-                    remember me
-                  </label>
-                <input class="form-check-input me-2" type="checkbox" value="" id="form2Example33" checked />
-                <a class="ml-5" href="/login">mkynch cont</a>
-              </div>
+              <div class="form-check d-flex mt-6">
+                <input class="form-check-input me-2" type="checkbox" value="" id="form2Example33" checked>
+                <label class="form-check-label" for="form2Example33">Remember me</label>
+            </div>
+            <a class="ms-auto align-self-center" href="{{ route('login') }}">Login to my account</a>
+
 
               <!-- Submit button -->
               <button type="submit" class="btn btn-primary btn-block mb-4 mt-2">
                 Sign up
               </button>
-
-              <!-- Register buttons -->
               <div class="text-center">
                 <p>or sign up with:</p>
-                
-
-                <button type="button" class="btn btn-link btn-floating mx-1">
-                  <i class="fab fa-google"></i>
-                </button>
-
-                <button type="button" class="btn btn-link btn-floating mx-1">
-                  <i class="fab fa-github"></i>
-                </button>
+            
+                <!-- Google login -->
+                <a href="/auth/google/redirect" class="btn btn-link btn-floating mx-1">
+                    <i class="fab fa-google"></i>
+                </a>
+            
+                <!-- GitHub login -->
+                <a href="/auth/github/redirect" class="btn btn-link btn-floating mx-1">
+                    <i class="fab fa-github"></i>
+                </a>
+            </div>
               </div>
             </form>
           </div>
