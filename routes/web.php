@@ -53,6 +53,7 @@ Route::middleware(['auth' , 'admin'])->group(function () {
   Route::get('/food' ,[FoodController::class, 'create'])->name('create');
   Route::get('/Food-data' ,  [FoodController::class , 'GetFood'])->name('food');
   Route::resource('/user', UserController::class);
+  Route::get('/all-commends' , [AdminController::class,  'GetCommands'])->name('get.command');
 });
 
 

@@ -7,56 +7,45 @@
         <thead>
             <tr>
                 <th scope="col">ID</th>
-                <th scope="col">Pets name</th>
+                <th scope="col">Product</th>
                 <th scope="col">Price</th>
                 <th scope="col">Category</th>
                 <th scope="col">Date de creation</th>
-                <th scope="col">User </th>
+                <th scope="col">User</th>
+                <th scope="col">Status</th>
                 <th scope="col">Actions</th>
             </tr>
         </thead>
         <tbody>
-            {{-- @dd( $products) --}}
-           
             @forelse ($commands as $command)
             <tr>
                 <td>{{ $command->id }}</td>
-                <td>{{ $command->product->name }}</td>
-                <td>{{ $command->product->price }}$</td>
-
-                                    <td class="m-5">
-                                      {{ $command->product->category->name}}
-                                    </td>
-                                    
+                <td>{{ optional($command->product)->name }}</td>
+                <td>{{ $command->total_price }}</td>
+                <td>{{ optional($command->food)->name }}</td>
                 <td>{{ $command->created_at }}</td>
                 <td>{{ $command->user->name }}</td>
+                <td>{{ $command->status }}</td>
                 <td>
-                    <form action="{{ route('command.update', $command->id) }}" method="post">
+                    <form action="" method="post">
                         @csrf
                         @method('PUT')
-                        
-                        @if ($command->commend === 'valid')
-                            <input type="hidden" name="status" value="invalid">
-                            <button type="submit" class="btn btn-danger">{{ $command->commend }}</button>
-                        @else
-                            <input type="hidden" name="status" value="valide">
-                            <button type="submit" class="btn btn-success">{{ $command->commend }}</button>
-                        @endif
+                        <button type="submit" class="btn btn-{{ $command->status === 'valid' ? 'danger' : 'success' }}">
+                            {{ $command->status === 'valid' ? 'Invalidate' : 'Validate' }}
+                        </button>
                     </form>
-                    
-                    
-                    <br>
                 </td>
             </tr>
             @empty
-                <tr>
-                    <td colspan="10" align="center"> no commands exist</td>
-                </tr>
+            <tr>
+                <td colspan="8" align="center">No commands exist</td>
+            </tr>
             @endforelse
         </tbody>
     </table>
     {{ $commands->links() }}
 </div>
+
  @endsection
 
  {{--route('command.update', $command->id) --}}

@@ -54,6 +54,7 @@
                             <nav class="sb-sidenav-menu-nested nav">
                                 <a class="nav-link" href="{{ route('Home.index') }}">Home</a>
                                 <a class="nav-link" href="{{ route('payment') }}">Payments</a>
+                                <a class="nav-link" href="{{ route('get.command') }}">commends</a>
                                 <div class="dropdown">
                                     <a class="nav-link dropdown-toggle" href="#" role="button" id="navbarDropdown1"
                                         data-bs-toggle="dropdown" aria-expanded="false">Gestion Pets</a>

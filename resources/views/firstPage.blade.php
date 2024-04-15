@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Pest Control Home Page</title>
+  <title>{{ config('app.name')  }} | first page</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
   <link rel="stylesheet" href="https://unpkg.com/bs-brain@2.0.3/components/pricings/pricing-2/assets/css/pricing-2.css">
   <script src="https://kit.fontawesome.com/c0bae2ffa6.js" crossorigin="anonymous"></script>
@@ -12,7 +12,7 @@
   <link rel="stylesheet" href="{{ asset('css/firststyle.css') }}">
   <style>
   .rbg {
-    background-color: rgba(208, 245, 217, 0.9); /* Adjust the alpha value (0.9 in this case) to change the opacity */
+    background-color: rgba(179, 239, 247, 0.9);
   }
   
   .card {
@@ -136,7 +136,7 @@
             <header class="text-center pb-5">
                 <h1 class="h2">PetsWeb</h1>
                 <p>Find motivation and joy in the company of your beloved pets.</p>
-            </header>Age
+            </header>
         </div>
     </div>
 

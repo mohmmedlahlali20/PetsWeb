@@ -161,12 +161,12 @@ body {
                         <h3>Browse Categories</h3>
                     </div>
                     <div class="widgets_inner">
-                        <form action="" method="GET">
+                        <form action=""  id="filterForm" method="GET">
                             @csrf
                             <ul class="list-group">
                                 @forelse ($categories as $cat)
                                 <li class="list-group-item">
-                                    <input type="checkbox" value="{{ $cat->id }}" id="category_{{ $cat->id }}" name="category[]" class="form-check-input">
+                                    <input type="radio" value="{{ $cat->id }}" id="category_{{ $cat->id }}" name="category[]" class="form-check-input">
                                     <label for="category_{{ $cat->id }}" class="form-check-label">{{ $cat->name }}</label>
                                 </li>
                                 @empty
@@ -201,6 +201,7 @@ body {
                 </aside>
             </div>
         </div>
+   
     </div>
     </section>
     <div class="container-fluid bg-dark text-light">
@@ -251,6 +252,11 @@ body {
             </div>
         </footer>
     </div>
+    <script>
+
+    </script>
+    
+    
     
     
     <!-- Bootstrap core JS-->
