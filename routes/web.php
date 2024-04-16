@@ -27,6 +27,13 @@ use App\Http\Controllers\CategoriesController;
 */
 // Route::get('/Commandes', [CommendsController::class, 'index']);
 
+Route::get('/', function(){
+  return view('firstPage');
+});
+
+
+
+
 Route::resource('/Home', ProductsController::class);
 Route::resource('/Commandes', CommendsController::class);
 Route::resource('/commentes', CommentsController::class);
@@ -38,9 +45,13 @@ Route::get('/checkout' , [PaymentsController::class , 'index'])->name('GetPaymen
 Route::post('/checkout', [PaymentsController::class, 'checkout'])->name('striptPayment');
 Route::get('/Commande', [PaymentsController::class, 'success'])->name('success');
 
+
 Route::post('/Commandes/foods', [CommendsController::class, 'storeFood'])->name('order.food');
 //Route::post('/order/pets', [CommendsController::class, 'storePets'])->name('order.pets');
 Route::post('/order/accessoir', [CommendsController::class, 'storeAccessoir'])->name('order.accessoir');
+
+Route::post('/Home' , [ProductsController::class, 'likeProduct'])->name('like.product');                                       
+
 
  Route::resource('/Food', FoodController::class);
 Route::middleware(['auth' , 'admin'])->group(function () {
@@ -57,9 +68,6 @@ Route::middleware(['auth' , 'admin'])->group(function () {
 });
 
 
-Route::get('/', function(){
-  return view('firstPage');
-});
 
 Route::prefix('auth')->group(function () {
     Route::get('/login', [AuthController::class, 'login'])->name('login');

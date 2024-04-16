@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Food;
+use App\Models\commends;
 use App\Models\Categories;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -21,9 +22,11 @@ class FoodController extends Controller
     public function index()
     {
         $Foods = Food::all();
+        $userId = Auth::id();
+        $userCommandCount = commends::where('user_id', $userId)->count();
         //dd($Foods);
         $categories = Categories::with('Products')->has('Products')->get();
-        return view('welcome' , compact('Foods','categories'));
+        return view('welcome' , compact('Foods','categories' , 'userCommandCount'));
     }
 
     /**

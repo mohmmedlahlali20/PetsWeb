@@ -11,6 +11,9 @@ use Illuminate\Support\Facades\Auth;
 
 class CommendsController extends Controller
 {
+
+
+
     /**
      * Display a listing of the resource.
      */
@@ -55,10 +58,6 @@ class CommendsController extends Controller
         return redirect()->back()->with('success', 'Votre commande a été passée avec succès.');
     }
 
-    public function storeFoods(Request $request)
-{
-   
-}
 public function storeAccessoir(Request $request)
 {
     if (!Auth::check()) {

@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\commends;
 use App\Models\Accessoir;
 use App\Models\Categories;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class AccessoirController extends Controller
 {
@@ -20,8 +22,10 @@ class AccessoirController extends Controller
     {
         $Accessoir = Accessoir::all();
         //dd($Accessoir);
+        $userId = Auth::id();
+        $userCommandCount = commends::where('user_id', $userId)->count();
         $categories = Categories::with('Products')->has('Products')->get();
-        return view('welcome' , compact('Accessoir','categories'));
+        return view('welcome' , compact('Accessoir','categories' , 'userCommandCount'));
     }
 
     /**

@@ -94,32 +94,31 @@ body {
                 <form action=""  class="d-flex">
                   <a id="" class="btn btn-outline-dark"  href="{{ route('Commandes.index') }}">
                       <i class="bi-cart-fill me-1"></i>
-                     My Cards
+                     My Cards ({{ $userCommandCount }})
                   </a>
               </form>
             </div>
         </div>
     </nav>
 <br>
-    <form method="get">
-       <div  id="big_div"  class="container">
-        <div  class="search">
+<form method="get">
+    <div id="big_div" class="container">
+        <div class="search">
             <div class="row justify-content-center">
                 <div class="col-md-6">
-                    <div class="d-flex justify-content-center">
-                        &nbsp;&nbsp;&nbsp;
-                        <div class="search-2"> 
-                            <i class='bx bxs-map'></i> 
-                            <input type="search" class="form-control" name='query' placeholder="Search 2"> 
-                            <button class="btn btn-primary">Search</button> 
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="bx bxs-map"></i></span>
+                        <input type="search" class="form-control" name="query" placeholder="Search">
+                        <div class="input-group-append">
+                            <button class="btn btn-primary" type="submit">Search</button>
                         </div>
                     </div>
-                    <br>
                 </div>
             </div>
         </div>
     </div>
-    </form>
+</form>
+
 
     <section class="cat_product_area section_gap ">
       <div class="row flex-row-reverse">
@@ -241,7 +240,7 @@ body {
                         </div>
                         <div class="col-xl-2 col-md-4 col-sm-4 col-auto order-1 align-self-end">
                             <h6 class="mt-55 mt-2 text-muted bold-text"><b>ANIRUDH SINGLA</b></h6>
-                            <small><span><i class="fa fa-envelope" aria-hidden="true"></i></span> anirudh@gmail.com</small>
+                            <small><span><i class="fa fa-envelope" aria-hidden="true"></i></span> mohamemd@PEts.web</small>
                         </div>
                         <div class="col-xl-2 col-md-4 col-sm-4 col-auto order-2 align-self-end mt-3">
                             <h6 class="text-muted bold-text"><b>RISHABH SHEKHAR</b></h6>

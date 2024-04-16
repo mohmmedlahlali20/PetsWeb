@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\commends;
 use App\Models\comments;
 use App\Models\Products;
 use App\Models\Categories;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ProductsController extends Controller
 {
@@ -45,15 +47,19 @@ class ProductsController extends Controller
         }
     
 
-        $products =  $productsQuery->orderBy('created_at', 'DESC')->get();
+        $products =  $productsQuery->orderBy('likes', 'DESC')->get();;
 //dd($products);
         $categories = Categories::with('Products')->has('Products')->get();
-    
- 
-        return view('welcome', compact('products', 'categories'));
+
+        $userId = Auth::id();
+        $userCommandCount = commends::where('user_id', $userId)->count();
+        //$likesCount = commends::where('user_id', $userId)->count();
+              
+        return view('welcome', compact('products', 'categories' , 'userCommandCount' ));
     }
-    
-    
+
+
+
     
 
     /**
@@ -110,4 +116,17 @@ class ProductsController extends Controller
 
 
   
+public function likeProduct(Request $request) {
+    $request->validate([
+        'product_id' => 'required|exists:products,id',
+    ]);
+
+    $product = Products::findOrFail($request->product_id);
+//dd($product);
+    $product->increment('likes');
+
+    return  redirect()->back();
+}
+    
+    
 }

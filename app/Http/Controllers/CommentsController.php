@@ -87,16 +87,35 @@ class CommentsController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, comments $comments)
+    public function update(Request $request, $id)
     {
-        //
+        $request->validate([
+            'msg' => 'required',
+            'rating' => 'required|integer|min:1|max:10',
+        ]);
+    
+        $comment = comments::findOrFail($id);
+    
+        if ($comment->user_id === auth()->id()) {
+            $comment->comments = $request->input('msg');
+            $comment->rate_number = $request->input('rating');
+    
+            $comment->save();
+    
+            return redirect()->back()->with('success', 'Commentaire mis à jour avec succès.');
+        } else {
+            return redirect()->back()->with('error', 'Vous n\'êtes pas autorisé à modifier ce commentaire.');
+        }
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(comments $comments)
+    public function destroy($id)
     {
-        //
+        $commentes = comments::find($id);
+        //dd($commentes);
+        $commentes->delete();
+        return redirect()->back()->with('success', 'Commentaire supprimé avec succès.');
     }
 }

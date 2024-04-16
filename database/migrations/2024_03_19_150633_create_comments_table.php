@@ -19,6 +19,7 @@ return new class extends Migration
             ->constrained('users')
             ->onDelete('cascade');
             $table->text('comments');
+            
             $table->float('rate_number');
             $table->timestamps();
             $table->softDeletes();
