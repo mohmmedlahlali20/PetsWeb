@@ -90,8 +90,11 @@ class FoodController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Food $food)
+    public function destroy($food)
     {
-        //
+        $foood = Food::find($food);
+        //dd($foood);
+        $foood->delete();
+        return redirect()->back()->with('success', 'Food deleted successfully');
     }
 }

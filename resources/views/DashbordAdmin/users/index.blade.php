@@ -1,5 +1,5 @@
 @extends('Layouts.Admin')
-@section('title' , 'All Users')
+@section('title', 'All Users')
 
 @section('content')
 <div class="container">
@@ -10,6 +10,7 @@
                 <th scope="col">Name</th>
                 <th scope="col">Email</th>
                 <th scope="col">Role</th>
+                <th scope="col">Provider</th>
                 <th scope="col">Orders Count</th>
                 <th scope="col">Created At</th>
                 <!-- Add more headers as needed -->
@@ -21,19 +22,20 @@
                 <td>{{ $user->id }}</td>
                 <td>{{ $user->name }}</td>
                 <td>{{ $user->email }}</td>
-                <td>{{ $user->role }}</td>
-                <td>{{ $user->orders_count }}</td>
-
-                <td>{{ $user->created_at }}</td>
                 
+                <td>{{ $user->role }}</td>
+                <td>{{ $user->provider }}</td>
+                <td>{{ $user->commands()->count() }}</td> 
+                <td>{{ $user->created_at }}</td>
             </tr>
             @empty
-                <tr>
-                    <td colspan="5" align="center">No users exist</td>
-                </tr>
+            <tr>
+                <td colspan="8" align="center">No users exist</td>
+            </tr>
             @endforelse
         </tbody>
     </table>
 </div>
-
 @endsection
+
+

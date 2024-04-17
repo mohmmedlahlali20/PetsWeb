@@ -1,5 +1,5 @@
 @extends('Layouts.Admin')
-@section('title' , 'All pyment')
+@section('title' , 'All command')
 
 @section('content')
 <div class="container">
@@ -7,34 +7,45 @@
         <thead>
             <tr>
                 <th scope="col">ID</th>
-                <th scope="col">Total Price</th>
-                <th scope="col">Username</th>
-                <th scope="col">products</th>
+                <th scope="col">Product</th>
+                <th scope="col">Price</th>
+                <th scope="col">Category</th>
                 <th scope="col">Date de creation</th>
                 <th scope="col">User</th>
+                <th scope="col">Status</th>
+                <th scope="col">Payment Method</th>
+                <th scope="col">Actions</th>
             </tr>
         </thead>
         <tbody>
-            @forelse ($payment as $paid)
+            @forelse ($commands as $command)
             <tr>
-                <td>{{ $paid->id }}</td>
-                <td>{{ $paid->amount }}$</td>
-                <td>{{ optional($paid->command)->user ? $paid->command->user->name : 'No name' }}</td>
-                <td>{{ optional($paid->command)->product ? $paid->command->product->name : 'No name' }}</td>
-                
-                
-                
-                                    
-                <td>{{ $paid->created_at }}</td>
-                <td>{{ $paid->payment_status }}</td>
+                <td>{{ $command->id }}</td>
+                <td>{{ optional($command->product)->name }}</td>
+                <td>{{ $command->total_price }}</td>
+                <td>{{ optional($command->product)->category }}</td>
+                <td>{{ $command->created_at }}</td>
+                <td>{{ $command->user->name }}</td>
+                <td>{{ $command->status }}</td>
+                <td>{{ optional($command->payment)->payment_method }}</td>
+                <td>
+                    <form action="" method="post">
+                        @csrf
+                        @method('PUT')
+                        <button type="submit" class="btn btn-{{ $command->status === 'valid' ? 'danger' : 'success' }}">
+                            {{ $command->status === 'valid' ? 'Invalidate' : 'Validate' }}
+                        </button>
+                    </form>
+                </td>
             </tr>
             @empty
-                <tr>
-                    <td colspan="6" align="center"> no commands exist</td>
-                </tr>
+            <tr>
+                <td colspan="9" align="center">No commands exist</td>
+            </tr>
             @endforelse
         </tbody>
     </table>
-   
+    {{ $commands->links() }}
 </div>
+
 @endsection

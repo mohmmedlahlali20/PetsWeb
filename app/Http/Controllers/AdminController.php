@@ -27,9 +27,10 @@ class AdminController extends Controller
     
 
     public function GetCommands(){
-        $commands = commends::paginate(4);
+        $commands = commends::withTrashed()->paginate(5);
         return view('DashbordAdmin.commandAdmin.index', compact('commands'));
     }
+    
 
     /**
      * Show the form for creating a new resource.
@@ -115,6 +116,23 @@ class AdminController extends Controller
         return view('Layouts.Admin' , compact('userCount',
         'productCount',
         'categoryCount'));
+    }
+
+    public function getOrder(){
+        $orders = commends::paginate(4);
+        return view('DashbordAdmin.commandAdmin.index', compact('orders'));
+    }
+    
+
+    public function AdminCancelCommand($id){
+        $cancel = commends::find($id);
+        //dd($cancel);
+        if($cancel){
+            $cancel->delete(); 
+            return redirect()->back()->with('success', 'Command cancelled successfully');
+        } else {
+            return redirect()->back()->with('error', 'this command already cancled , or not exist in database ');
+        }
     }
     
 }

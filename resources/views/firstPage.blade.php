@@ -68,64 +68,65 @@
     </div>
   </nav>
 
-<section class="testimonial">
-  <div class="container">
-      <div class="row">
-          <div class="col-lg-6 d-none d-lg-block">
-              <ol class="carousel-indicators tabs">
-                  <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active">
-                      <figure>
-                          <img src="{{ asset('assets/images/arnab1.jpg') }}" class="img-fluid rounded-circle" alt="A happy pet">
-                      </figure>
-                  </li>
-                  <li data-target="#carouselExampleIndicators" data-slide-to="1">
-                      <figure>
-                          <img src="{{ asset('assets/images/arnab1.jpg') }}" class="img-fluid rounded-circle" alt="Another happy pet">
-                      </figure>
-                  </li>
-                  <li data-target="#carouselExampleIndicators" data-slide-to="2">
-                      <figure>
-                          <img src="{{ asset('assets/images/arnab1.jpg') }}" class="img-fluid rounded-circle" alt="Yet another happy pet">
-                      </figure>
-                  </li>
-              </ol>
-          </div>
-          <div class="col-lg-6 d-flex justify-content-center align-items-center">
-              <div id="carouselExampleIndicators" data-interval="false" class="carousel slide" data-ride="carousel">
-                  <h3>WHAT OUR CLIENTS SAY</h3>
-                  <h1>TESTIMONIALS</h1>
-                  <div class="carousel-inner">
-                      <div class="carousel-item active">
-                          <div class="quote-wrapper">
-                              <p>Les Pets has been a game-changer for my furry friend! Their dedication to providing healthy and delicious pet food has made a noticeable difference in my pet's energy and overall well-being. I highly recommend Les Pets to all pet owners!</p>
-                              <h3>Jennifer Smith</h3>
-                          </div>
-                      </div>
-                      <div class="carousel-item">
-                          <div class="quote-wrapper">
-                              <p>Since switching to Les Pets, my pet has never been happier! The quality of their food and the care they put into every meal is evident. I'm so grateful to have found a company that prioritizes the health and happiness of pets.</p>
-                              <h3>Michael Johnson</h3>
-                          </div>
-                      </div>
-                      <div class="carousel-item">
-                          <div class="quote-wrapper">
-                              <p>Les Pets goes above and beyond to ensure my pet receives the nutrition they need. Their commitment to quality and their love for animals shines through in every meal. Thank you, Les Pets, for making a difference in my pet's life!</p>
-                              <h3>Emily Rodriguez</h3>
-                              
-                          </div>
-                      </div>
-                  </div>
-                  <button class="btn btn-info "> Book now</button>
-                  <ol class="carousel-indicators indicators">
-                      <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
-                      <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-                      <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
-                  </ol>
-              </div>
-          </div>
-      </div>
-  </div>
-</section>
+  <section class="testimonial">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6 d-none d-lg-block">
+                <ol class="carousel-indicators tabs">
+                    <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active">
+                        <figure>
+                            <img src="{{ asset('assets/images/arnab1.jpg') }}" class="img-fluid rounded-circle" alt="A happy pet">
+                        </figure>
+                    </li>
+                    <li data-target="#carouselExampleIndicators" data-slide-to="1">
+                        <figure>
+                            <img src="{{ asset('assets/images/arnab1.jpg') }}" class="img-fluid rounded-circle" alt="Another happy pet">
+                        </figure>
+                    </li>
+                    <li data-target="#carouselExampleIndicators" data-slide-to="2">
+                        <figure>
+                            <img src="{{ asset('assets/images/arnab1.jpg') }}" class="img-fluid rounded-circle" alt="Yet another happy pet">
+                        </figure>
+                    </li>
+                </ol>
+            </div>
+            <div class="col-lg-6 d-flex justify-content-center align-items-center">
+                <div id="carouselExampleIndicators" data-interval="false" class="carousel slide" data-ride="carousel">
+                    <h3>WHAT OUR CLIENTS SAY</h3>
+                    <h1>TESTIMONIALS</h1>
+                    <div class="carousel-inner">
+                        <div class="carousel-item active">
+                            <div class="quote-wrapper">
+                                <p>Les Pets has been a game-changer for my furry friend! Their dedication to providing healthy and delicious pet food has made a noticeable difference in my pet's energy and overall well-being. I highly recommend Les Pets to all pet owners!</p>
+                                <h3>Jennifer Smith</h3>
+                            </div>
+                        </div>
+                        <div class="carousel-item">
+                            <div class="quote-wrapper">
+                                <p>Since switching to Les Pets, my pet has never been happier! The quality of their food and the care they put into every meal is evident. I'm so grateful to have found a company that prioritizes the health and happiness of pets.</p>
+                                <h3>Michael Johnson</h3>
+                            </div>
+                        </div>
+                        <div class="carousel-item">
+                            <div class="quote-wrapper">
+                                <p>Les Pets goes above and beyond to ensure my pet receives the nutrition they need. Their commitment to quality and their love for animals shines through in every meal. Thank you, Les Pets, for making a difference in my pet's life!</p>
+                                <h3>Emily Rodriguez</h3>
+                                
+                            </div>
+                        </div>
+                    </div>
+                    <button class="btn btn-info "> Book now</button>
+                    <ol class="carousel-indicators indicators">
+                        <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+                        <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+                        <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </div>
+  </section>
+  
 
 
 <section class="py-5">

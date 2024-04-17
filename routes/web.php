@@ -60,7 +60,9 @@ Route::middleware(['auth' , 'admin'])->group(function () {
   Route::get('/Accessoir' , [AccessoirController::class, 'create'])->name('accessoir.name');
   Route::post('/Accessoir', [AccessoirController::class, 'store'])->name('accessoirs.store');
   Route::get('/Accessory' , [AccessoirController::class, 'getAccessoir'])->name('accessory');
-  Route::resource('user', UserController::class);
+  //Route::resource('user', UserController::class);
+  Route::delete('/Food-data/{food}', [FoodController::class, 'destroy'])->name('food.destroy');
+  Route::delete('/all-commends/{id}', [AdminController::class, 'AdminCancelCommand'])->name('admin.destroy');
   Route::get('/food' ,[FoodController::class, 'create'])->name('create');
   Route::get('/Food-data' ,  [FoodController::class , 'GetFood'])->name('food');
   Route::resource('/user', UserController::class);

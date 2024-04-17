@@ -41,7 +41,7 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
 
-                    <li class="nav-item"><a class="nav-link active" aria-current="page" href="">Home</a></li>
+                    <li class="nav-item"><a class="nav-link active" aria-current="page" href="{{ route('Home.index') }}">Home</a></li>
                     @if(Auth::check() && Auth::user()->role == 'admin')
                     <li class="nav-item"><a class="nav-link" href="{{ route('product.index') }}">Dashboard</a></li>
                     @endif
@@ -111,6 +111,7 @@
         <div class="d-flex justify-content-center row">
             <div class="col-md-10">
                 @forelse ($commands as $commend)
+                @if ($commend->user_id === auth()->user()->id)
                 <br>
                 <div class="row p-2 bg-white border rounded">
                     <div class="col-md-3 mt-1">
@@ -144,7 +145,7 @@
                                 @elseif ($commend->product)
                                 {{ $commend->product->price }}
                                 @endif
-                                $
+                                MAD
                             </h4>
                         </div>
                         <h6 class="text-success">{{ $commend->user->name }}</h6>
@@ -160,9 +161,12 @@
                         </form>
                     </div>
                 </div>
+              
+
+                @endif
                 @empty
-                <div class="alert alert-warning">
-                    No commands available.
+                <div class="alert alert-warning rounded">
+                    <h1 class="text-center">No commands available.</h1>
                 </div>
                 @endforelse
                 {{ $commands->links() }}

@@ -165,104 +165,71 @@
         </div>
         </div>
     </section> 
-
     <section>
         <div class="container">
             <div class="row">
-                <div class="col-sm-5 col-md-6 col-12 pb-4">
-               
+                <div class="col-md-8 col-lg-7 col-xl-6 pb-4">
                     <div class="comment-section border bg-light rounded p-3 shadow">
-                    
-                        @forelse ($comments as $item)
-                            <div class="comment mt-4 text-justify border bg-light rounded p-3 float-left shadow">
-                                <h4>{{ $item->user->name }}</h4>
-                                <span>{{ $item->created_at }}</span>
-                                <br>
-                                <p>{{ $item->comments }}</p>
-                                <span>{{ $item->rate_number }}/10</span>
-                               
-                                <div class="d-flex justify-content-between align-items-center">
-                                    <div class="d-flex flex-row align-items-center">
-                                        <span class="small"></span>
-                                        <form action="" method="POST">
-                                            @csrf
-                                            <button type="submit" class="btn btn-link btn-sm"> <i class="far fa-thumbs-up text-primary me-2"></i></button>
-                                        </form>
-                                    </div>
-                                    @if(Auth::id() === $item->user_id)
-                                    <div>
+                        @if ($comments->isNotEmpty())
+                            @forelse ($comments as $item)
+                                <div class="comment mt-4 text-justify border bg-light rounded p-3 float-left shadow">
+                                    <div class="d-flex justify-content-between p-3">
                                         <form action="{{ route('commentes.destroy', $item->id) }}" method="POST">
                                             @csrf
                                             @method('DELETE')
-                                            <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to delete?')"><i class="fas fa-trash"></i></button>
+                                            <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to delete?')">
+                                                <i class="fas fa-trash"></i>
+                                            </button>
                                         </form>
-                                        <!-- Edit button -->
-                                        <button type="button" class="btn mt-2 btn-primary btn-sm" data-toggle="modal" data-target="#editComment{{ $item->id }}">
+                                        <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#editComment{{ $item->id }}">
                                             <i class="fas fa-edit"></i>
                                         </button>
-                                        <!-- Edit comment modal -->
-                                        <div class="modal fade" id="editComment{{ $item->id }}" tabindex="-1" role="dialog" aria-labelledby="editCommentLabel{{ $item->id }}" aria-hidden="true">
-                                            <div class="modal-dialog" role="document">
-                                                <div class="modal-content">
-                                                    <div class="modal-header">
-                                                        <h5 class="modal-title" id="editCommentLabel{{ $item->id }}">Edit Comment</h5>
-                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                            <span aria-hidden="true">&times;</span>
-                                                        </button>
-                                                    </div>
-                                                    <div class="modal-body">
-                                                        <!-- Edit comment form -->
-                                                        <form action="{{ route('commentes.update', $item->id) }}" method="POST">
-                                                            @csrf
-                                                            @method('PUT')
-                                                            <div class="form-group">
-                                                                <label for="editMsg">Message</label>
-                                                                <textarea name="msg" id="editMsg" cols="30" rows="5" class="form-control">{{ $item->comments }}</textarea>
-                                                            </div>
-                                                            <div class="form-group">
-                                                                <label for="editRating">Rating</label>
-                                                                <input type="number" name="rating" id="editRating" class="form-control" value="{{ $item->rate_number }}">
-                                                            </div>
-                                                            <div class="modal-footer">
-                                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                                                <button type="submit" class="btn btn-primary">Save changes</button>
-                                                            </div>
-                                                        </form>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <!-- End of Edit comment modal -->
                                     </div>
-                                    @endif
+                                    <h4>{{ $item->user->name }}</h4>
+                                    <span>{{ $item->created_at }}</span>
+                                    <br>
+                                    <p>{{ $item->comments }}</p>
+                                    <span>{{ $item->rate_number }}/10</span>
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <div class="d-flex flex-row align-items-center">
+                                            <span class="small"></span>
+                                            <button type="button" class="btn btn-link btn-sm" data-toggle="modal" data-target="#editComment{{ $item->id }}">
+                                                <i class="far fa-thumbs-up text-primary me-2"></i>
+                                            </button>
+                                            <form action="" method="POST">
+                                                @csrf
+                                                <button type="submit" class="btn btn-link btn-sm">
+                                                    <i class="far fa-thumbs-up text-primary me-2"></i>
+                                                </button>
+                                            </form>
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
-                        @empty
+                            @empty
+                                <span>No comments exist</span>
+                            @endforelse
+                        @else
                             <span>No comments exist</span>
-                        @endforelse
+                        @endif
                     </div>
                 </div>
-                
-                <div class="col-lg-4 col-md-5 col-sm-4 offset-md-1 offset-sm-1 col-12 mt-4">
+                <div class="col-md-4 col-lg-5 col-xl-6 pb-4">
                     <form action="{{ isset($comment) ? route('commentes.update', $comment->id) : route('commentes.store') }}" method="POST" class="border p-4 rounded shadow" style="background-color: #f0f2f5;">
                         @csrf
                         @isset($comment)
                             @method('PUT')
                         @endisset
-                    
                         <input type="hidden" name="products_id" value="{{ $products->id }}">
                         @if (session('success'))
                             <span class="text-success">
                                 {{ session('success') }}
                             </span>
                         @endif
-                    
                         @if (session('error'))
                             <div class="alert alert-danger">
                                 {{ session('error') }}
                             </div>
                         @endif
-                    
                         <h4>{{ isset($comment) ? 'Update' : 'Leave a' }} comment</h4>
                         <div class="form-group">
                             <label for="comments">Message</label>
@@ -280,6 +247,9 @@
             </div>
         </div>
     </section>
+    
+    
+    
     
     
 

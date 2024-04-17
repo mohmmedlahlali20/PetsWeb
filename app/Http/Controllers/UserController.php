@@ -12,13 +12,26 @@ class UserController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
-    {
-     
-        $users = User::withCount('commands')->paginate(3);   
-             return view('DashbordAdmin.users.index' ,compact('users'));
+
+     public function index()
+{
+    $users = User::withCount([
+        'commands',
+        'commands as paid_commands_count' => function ($query) {
+            $query->where('status', 'valide');
+        },
+        'commands as unpaid_commands_count' => function ($query) {
+            $query->where('status', 'invalid');
+        },
+    ])->get();
+
    
-    }
+    return view('DashbordAdmin.users.index', compact('users'));
+}
+
+     
+    
+
 
     /**
      * Show the form for creating a new resource.
