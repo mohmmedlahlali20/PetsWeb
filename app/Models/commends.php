@@ -31,7 +31,7 @@ class commends extends Model
 
     public function payment()
     {
-        return $this->hasOne(payment::class , 'commend_id');
+        return $this->hasOne(payment::class);
     }
 
     public function food()

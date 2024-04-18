@@ -18,11 +18,11 @@
     <link href="{{asset('css/font-awesome.min.css')}}" rel="stylesheet" />
 </head>
 <style>
-    #big_div {
-        background-image: url('{{ asset('assets/images/laura.jpg') }}');
-        z-index: 999
-    }
+   
+   .rbg-nav{
+    background-color: rgba(152, 236, 229, 0.5);
 
+}
     .custom-card {
         /* Add your custom styles here */
         border: 2px solid #ccc;
@@ -33,70 +33,84 @@
 </style>
 
 <body>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <nav class="navbar navbar-expand-lg rbg-nav">
         <div class="container px-4 px-lg-5">
-            <a class="navbar-brand" href="#!"><img width="30%" src="{{ asset('assets/images/logo.jpg') }}" alt=""></a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
-                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+            <a class="navbar-brand" href="#!"><img style="border-radius: 10px;" width="30%" src="{{ asset('assets/images/logo.jpg') }}" alt=""></a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+                <span class="navbar-toggler-icon"></span>
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
-
-                    <li class="nav-item"><a class="nav-link active" aria-current="page" href="{{ route('Home.index') }}">Home</a></li>
+    
+                    <li class="nav-item"><a class="nav-link active" aria-current="page" href=""><i class="fas fa-home"></i></a></li>
                     @if(Auth::check() && Auth::user()->role == 'admin')
                     <li class="nav-item"><a class="nav-link" href="{{ route('product.index') }}">Dashboard</a></li>
                     @endif
-
-
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown"
-                            aria-expanded="false">Shop</a>
+                        <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Categories
+                        </a>
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <li><a class="dropdown-item" href="#!">All Products</a></li>
                             <li>
-                                <hr class="dropdown-divider" />
+                                <a class="dropdown-item" href="#!">Contact Admin</a>
                             </li>
-                            <li><a class="dropdown-item" href="#!">Popular Items</a></li>
-                            <li><a class="dropdown-item" href="#!">New Arrivals</a></li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li>
+                                <a class="dropdown-item" href="{{ url('/chatify') }}">Chat</a>
+                            </li>
                         </ul>
                     </li>
+                    
+    
                     @guest
                     <li class="nav-item">
-                        <a class="nav-link active custom-btn login-btn" aria-current="page" href="{{ route('login') }}">Login</a>
+                        <a class="nav-link active custom-btn login-btn" aria-current="page" href="{{ route('login') }}"><i class="fas fa-sign-in-alt"></i> Login</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active custom-btn register-btn" aria-current="page" href="{{ route('register') }}">Register</a>
+                        <a class="nav-link active custom-btn register-btn" aria-current="page" href="{{ route('register') }}"><i class="fas fa-user-plus"></i> Register</a>
                     </li>
                     @endguest
-
-
                     @auth
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle btn btn-primary" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown"
-                            aria-expanded="false">Profile</a>
-                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <li><span class="dropdown-item">{{ auth()->user()->name }}</span></li>
-                            <li><span class="dropdown-item">{{ auth()->user()->email }}</span></li>
+                        <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="fas fa-user-alt"></i> 
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                             <li>
-                                <hr class="dropdown-divider" />
+                                <span class="dropdown-item">
+                                    <strong>Name:</strong> {{ auth()->user()->name }}
+                                </span>
+                            </li>
+                            <li>
+                                <span class="dropdown-item">
+                                    <strong>Email:</strong> {{ auth()->user()->email }}
+                                </span>
+                            </li>
+                            <li>
+                                <hr class="dropdown-divider">
                             </li>
                             <li>
                                 <form action="{{ route('logout') }}" method="POST">
                                     @csrf
-                                    <button type="submit" class="dropdown-item btn btn-info">Logout</button>
+                                    <button type="submit" class="dropdown-item btn btn-outline-danger"><i class="fas fa-sign-out-alt"></i> Logout</button>
                                 </form>
                             </li>
                         </ul>
                     </li>
+                    
                     @endauth
-
-
                 </ul>
-                <form id="addToCartForm" class="d-flex">
-                    <a href="{{ route('Home.index') }}" class="btn btn-outline-dark">
-                        see all products
+                {{-- <form action="" class="d-flex">
+                    <a id="" class="btn btn-outline-dark" href="{{ route('Commandes.index') }}">
+                        <i class="bi-cart-fill me-1"></i>
+                        My Cards ({{ $userCommandCount }})
                     </a>
-                </form>
-
+                </form> --}}
             </div>
         </div>
     </nav>

@@ -79,13 +79,13 @@ class PaymentsController extends Controller
     }
 
 
+    public function AllPayment(){
+        $items = payment::with('commend')->get();
+//dd($items);
+        $total = $items->sum('amount'); 
 
-        public function AllPayment(){
-           $payment =  payment::all();
-           //dd($payment);
-            return view('DashbordAdmin.payment.index',compact('payment'));
-            
-        }
+        return view('DashbordAdmin.payment.index', compact('items', 'total'));
+    }
 
 
 

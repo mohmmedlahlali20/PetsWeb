@@ -12,8 +12,8 @@ class payment extends Model
 
     protected $fillable = ['amount', 'payment_status', 'stripe_payment_id', 'commend_id'];
 
-    public function command()
+    public function commend()
     {
-        return $this->belongsTo(commends::class, 'commend_id');
+        return $this->belongsTo(commends::class);
     }
 }

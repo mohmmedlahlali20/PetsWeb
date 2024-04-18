@@ -17,90 +17,82 @@
     <link href="{{asset('css/font-awesome.min.css')}}" rel="stylesheet" />
 </head>
 <style>
-body {
-    overflow-x: hidden;
-}
-    .custom-card {
-    /* Add your custom styles here */
-    border: 2px solid #ccc;
-    border-radius: 10px;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-}
-.btn-icon {
-    display: flex;
-    align-items: center;
-}
-.btn-icon a {
-    flex: 1;
-}
-.btn-icon i {
-    margin-right: 5px; 
-}
 
 </style>
 
 <body style="">
-    <nav class="navbar navbar-expand-lg navbar-light bg-silver">
-                <div class="container px-4 px-lg-5">
-            <a class="navbar-brand" href="#!"><img width="30%" src="{{ asset('assets/images/logo.jpg') }}" alt=""></a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+    <nav class="navbar navbar-expand-lg navbar-light rbg-nav">
+        <div class="container">
+            <a class="navbar-brand" href="#">
+                <img class="logo" style="border-radius: 40px;" width="30%" src="{{ asset('assets/images/logo.jpg') }}" alt="Logo">
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+                <span class="navbar-toggler-icon"></span>
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
-
-                      <li class="nav-item"><a class="nav-link active" aria-current="page" href=""><i class="fas fa--in-alt">Home</i></a></li>
-                      @if(Auth::check() && Auth::user()->role == 'admin')
-                      <li class="nav-item"><a class="nav-link" href="{{ route('product.index') }}">Dashboard</a></li>
-                      @endif
-                      <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="fas fa-cat	"></i></a>
-                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <li>
-                                <a class="dropdown-item" href="#!">Contact Admin</a>
-                            </li>
-                            <li>
-                                <hr class="dropdown-divider">
-                            </li>
-                            <li>
-                                <a class="dropdown-item" href="{{ url('/chatify') }}">Chat</a>
-                            </li>
-                        </ul>
-                    </li>
+                    <li class="nav-item"><a class="nav-link active" aria-current="page" href="#"><i class="fas fa-home fa-lg"></i> Home</a></li>
+                    
+                    @if(Auth::check() && Auth::user()->role == 'admin')
+                        <li class="nav-item"><a class="nav-link" href="{{ route('product.index') }}">Dashboard</a></li>
+                    @endif
                     
                     @guest
-                    <li class="nav-item">
-                        <a class="nav-link active custom-btn login-btn" aria-current="page" href="{{ route('login') }}"><i class="fas fa-sign-in-alt"> login</i></a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link active custom-btn register-btn" aria-current="page" href="{{ route('register') }}"><i class="fas fa--in-alt">register</i></a>
-                    </li>
+                        <li class="nav-item">
+                            <a class="nav-link custom-btn login-btn" href="{{ route('login') }}"><i class="fas fa-sign-in-alt fa-lg"></i> Login</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link custom-btn register-btn" href="{{ route('register') }}"><i class="fas fa-user-plus fa-lg"></i> Register</a>
+                        </li>
                     @endguest
+                </ul>
+                
+                <div class="d-flex align-items-center ms-lg-auto">
                     @auth
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle " id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="	fas fa-user-alt"></i></a>
-                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <li><span class="dropdown-item">{{ auth()->user()->name }}</span></li>
-                            <li><span class="dropdown-item">{{ auth()->user()->email }}</span></li>
-                            <li><hr class="dropdown-divider" /></li>
+                    <div class="dropdown">
+                        <button class="btn custom-btn dropdown-toggle" type="button" id="userDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="fas fa-user-alt fa-lg"></i> {{ auth()->user()->name }}
+                        </button>
+                        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
+                            <li><span class="dropdown-item"><strong>Email:</strong> {{ auth()->user()->email }}</span></li>
+                            <li><hr class="dropdown-divider"></li>
                             <li>
                                 <form action="{{ route('logout') }}" method="POST">
                                     @csrf
-                                    <button type="submit" class="dropdown-item btn btn-info"><i class="fas fa-in-alt">Log out</i></button>
+                                    <button type="submit" class="dropdown-item btn btn-outline-danger"><i class="fas fa-sign-out-alt fa-lg"></i> Logout</button>
                                 </form>
                             </li>
                         </ul>
-                    </li>
-                @endauth
-                </ul>
-                <form action=""  class="d-flex">
-                  <a id="" class="btn btn-outline-dark"  href="{{ route('Commandes.index') }}">
-                      <i class="bi-cart-fill me-1"></i>
-                     My Cards ({{ $userCommandCount }})
-                  </a>
-              </form>
+                    </div>
+                    @endauth
+                    
+                    <form action="{{ route('Commandes.index') }}" method="GET" class="ms-3">
+                        <button type="submit" class="btn custom-btn">
+                            <i class="bi-cart-fill fa-lg me-1"></i>
+                            My Orders ({{ $userCommandCount }})
+                        </button>
+                    </form>
+                </div>
             </div>
         </div>
     </nav>
+    
+    
+
 <br>
+<div class="d-flex align-items-center justify-content-center" ">
+    <div class="g  p-5 w-50 d-inline-block border rounded-5">
+        <h3 class="text-center">Welcome to PetsWeb</h3>
+        <p class="text-center">If you have any inquiries, you can contact the admin <a href="{{ url('/chatify') }}" class="btn btn-info">here</a>.</p>
+    </div>
+</div>
+
+
+<br>
+
 <form method="get">
     <div id="big_div" class="container">
         <div class="search">
@@ -119,15 +111,18 @@ body {
     </div>
 </form>
 
-
     <section class="cat_product_area section_gap ">
       <div class="row flex-row-reverse">
         <div id="notification-container">
             @if(session('success'))
-                <div id="notification-message" class="notification-message">{{ session('success') }}</div>
+                <div id="notification-message" class="notification-message success">
+                    <i class="fas fa-check-circle"></i> {{ session('success') }}
+                </div>
             @endif
             @if(session('danger'))
-            <div id="notification-message" class="notification-message">{{ session('success') }}</div>
+                <div id="notification-message" class="notification-message danger">
+                    <i class="fas fa-exclamation-circle"></i> {{ session('danger') }}
+                </div>
             @endif
         </div>
         <div class="col-lg-9">  

@@ -5286,3 +5286,56 @@ h6 {
 .footer-area .footer-bottom .footer-social a:hover {
     background: #71cd14
 }
+
+
+body {
+    overflow-x: hidden;
+}
+    .custom-card {
+    /* Add your custom styles here */
+    border: 2px solid #ccc;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+}
+.btn-icon {
+    display: flex;
+    align-items: center;
+}
+.btn-icon a {
+    flex: 1;
+}
+.btn-icon i {
+    margin-right: 5px; 
+}
+.rbg-nav{
+    background-color: rgba(152, 236, 229, 0.5);
+
+}
+.g{
+    background-color: rgba(82, 199, 189, 0.5);
+}
+
+.custom-btn {
+        background-color: rgba(70, 97, 128, 0.1);
+        color: rgb(59, 221, 221);
+    }
+
+    .notification-message {
+    padding: 10px;
+    margin: 10px 0;
+    border-radius: 5px;
+}
+
+.notification-message.success {
+    background-color: #d4edda;
+    color: #155724;
+}
+
+.notification-message.danger {
+    background-color: #f8d7da;
+    color: #721c24;
+}
+
+.notification-message i {
+    margin-right: 5px;
+}
