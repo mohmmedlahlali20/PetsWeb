@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\Food;
 use App\Models\User;
+use App\Models\payment;
 use App\Models\commends;
+use App\Models\comments;
 use App\Models\Products;
 use App\Models\Categories;
 use Illuminate\Http\Request;
@@ -18,12 +20,26 @@ class AdminController extends Controller
      */
     public function index()
     {
-        $products = Products::paginate(5);
+        $products = Products::with('comments')->paginate(5);    
+        $is_command = [];
+        $productRates = [];
+        foreach ($products as $product) {
+            $is_command[$product->id] = commends::where('products_id', $product->id)->exists();
     
-      
+            $comments = comments::where('products_id', $product->id)->get();
     
-        return view('DashbordAdmin.Products.index', compact('products'));
+            $totalRateNumer = $comments->sum('rate_numer');
+            $commentsCount = $comments->count();
+    
+            $averageRateNumer = $commentsCount > 0 ? $totalRateNumer / $commentsCount : 0;
+    
+            $productRates[$product->id] = $averageRateNumer;
+        }
+    
+        return view('DashbordAdmin.Products.index', compact('products', 'is_command', 'productRates'));
     }
+    
+    
     
 
     public function GetCommands(){
@@ -54,7 +70,7 @@ class AdminController extends Controller
              $data['image'] = $admin->file('image')->store('Products', 'public');
          }
      
-         // Ensure 'category_id' is provided in $data
+
          $data['category_id'] = $admin->category_id;
      
          Products::create($data);
@@ -119,7 +135,7 @@ class AdminController extends Controller
     }
 
     public function getOrder(){
-        $orders = commends::paginate(4);
+        $orders = commends::with('comments')->paginate(4);
         return view('DashbordAdmin.commandAdmin.index', compact('orders'));
     }
     

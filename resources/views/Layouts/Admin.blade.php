@@ -20,8 +20,15 @@
    $productsCount = App\Models\Products::count();
    $FoodCount = App\Models\Food::count();
    $AccessoirCount = App\Models\Accessoir::count();
+   $CategoryCount = App\Models\Categories::count();
+   $CommentCount = App\Models\comments::count();
+   $commendsCount = App\Models\commends::count();
+   $totalAmountPaid = App\Models\payment::sum('amount');
 @endphp
+<style>
+   
 
+</style>
 <body class="sb-nav-fixed">
     <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
 
@@ -135,7 +142,7 @@
                     
                  
                     <div class="row m-3">
-                        <div class="col-xl-3 col-md-6">
+                        <div class="col-xl-3 col-md-6 mt-3">
                             <div class="card shadow h-100 py-2 border-left-primary">
                                 <div class="card-body">
                                     <div class="row no-gutters align-items-center">
@@ -152,7 +159,7 @@
                                     <a class="small text-primary stretched-link" href="{{ route('user.index') }}"></a>
                             </div>
                         </div>
-                        <div class="col-xl-3 col-md-6">
+                        <div class="col-xl-3 col-md-6 mt-3">
                             <div class="card shadow h-100 py-2 border-left-primary">
                                 <div class="card-body">
                                     <div class="row no-gutters align-items-center">
@@ -170,7 +177,25 @@
                         
                             </div>
                         </div>
-                        <div class="col-xl-3 col-md-6">
+                        <div class="col-xl-3 col-md-6 mt-3">
+                            <div class="card shadow h-100 py-2 border-left-primary">
+                                <div class="card-body">
+                                    <div class="row no-gutters align-items-center">
+                                        <div class="col mr-2">
+                                            <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Accessoir</div>
+                                            <div class="h5 mb-0 font-weight-bold text-gray-800">{{ $AccessoirCount }}</div>
+                                        </div>
+                                        <div class="col-auto">
+                                            <i class="fas fa-users fa-2x text-gray-300"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                               
+                                    <a class="small text-primary stretched-link" href="{{ route('accessory') }}"></a>
+                                
+                            </div>
+                        </div>
+                        <div class="col-xl-3 col-md-6 mt-3">
                             <div class="card shadow h-100 py-2 border-left-primary">
                                 <div class="card-body">
                                     <div class="row no-gutters align-items-center">
@@ -187,33 +212,90 @@
                                     <a class="small text-primary stretched-link" href="#"> </a>
                                
                             </div>
-                        </div>
-                        <div class="col-xl-3 col-md-6">
+                        </div>    
+                        <div class="col-xl-3 col-md-6 mt-3">
                             <div class="card shadow h-100 py-2 border-left-primary">
                                 <div class="card-body">
                                     <div class="row no-gutters align-items-center">
                                         <div class="col mr-2">
-                                            <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Users</div>
-                                            <div class="h5 mb-0 font-weight-bold text-gray-800">{{ $AccessoirCount }}</div>
+                                            <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Total Price Paid</div>
+                                            <div class="h5 mb-0 font-weight-bold text-gray-800">{{ $totalAmountPaid }} MAD</div>
                                         </div>
                                         <div class="col-auto">
-                                            <i class="fas fa-users fa-2x text-gray-300"></i>
+                                           
+                                            <i class="	fa fa-dollar fa-2x text-gray-300"></i>
                                         </div>
                                     </div>
                                 </div>
-                               
-                                    <a class="small text-primary stretched-link" href="{{ route('accessoir.index') }}"></a>
-                                
+                                <a class="small text-primary stretched-link" href="#"></a>
                             </div>
                         </div>
-                    </div>
+                        <div class="col-xl-3 col-md-6 mt-3">
+                            <div class="card shadow h-100 py-2 border-left-primary">
+                                <div class="card-body">
+                                    <div class="row no-gutters align-items-center">
+                                        <div class="col mr-2">
+                                            <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Comments</div>
+                                            <div class="h5 mb-0 font-weight-bold text-gray-800">{{ $CommentCount }}</div>
+                                        </div>
+                                        <div class="col-auto">
+                                            <i class="fas fa-comments fa-2x text-gray-300"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                                <a class="small text-primary stretched-link" href=""></a>
+                            </div>
+                        </div>
+                        <div class="col-xl-3 col-md-6 mt-3">
+                            <div class="card shadow h-100 py-2 border-left-primary">
+                                <div class="card-body">
+                                    <div class="row no-gutters align-items-center">
+                                        <div class="col mr-2">
+                                            <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Command</div>
+                                            <div class="h5 mb-0 font-weight-bold text-gray-800">{{ $commendsCount }}</div>
+                                        </div>
+                                        <div class="col-auto">
+                                            <i class="fas fa-shopping-bag fa-2x text-gray-300"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                                <a class="small text-primary stretched-link" href="{{ route('get.command') }}"></a>
+                            </div>
+                        </div>
+                        <div class="col-xl-3 col-md-6 mt-3">
+                            <div class="card shadow h-100 py-2 border-left-primary">
+                                <div class="card-body">
+                                    <div class="row no-gutters align-items-center">
+                                        <div class="col mr-2">
+                                            <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Category</div>
+                                            <div class="h5 mb-0 font-weight-bold text-gray-800">{{ $CategoryCount }}</div>
+                                        </div>
+                                        <div class="col-auto">
+                                            <i class="	fab fa-canadian-maple-leaf fa-2x text-gray-300"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                                <a class="small text-primary stretched-link" href="{{ route('category.index') }}"></a>
+                            </div>
+                        </div>
+                        
                 </div>
             </main>
             
             <div class="container">
-       
+              
+                <div id="notification-container">
+                    @if(session('success'))
+                        <div id="notification-message" class="notification-message">{{ session('success') }}</div>
+                    @endif
+                    @if(session('danger'))
+                    <div id="notification-message" class="notification-message">{{ session('success') }}</div>
+                    @endif
+                </div>
+                
 
                 @yield('content')
+                
                 
             </div>
             <footer class="py-4 bg-light mt-auto container">
@@ -231,7 +313,9 @@
         </div>
     </div>
 
-
+<script>
+   
+</script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous">
     </script>
     <script src="{{ asset('demo/chart-area-demo.js') }}"></script>

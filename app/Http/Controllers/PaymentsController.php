@@ -18,6 +18,7 @@ class PaymentsController extends Controller
     public function index()
     {
         $commands = commends::paginate(4); 
+        //dd($commands);
         return view('command.index', compact('commands'));
     }
 
@@ -25,30 +26,15 @@ class PaymentsController extends Controller
     {
         $userName = auth()->user()->name;
         $commendId = $request->input('command_id');
-        $foods = Food::all();
-        $foodTotalAmount = 0;
+        $foodsTotalAmount = Food::sum('price');
+
+        // Calculate total amount from accessories
+        $accessoiresTotalAmount = Accessoir::sum('price');
     
-        foreach ($foods as $food) {
-            $foodTotalAmount += $food->price;
-        }
+        $productsTotalAmount = Products::sum('price');
     
-        $accessoires = Accessoir::all();
-        $accessoirTotalAmount = 0;
-    
-        foreach ($accessoires as $accessoir) {
-            $accessoirTotalAmount += $accessoir->price;
-        }
-    
-        $total = $foodTotalAmount + $accessoirTotalAmount;
-    
-        $products = Products::all();
-        $totalAmount = 0;
-    
-        foreach ($products as $product) {
-            $totalAmount += $product->price;
-        }
-    
-        $totalAmount += $total;
+
+        $totalAmountPaid = $foodsTotalAmount + $accessoiresTotalAmount + $productsTotalAmount;
     
         \Stripe\Stripe::setApiKey(config('stripe.sk'));
         $session = \Stripe\Checkout\Session::create([
@@ -56,8 +42,8 @@ class PaymentsController extends Controller
             'line_items' => [
                 [
                     'price_data' => [
-                        'currency' => 'usd',
-                        'unit_amount' => $totalAmount * 100, 
+                        'currency' => 'MAD',
+                        'unit_amount' => $totalAmountPaid * 100, 
                         'product_data' => [
                             'name' => 'النقودالنقودالنقودالنقود',
                         ],
@@ -71,16 +57,15 @@ class PaymentsController extends Controller
         ]);
     
         $payment = Payment::create([
-            'amount' => $totalAmount,
+            'amount' => $totalAmountPaid,
             'payment_status' => 'valider',
             'stripe_payment_id' => $session->id,
             'commend_id' =>  $commendId,
             'strip_user_name'=> $userName
         ]);
     
-        // Vérifier si le paiement a été créé avec succès avant de supprimer la commande
         if ($payment) {
-            // Supprimer la commande non payée
+           
             commends::find($commendId)->delete();
         }
     

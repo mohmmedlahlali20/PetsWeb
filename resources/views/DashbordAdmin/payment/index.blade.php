@@ -2,7 +2,7 @@
 @section('title' , 'All command')
 
 @section('content')
-<div class="container">
+{{-- <div class="container">
     <table class="table table-bordered table-hover table-striped">
         <thead>
             <tr>
@@ -46,6 +46,6 @@
         </tbody>
     </table>
     {{ $commands->links() }}
-</div>
+</div> --}}
 
 @endsection

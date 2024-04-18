@@ -19,3 +19,16 @@ window.addEventListener('DOMContentLoaded', event => {
         new simpleDatatables.DataTable(datatablesSimple);
     }
 });
+
+
+var notification = document.getElementById('notification-message');
+
+if (notification) {
+ 
+    notification.classList.add('notification-message');
+
+
+    setTimeout(function() {
+        notification.remove();
+    }, 5000);
+}

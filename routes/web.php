@@ -44,16 +44,13 @@ Route::post('/commentair', [CommentsController::class, 'store'])->name('commente
 Route::get('/checkout' , [PaymentsController::class , 'index'])->name('GetPayment');
 Route::post('/checkout', [PaymentsController::class, 'checkout'])->name('striptPayment');
 Route::get('/Commande', [PaymentsController::class, 'success'])->name('success');
-
-
 Route::post('/Commandes/foods', [CommendsController::class, 'storeFood'])->name('order.food');
 //Route::post('/order/pets', [CommendsController::class, 'storePets'])->name('order.pets');
 Route::post('/order/accessoir', [CommendsController::class, 'storeAccessoir'])->name('order.accessoir');
-
 Route::post('/Home' , [ProductsController::class, 'likeProduct'])->name('like.product');                                       
+Route::resource('/Food', FoodController::class);
 
 
- Route::resource('/Food', FoodController::class);
 Route::middleware(['auth' , 'admin'])->group(function () {
   Route::resource('/category' , CategoriesController::class);
   Route::resource('/product', AdminController::class);

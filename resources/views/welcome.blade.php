@@ -34,7 +34,7 @@ body {
     flex: 1;
 }
 .btn-icon i {
-    margin-right: 5px; /* Adjust margin as needed */
+    margin-right: 5px; 
 }
 
 </style>
@@ -122,6 +122,14 @@ body {
 
     <section class="cat_product_area section_gap ">
       <div class="row flex-row-reverse">
+        <div id="notification-container">
+            @if(session('success'))
+                <div id="notification-message" class="notification-message">{{ session('success') }}</div>
+            @endif
+            @if(session('danger'))
+            <div id="notification-message" class="notification-message">{{ session('success') }}</div>
+            @endif
+        </div>
         <div class="col-lg-9">  
             @if (isset($products ))
             <x-pets :products="$products" />

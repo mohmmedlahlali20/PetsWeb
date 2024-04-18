@@ -7,22 +7,32 @@
         <thead>
             <tr>
                 <th scope="col">ID</th>
+                <th scope="col">Avatar</th>
                 <th scope="col">Name</th>
                 <th scope="col">Email</th>
                 <th scope="col">Role</th>
                 <th scope="col">Provider</th>
                 <th scope="col">Orders Count</th>
                 <th scope="col">Created At</th>
-                <!-- Add more headers as needed -->
+           
             </tr>
         </thead>
         <tbody>
             @forelse ($users as $user)
             <tr>
+                @php
+                    dump($user->avatar )
+                @endphp
                 <td>{{ $user->id }}</td>
+                <td>
+                    @if ($user->avatar)
+                        <img src="{{ Storage::url($user->avatar) }}" alt="Avatar" width="50" height="50">
+                    @else
+                        No Avatar
+                    @endif
+                </td>
                 <td>{{ $user->name }}</td>
                 <td>{{ $user->email }}</td>
-                
                 <td>{{ $user->role }}</td>
                 <td>{{ $user->provider }}</td>
                 <td>{{ $user->commands()->count() }}</td> 
@@ -37,5 +47,3 @@
     </table>
 </div>
 @endsection
-
-

@@ -51,3 +51,18 @@ class Slider {
   
     slider.init()
   }
+
+
+
+
+  var notification = document.getElementById('notification-message');
+
+  if (notification) {
+   
+      notification.classList.add('notification-message');
+  
+  
+      setTimeout(function() {
+          notification.remove();
+      }, 5000);
+  }

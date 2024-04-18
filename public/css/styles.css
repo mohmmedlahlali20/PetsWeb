@@ -11343,3 +11343,35 @@ textarea.form-control-lg {
 
 
 
+.notification-message {
+  z-index: 999;
+  position: fixed;
+  top: 60%;
+  right:5%;
+  transform: translateY(-50%);
+  background-color: #28a745;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 5px;
+  animation: slideInLeft 0.5s ease forwards, fadeOut 0.5s 4.5s ease forwards;
+}
+
+@keyframes slideInLeft {
+  from {
+      right: -100%;
+  }
+  to {
+      right: 0;
+  }
+}
+
+@keyframes fadeOut {
+  from {
+      opacity: 1;
+  }
+  to {
+      opacity: 0;
+  }
+}
+
+
