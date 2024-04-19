@@ -1,11 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <meta name="description" content="" />
     <meta name="author" content="" />
-    <title>{{ config('app.name')  }} </title>
+    <title>{{ config('app.name') }} </title>
 
     <link rel="icon" type="image/x-icon" href="{{asset('assets/favicon.ico')}}" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
@@ -17,194 +18,195 @@
     <link href="{{asset('css/font-awesome.min.css')}}" rel="stylesheet" />
 </head>
 <style>
-
+   
 </style>
 
 <body style="">
     <nav class="navbar navbar-expand-lg navbar-light rbg-nav">
         <div class="container">
             <a class="navbar-brand" href="#">
-                <img class="logo" style="border-radius: 40px;" width="30%" src="{{ asset('assets/images/logo.jpg') }}" alt="Logo">
+                <img src="assets/images/logo.jpg" alt="Logo" class="logo">
             </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
                 <span class="navbar-toggler-icon"></span>
                 <span class="navbar-toggler-icon"></span>
             </button>
-            
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
-                    <li class="nav-item"><a class="nav-link active" aria-current="page" href="#"><i class="fas fa-home fa-lg"></i> Home</a></li>
-                    
-                    @if(Auth::check() && Auth::user()->role == 'admin')
-                        <li class="nav-item"><a class="nav-link" href="{{ route('product.index') }}">Dashboard</a></li>
-                    @endif
-                    
-                    @guest
-                        <li class="nav-item">
-                            <a class="nav-link custom-btn login-btn" href="{{ route('login') }}"><i class="fas fa-sign-in-alt fa-lg"></i> Login</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link custom-btn register-btn" href="{{ route('register') }}"><i class="fas fa-user-plus fa-lg"></i> Register</a>
-                        </li>
-                    @endguest
-                </ul>
-                
-                <div class="d-flex align-items-center ms-lg-auto">
-                    @auth
-                    <div class="dropdown">
-                        <button class="btn custom-btn dropdown-toggle" type="button" id="userDropdown" data-bs-toggle="dropdown" aria-expanded="false">
-                            <i class="fas fa-user-alt fa-lg"></i> {{ auth()->user()->name }}
-                        </button>
-                        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
-                            <li><span class="dropdown-item"><strong>Email:</strong> {{ auth()->user()->email }}</span></li>
-                            <li><hr class="dropdown-divider"></li>
-                            <li>
-                                <form action="{{ route('logout') }}" method="POST">
-                                    @csrf
-                                    <button type="submit" class="dropdown-item btn btn-outline-danger"><i class="fas fa-sign-out-alt fa-lg"></i> Logout</button>
-                                </form>
-                            </li>
-                        </ul>
+                <form class="d-flex" method="get">
+                    <span class="input-group-addon"><i class="bx bxs-map"></i></span>
+                    <input type="search" class="form-control" name="query" placeholder="Search">
+                    &nbsp;
+                    <div class="input-group-append">
+                        <button class="btn btn-primary" type="submit">Search</button>
                     </div>
+                </form>
+                <ul class="navbar-nav ms-auto mb-2 mb-lg-0 me-2">
+                    @auth
+                    @if(Auth::user()->role == 'admin')
+                    <li class="nav-item ms-lg-2">
+                        <a class="nav-link dashboard-link custom-btn" href="{{ route('product.index') }}">Dashboard</a>
+                    </li>
+                    @endif
+                    @else
+                    <li class="nav-item">
+                        <a class="nav-link custom-btn login-btn" href="{{ route('login') }}"><i
+                                class="fas fa-sign-in-alt fa-lg"></i> Login</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link custom-btn register-btn" href="{{ route('register') }}"><i
+                                class="fas fa-user-plus fa-lg"></i> Register</a>
+                    </li>
                     @endauth
-                    
-                    <form action="{{ route('Commandes.index') }}" method="GET" class="ms-3">
+
+                    <form action="{{ route('Commandes.index') }}" method="GET" class="ms-lg-2">
                         <button type="submit" class="btn custom-btn">
                             <i class="bi-cart-fill fa-lg me-1"></i>
                             My Orders ({{ $userCommandCount }})
                         </button>
                     </form>
-                </div>
+
+                    <div class="ms-lg-2">
+                        @auth
+                        <div class="dropdown">
+                            <button class="btn custom-btn dropdown-toggle" type="button" id="userDropdown"
+                                data-bs-toggle="dropdown" aria-expanded="false">
+                                <i class="fas fa-user-alt fa-lg"></i> {{ auth()->user()->name }}
+                            </button>
+                            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
+                                <li><span class="dropdown-item"><strong>Email:</strong> {{ auth()->user()->email }}</span>
+                                </li>
+                                <li><hr class="dropdown-divider"></li>
+                                <li>
+                                    <form action="{{ route('logout') }}" method="POST">
+                                        @csrf
+                                        <button type="submit" class="dropdown-item btn btn-outline-danger"><i
+                                                class="fas fa-sign-out-alt fa-lg"></i> Logout</button>
+                                    </form>
+                                </li>
+                            </ul>
+                        </div>
+                        @endauth
+                    </div>
+                </ul>
             </div>
         </div>
     </nav>
-    
-    
-
-<br>
-<div class="d-flex align-items-center justify-content-center" ">
-    <div class="g  p-5 w-50 d-inline-block border rounded-5">
-        <h3 class="text-center">Welcome to PetsWeb</h3>
-        <p class="text-center">If you have any inquiries, you can contact the admin <a href="{{ url('/chatify') }}" class="btn btn-info">here</a>.</p>
-    </div>
-</div>
 
 
-<br>
+    <br>
 
-<form method="get">
-    <div id="big_div" class="container">
-        <div class="search">
-            <div class="row justify-content-center">
-                <div class="col-md-6">
-                    <div class="input-group">
-                        <span class="input-group-addon"><i class="bx bxs-map"></i></span>
-                        <input type="search" class="form-control" name="query" placeholder="Search">
-                        <div class="input-group-append">
-                            <button class="btn btn-primary" type="submit">Search</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
+    <div class="d-flex align-items-center justify-content-center" ">
+        <div class="g  p-5 w-50 d-inline-block border rounded-5">
+            <h3 class="text-center">Welcome to PetsWeb</h3>
+            <p class="text-center">If you have any inquiries, you can contact the admin <a href="{{ url('/chatify') }}" class="btn btn-info">here</a>.</p>
         </div>
     </div>
-</form>
+
+    <br>
+
 
     <section class="cat_product_area section_gap ">
-      <div class="row flex-row-reverse">
-        <div id="notification-container">
-            @if(session('success'))
+        <div class="row flex-row-reverse">
+            <div id="notification-container">
+                @if(session('success'))
                 <div id="notification-message" class="notification-message success">
                     <i class="fas fa-check-circle"></i> {{ session('success') }}
                 </div>
-            @endif
-            @if(session('danger'))
+                @endif
+                @if(session('danger'))
                 <div id="notification-message" class="notification-message danger">
                     <i class="fas fa-exclamation-circle"></i> {{ session('danger') }}
                 </div>
-            @endif
-        </div>
-        <div class="col-lg-9">  
-            @if (isset($products ))
-            <x-pets :products="$products" />
-            @elseif (isset($Foods))
-            <x-food :Food="$Foods"/>
-            @elseif(isset($Accessoir))
-            <x-accessoir :Accessoir="$Accessoir"/>
-            @endif
-          </div>
-          <div class="col-lg-2">
-            <div class="left_sidebar_area">
-                <aside class="left_widgets p_filter_widgets">
-                    <div class="l_w_title">
-                        <h3 class="m-3">Autre service</h3>
-                    </div>
-                    
-                    <div class="d-grid gap-1 container">
-                        <div class="btn-icon">
-                            <a class="btn btn-primary" href="{{ route('Home.index') }}">
-                                <i class="fas fa-dog material-icons"></i> Pets
-                            </a>
-                        </div>
-                        <div class="btn-icon">
-                            <a class="btn btn-primary" href="{{ route('accessoir.index') }}">
-                                <i class="fas fa-shopping-bag material-icons"></i> Accessories
-                            </a>
-                        </div>
-                        <div class="btn-icon">
-                            <a class="btn btn-primary" href="{{ route('Food.index') }}">
-                                <i class="fas fa-utensils material-icons"></i> Foods
-                            </a>
-                        </div>
-                    </div>
-                    <hr>
-                    <div class="l_w_title">
-                        <h3>Browse Categories</h3>
-                    </div>
-                    <div class="widgets_inner">
-                        <form action=""  id="filterForm" method="GET">
-                            @csrf
-                            <ul class="list-group">
-                                @forelse ($categories as $cat)
-                                <li class="list-group-item">
-                                    <input type="radio" value="{{ $cat->id }}" id="category_{{ $cat->id }}" name="category[]" class="form-check-input">
-                                    <label for="category_{{ $cat->id }}" class="form-check-label">{{ $cat->name }}</label>
-                                </li>
-                                @empty
-                                <li class="list-group-item">
-                                    <div class="alert alert-warning">
-                                        No categories exist.
-                                    </div>
-                                </li>
-                                @endforelse
-                            </ul>
-                            <hr>
-                            <div class="mb-3">
-                                <label for="sex" class="form-label">Sex:</label>
-                                <select class="form-select" id="sex" name="sex">
-                                    <option value="">All</option>
-                                    <option value="male" {{ request('sex') == 'male' ? 'selected' : '' }}>Male</option>
-                                    <option value="female" {{ request('sex') == 'female' ? 'selected' : '' }}>Female</option>
-                                </select>
-                            </div>
-                            <div class="mb-3">
-                                <label for="age" class="form-label">Age:</label>
-                                <select class="form-select" id="age" name="age">
-                                    <option value="">All</option>
-                                    <option value="2-6" {{ request('age') == '2-6' ? 'selected' : '' }}>2-6 years</option>
-                                    <option value="7-10" {{ request('age') == '7-10' ? 'selected' : '' }}>7-10 years</option>
-                                    <option value="10+" {{ request('age') == '10+' ? 'selected' : '' }}>Over 10 years</option>
-                                </select>
-                            </div>
-                            <button type="submit" class="btn btn-primary">Filter</button>
-                        </form>
-                    </div>
-                </aside>
+                @endif
             </div>
+            <div class="col-lg-9">
+                @if (isset($products ))
+                <x-pets :products="$products" />
+                @elseif (isset($Foods))
+                <x-food :Food="$Foods" />
+                @elseif(isset($Accessoir))
+                <x-accessoir :Accessoir="$Accessoir" />
+                @endif
+            </div>
+            <div class="col-lg-2">
+                <div class="left_sidebar_area">
+                    <aside class="left_widgets p_filter_widgets">
+                        <div class="l_w_title">
+                            <h3 class="m-3">Autre service</h3>
+                        </div>
+
+                        <div class="d-grid gap-1 container">
+                            <div class="btn-icon">
+                                <a class="btn btn-primary" href="{{ route('Home.index') }}">
+                                    <i class="fas fa-dog material-icons"></i> Pets
+                                </a>
+                            </div>
+                            <div class="btn-icon">
+                                <a class="btn btn-primary" href="{{ route('accessoir.index') }}">
+                                    <i class="fas fa-shopping-bag material-icons"></i> Accessories
+                                </a>
+                            </div>
+                            <div class="btn-icon">
+                                <a class="btn btn-primary" href="{{ route('Food.index') }}">
+                                    <i class="fas fa-utensils material-icons"></i> Foods
+                                </a>
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="l_w_title">
+                            <h3>Browse Categories</h3>
+                        </div>
+                        <div class="widgets_inner">
+                            <form action="" id="filterForm" method="GET">
+                                @csrf
+                                <ul class="list-group">
+                                    @forelse ($categories as $cat)
+                                    <li class="list-group-item">
+                                        <input type="radio" value="{{ $cat->id }}" id="category_{{ $cat->id }}" name="category[]" class="form-check-input">
+                                        <label for="category_{{ $cat->id }}" class="form-check-label">{{ $cat->name
+                                            }}</label>
+                                    </li>
+                                    @empty
+                                    <li class="list-group-item">
+                                        <div class="alert alert-warning">
+                                            No categories exist.
+                                        </div>
+                                    </li>
+                                    @endforelse
+                                </ul>
+                                <hr>
+                                <div class="mb-3">
+                                    <label for="sex" class="form-label">Sex:</label>
+                                    <select class="form-select" id="sex" name="sex">
+                                        <option value="">All</option>
+                                        <option value="male" {{ request('sex')=='male' ? 'selected' : '' }}>Male
+                                        </option>
+                                        <option value="female" {{ request('sex')=='female' ? 'selected' : '' }}>Female
+                                        </option>
+                                    </select>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="age" class="form-label">Age:</label>
+                                    <select class="form-select" id="age" name="age">
+                                        <option value="">All</option>
+                                        <option value="2-6" {{ request('age')=='2-6' ? 'selected' : '' }}>2-6 years
+                                        </option>
+                                        <option value="7-10" {{ request('age')=='7-10' ? 'selected' : '' }}>7-10 years
+                                        </option>
+                                        <option value="10+" {{ request('age')=='10+' ? 'selected' : '' }}>Over 10 years
+                                        </option>
+                                    </select>
+                                </div>
+                                <button type="submit" class="btn btn-primary">Filter</button>
+                            </form>
+                        </div>
+                    </aside>
+                </div>
+            </div>
+
         </div>
-   
-    </div>
     </section>
     <div class="container-fluid bg-dark text-light">
         <footer>
@@ -243,11 +245,13 @@
                         </div>
                         <div class="col-xl-2 col-md-4 col-sm-4 col-auto order-1 align-self-end">
                             <h6 class="mt-55 mt-2 text-muted bold-text"><b>ANIRUDH SINGLA</b></h6>
-                            <small><span><i class="fa fa-envelope" aria-hidden="true"></i></span> mohamemd@PEts.web</small>
+                            <small><span><i class="fa fa-envelope" aria-hidden="true"></i></span>
+                                mohamemd@PEts.web</small>
                         </div>
                         <div class="col-xl-2 col-md-4 col-sm-4 col-auto order-2 align-self-end mt-3">
                             <h6 class="text-muted bold-text"><b>RISHABH SHEKHAR</b></h6>
-                            <small><span><i class="fa fa-envelope" aria-hidden="true"></i></span> rishab@gmail.com</small>
+                            <small><span><i class="fa fa-envelope" aria-hidden="true"></i></span>
+                                rishab@gmail.com</small>
                         </div>
                     </div>
                 </div>
@@ -257,10 +261,10 @@
     <script>
 
     </script>
-    
-    
-    
-    
+
+
+
+
     <!-- Bootstrap core JS-->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
     <!-- Core theme JS-->
@@ -268,4 +272,5 @@
     <script src="{{asset('js/AddCart.js')}}"></script>
 
 </body>
+
 </html>

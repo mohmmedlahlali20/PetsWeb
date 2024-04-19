@@ -185,7 +185,13 @@
                                             <i class="fas fa-edit"></i>
                                         </button>
                                     </div>
-                                    <h4>{{ $item->user->name }}</h4>
+
+                                    <h5>
+                                        <img src="{{ asset('assets/images/arnab1.jpg') }}" alt=" Avatar" class="avatar img-fluid rounded-circle" style="width: 50px; height: 50px;">
+
+                                        {{ $item->user->name }}
+
+                                    </h5>
                                     <span>{{ $item->created_at }}</span>
                                     <br>
                                     <p>{{ $item->comments }}</p>

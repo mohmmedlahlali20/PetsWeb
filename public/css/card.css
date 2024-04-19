@@ -5325,6 +5325,31 @@ body {
     margin: 10px 0;
     border-radius: 5px;
 }
+.profile-link {
+    color: #fff;
+    background-color: #59abb6;
+    border-radius: 5px;
+    padding: 10px 20px;
+}
+
+.dashboard-link {
+    color: #fff;
+    background-color: #208083;
+    border-radius: 5px;
+    padding: 10px 20px;
+}
+
+.logo {
+max-width: 30%;
+border-radius: 30px;
+}
+
+
+.navbar-toggler-icon {
+background-color: #47648a; /* Set color for the toggler icon */
+}
+
+
 
 .notification-message.success {
     background-color: #d4edda;

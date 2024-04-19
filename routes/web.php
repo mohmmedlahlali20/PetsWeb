@@ -53,7 +53,10 @@ Route::resource('/Food', FoodController::class);
 
 Route::middleware(['auth' , 'admin'])->group(function () {
   Route::resource('/category' , CategoriesController::class);
+
   Route::resource('/product', AdminController::class);
+
+
   Route::get('/Accessoir' , [AccessoirController::class, 'create'])->name('accessoir.name');
   Route::post('/Accessoir', [AccessoirController::class, 'store'])->name('accessoirs.store');
   Route::get('/Accessory' , [AccessoirController::class, 'getAccessoir'])->name('accessory');

@@ -25,10 +25,11 @@ class PaymentsController extends Controller
     public function checkout(Request $request)
     {
         $userName = auth()->user()->name;
+        $isPayed = true ;
         $commendId = $request->input('command_id');
         $foodsTotalAmount = Food::sum('price');
 
-        // Calculate total amount from accessories
+      
         $accessoiresTotalAmount = Accessoir::sum('price');
     
         $productsTotalAmount = Products::sum('price');
@@ -56,21 +57,21 @@ class PaymentsController extends Controller
             'cancel_url' => route('GetPayment'),
         ]);
     
-        $payment = Payment::create([
+    $payment =  Payment::create([
             'amount' => $totalAmountPaid,
             'payment_status' => 'valider',
             'stripe_payment_id' => $session->id,
             'commend_id' =>  $commendId,
             'strip_user_name'=> $userName
         ]);
-    
-        if ($payment) {
+    // //dd($payment);
+    //     if ($payment) {
            
-            commends::find($commendId)->delete();
-        }
+    //         commends::find($commendId)->delete();
+    //     }
     
-        return redirect()->to($session->url);
-    }
+    return redirect()->route('Commandes.index')->with(['totalAmountPaid' => $totalAmountPaid, 'isPayed' => $isPayed]);
+}
     
    
     public function success(Request $request)

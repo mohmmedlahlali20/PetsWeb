@@ -18,13 +18,20 @@
     <link href="{{asset('css/font-awesome.min.css')}}" rel="stylesheet" />
 </head>
 <style>
-   
+  body{
+	background-color: #eee;
+}
+
+.address-line{
+	color: #4C40E0;
+    font-size: 11px;
+    font-weight: 700;
+}
    .rbg-nav{
     background-color: rgba(152, 236, 229, 0.5);
 
 }
     .custom-card {
-        /* Add your custom styles here */
         border: 2px solid #ccc;
         border-radius: 10px;
         box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
@@ -121,6 +128,42 @@
         </div>
         @endif
     </div>
+    @if (session('isPayed'))
+    <div class="container mt-5 d-flex justify-content-center">
+        <div class="card p-4 mt-3">
+           <div class="first d-flex justify-content-between align-items-center mb-3">
+             <div class="info">
+                 <span class="d-block name">Thank you, Alex</span>
+                 <span class="order">Order - 4554645</span>
+                  
+             </div>
+            
+              <img src="https://i.imgur.com/NiAVkEw.png" width="40"/>
+               
+ 
+           </div>
+               <div class="detail">
+           <span class="d-block summery">Your order has been dispatched. we are delivering you order.</span>
+               </div>
+           <hr>
+           <div class="text">
+         <span class="d-block new mb-1" >Alex Dorlew</span>
+          </div>
+         <span class="d-block address mb-3">672 Conaway Street Bryantiville Massachusetts 02327</span>
+           <div class="  money d-flex flex-row mt-2 align-items-center">
+             <img src="https://i.imgur.com/ppwgjMU.png" width="20" />
+         
+             <span class="ml-2">Cash on Delivery</span> 
+ 
+                </div>
+                <div class="last d-flex align-items-center mt-3">
+                 <span class="address-line">CHANGE MY DELIVERY ADDRESS</span>
+ 
+                </div>
+         </div>
+     </div>
+@endif
+
     <div class="container mt-5 mb-5">
         <div class="d-flex justify-content-center row">
             <div class="col-md-10">
@@ -179,9 +222,39 @@
 
                 @endif
                 @empty
-                <div class="alert alert-warning rounded">
-                    <h1 class="text-center">No commands available.</h1>
-                </div>
+                <div class="container mt-5 d-flex justify-content-center">
+                    <div class="card p-4 mt-3">
+                       <div class="first d-flex justify-content-between align-items-center mb-3">
+                         <div class="info">
+                             <span class="d-block name">Thank you, Alex</span>
+                             <span class="order">Order - 4554645</span>
+                              
+                         </div>
+                        
+                          <img src="https://i.imgur.com/NiAVkEw.png" width="40"/>
+                           
+             
+                       </div>
+                           <div class="detail">
+                       <span class="d-block summery">Your order has been dispatched. we are delivering you order.</span>
+                           </div>
+                       <hr>
+                       <div class="text">
+                     <span class="d-block new mb-1" >Alex Dorlew</span>
+                      </div>
+                     <span class="d-block address mb-3">672 Conaway Street Bryantiville Massachusetts 02327</span>
+                       <div class="  money d-flex flex-row mt-2 align-items-center">
+                         <img src="https://i.imgur.com/ppwgjMU.png" width="20" />
+                     
+                         <span class="ml-2">Cash on Delivery</span> 
+             
+                            </div>
+                            <div class="last d-flex align-items-center mt-3">
+                             <span class="address-line">CHANGE MY DELIVERY ADDRESS</span>
+             
+                            </div>
+                     </div>
+                 </div>
                 @endforelse
                 {{ $commands->links() }}
                 @if($commands->isNotEmpty())

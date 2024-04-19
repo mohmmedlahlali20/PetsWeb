@@ -22,8 +22,8 @@ class CommendsController extends Controller
      public function index()
      {
          $commands = commends::with(['product', 'food', 'accessoir'])->paginate(4);
-     
-         return view('command.index', compact('commands'));
+         $isPayed = false;
+         return view('command.index', compact('commands' , 'isPayed'));
      }
     /**
      * Show the form for creating a new resource.
@@ -44,7 +44,7 @@ class CommendsController extends Controller
         
         $productId = $request->input('product_id');
         $userId = Auth::id();
-    
+    $isPayed = false ;
         $product = Products::findOrFail($productId);
     
         

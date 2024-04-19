@@ -2,6 +2,7 @@
 @section('title' , ($IsUpdte? 'Update' : 'Create') . ' Products')
             @php
             $route = $IsUpdte ? route('product.update', $product->id) : route('product.store');
+            dump($route);
             @endphp
 @section('content')
         <h1 class="text-center mb-5 mt-5 font-bold">@yield('title')</h1>
@@ -44,9 +45,12 @@
                     <select class="form-control border" name="sex">
                         <option value="">Select sex</option>
                         @foreach(['male', 'female'] as $value)
-                            <option value="{{ $value }}">{{ ucfirst($value) }}</option>
+                            <option value="{{ $value }}" {{ (old('sex') == $value || (isset($product) && $product->sex == $value)) ? 'selected' : '' }}>
+                                {{ ucfirst($value) }}
+                            </option>
                         @endforeach
                     </select>
+                    
                     
                 </div>
                 <div class="col">

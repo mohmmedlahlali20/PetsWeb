@@ -12,6 +12,7 @@ use App\Models\Categories;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\ProductsRequest;
+use Illuminate\Support\Facades\Storage;
 
 class AdminController extends Controller
 {
@@ -64,7 +65,7 @@ class AdminController extends Controller
    
      public function store(ProductsRequest $admin)
      {
-         //
+         //dd($admin);
          $data = $admin->validated();
          if ($admin->hasFile('image')) {
              $data['image'] = $admin->file('image')->store('Products', 'public');
@@ -104,13 +105,24 @@ class AdminController extends Controller
     public function update(ProductsRequest $request, Products $product)
     {
         $validatedData = $request->validated();
-        //$product->category_id = $validatedData['category'];
-        $validatedData['category_id'] = $product->category_id;
-        $product->update($validatedData);
 
-        //$product->update($validatedData);
-         return redirect()->route('product.index')->with('success' , 'Product is update successfuly');
+        if ($request->hasFile('image')) {
+            $imagePath = $request->file('image')->store('images', 'public');
+            
+            if ($product->image) {
+                Storage::disk('public')->delete($product->image);
+            }
+            
+
+            $validatedData['image'] = $imagePath;
+        }
+
+        $product->update($validatedData);
+    
+
+        return redirect()->route('product.index')->with('success' , 'Product updated successfully');
     }
+    
 
     /**
      * Remove the specified resource from storage.

@@ -26,15 +26,15 @@ class ProductsRequest extends FormRequest
             'name' => 'required|min:5',
             'price' => 'required|numeric',
             'description' => 'required|min:20',
-            //'quantity' => 'required|numeric',
+            'image' => 'required',
             'category_id' => 'required',
-            'sex'=> 'required',
+          //  'sex'=> '',
             'age' => 'required'
         ];
         
-        if ($this->route()->getActionMethod() !== 'update') {
-            $rules['image'] = 'image|required'; 
-        }
+        //if ($this->route()->getActionMethod() !== 'update') {
+          //  $rules['image'] = ''; 
+       // }
         
         return $rules;
         

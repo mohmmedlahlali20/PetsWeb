@@ -286,10 +286,14 @@
               
                 <div id="notification-container">
                     @if(session('success'))
-                        <div id="notification-message" class="notification-message">{{ session('success') }}</div>
+                    <div id="notification-message" class="notification-message alert alert-success" role="alert">
+                        <i class="bi bi-check-circle-fill"></i> {{ session('success') }}
+                    </div>
                     @endif
                     @if(session('danger'))
-                    <div id="notification-message" class="notification-message">{{ session('success') }}</div>
+                    <div id="notification-message" class="notification-message alert alert-danger" role="alert">
+                        <i class="bi bi-exclamation-triangle-fill"></i> {{ session('danger') }}
+                    </div>
                     @endif
                 </div>
                 
