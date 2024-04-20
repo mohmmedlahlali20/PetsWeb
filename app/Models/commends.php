@@ -4,6 +4,7 @@ namespace App\Models;
 
 
 use App\Models\User;
+use App\Models\payment;
 use App\Models\payments;
 use App\Models\Products;
 use Illuminate\Database\Eloquent\Model;
@@ -31,9 +32,8 @@ class commends extends Model
 
     public function payment()
     {
-        return $this->hasOne(payment::class);
+        return $this->hasOne(payment::class, 'commend_id');
     }
-
     public function food()
     {
         return $this->belongsTo(Food::class, 'food_id');

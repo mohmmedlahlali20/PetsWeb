@@ -24,7 +24,7 @@ class UserController extends Controller
             $query->where('status', 'invalid');
         },
     ])->get();
-
+//dd($users);
    
     return view('DashbordAdmin.users.index', compact('users'));
 }

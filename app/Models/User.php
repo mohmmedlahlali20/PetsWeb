@@ -26,7 +26,8 @@ class User extends Authenticatable
         'role',
         'provider',
         'provider_id',
-        'provider_token'
+        'provider_token',
+        'avatar'
 
     ];
 

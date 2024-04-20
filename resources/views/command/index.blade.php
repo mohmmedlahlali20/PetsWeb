@@ -40,84 +40,74 @@
 </style>
 
 <body>
-    <nav class="navbar navbar-expand-lg rbg-nav">
-        <div class="container px-4 px-lg-5">
-            <a class="navbar-brand" href="#!"><img style="border-radius: 10px;" width="30%" src="{{ asset('assets/images/logo.jpg') }}" alt=""></a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <nav class="navbar navbar-expand-lg navbar-light rbg-nav">
+        <div class="container">
+            <a class="navbar-brand" href="{{ route('Home.index') }}">
+                <img src="assets/images/logo.jpg" alt="Logo" class="logo">
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
                 <span class="navbar-toggler-icon"></span>
                 <span class="navbar-toggler-icon"></span>
             </button>
-            
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
-    
-                    <li class="nav-item"><a class="nav-link active" aria-current="page" href=""><i class="fas fa-home"></i></a></li>
-                    @if(Auth::check() && Auth::user()->role == 'admin')
-                    <li class="nav-item"><a class="nav-link" href="{{ route('product.index') }}">Dashboard</a></li>
-                    @endif
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            Categories
-                        </a>
-                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <li>
-                                <a class="dropdown-item" href="#!">Contact Admin</a>
-                            </li>
-                            <li>
-                                <hr class="dropdown-divider">
-                            </li>
-                            <li>
-                                <a class="dropdown-item" href="{{ url('/chatify') }}">Chat</a>
-                            </li>
-                        </ul>
-                    </li>
-                    
-    
-                    @guest
-                    <li class="nav-item">
-                        <a class="nav-link active custom-btn login-btn" aria-current="page" href="{{ route('login') }}"><i class="fas fa-sign-in-alt"></i> Login</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link active custom-btn register-btn" aria-current="page" href="{{ route('register') }}"><i class="fas fa-user-plus"></i> Register</a>
-                    </li>
-                    @endguest
+                <form class="d-flex" method="get">
+                    <span class="input-group-addon"><i class="bx bxs-map"></i></span>
+                    <input type="search" class="form-control" name="query" placeholder="Search">
+                    &nbsp;
+                    <div class="input-group-append">
+                        <button class="btn btn-primary" type="submit">Search</button>
+                    </div>
+                </form>
+                <ul class="navbar-nav ms-auto mb-2 mb-lg-0 me-2">
                     @auth
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            <i class="fas fa-user-alt"></i> 
-                        </a>
-                        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                            <li>
-                                <span class="dropdown-item">
-                                    <strong>Name:</strong> {{ auth()->user()->name }}
-                                </span>
-                            </li>
-                            <li>
-                                <span class="dropdown-item">
-                                    <strong>Email:</strong> {{ auth()->user()->email }}
-                                </span>
-                            </li>
-                            <li>
-                                <hr class="dropdown-divider">
-                            </li>
-                            <li>
-                                <form action="{{ route('logout') }}" method="POST">
-                                    @csrf
-                                    <button type="submit" class="dropdown-item btn btn-outline-danger"><i class="fas fa-sign-out-alt"></i> Logout</button>
-                                </form>
-                            </li>
-                        </ul>
+                    @if(Auth::user()->role == 'admin')
+                    <li class="nav-item ms-lg-2">
+                        <a class="nav-link dashboard-link custom-btn" href="{{ route('product.index') }}">Dashboard</a>
                     </li>
-                    
+                    @endif
+                    @else
+                    <li class="nav-item">
+                        <a class="nav-link custom-btn login-btn" href="{{ route('login') }}"><i
+                                class="fas fa-sign-in-alt fa-lg"></i> Login</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link custom-btn register-btn" href="{{ route('register') }}"><i
+                                class="fas fa-user-plus fa-lg"></i> Register</a>
+                    </li>
                     @endauth
+
+                    <form action="{{ route('Commandes.index') }}" method="GET" class="ms-lg-2">
+                        <button type="submit" class="btn custom-btn">
+                            <i class="bi-cart-fill fa-lg me-1"></i>
+                            My Orders 
+                        </button>
+                    </form>
+
+                    <div class="ms-lg-2">
+                        @auth
+                        <div class="dropdown">
+                            <button class="btn custom-btn dropdown-toggle" type="button" id="userDropdown"
+                                data-bs-toggle="dropdown" aria-expanded="false">
+                                <i class="fas fa-user-alt fa-lg"></i> {{ auth()->user()->name }}
+                            </button>
+                            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
+                                <li><span class="dropdown-item"><strong>Email:</strong> {{ auth()->user()->email }}</span>
+                                </li>
+                                <li><hr class="dropdown-divider"></li>
+                                <li>
+                                    <form action="{{ route('logout') }}" method="POST">
+                                        @csrf
+                                        <button type="submit" class="dropdown-item btn btn-outline-danger"><i
+                                                class="fas fa-sign-out-alt fa-lg"></i> Logout</button>
+                                    </form>
+                                </li>
+                            </ul>
+                        </div>
+                        @endauth
+                    </div>
                 </ul>
-                {{-- <form action="" class="d-flex">
-                    <a id="" class="btn btn-outline-dark" href="{{ route('Commandes.index') }}">
-                        <i class="bi-cart-fill me-1"></i>
-                        My Cards ({{ $userCommandCount }})
-                    </a>
-                </form> --}}
             </div>
         </div>
     </nav>
@@ -163,111 +153,98 @@
          </div>
      </div>
 @endif
-
-    <div class="container mt-5 mb-5">
-        <div class="d-flex justify-content-center row">
-            <div class="col-md-10">
-                @forelse ($commands as $commend)
-                @if ($commend->user_id === auth()->user()->id)
-                <br>
-                <div class="row p-2 bg-white border rounded">
-                    <div class="col-md-3 mt-1">
-                        @if ($commend->food)
-                        <img class="img-fluid img-responsive rounded product-image" src="{{ Storage::url($commend->food->image) }}">
-                        @elseif ($commend->accessoir)
-                        <img class="img-fluid img-responsive rounded product-image" src="{{ Storage::url($commend->accessoir->image) }}">
-                        @elseif ($commend->product)
-                        <img class="img-fluid img-responsive rounded product-image" src="{{ Storage::url($commend->product->image) }}">
-                        @endif
+<div class="container mt-5 mb-5">
+    <div class="row justify-content-center">
+        <div class="col-md-10">
+            @forelse ($commands as $commend)
+            @if ($commend->user_id === auth()->user()->id)
+            <div class="card mb-4">
+                <div class="row g-0">
+                    <div class="col-md-6">
+                        <img class="card-img img-fluid" src="{{ $commend->food ? Storage::url($commend->food->image) : ($commend->accessoir ? Storage::url($commend->accessoir->image) : Storage::url($commend->product->image)) }}" alt="Product Image">
                     </div>
-                    <div class="col-md-6 mt-1">
-                        @if ($commend->food)
-                        <h5 class="badge bg-success">Food Name: {{ $commend->food->name }}</h5>
-                        @elseif ($commend->accessoir)
-                        <h5 class="badge bg-primary">Accessory Name: {{ $commend->accessoir->name }}</h5>
-                        @elseif ($commend->product)
-                        <h5 class="badge bg-info">Pet Name: {{ $commend->product->name }}</h5>
-                        <h5 class="">{{ $commend->product->description }}</h5>
-                        @endif
-
-                    </div>
-
-                    <div class="align-items-center align-content-center col-md-3 border-left mt-1">
-                        <div class="d-flex flex-row align-items-center">
-                            <h4 class="mr-1">
-                                @if ($commend->food)
-                                {{ $commend->food->price }}
-                                @elseif ($commend->accessoir)
-                                {{ $commend->accessoir->price }}
-                                @elseif ($commend->product)
-                                {{ $commend->product->price }}
-                                @endif
-                                MAD
-                            </h4>
+                    <div class="col-md-6">
+                        <div class="card-body">
+                            @if ($commend->food)
+                            <h5 class="card-title"><span class="badge bg-success">Food Name: {{ $commend->food->name }}</span></h5>
+                            @elseif ($commend->accessoir)
+                            <h5 class="card-title"><span class="badge bg-primary">Accessory Name: {{ $commend->accessoir->name }}</span></h5>
+                            @elseif ($commend->product)
+                            <h5 class="card-title"><span class="badge bg-info">Pet Name: {{ $commend->product->name }}</span></h5>
+                            <p class="card-text">{{ $commend->product->description }}</p>
+                            @endif
+                            <p class="card-text"><small class="text-muted">{{ $commend->user->name }}</small></p>
                         </div>
-                        <h6 class="text-success">{{ $commend->user->name }}</h6>
-                        <div class="d-flex flex-column mt-4">
-                            <button class="btn btn-outline-success btn-sm mt-2" type="button">Total Commands:</button>
-                        </div>
-                        <form action="{{ route('Commandes.destroy', $commend->id) }}" method="POST">
-                            @csrf
-                            @method('DELETE')
-                            <div class="d-flex flex-column mt-4">
-                                <button class="btn btn-outline-danger btn-sm mt-2" type="submit">Cancel Order</button>
-                            </div>
-                        </form>
                     </div>
                 </div>
-              
-
-                @endif
-                @empty
-                <div class="container mt-5 d-flex justify-content-center">
-                    <div class="card p-4 mt-3">
-                       <div class="first d-flex justify-content-between align-items-center mb-3">
-                         <div class="info">
-                             <span class="d-block name">Thank you, Alex</span>
-                             <span class="order">Order - 4554645</span>
-                              
-                         </div>
-                        
-                          <img src="https://i.imgur.com/NiAVkEw.png" width="40"/>
-                           
-             
-                       </div>
-                           <div class="detail">
-                       <span class="d-block summery">Your order has been dispatched. we are delivering you order.</span>
-                           </div>
-                       <hr>
-                       <div class="text">
-                     <span class="d-block new mb-1" >Alex Dorlew</span>
-                      </div>
-                     <span class="d-block address mb-3">672 Conaway Street Bryantiville Massachusetts 02327</span>
-                       <div class="  money d-flex flex-row mt-2 align-items-center">
-                         <img src="https://i.imgur.com/ppwgjMU.png" width="20" />
-                     
-                         <span class="ml-2">Cash on Delivery</span> 
-             
-                            </div>
-                            <div class="last d-flex align-items-center mt-3">
-                             <span class="address-line">CHANGE MY DELIVERY ADDRESS</span>
-             
-                            </div>
-                     </div>
-                 </div>
-                @endforelse
-                {{ $commands->links() }}
-                @if($commands->isNotEmpty())
+                <div class="card-footer d-flex justify-content-between align-items-center">
+                    <h4>
+                        @if ($commend->food)
+                        {{ $commend->food->price }}
+                        @elseif ($commend->accessoir)
+                        {{ $commend->accessoir->price }}
+                        @elseif ($commend->product)
+                        {{ $commend->product->price }}
+                        @endif
+                        MAD
+                    </h4>
+                    <form action="{{ route('Commandes.destroy', $commend->id) }}" method="POST">
+                        @csrf
+                        @method('DELETE')
+                        <button class="btn btn-outline-danger btn-sm" type="submit">Cancel Order</button>
+                    </form>
+                </div>
+            </div>
+            @endif
+            @empty
+            <div class="card mt-3">
+                <div class="card-body">
+                    <div class="first d-flex justify-content-between align-items-center mb-3">
+                        <div class="info">
+                            <span class="d-block name">Thank you, {{ auth()->user()->name }}</span>
+                            <span class="order">Order - 4554645</span>
+                        </div>
+                        <img src="https://i.imgur.com/NiAVkEw.png" width="40" alt="Checkmark Icon">
+                    </div>
+                    <div class="detail">
+                        <span class="d-block summery">Your order has been dispatched. We are delivering your order.</span>
+                    </div>
+                    <hr>
+                    <div class="text">
+                        <span class="d-block new mb-1">{{ auth()->user()->name }}</span>
+                    </div>
+                    <span class="d-block address mb-3">672 Conaway Street Bryantiville Massachusetts 02327</span>
+                    <div class="money d-flex flex-row mt-2 align-items-center">
+                        <img src="https://i.imgur.com/ppwgjMU.png" width="20" alt="Cash Icon">
+                        <span class="ml-2">Cash on Delivery</span>
+                    </div>
+                    <div class="last d-flex align-items-center mt-3">
+                        <a href="#" class="address-line">CHANGE MY DELIVERY ADDRESS</a>
+                    </div>
+                </div>
+            </div>
+            @endforelse
+           
+            @if($commands->isNotEmpty())
+            <div class="mt-5 d-flex justify-content-between">
                 <form action="{{ route('striptPayment') }}" method="POST">
                     @csrf
                     <input type="hidden" name="command_id" value="{{ $commands->first()->id }}">
-                    <button class="btn mt-5 btn-success" type="submit">Checkout</button>
+                    <button class="btn btn-success" type="submit">Checkout</button>
                 </form>
-                @endif
-                
+      
             </div>
+            
+            
+          
+            @endif
         </div>
     </div>
+</div>
+
+
+
+
 
 
     </footer>

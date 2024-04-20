@@ -81,14 +81,21 @@
               @error('password')
               <span class="text-danger">{{ $message }}</span>
           @enderror
-              <div class="form-outline mb-4">
+              <div class="form-outline mb-4">avatar
                 <label class="form-label" for="form3Example4"> Confirmation Password</label>
                 <input type="password" name="password_confirmation" id="form3Example4" class="form-control" />
               </div>
                   @error('password_confirmation')
                   <span class="text-danger">{{ $message }}</span>
               @enderror
-              <!-- Checkbox -->
+
+              <div class="mb-3">
+                <label for="formFile" class="form-label">User Avatar</label>
+                <input class="form-control" type="file" name="avatar" id="formFile">
+              </div>
+              @error('avatar')
+              <span class="text-danger">{{ $message }}</span>
+          @enderror
               <div class="form-check d-flex mt-6">
                 <input class="form-check-input me-2" type="checkbox" value="" id="form2Example33" checked>
                 <label class="form-check-label" for="form2Example33">Remember me</label>

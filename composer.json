@@ -13,6 +13,7 @@
         "laravel/socialite": "^5.12",
         "laravel/tinker": "^2.8",
         "munafio/chatify": "^1.6",
+        "simplesoftwareio/simple-qrcode": "~4",
         "stripe/stripe-php": "^13.16"
     },
     "require-dev": {

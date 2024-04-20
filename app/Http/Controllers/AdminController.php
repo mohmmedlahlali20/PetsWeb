@@ -67,6 +67,7 @@ class AdminController extends Controller
      {
          //dd($admin);
          $data = $admin->validated();
+         
          if ($admin->hasFile('image')) {
              $data['image'] = $admin->file('image')->store('Products', 'public');
          }

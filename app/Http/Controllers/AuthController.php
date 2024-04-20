@@ -28,6 +28,7 @@ class AuthController extends Controller
         $request->validate([
             'email' => 'required',
             'password' => 'required',
+            
         ]);
     
         $credentials = $request->only('email', 'password');
@@ -46,21 +47,36 @@ class AuthController extends Controller
 
     
 
-    public function registerPost(AuthRequest $request){
-        $data['name'] = $request->name;
-        $data['email'] = $request->email;
-        $data['password'] = bcrypt($request->password);
+    public function registerPost(AuthRequest $request)
+{
+    // Validate the request data
+    $data = $request->validated();
     
-        $user = User::create($data);
-       
-       
-        if(!$user){
-            return redirect()->back()->with('error', 'Registration failed');
-        }
-        auth()->login($user);
-   
-        return redirect()->route('Home.index')->with('success', 'Registration successful');
+    if ($request->hasFile('avatar')) {
+        $data['avatar'] = $request->file('avatar')->store('public/Avatars');
     }
+
+    $user = User::create([
+        'name' => $data['name'],
+        'email' => $data['email'],
+        'password' => Hash::make($data['password']),
+        'avatar' => $data['avatar']
+    ]);
+
+    if (!$user) {
+        return redirect()->back()->with('error', 'Registration failed');
+    }
+    
+    // Log in the newly registered user
+    auth()->login($user);
+
+    // Redirect to the home page with a success message
+    return redirect()->route('Home.index')->with('success', 'Registration successful');
+}
+
+
+    
+    
     
 
     public function Logout(){

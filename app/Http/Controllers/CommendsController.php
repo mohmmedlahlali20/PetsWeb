@@ -8,6 +8,8 @@ use App\Models\Products;
 use App\Models\Accessoir;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use SimpleSoftwareIO\QrCode\Facades\QrCode;
+
 
 class CommendsController extends Controller
 {
@@ -21,10 +23,15 @@ class CommendsController extends Controller
     
      public function index()
      {
-         $commands = commends::with(['product', 'food', 'accessoir'])->paginate(4);
+         $commands = commends::with(['product', 'food', 'accessoir'])
+                         ->where('status', 'invalid')
+                         ->get();
+     //dd($commands);
          $isPayed = false;
-         return view('command.index', compact('commands' , 'isPayed'));
+         return view('command.index', compact('commands', 'isPayed'));
      }
+     
+     
     /**
      * Show the form for creating a new resource.
      */
@@ -52,7 +59,8 @@ class CommendsController extends Controller
         commends::create([
             'products_id' => $productId,
             'user_id' => $userId,
-            'total_price' => $product->price 
+            'total_price' => $product->price ,
+            'status' => 'invalid',
         ]);
     
         return redirect()->back()->with('success', 'Votre commande a été passée avec succès.');

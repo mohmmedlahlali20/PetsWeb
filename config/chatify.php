@@ -58,11 +58,7 @@ return [
     | User Avatar
     |-------------------------------------
     */
-    'user_avatar' => [
-        'folder' => 'users-avatar',
-        'default' => 'avatar.png',
-    ],
-
+    
     /*
     |-------------------------------------
     | Gravatar
@@ -71,11 +67,7 @@ return [
     | [ 404 | mp | identicon (default) | monsterid | wavatar ]
     |-------------------------------------
     */
-    'gravatar' => [
-        'enabled' => true,
-        'image_size' => 200,
-        'imageset' => 'identicon'
-    ],
+    
 
     /*
     |-------------------------------------
