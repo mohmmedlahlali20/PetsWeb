@@ -2,7 +2,9 @@
 
 namespace App\Models;
 
+use App\Models\Food;
 use App\Models\Products;
+use App\Models\Accessoir;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
@@ -21,11 +23,23 @@ class comments extends Model
     {
         return $this->belongsTo(User::class, 'user_id');
     }
+
+    public function food()
+    {
+        return $this->belongsTo(Food::class);
+    }
+
+    public function accessory()
+    {
+        return $this->belongsTo(Accessoir::class);
+    }
+
     
     protected $fillable = [
         'product_id', // Corrected the attribute name
         'comments',
         'rate_number',
-        'user_id'
+        'user_id',
+        'food_id'
     ];
 }

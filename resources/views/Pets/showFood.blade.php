@@ -12,78 +12,81 @@
     <script src="https://kit.fontawesome.com/c0bae2ffa6.js" crossorigin="anonymous"></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+        <link href="{{asset('css/styles.css')}}" rel="stylesheet" />
+        <link href="{{asset('css/card.css')}}" rel="stylesheet" />
     <title>{{ config('app.name') }} </title>
 </head>
 
 <body>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <div class="container px-4 px-lg-5">
-            <a class="navbar-brand" href="#!"><img width="30%" src="{{ asset('assets/images/logo.jpg') }}"
-                    alt=""></a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
-                aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+    <nav class="navbar  navbar-expand-lg navbar-light rbg-nav">
+        <div class="container">
+            <a class="navbar-brand" href="{{ route('Home.index') }}">
+                <img src="{{asset('assets/images/logo.jpg')}}" alt="Logo" class="logo">
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+                <span class="navbar-toggler-icon"></span>
+                <span class="navbar-toggler-icon"></span>
+            </button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
-
-                    <li class="nav-item"><a class="nav-link active" aria-current="page" href="">Home</a></li>
-                    @if (Auth::check() && Auth::user()->role == 'admin')
-                        <li class="nav-item"><a class="nav-link" href="{{ route('product.index') }}">Dashboard</a></li>
-                    @endif
-
-
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button"
-                            data-bs-toggle="dropdown" aria-expanded="false">Shop</a>
-                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <li><a class="dropdown-item" href="#!">All Products</a></li>
-                            <li>
-                                <hr class="dropdown-divider" />
-                            </li>
-                            <li><a class="dropdown-item" href="#!">Popular Items</a></li>
-                            <li><a class="dropdown-item" href="#!">New Arrivals</a></li>
-                        </ul>
-                    </li>
-                    @guest
-                        <li class="nav-item">
-                            <a class="nav-link active custom-btn login-btn" aria-current="page"
-                                href="{{ route('login') }}">Login</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link active custom-btn register-btn" aria-current="page"
-                                href="{{ route('register') }}">Register</a>
-                        </li>
-                    @endguest
-
-
+                <form class="d-flex" method="get">
+                    <span class="input-group-addon"><i class="bx bxs-map"></i></span>
+                    <input type="search" class="form-control" name="query" placeholder="Search">
+                    &nbsp;
+                    <div class="input-group-append">
+                        <button class="btn btn-primary" type="submit">Search</button>
+                    </div>
+                </form>
+                <ul class="navbar-nav ms-auto mb-2 mb-lg-0 me-2">
                     @auth
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle btn btn-primary" id="navbarDropdown" href="#"
-                                role="button" data-bs-toggle="dropdown" aria-expanded="false">Profile</a>
-                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <li><span class="dropdown-item">{{ auth()->user()->name }}</span></li>
-                                <li><span class="dropdown-item">{{ auth()->user()->email }}</span></li>
-                                <li>
-                                    <hr class="dropdown-divider" />
+                    @if(Auth::user()->role == 'admin')
+                    <li class="nav-item ms-lg-2">
+                        <a class="nav-link dashboard-link custom-btn" href="{{ route('product.index') }}">Dashboard</a>
+                    </li>
+                    @endif
+                    @else
+                    <li class="nav-item">
+                        <a class="nav-link custom-btn login-btn" href="{{ route('login') }}"><i
+                                class="fas fa-sign-in-alt fa-lg"></i> Login</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link custom-btn register-btn" href="{{ route('register') }}"><i
+                                class="fas fa-user-plus fa-lg"></i> Register</a>
+                    </li>
+                    @endauth
+
+                    <form action="{{ route('Commandes.index') }}" method="GET" class="ms-lg-2">
+                        <button type="submit" class="btn custom-btn">
+                            <i class="bi-cart-fill fa-lg me-1"></i>
+                            My Orders 
+                        </button>
+                    </form>
+
+                    <div class="ms-lg-2">
+                        @auth
+                        <div class="dropdown">
+                            <button class="btn custom-btn dropdown-toggle" type="button" id="userDropdown"
+                                data-bs-toggle="dropdown" aria-expanded="false">
+                                <i class="fas fa-user-alt fa-lg"></i> {{ auth()->user()->name }}
+                            </button>
+                            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
+                                <li><span class="dropdown-item"><strong>Email:</strong> {{ auth()->user()->email }}</span>
                                 </li>
+                                <li><hr class="dropdown-divider"></li>
                                 <li>
                                     <form action="{{ route('logout') }}" method="POST">
                                         @csrf
-                                        <button type="submit" class="dropdown-item btn btn-info">Logout</button>
+                                        <button type="submit" class="dropdown-item btn btn-outline-danger"><i
+                                                class="fas fa-sign-out-alt fa-lg"></i> Logout</button>
                                     </form>
                                 </li>
                             </ul>
-                        </li>
-                    @endauth
-
-
+                        </div>
+                        @endauth
+                    </div>
                 </ul>
-                <form action="" class="d-flex">
-                    <a id="" class="btn btn-outline-dark" href="{{ route('Commandes.index') }}">
-                        <i class="bi-cart-fill me-1"></i>
-                        My Cards
-                    </a>
-                </form>
             </div>
         </div>
     </nav>
@@ -109,23 +112,19 @@
                 <main class="col-lg-6">
                     <div class="ps-lg-3">
                         <h4 class="title text-dark">
-                            {{ $Food->name }} <!-- Display the Food name -->
+                            {{ $Food->name }} 
                         </h4>
                         <div class="mb-3">
-                            <span class="h5">${{ $Food->price }}.00</span> <!-- Display the Food price -->
+                            <span class="h5">${{ $Food->price }}.00</span> 
                             <span class="text-muted">/per box</span>
                         </div>
-                        <img src="{{ Storage::url($Food->image) }}" class="img-fluid rounded mb-3" alt="{{ $Food->name }}"> <!-- Display the Food image -->
+                        <img src="{{ Storage::url($Food->image) }}" class="img-fluid rounded mb-3" alt="{{ $Food->name }}">
                         <p>
-                            {{-- {{ $Food->description }} <!-- Display the Food description --> --}}
+                            
                         </p>
-                        <!-- Other details can be displayed similarly -->
                         <div class="row">
                             <dt class="col-3">quantity:</dt>
                             <dd class="col-9">{{ $Food->quantity }}</dd> 
-                
-                       
-                
                             <dt class="col-3">Date of creation</dt>
                             <dd class="col-9">{{ $Food->created_at }}</dd>
                         </div>
@@ -144,7 +143,7 @@
             <div class="row">
                 <div class="col-sm-5 border m-5 col-md-6 col-12 pb-4">
                     
-                        {{-- <h1>Comments</h1>
+                         <h1>Comments</h1>
                       @forelse ($comments as $item)
                       <div class="comment mt-4 text-justify border bg-light rounded p-3 float-left shadow">
                         <h4>{{ $item->user->name }}</h4>
@@ -156,34 +155,35 @@
                       @empty
                           
                       @endforelse
-                         --}}
+                         
                     </div>
                    
                     <div class="col-lg-4 col-md-5 col-sm-4 offset-md-1 offset-sm-1 col-12 mt-4">
                         <div id="algin-form">
-                            <form action="{{ route('commentes') }}" method="POST">
-                                @csrf
-                                @if (session('success'))
-                                <div class="alert alert-success">
-                                    {{ session('success') }}
-                                </div>
-                            @endif
-                        
-                            @if (session('error'))
-                                <div class="alert alert-danger">
-                                    {{ session('error') }}
-                                </div>
-                            @endif
+
+                            @if (session('success'))
+                            <div class="alert alert-success">
+                                {{ session('success') }}
+                            </div>
+                        @endif
+                    
+                        @if (session('error'))
+                            <div class="alert alert-danger">
+                                {{ session('error') }}
+                            </div>
+                        @endif
+                            <form action="{{ route('foods.comments.store', $Food->id) }}" method="POST">
+                                @csrf 
                             <div class="form-group">
                                 <h4>Leave a comment</h4>
                                 <label for="comments">Message</label>
-                                {{-- <input type="hidden" name="products_id" value="{{ $products->id }}"> --}}
-                                <textarea name="msg" id="comments" cols="30" rows="5" class="form-control"
+                                <input type="hidden" name="Food_id" value="{{ $Food->id }}">
+                                <textarea name="comments" id="comments" cols="30" rows="5" class="form-control"
                                     style="background-color: rgb(221, 217, 217);"></textarea>
                             </div>
                             <div class="form-group">
                                 <label for="rating">Rating</label>
-                                <input type="number" name="rating" id="rating" class="form-control">
+                                <input type="number" name="rate_number" id="rating" class="form-control">
                             </div>
                             <div class="form-group">
                                 <button type="submit" id="post" class="btn btn-primary mt-3">Post Comment</button> 

@@ -157,6 +157,7 @@
     <div class="row justify-content-center">
         <div class="col-md-10">
             @forelse ($commands as $commend)
+            
             @if ($commend->user_id === auth()->user()->id)
             <div class="card mb-4">
                 <div class="row g-0">
@@ -199,30 +200,17 @@
             @empty
             <div class="card mt-3">
                 <div class="card-body">
-                    <div class="first d-flex justify-content-between align-items-center mb-3">
-                        <div class="info">
-                            <span class="d-block name">Thank you, {{ auth()->user()->name }}</span>
-                            <span class="order">Order - 4554645</span>
-                        </div>
-                        <img src="https://i.imgur.com/NiAVkEw.png" width="40" alt="Checkmark Icon">
+                    <div class="alert alert-warning" role="alert">
+                        You haven't placed any orders yet. Please proceed to make a purchase.
                     </div>
-                    <div class="detail">
-                        <span class="d-block summery">Your order has been dispatched. We are delivering your order.</span>
+                    <div>
+                         
                     </div>
-                    <hr>
-                    <div class="text">
-                        <span class="d-block new mb-1">{{ auth()->user()->name }}</span>
-                    </div>
-                    <span class="d-block address mb-3">672 Conaway Street Bryantiville Massachusetts 02327</span>
-                    <div class="money d-flex flex-row mt-2 align-items-center">
-                        <img src="https://i.imgur.com/ppwgjMU.png" width="20" alt="Cash Icon">
-                        <span class="ml-2">Cash on Delivery</span>
-                    </div>
-                    <div class="last d-flex align-items-center mt-3">
-                        <a href="#" class="address-line">CHANGE MY DELIVERY ADDRESS</a>
-                    </div>
+
                 </div>
             </div>
+            
+            
             @endforelse
            
             @if($commands->isNotEmpty())

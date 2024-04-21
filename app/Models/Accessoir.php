@@ -10,10 +10,18 @@ class Accessoir extends Model
     use HasFactory;
 
     protected $fillable = [
-        'name', 'price', 'image', 'quantity', // Add 'user_id' to fillable fields
+        'name', 
+        'price', 
+        'image', 
+        'quantity', 
     ];
     public function commends()
     {
         return $this->hasMany(Commend::class, 'accessoir_id');
+    }
+
+    public function comments()
+    {
+        return $this->hasMany(comments::class);
     }
 }

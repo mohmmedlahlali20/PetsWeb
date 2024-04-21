@@ -6,9 +6,13 @@ use App\Models\Food;
 use App\Models\payment;
 use App\Models\commends;
 use App\Models\Products;
+use App\Mail\QrCodeEmail;
 use App\Models\Accessoir;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Storage;
 use SimpleSoftwareIO\QrCode\Facades\QrCode;
+
 
 class PaymentsController extends Controller
 {
@@ -99,7 +103,7 @@ public function success(Request $request)
                      })
                      ->with(['product', 'food', 'accessoir'])
                      ->get();
-        //dd($commands);
+
     $productCounts = [];
     $totalPrice = 0;
 
@@ -119,13 +123,14 @@ public function success(Request $request)
         }
     }
 
-    // Generate QR code
     $productNamesString = implode(', ', array_keys($productCounts));
     $date = now()->format('Y-m-d');
     $qrcode = QrCode::size(200)
                     ->generate("Products: $productNamesString\nDate: $date\nTotal Price: $totalPrice MAD");
+ 
 
-    // Pass data to the view
+
+
     return view('command.success', compact('qrcode', 'productCounts', 'commands', 'totalPrice'));
 }
 

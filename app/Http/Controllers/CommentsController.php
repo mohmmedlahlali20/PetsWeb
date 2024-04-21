@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Food;
 use App\Models\comments;
 use App\Models\Products;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\CommentesRequest;
+use Illuminate\Support\Facades\Validator;
 
 class CommentsController extends Controller
 {
@@ -118,4 +120,48 @@ class CommentsController extends Controller
         $commentes->delete();
         return redirect()->back()->with('success', 'Commentaire supprimé avec succès.');
     }
+
+
+
+    public function CommentsForFoods($id) {
+        $Food = Food::findOrFail($id);
+        $comments = comments::where('food_id', $id)->get();
+        //dd($comments);
+        return view('Pets.showFood', compact('Food', 'comments'));
+    }
+
+
+        public function storeCommentForFood(Request $request, $foodId) {
+            //dd($request->all());
+            $validator = Validator::make($request->all(), [
+                'comments' => 'required|string',
+                'rate_number' => 'required|numeric|min:1|max:10',
+            ]);
+
+            if ($validator->fails()) {
+                return redirect()->back()->withErrors($validator)->withInput();
+            }
+
+            $food = Food::findOrFail($foodId);
+//dd($food);
+            $comment = new comments();
+            $comment->food_id = $food->id;
+            $comment->user_id = auth()->user()->id;
+            $comment->comments = $request->input('comments');
+            $comment->rate_number = $request->input('rate_number');
+            $comment->save();
+   //dd($comment);
+            return redirect()->back()->with('success', 'Comment added successfully!');
 }
+
+
+
+public function CommentsForAccessoir($id) {
+    $Accessoir = Accessoir::findOrFail($id);
+    $comments = comments::where('food_id', $id)->get();
+    dd($Accessoir);
+    return view('Pets.ShowAccessoir', compact('Food', 'Accessoir'));
+}
+}
+
+

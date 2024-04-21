@@ -14,4 +14,10 @@ class Food extends Model
     {
         return $this->hasMany(Commend::class, 'food_id');
     }
+
+
+    public function comments()
+    {
+        return $this->hasMany(comments::class);
+    }
 }

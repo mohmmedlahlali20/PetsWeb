@@ -41,6 +41,10 @@ Route::get('/payments' , [PaymentsController::class, 'AllPayment'])->name('payme
 Route::resource('/accessoir', AccessoirController::class);
 Route::post('/Commandes', [CommendsController::class, 'store'])->name('command');
 Route::post('/commentair', [CommentsController::class, 'store'])->name('commentes');
+//Route::post('/Food/{id}/commentes',[CommentsController::class, 'CommentsForFoods'])->name('commentes.foods');
+Route::post('/foods/{id}/comments', [CommentsController::class, 'storeCommentForFood'])->name('foods.comments.store');
+Route::get('/foods/{id}/comments', [CommentsController::class, 'CommentsForFoods'])->name('foods.comments');
+
 Route::get('/checkout' , [PaymentsController::class , 'index'])->name('GetPayment');
 Route::post('/checkout', [PaymentsController::class, 'checkout'])->name('striptPayment');
 Route::get('/checkout/success', [PaymentsController::class, 'success'])->name('success'); 

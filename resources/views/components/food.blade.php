@@ -14,6 +14,7 @@
                     <p class="card-text">stock:{{ $item->quantity }}</p>
                     <p class="card-text">Created at: {{ $item->created_at }}</p>
                     <div class="d-flex justify-content-between">
+                        
                         <a href="   {{ route('Food.show' , $item->id ) }}" class="btn btn-outline-dark">
                             <i class="fas fa-eye"></i> Show More
                         </a>

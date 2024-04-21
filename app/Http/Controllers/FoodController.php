@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Food;
 use App\Models\commends;
+use App\Models\comments;
 use App\Models\Categories;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -67,8 +68,8 @@ class FoodController extends Controller
      */
     public function show(Food $Food)
     {
-        
-        return view('Pets.showFood' , compact('Food'));
+        $comments = comments::all();
+        return view('Pets.showFood' , compact('Food' , 'comments'));
     }
 
     /**

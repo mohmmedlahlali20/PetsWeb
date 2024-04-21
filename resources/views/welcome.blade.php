@@ -18,11 +18,28 @@
     <link href="{{asset('css/font-awesome.min.css')}}" rel="stylesheet" />
 </head>
 <style>
-   
+.special-offer {
+    position: relative;
+}
+
+.special-offer::before {
+    content: "%30 OFF";
+    position: absolute;
+    top: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #ff0000;
+    color: #fff;
+    padding: 3px 10px;
+    border-radius: 5px;
+    font-weight: bold;
+    font-size: 14px;
+}
+
 </style>
 
-<body style="">
-    <nav class="navbar navbar-expand-lg navbar-light rbg-nav">
+<body class="bg-bady">
+    <nav class="navbar  navbar-expand-lg navbar-light rbg-nav">
         <div class="container">
             <a class="navbar-brand" href="#">
                 <img src="assets/images/logo.jpg" alt="Logo" class="logo">
@@ -96,14 +113,23 @@
 
 
     <br>
-
-    <div class="d-flex align-items-center justify-content-center" ">
-        <div class="g  p-5 w-50 d-inline-block border rounded-5">
+    <div class="d-flex align-items-center justify-content-center">
+        <div class="g p-5 w-50 border rounded-5">
             <h3 class="text-center">Welcome to PetsWeb</h3>
-            <p class="text-center">If you have any inquiries, you can contact the admin <a href="{{ url('/chatify') }}" class="btn btn-info">here</a>.</p>
+            <p class="text-center">Here you can find all the pets you need, with the best quality and prices.</p>
+            <div class="text-center my-5 p-5 rounded shadow w-100 border border-3 border-dark mb-5 mb-lg-0 position-relative special-offer">
+                <span class="position-absolute top-0 start-50 translate-middle badge bg-danger">30% OFF</span>
+                <i class="position-absolute top-50 start-50 translate-middle text-primary bi bi-coupon2" style="font-size: 3rem;"></i>
+                <div class="mb-3">
+                    <img src="#" alt="Pet Image" id="petImage" class="img-fluid" style="display: none;">
+                </div>
+                <button type="button" class="btn btn-primary" onclick="importImage()">Import Pet Image</button>
+            </div>
         </div>
     </div>
-
+    
+    
+    
     <br>
 
 
@@ -130,7 +156,7 @@
                 <x-accessoir :Accessoir="$Accessoir" />
                 @endif
             </div>
-            <div class="col-lg-2">
+            <div class="col-lg-2 bg-b">
                 <div class="left_sidebar_area">
                     <aside class="left_widgets p_filter_widgets">
                         <div class="l_w_title">
@@ -258,9 +284,6 @@
             </div>
         </footer>
     </div>
-    <script>
-
-    </script>
 
 
 

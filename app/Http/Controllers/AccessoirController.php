@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\commends;
+use App\Models\comments;
 use App\Models\Accessoir;
 use App\Models\Categories;
 use Illuminate\Http\Request;
@@ -68,7 +69,8 @@ class AccessoirController extends Controller
     public function show(Accessoir $accessoir)
     {
         //dd($accessoir);
-        return view('Pets.ShowAccessoir' , compact('accessoir'));
+        $comments = comments::all();
+        return view('Pets.ShowAccessoir' , compact('accessoir' , 'comments'));
     }
 
     /**
