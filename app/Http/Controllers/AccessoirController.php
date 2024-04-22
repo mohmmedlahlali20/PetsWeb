@@ -94,6 +94,8 @@ class AccessoirController extends Controller
      */
     public function destroy(Accessoir $accessoir)
     {
-        //
+        //dd($accessoir->delete());
+        $accessoir->delete();
+        return redirect()->back()->with('success', 'Accessory deleted successfully.');
     }
 }

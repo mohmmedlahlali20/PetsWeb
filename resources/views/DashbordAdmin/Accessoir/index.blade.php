@@ -32,9 +32,13 @@
                     @endif
                 </td>
                 <td>{{ $item->created_at }}</td>
-                <td> <!-- Example of actions buttons, replace with your own -->
+                <td> 
                     <button class="btn btn-primary">Edit</button>
-                    <button class="btn btn-danger">Delete</button>
+                    <form action="{{ route('accessoir.destroy' , $item->id) }}" method="post">
+                        @csrf
+                        @method('DELETE')
+                        <button class="btn btn-danger">Delete</button>
+                    </form>
                 </td>
             </tr>
             @empty

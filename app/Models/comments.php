@@ -26,20 +26,21 @@ class comments extends Model
 
     public function food()
     {
-        return $this->belongsTo(Food::class);
+        return $this->belongsTo(Food::class , 'food_id');
     }
 
     public function accessory()
     {
-        return $this->belongsTo(Accessoir::class);
+        return $this->belongsTo(Accessoir::class , 'accessoir_id');
     }
 
     
     protected $fillable = [
-        'product_id', // Corrected the attribute name
+        'product_id', 
         'comments',
         'rate_number',
         'user_id',
-        'food_id'
+        'food_id',
+        'accessoir_id',
     ];
 }

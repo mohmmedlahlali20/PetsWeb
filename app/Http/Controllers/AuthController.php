@@ -116,7 +116,6 @@ class AuthController extends Controller
     }
 
     public function resetPassword($token){
-        // Pass the token to the view
         return view('auth.newPassword', compact('token'));
     }
  
@@ -128,7 +127,6 @@ public function ResetPasswordPost(Request $request){
           "password" => "required|string|min:8|confirmed",
     ]);
 
-    // Fetch the reset token from the database
     $resetPassword = PasswordResetToken::where('email', $request->email)
                                          ->where('token', $request->token)
                                          ->first();
@@ -137,10 +135,8 @@ public function ResetPasswordPost(Request $request){
         return redirect()->route('reset.password')->with('error', "Invalid or expired token");
     }
 
-    // Update the user's password
     $dd = User::where("email", $request->email)->update(["password" => Hash::make($request->password)]);
 //dd($dd);
-    // Delete the reset token from the database
     $resetPassword->delete();
 
     return redirect()->route('login')->with('success', 'Password reset successfully');

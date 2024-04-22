@@ -75,7 +75,6 @@ public function storeAccessoir(Request $request)
     $accessoirId = $request->input('accessoir_id');
     $userId = Auth::id();
 
-    // Assuming you have an Accessoir model
     $accessoir = Accessoir::findOrFail($accessoirId);
 
     commends::create([
@@ -102,10 +101,10 @@ public function storeFood(Request $request)
 
     $food = Food::findOrFail($foodId);
     
-    $existingCommand = commends::where('food_id', $foodId)
-                                ->where('user_id', $userId)
-                                ->where('status', 'invalid') 
-                                ->first();
+    // $existingCommand = commends::where('food_id', $foodId)
+    //                             ->where('user_id', $userId)
+    //                             ->where('status', 'invalid') 
+    //                             ->first();
 
     if ($food->quantity > 0) {
         $food->quantity -= 1; 
@@ -122,14 +121,14 @@ public function storeFood(Request $request)
     } 
 
    
-    if ($existingCommand) {
-        $food->quantity += 1; 
-        $food->save();
+    // if ($existingCommand) {
+    //     $food->quantity += 1; 
+    //     $food->save();
 
-        $existingCommand->delete(); 
+    //     $existingCommand->delete(); 
 
-        return redirect()->back()->with('success', 'Votre commande de nourriture a été annulée avec succès.');
-    }
+      //  return redirect()->back()->with('success', 'Votre commande de nourriture a été annulée avec succès.');
+   // }
 }
 
 

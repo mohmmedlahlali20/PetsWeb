@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Food;
 use App\Models\comments;
 use App\Models\Products;
+use App\Models\Accessoir;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\CommentesRequest;
@@ -157,11 +158,35 @@ class CommentsController extends Controller
 
 
 public function CommentsForAccessoir($id) {
-    $Accessoir = Accessoir::findOrFail($id);
-    $comments = comments::where('food_id', $id)->get();
-    dd($Accessoir);
-    return view('Pets.ShowAccessoir', compact('Food', 'Accessoir'));
+    $accessoir = Accessoir::findOrFail($id);
+    $comments = comments::where('accessoir_id', $id)->get();
+    //dd($Accessoir);
+    return view('Pets.ShowAccessoir', compact('comments', 'accessoir'));
 }
+
+        public function storeCommentForAccessoir(Request $request, $AccessoirId) {
+dd($request->all());
+            $validator = Validator::make($request->all(), [
+                'comments' => 'required|string',
+                'rate_number' => 'required|numeric|min:1|max:10',
+            ]);
+
+            if ($validator->fails()) {
+                return redirect()->back()->withErrors($validator)->withInput();
+            }
+
+            $Accessoir = Accessoir::findOrFail($AccessoirId);
+//dd($food);
+            $comment = new comments();
+            $comment->accessoir_id  = $Accessoir->id;
+            $comment->user_id = auth()->user()->id;
+            $comment->comments = $request->input('comments');
+            $comment->rate_number = $request->input('rate_number');
+            $comment->save();
+   dd($comment);
+            return redirect()->back()->with('success', 'Comment added successfully!');
+
+        }
 }
 
 

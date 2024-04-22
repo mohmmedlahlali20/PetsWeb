@@ -144,9 +144,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-sm-5 col-md-6 col-12 pb-4">
-                    <!-- Comment Section -->
                     <div class="comment-section border bg-light rounded p-3 shadow">
-                        <!-- Sample comment -->
                         <div class="comment mt-4 text-justify border bg-light rounded p-3 shadow">
                             <h4>User Name</h4>
                             <span>Date</span>
@@ -154,33 +152,34 @@
                             <p>Comment Text</p>
                             <span>Rating</span>
                         </div>
-                        <!-- End of sample comment -->
-                        <!-- You can add more comments dynamically -->
                     </div>
-                    <!-- End of Comment Section -->
                 </div>
                 <div class="col-lg-4 col-md-5 col-sm-4 offset-md-1 offset-sm-1 col-12 mt-4">
-                    <!-- Comment Form -->
-                    <form action="{{ route('commentes') }}" method="POST" class="border p-4 rounded shadow"
-                        style="background-color: #f0f2f5;">
-                        @csrf
-                        @if (session('success'))
-                       <span class="text-success">
-                        {{ session('success') }}
-                       </span>
-                           
-                        @endif
-    
-                        @if (session('error'))
-                        <span class="text-danger">
-                            {{ session('error') }}
-                        </span>
-                          
+                    @if (session('success'))
+                    <span class="text-success">
+                     {{ session('success') }}
+                    </span>
+                        
+                     @endif
+ 
+                     @if (session('error'))
+                     <span class="text-danger">
+                         {{ session('error') }}
+                     </span>
                        
-                        @endif
+                    
+                     @endif
+                     @php
+                       dump($accessoir->id);
+                     @endphp
+                  <form action="{{ route('accessoir.comments', $accessoir->id) }}" method="POST" class="border p-4 rounded shadow" style="background-color: #f0f2f5;">
+
+                        @csrf
+                       
                         <h4>Leave a comment</h4>
                         <div class="form-group">
                             <label for="comments">Message</label>
+                            <input type="hidden" name="accessoir_id" value="{{ $accessoir->id }}">
                             <textarea name="msg" id="comments" cols="30" rows="5" class="form-control"
                                 style="background-color: rgb(221, 217, 217);"></textarea>
                         </div>
@@ -192,7 +191,6 @@
                             <button type="submit" id="post" class="btn btn-primary">Post Comment</button>
                         </div>
                     </form>
-                    <!-- End of Comment Form -->
                 </div>
             </div>
         </div>

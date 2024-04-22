@@ -53,7 +53,6 @@ class ProductsController extends Controller
 
         $userId = Auth::id();
         $userCommandCount = commends::where('user_id', $userId)->count();
-        //$likesCount = commends::where('user_id', $userId)->count();
         
               
         return view('welcome', compact('products', 'categories' , 'userCommandCount'));

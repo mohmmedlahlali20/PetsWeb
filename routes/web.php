@@ -45,6 +45,12 @@ Route::post('/commentair', [CommentsController::class, 'store'])->name('commente
 Route::post('/foods/{id}/comments', [CommentsController::class, 'storeCommentForFood'])->name('foods.comments.store');
 Route::get('/foods/{id}/comments', [CommentsController::class, 'CommentsForFoods'])->name('foods.comments');
 
+// Route Definition
+Route::post('/accessoir/{id}/comments', [CommentsController::class, 'CommentsForAccessoir'])->name('accessoir.comments.store');
+Route::get('/accessoir/{id}/comments', [CommentsController::class, 'storeCommentForAccessoir'])->name('accessoir.comments');
+
+
+
 Route::get('/checkout' , [PaymentsController::class , 'index'])->name('GetPayment');
 Route::post('/checkout', [PaymentsController::class, 'checkout'])->name('striptPayment');
 Route::get('/checkout/success', [PaymentsController::class, 'success'])->name('success'); 
@@ -65,7 +71,7 @@ Route::middleware(['auth' , 'admin'])->group(function () {
   Route::get('/Accessoir' , [AccessoirController::class, 'create'])->name('accessoir.name');
   Route::post('/Accessoir', [AccessoirController::class, 'store'])->name('accessoirs.store');
   Route::get('/Accessory' , [AccessoirController::class, 'getAccessoir'])->name('accessory');
-  //Route::resource('user', UserController::class);
+  Route::delete('/Accessoir/{accessoir}', [AccessoirController::class, 'destroy'])->name('accessoir.destroy');
   Route::delete('/Food-data/{food}', [FoodController::class, 'destroy'])->name('food.destroy');
   Route::delete('/all-commends/{id}', [AdminController::class, 'AdminCancelCommand'])->name('admin.destroy');
   Route::get('/food' ,[FoodController::class, 'create'])->name('create');

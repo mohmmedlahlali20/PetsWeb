@@ -87,7 +87,7 @@ class PaymentsController extends Controller
     if ($payment) {
         commends::where('id', $commendId)->update(['status' => 'valide']);
     }
-    
+ //   dd($payment);
 
     return redirect()->to($session->url);
 }
@@ -138,13 +138,13 @@ public function success(Request $request)
 
 
 
-    public function AllPayment(){
-        $items = payment::with('commend')->get();
-//dd($items);
-        $total = $items->sum('amount'); 
-
-        return view('DashbordAdmin.payment.index', compact('items', 'total'));
-    }
+public function AllPayment(){
+    $items = Payment::all();
+    $total = $items->sum('amount');
+    $paymentMethod = 'Stripe'; 
+    $transactionID = 'STRIPE123'; 
+    return view('DashbordAdmin.payment.index', compact('items', 'total', 'paymentMethod', 'transactionID'));
+}
 
 
 
