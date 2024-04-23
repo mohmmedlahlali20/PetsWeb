@@ -11,30 +11,9 @@
   <link rel="stylesheet" href="{{ asset('css/styles.css') }}">
   <link rel="stylesheet" href="{{ asset('css/firststyle.css') }}">
   <style>
-  .rbg {
-    background-color: rgba(179, 239, 247, 0.9);
-  }
   
-  .card {
-      margin-bottom: 20px;
-    }
+      
 
-    .hero-section {
-      background-image: url('{{ asset('assets/images/image.png') }}');
-      color: #333; 
-      padding: 100px 0; 
-      text-align: center;
-    }
-    #services, #prices, #sales, #contact {
-      background-color: #fff; 
-      color: #333; 
-      padding: 80px 0; 
-    }
-
-    .center-image {
-      display: flex;
-      justify-content: center;
-    }
   </style>
 </head>
 <body class="bsb-pets">
@@ -67,66 +46,28 @@
         </div>
     </div>
   </nav>
-
-  <section class="testimonial">
+  <section class="about-petsweb">
     <div class="container">
-        <div class="row">
-            <div class="col-lg-6 d-none d-lg-block">
-                <ol class="carousel-indicators tabs">
-                    <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active">
-                        <figure>
-                            <img src="{{ asset('assets/images/arnab1.jpg') }}" class="img-fluid rounded-circle" alt="A happy pet">
-                        </figure>
-                    </li>
-                    <li data-target="#carouselExampleIndicators" data-slide-to="1">
-                        <figure>
-                            <img src="{{ asset('assets/images/arnab1.jpg') }}" class="img-fluid rounded-circle" alt="Another happy pet">
-                        </figure>
-                    </li>
-                    <li data-target="#carouselExampleIndicators" data-slide-to="2">
-                        <figure>
-                            <img src="{{ asset('assets/images/arnab1.jpg') }}" class="img-fluid rounded-circle" alt="Yet another happy pet">
-                        </figure>
-                    </li>
-                </ol>
-            </div>
-            <div class="col-lg-6 d-flex justify-content-center align-items-center">
-                <div id="carouselExampleIndicators" data-interval="false" class="carousel slide" data-ride="carousel">
-                    <h3>WHAT OUR CLIENTS SAY</h3>
-                    <h1>TESTIMONIALS</h1>
-                    <div class="carousel-inner">
-                        <div class="carousel-item active">
-                            <div class="quote-wrapper">
-                                <p>Les Pets has been a game-changer for my furry friend! Their dedication to providing healthy and delicious pet food has made a noticeable difference in my pet's energy and overall well-being. I highly recommend Les Pets to all pet owners!</p>
-                                <h3>Jennifer Smith</h3>
-                            </div>
-                        </div>
-                        <div class="carousel-item">
-                            <div class="quote-wrapper">
-                                <p>Since switching to Les Pets, my pet has never been happier! The quality of their food and the care they put into every meal is evident. I'm so grateful to have found a company that prioritizes the health and happiness of pets.</p>
-                                <h3>Michael Johnson</h3>
-                            </div>
-                        </div>
-                        <div class="carousel-item">
-                            <div class="quote-wrapper">
-                                <p>Les Pets goes above and beyond to ensure my pet receives the nutrition they need. Their commitment to quality and their love for animals shines through in every meal. Thank you, Les Pets, for making a difference in my pet's life!</p>
-                                <h3>Emily Rodriguez</h3>
-                                
-                            </div>
-                        </div>
-                    </div>
-                    <button class="btn btn-info "> Book now</button>
-                    <ol class="carousel-indicators indicators">
-                        <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
-                        <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-                        <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
-                    </ol>
-                </div>
-            </div>
+      <div class="row">
+        <div class="col-lg-6 d-flex justify-content-center align-items-center">
+          <figure>
+            <img src="{{ asset('assets/images/HomePage2.jpeg') }}" class="testimonial-image" alt="A happy pet">
+          </figure>
         </div>
+        <div class="col-lg-6 d-flex justify-content-center bg-light align-items-center">
+          <div class="quote-wrapper">
+            <h2 class="align-self-center text-center">About PetsWeb</h2>
+            <p class="text-center text-lg-start">PetsWeb is an innovative platform dedicated to providing comprehensive solutions for pet owners and pet enthusiasts. Our mission is to enhance the well-being of pets and strengthen the bond between humans and their furry companions.</p>
+            <p class="text-center text-lg-start">With PetsWeb, you can discover a wide range of resources, including articles on pet care, training tips, product reviews, and community forums where you can connect with other pet lovers. Whether you're a new pet parent or an experienced enthusiast, PetsWeb has something for everyone.</p>
+            <p class="text-center text-lg-start">Join us in our mission to create a world where every pet is happy, healthy, and loved. Explore PetsWeb today and embark on a journey of joy and companionship with your beloved pets!</p>
+          </div>
+        </div>
+      </div>
     </div>
   </section>
   
+  
+    
 
 
 <section class="py-5">
@@ -156,6 +97,63 @@
       </div>
   </div>
 </section>
+
+<section class="faq-section">
+  <div class="container">
+      <h2 class="text-center">Frequently Asked Questions</h2>
+      <div class="row">
+          <div class="col-lg-4">
+              <div class="faq-item">
+                  <img src="{{ asset('assets/images/HomePage7.jpeg') }}" alt="FAQ Image 1">
+                  <h3>How do I get started with your product?</h3>
+                  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum varius ex vel ex fermentum, ut ullamcorper justo rhoncus.</p>
+              </div>
+          </div>
+          <div class="col-lg-4">
+              <div class="faq-item">
+                  <img src="{{ asset('assets/images/HomePage8.jpeg')  }}" alt="FAQ Image 2">
+                  <h3>What payment methods do you accept?</h3>
+                  <p>Nullam vel mauris sit amet neque ultricies varius. Nulla facilisi. Vestibulum auctor urna nec tellus aliquet, nec pulvinar metus convallis.</p>
+              </div>
+          </div>
+          <div class="col-lg-4">
+            <div class="faq-item">
+                <img src="{{ asset('assets/images/HomePage9.jpeg') }}" alt="FAQ Image 3">
+                <h3>How can I contact support?</h3>
+                <p>Phasellus sed elit id ipsum tincidunt dapibus. Sed vel mi ut lacus condimentum tristique. Fusce sollicitudin sapien in ipsum molestie.</p>
+            </div>
+          </div>
+      </div>
+  </div>
+</section>
+<section class="board-section">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-4">
+        <div class="board-item" id="users">
+          <img src="{{ asset('assets/images/HomePage11.jpeg') }}" class="img-fluid board-image" alt="Users Image">
+          <span class="count">0</span>
+          <p>Users</p>
+        </div>
+      </div>
+      <div class="col-lg-4">
+        <div class="board-item" id="pets">
+          <img src="{{ asset('assets/images/HomePage10.jpeg') }}" class="img-fluid board-image" alt="Pets Image">
+          <span class="count">0</span>
+          <p>Pets</p>
+        </div>
+      </div>
+      <div class="col-lg-4">
+        <div class="board-item" id="searching">
+          <img src="{{ asset('assets/images/HomePage7.jpeg') }}" class="img-fluid board-image" alt="Searching Image">
+          <span class="count">0</span>
+          <p>Pets Searching</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- Pets Section -->
 <section class="bsb-pets bg-light py-5 py-xl-8">
   <div class="container">
@@ -205,148 +203,7 @@
 </section>
 
 
-<section class="bsb-pricing-2 bg-light py-5 py-xl-8">
-  <div class="container">
-    <div class="row justify-content-md-center">
-      <div class="col-12 col-md-10 col-lg-8 col-xl-7 col-xxl-6">
-        <h3 class="fs-6 text-secondary mb-2 text-uppercase text-center">Our Pet Packages</h3>
-        <h2 class="display-5 mb-4 mb-md-5 text-center">Discover our premium and VIP plans for your furry friends.</h2>
-        <hr class="w-50 mx-auto mb-5 mb-xl-9 border-dark-subtle">
-      </div>
-    </div>
-  </div>
-  <div class="container">
-    <div class="row gy-5 gy-lg-0 gx-xl-5">
-      <div class="col-12 col-lg-4">
-        <div class="card border-0 border-bottom border-primary shadow-sm">
-          <div class="card-body p-4 p-xxl-5">
-            <h2 class="h4 mb-2">Premium</h2>
-            <h4 class="display-3 fw-bold text-primary mb-0">$75</h4>
-            <p class="text-secondary mb-4">USD / Month</p>
-            <ul class="list-group list-group-flush mb-4">
-              <li class="list-group-item">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-check" viewBox="0 0 16 16">
-                  <path d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425a.267.267 0 0 1 .02-.022z" />
-                </svg>
-                <span><strong>10</strong> Grooming Sessions</span>
-              </li>
-              <li class="list-group-item">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-check" viewBox="0 0 16 16">
-                  <path d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425a.267.267 0 0 1 .02-.022z" />
-                </svg>
-                <span><strong>200</strong> Treats</span>
-              </li>
-              <li class="list-group-item">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-check" viewBox="0 0 16 16">
-                  <path d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425a.267.267 0 0 1 .02-.022z" />
-                </svg>
-                <span><strong>50 lbs</strong> of Premium Food</span>
-              </li>
-              <li class="list-group-item">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-check" viewBox="0 0 16 16">
-                  <path d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425a.267.267 0 0 1 .02-.022z" />
-                </svg>
-                <span>Free <strong>Toy</strong></span>
-              </li>
-              <li class="list-group-item">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-check" viewBox="0 0 16 16">
-                  <path d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425a.267.267 0 0 1 .02-.022z" />
-                </svg>
-                <span><strong>Bi-weekly</strong> Vet Check</span>
-              </li>
-            </ul>
-            <a href="#!" class="btn bsb-btn-xl btn-primary rounded-pill">Choose Plan</a>
-          </div>
-        </div>
-      </div>
-      <div class="col-12 col-lg-4">
-        <div class="card border-0 border-bottom border-primary shadow-sm">
-          <div class="card-body p-4 p-xxl-5">
-            <h2 class="h4 mb-2">VIP</h2>
-            <h4 class="display-3 fw-bold text-primary mb-0">$90 </h4>
-            <p class="text-secondary mb-4">USD / Month</p>
-            <ul class="list-group list-group-flush mb-4">
-              <li class="list-group-item">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-check" viewBox="0 0 16 16">
-                  <path d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425a.267.267 0 0 1 .02-.022z" />
-                </svg>
-                <span><strong>10</strong> Grooming Sessions</span>
-              </li>
-              <li class="list-group-item">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-check" viewBox="0 0 16 16">
-                  <path d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425a.267.267 0 0 1 .02-.022z" />
-                </svg>
-                <span><strong>200</strong> Treats</span>
-              </li>
-              <li class="list-group-item">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-check" viewBox="0 0 16 16">
-                  <path d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425a.267.267 0 0 1 .02-.022z" />
-                </svg>
-                <span><strong>50 lbs</strong> of Premium Food</span>
-              </li>
-              <li class="list-group-item">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-check" viewBox="0 0 16 16">
-                  <path d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425a.267.267 0 0 1 .02-.022z" />
-                </svg>
-                <span>Free <strong>Toy</strong></span>
-              </li>
-              <li class="list-group-item">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-check" viewBox="0 0 16 16">
-                  <path d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425a.267.267 0 0 1 .02-.022z" />
-                </svg>
-                <span><strong>Bi-weekly</strong> Vet Check</span>
-              </li>
-            </ul>
-            <a href="#!" class="btn bsb-btn-xl btn-primary rounded-pill">Choose Plan</a>
-          </div>
-        </div>
-      </div>
-      <div class="col-12 col-lg-4">
-        <div class="card border-0 border-bottom border-primary shadow-sm">
-          <div class="card-body p-4 p-xxl-5">
-            <h2 class="h4 mb-2">Premium</h2>
-            <h4 class="display-3 fw-bold text-primary mb-0">$75</h4>
-            <p class="text-secondary mb-4">USD / Month</p>
-            <ul class="list-group list-group-flush mb-4">
-              <li class="list-group-item">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-check" viewBox="0 0 16 16">
-                  <path d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425a.267.267 0 0 1 .02-.022z" />
-                </svg>
-                <span><strong>10</strong> Grooming Sessions</span>
-              </li>
-              <li class="list-group-item">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-check" viewBox="0 0 16 16">
-                  <path d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425a.267.267 0 0 1 .02-.022z" />
-                </svg>
-                <span><strong>200</strong> Treats</span>
-              </li>
-              <li class="list-group-item">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-check" viewBox="0 0 16 16">
-                  <path d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425a.267.267 0 0 1 .02-.022z" />
-                </svg>
-                <span><strong>50 lbs</strong> of Premium Food</span>
-              </li>
-              <li class="list-group-item">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-check" viewBox="0 0 16 16">
-                  <path d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425a.267.267 0 0 1 .02-.022z" />
-                </svg>
-                <span>Free <strong>Toy</strong></span>
-              </li>
-              <li class="list-group-item">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-check" viewBox="0 0 16 16">
-                  <path d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425a.267.267 0 0 1 .02-.022z" />
-                </svg>
-                <span><strong>Bi-weekly</strong> Vet Check</span>
-              </li>
-            </ul>
-            <a href="#!" class="btn bsb-btn-xl btn-primary rounded-pill">Choose Plan</a>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-  
-</section>
+
 
 
 
@@ -356,42 +213,7 @@
           
 
 <!-- Sales Section -->
-<section id="sales">
-    <div class="container">
-        <h2 class="text-center mb-5">Sales</h2>
-        <p class="text-center">Check out our latest sales and promotions!</p>
-        <!-- Sale Cards -->
-        <div class="row">
-            <div class="col-md-4">
-                <div class="card">
-                    <div class="card-body">
-                        <h5 class="card-title">Summer Sale</h5>
-                        <p class="card-text">Get 20% off on all pest control services this summer.</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="card">
-                    <div class="card-body">
-                        <h5 class="card-title">Holiday Special</h5>
-                        <p class="card-text">Special discounts available for holiday bookings.</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="card">
-                    <div class="card-body">
-                        <h5 class="card-title">Refer a Friend</h5>
-                        <p class="card-text">Refer a friend and get $50 off on your next service.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="center-image">
-        <img src="{{ asset('assets/images/OIG1.jpeg') }}" width="20%" alt="Sales Image" class="img-fluid">
-    </div>
-  </section>
+
   <div class="container-fluid  text-light rbg">
     <footer>
         <div class="row my-5 justify-content-center py-5">
@@ -441,7 +263,33 @@
     </footer>
   </div>
   
+<script>
+  // JavaScript code for animating the counts
+document.addEventListener('DOMContentLoaded', function() {
+  const usersCount = document.getElementById('users').querySelector('.count');
+  const petsCount = document.getElementById('pets').querySelector('.count');
+  const searchingCount = document.getElementById('searching').querySelector('.count');
 
+  // Start the counts animation
+  animateCount(usersCount, 0, 500, 1500);
+  animateCount(petsCount, 0, 1000, 1500);
+  animateCount(searchingCount, 0, 500, 1500);
+
+  function animateCount(element, start, end, duration) {
+    let current = start;
+    const increment = end > start ? 1 : -1;
+    const stepTime = Math.abs(Math.floor(duration / (end - start)));
+    const timer = setInterval(function() {
+      current += increment;
+      element.textContent = current;
+      if (current === end) {
+        clearInterval(timer);
+      }
+    }, stepTime);
+  }
+});
+
+</script>
 
 <!-- Bootstrap Bundle with Popper -->
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>

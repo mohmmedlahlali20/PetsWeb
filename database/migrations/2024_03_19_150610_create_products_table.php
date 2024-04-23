@@ -17,7 +17,6 @@ return new class extends Migration
             $table->string('name');
             $table->float('price')->nullable()->default(00.0);
             $table->text('description')->nullable(); 
-            //$table->integer('quantity')->default(10);
             $table->string('image')->nullable();
             $table->foreignId('category_id')
             ->constrained('categories')

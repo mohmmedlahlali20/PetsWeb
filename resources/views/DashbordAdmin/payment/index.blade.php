@@ -2,7 +2,7 @@
 @section('title', 'Payment Invoice')
 
 @section('content')
-<div class="container">
+{{-- <div class="container">
     <h2>Payment Invoice</h2>
     <div class="table-responsive">
         <table class="table table-striped">
@@ -10,6 +10,7 @@
                 <tr>
                     <th>Item</th>
                     <th>User</th>
+                    <th>Status</th>
                     <th>Price</th>
                 </tr>
             </thead>
@@ -26,22 +27,23 @@
                         @endif
                     </td>
                     <td>
-                        @if ($item->Commends->product)
-                            {{ $item->Commends->user->name }}
-                        @elseif($item->Commends->accessoir)
-                            {{ $item->Commends->user->name }}
-                        @elseif ($item->Commends->food)
-                            {{ $item->Commends->user->name }}
+                        {{ $item->Commends->user->name }}
+                    </td>
+                    <td>
+                        @if (\App\Models\Payment::where('commend_id', $item->Commends->id)->exists())
+                            <i class="fas fa-check text-success"></i> Paid
+                        @else
+                            <i class="fas fa-times text-danger"></i> Not Paid
                         @endif
                     </td>
                     <td>
                         @if ($item->Commends->product)
-                        {{ $item->Commends->product->price }}MAD
-                    @elseif($item->Commends->accessoir)
-                        {{ $item->Commends->accessoir->price }}MAD
-                    @elseif ($item->Commends->food)
-                        {{ $item->Commends->food->price }}MAD
-                    @endif
+                            {{ $item->Commends->product->price }} MAD
+                        @elseif($item->Commends->accessoir)
+                            {{ $item->Commends->accessoir->price }} MAD
+                        @elseif ($item->Commends->food)
+                            {{ $item->Commends->food->price }} MAD
+                        @endif
                     </td>
                 </tr>
                 @endforeach
@@ -68,5 +70,9 @@
             </table>
         </div>
     </div>
-</div>
+</div> --}}
+
+ 
+
+
 @endsection

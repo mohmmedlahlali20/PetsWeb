@@ -156,79 +156,64 @@
 <div class="container mt-5 mb-5">
     <div class="row justify-content-center">
         <div class="col-md-10">
-            @forelse ($commands as $commend)
-            
-            @if ($commend->user_id === auth()->user()->id)
-            <div class="card mb-4">
-                <div class="row g-0">
+            <div class="container mt-5">
+                <div class="row">
+                    @forelse ($commands as $commend)
+                    @if ($commend->user_id === auth()->user()->id)
+                    <div class="col-md-6"> <!-- Start of column for one card -->
+                        <div class="card mb-3">
+                            <div class="row no-gutters">
+                                <div class="col-md-4">
+                                    <img src="{{ $commend->food ? Storage::url($commend->food->image) : ($commend->accessoir ? Storage::url($commend->accessoir->image) : Storage::url($commend->product->image)) }}" class="card-img" alt="Product Image">
+                                </div>
+                                <div class="col-md-8">
+                                    <div class="card-body">
+                                        @if ($commend->food)
+                                        <h5 class="card-title"><span class="badge bg-success">Food Name: {{ $commend->food->name }}</span></h5>
+                                        @elseif ($commend->accessoir)
+                                        <h5 class="card-title"><span class="badge bg-primary">Accessory Name: {{ $commend->accessoir->name }}</span></h5>
+                                        @elseif ($commend->product)
+                                        <h5 class="card-title"><span class="badge bg-info">Pet Name: {{ $commend->product->name }}</span></h5>
+                                        <p class="card-text">{{ $commend->product->description }}</p>
+                                        @endif
+                                        <p class="card-text">$ {{ $commend->food ? $commend->food->price : ($commend->accessoir ? $commend->accessoir->price : $commend->product->price) }} MAD</p>
+                                        <form action="{{ route('Commandes.destroy', $commend->id) }}" method="POST">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button class="btn btn-danger"><i class="fas fa-trash"></i> Remove</button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div> <!-- End of column for one card -->
+                    @endif
+                    @empty
                     <div class="col-md-6">
-                        <img class="card-img img-fluid" src="{{ $commend->food ? Storage::url($commend->food->image) : ($commend->accessoir ? Storage::url($commend->accessoir->image) : Storage::url($commend->product->image)) }}" alt="Product Image">
-                    </div>
-                    <div class="col-md-6">
-                        <div class="card-body">
-                            @if ($commend->food)
-                            <h5 class="card-title"><span class="badge bg-success">Food Name: {{ $commend->food->name }}</span></h5>
-                            @elseif ($commend->accessoir)
-                            <h5 class="card-title"><span class="badge bg-primary">Accessory Name: {{ $commend->accessoir->name }}</span></h5>
-                            @elseif ($commend->product)
-                            <h5 class="card-title"><span class="badge bg-info">Pet Name: {{ $commend->product->name }}</span></h5>
-                            <p class="card-text">{{ $commend->product->description }}</p>
-                            @endif
-                            <p class="card-text"><small class="text-muted">{{ $commend->user->name }}</small></p>
+                        <div class="card mt-3">
+                            <div class="card-body">
+                                <div class="alert alert-warning" role="alert">
+                                    You haven't placed any orders yet. Please proceed to make a purchase.
+                                </div>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="card-footer d-flex justify-content-between align-items-center">
-                    <h4>
-                        @if ($commend->food)
-                        {{ $commend->food->price }}
-                        @elseif ($commend->accessoir)
-                        {{ $commend->accessoir->price }}
-                        @elseif ($commend->product)
-                        {{ $commend->product->price }}
-                        @endif
-                        MAD
-                    </h4>
-                    <form action="{{ route('Commandes.destroy', $commend->id) }}" method="POST">
-                        @csrf
-                        @method('DELETE')
-                        <button class="btn btn-outline-danger btn-sm" type="submit">Cancel Order</button>
-                    </form>
+                    @endforelse
+                    @if($commands->isNotEmpty())
+                    <div class="col-md-12 mt-5 d-flex justify-content-end"> <!-- Start of column for checkout button -->
+                        <form action="{{ route('striptPayment') }}" method="POST">
+                            @csrf
+                            <input type="hidden" name="command_id" value="{{ $commands->first()->id }}">
+                            <button class="btn btn-success" type="submit">Checkout</button>
+                        </form>
+                    </div> <!-- End of column for checkout button -->
+                    @endif
                 </div>
             </div>
-            @endif
-            @empty
-            <div class="card mt-3">
-                <div class="card-body">
-                    <div class="alert alert-warning" role="alert">
-                        You haven't placed any orders yet. Please proceed to make a purchase.
-                    </div>
-                    <div>
-                         
-                    </div>
-
-                </div>
-            </div>
-            
-            
-            @endforelse
-           
-            @if($commands->isNotEmpty())
-            <div class="mt-5 d-flex justify-content-between">
-                <form action="{{ route('striptPayment') }}" method="POST">
-                    @csrf
-                    <input type="hidden" name="command_id" value="{{ $commands->first()->id }}">
-                    <button class="btn btn-success" type="submit">Checkout</button>
-                </form>
-      
-            </div>
-            
-            
-          
-            @endif
         </div>
     </div>
 </div>
+
 
 
 

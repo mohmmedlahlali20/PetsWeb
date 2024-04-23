@@ -11445,3 +11445,231 @@ font-size: 11px;
 font-weight: 700;
 }
 
+.rbg {
+  background-color: rgba(185, 190, 190, 0.9);
+}
+
+.card {
+    margin-bottom: 20px;
+  }
+
+  /* .hero-section {
+    background-image: url('{{ asset('assets/images/image.png') }}');
+    color: #333; 
+    padding: 100px 0; 
+    text-align: center;
+  } */
+
+  .about-petsweb {
+    padding: 80px 0;
+  }
+  
+  .quote-wrapper {
+    padding: 20px;
+  }
+  
+  .testimonial-image {
+    width: 100%;
+    max-width: 400px;
+    height: auto;
+    border-radius: 50%;
+    border: 2px solid #fff;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+  }
+  
+  .quote-wrapper h2 {
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+  }
+  
+  .quote-wrapper p {
+    font-size: 1.1rem;
+    line-height: 1.8;
+  }
+  
+  @media (max-width: 992px) {
+    .about-petsweb {
+      padding: 50px 0;
+    }
+  
+    .testimonial-image {
+      max-width: 300px;
+    }
+  }
+  
+  #services, #prices, #sales, #contact {
+    background-color: #fff; 
+    color: #333; 
+    padding: 80px 0; 
+  }
+
+  .center-image {
+    display: flex;
+    justify-content: center;
+  }
+  .testimonial {
+          padding: 80px 0;
+      }
+
+      .testimonial h1 {
+          font-size: 2.5rem;
+          font-weight: bold;
+      }
+
+      .testimonial h3 {
+          font-size: 1.8rem;
+          font-weight: bold;
+      }
+
+      .quote-wrapper {
+          padding: 20px;
+          border: 1px solid #ddd;
+          border-radius: 10px;
+      }
+
+      .quote-wrapper p {
+          font-size: 1.1rem;
+      }
+
+      .quote-wrapper h3 {
+          font-size: 1.2rem;
+          font-weight: bold;
+          margin-top: 20px;
+      }
+
+      .carousel-inner {
+          background-color: #f9f9f9;
+          border-radius: 10px;
+      }
+
+      .carousel-indicators.tabs {
+          display: flex;
+          justify-content: center;
+      }
+
+      .carousel-indicators.tabs li {
+          width: 60px;
+          height: 60px;
+          margin-right: 10px;
+          border: 2px solid #fff;
+          border-radius: 50%;
+          overflow: hidden;
+      }
+
+      .carousel-indicators.tabs li img {
+          width: 100%;
+          border-radius: 50%;
+          /* Adjust the size of the images here */
+          max-width: 40px;
+          max-height: 40px;
+      }
+
+      .carousel-indicators.indicators li {
+          width: 15px;
+          height: 15px;
+          margin-right: 5px;
+          background-color: #ddd;
+          border: none;
+          border-radius: 50%;
+          cursor: pointer;
+      }
+
+      .carousel-indicators.indicators li.active {
+          background-color: #007bff;
+      }
+
+      .faq-section {
+          padding: 80px 0;
+      }
+
+      .faq-section h2 {
+          font-size: 2.5rem;
+          font-weight: bold;
+          margin-bottom: 30px;
+      }
+
+      .faq-item {
+          margin-bottom: 30px;
+      }
+
+      .faq-item img {
+          max-width: 100%;
+          height: auto;
+          border-radius: 5px;
+          margin-bottom: 20px;
+      }
+
+      .faq-item h3 {
+          font-size: 1.5rem;
+          font-weight: bold;
+          margin-bottom: 10px;
+      }
+
+      .faq-item p {
+          font-size: 1.1rem;
+          line-height: 1.6;
+      }
+
+      .board-section {
+background-color: #f9f9f9;
+padding: 50px 0;
+}
+
+.board-item {
+text-align: center;
+padding: 20px;
+background-color: #fff;
+border-radius: 10px;
+box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+transition: all 0.3s ease;
+}
+
+.board-item:hover {
+transform: translateY(-5px);
+box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.count {
+font-size: 2.5rem;
+font-weight: bold;
+color: #007bff;
+}
+
+.board-item p {
+margin-top: 10px;
+font-size: 1.2rem;
+color: #333;
+}
+
+.board-section {
+  background-color: #f9f9f9;
+  padding: 50px 0;
+}
+
+.board-item {
+  text-align: center;
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+}
+
+.board-item:hover {
+  transform: translateY(-5px);
+  box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+
+
+.board-image {
+  width: 100%;
+  height: auto;
+  border: 2px solid #ccc;
+}
+
+
+
+
+
+

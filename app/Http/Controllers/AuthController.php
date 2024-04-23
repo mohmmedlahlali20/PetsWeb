@@ -67,10 +67,8 @@ class AuthController extends Controller
         return redirect()->back()->with('error', 'Registration failed');
     }
     
-    // Log in the newly registered user
     auth()->login($user);
 
-    // Redirect to the home page with a success message
     return redirect()->route('Home.index')->with('success', 'Registration successful');
 }
 
@@ -98,7 +96,6 @@ class AuthController extends Controller
     
         $token = Str::random(64);
     
-        // Store the token in the database
         PasswordResetToken::updateOrCreate(
             ['email' => $request->email],
             ['token' => $token, 'created_at' => now()]
