@@ -52,17 +52,18 @@ class AuthController extends Controller
     // Validate the request data
     $data = $request->validated();
     
-    if ($request->hasFile('avatar')) {
-        $data['avatar'] = $request->file('avatar')->store('public/Avatars');
+    if ($request->hasFile('image')) {
+        $data['image'] = $request->file('image')->store('Avatrs' , 'public');
+
     }
 
     $user = User::create([
         'name' => $data['name'],
         'email' => $data['email'],
         'password' => Hash::make($data['password']),
-        'avatar' => $data['avatar']
+        'image' => $data['image']
     ]);
-
+//dd($user);
     if (!$user) {
         return redirect()->back()->with('error', 'Registration failed');
     }
@@ -138,4 +139,12 @@ public function ResetPasswordPost(Request $request){
 
     return redirect()->route('login')->with('success', 'Password reset successfully');
 }
+
+
+public function Profile(){
+    $user = Auth::user();
+    $userCommands = $user->commands()->get();
+    return view('auth.profile', compact('user' , 'userCommands'));
+}
+
 }

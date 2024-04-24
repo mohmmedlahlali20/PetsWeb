@@ -92,6 +92,7 @@ Route::prefix('auth')->group(function () {
     Route::post('/Forget-password', [AuthController::class, 'ForgetPassword'])->name('forget');
     Route::get('/reset-password/{token}' , [AuthController::class, 'resetPassword'])->name('reset.password');
     Route::post('/reset-password' , [AuthController::class, 'ResetPasswordPost'])->name('reset.password.post');
+    Route::get('/profile', [AuthController::class, 'Profile'])->name('profile');
 });
 
 

@@ -23,7 +23,7 @@
                     <p class="card-text">Price: ${{ $product->price }}</p>
                     <p class="card-text">Created at: {{ $product->created_at }}</p>
                     <div class="btn-group">
-                        <a href="{{ route('commentes.show', $product->id) }}" class="btn btn-outline-dark" data-toggle="modal" data-target="#productDetailsModal" data-product-id="{{ $product->id }}">
+                        <a href="{{ route('commentes.show', $product->id) }}" class="btn btn-outline-dark">
                             <i class="fas fa-eye"></i> 
                         </a>&nbsp;&nbsp;
                         <form action="{{ route('command') }}" method="post" class="d-inline">
@@ -53,7 +53,6 @@
             </div>
         </div>
         @empty
-        <!-- Aucun produit -->
         <div class="container">
             <div class="alert alert-warning">
                 No Products exist

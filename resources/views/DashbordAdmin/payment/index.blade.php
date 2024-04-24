@@ -2,7 +2,7 @@
 @section('title', 'Payment Invoice')
 
 @section('content')
-{{-- <div class="container">
+<div class="container">
     <h2>Payment Invoice</h2>
     <div class="table-responsive">
         <table class="table table-striped">
@@ -70,7 +70,7 @@
             </table>
         </div>
     </div>
-</div> --}}
+</div> 
 
  
 

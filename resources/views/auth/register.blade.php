@@ -56,7 +56,7 @@
 
         <div class="card bg-glass">
           <div class="card-body px-4 py-5 px-md-5">
-            <form method="POST" action="{{ route('register.post') }}">
+            <form method="POST" action="{{ route('register.post') }}" enctype="multipart/form-data">
               @csrf
               <div class="form-outline mb-4">
                 <label class="form-label" for="name">Name</label>
@@ -91,7 +91,7 @@
 
               <div class="mb-3">
                 <label for="formFile" class="form-label">User Avatar</label>
-                <input class="form-control" type="file" name="avatar" id="formFile">
+                <input class="form-control" type="file" name="image" id="image">
               </div>
               @error('avatar')
               <span class="text-danger">{{ $message }}</span>

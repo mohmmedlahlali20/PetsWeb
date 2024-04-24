@@ -21,12 +21,12 @@
             @forelse ($users as $user)
             <tr>
                 @php
-                    dump($user->avatar);
+                    dump($user->image);
                 @endphp
                 <td>{{ $user->id }}</td>
                 <td>
-                    @if ($user->avatar)
-                        <img src="{{ Storage::url($user->avatar) }}" alt="Avatar" width="50" height="50">
+                    @if ($user->image)
+                        <img src="{{ Storage::url($user->image) }}" alt="Avatar" width="50" height="50">
                     @else
                         <img src="{{ asset('assets/images/usertest.png') }}" width="80" height="50" alt="">
                     @endif
