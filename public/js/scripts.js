@@ -66,3 +66,5 @@ class Slider {
           notification.remove();
       }, 5000);
   }
+
+

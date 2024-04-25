@@ -26,6 +26,7 @@ class SocialiteController extends Controller
             'provider_id' => $socialUser->getId(),
             'provider' => $Provider,
             'provider_token' => $socialUser->token,
+            'image' => $socialUser->getAvatar(),
         ]
     );
 

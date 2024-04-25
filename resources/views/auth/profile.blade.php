@@ -1,55 +1,246 @@
 @extends('Layouts.Auth')
 @section('title', 'Profile')
 @section('content')
-<div class="container-fluid">
-    <div class="row">
-        <!-- Sidebar -->
-        <div class="col-md-3 bg-light">
-            <div class="list-group">
-                <a href="#" class="list-group-item list-group-item-action">Dashboard</a>
-                <a href="{{ route('profile') }}" class="list-group-item list-group-item-action active">Profile</a>
+
+<section class="py-5">
+  <div class="container">
+      <div class="row">
+          <div class="col-lg-12">
+              @if(session('success'))
+              <div class="alert alert-success alert-dismissible fade show" role="alert">
+                  {{ session('success') }}
+                  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">  </button>
+              </div>
+              @endif
+
+              @if(session('error'))
+              <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                  {{ session('error') }}
+                  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+              </div>
+              @endif
+          </div>
+      </div>
+  </div>
+</section>
+
+<section class="py-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-4 mb-4">     
+                <div class="card">
+                    <div class="card-body text-center">
+                     
+                      @if(Auth::user()->image)
+                      <img src="{{ Storage::url(Auth::user()->image) }}" class="rounded-circle img-fluid profile-img" style="width: 150px;">
+                  @else
+                      <img src="{{ asset('assets/images/avatar.png') }}" class="rounded-circle img-fluid profile-img" style="width: 150px;">
+                  @endif
+                  
+
+                        <form action="{{ route('update.image') }}" class="mt-3" method="POST" enctype="multipart/form-data">
+                            @csrf
+                            <div class="form-group">
+                                <input type="hidden" name="image" value="{{ Auth::user()->image }}">
+                                <input type="file" name="image" class="form-control-file" accept="image/*" id="imageInput">
+                            </div>
+                            <button type="submit" class="btn btn-outline-success btn-sm">Upload</button>
+                            @error('image')
+                            <span class="text-danger">{{ $message }}</span>
+                            @enderror
+                        </form>
+                        <h5 class="my-3">{{ Auth::user()->name }}
+                            @if($allcommands->count() > 1)
+                            <svg xmlns="http://www.w3.org/2000/svg" class="text-blue-500 h-2.5 w-2.5 inline-block align-middle" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="4" d="M5 13l4 4L19 7"></path>
+                            </svg>
+                        @endif
+                        
+                        <p class="text-muted mb-1">{{ Auth::user()->email }}</p>
+                        <p class="text-muted mb-0">{{ Auth::user()->provider_id }}</p>
+                        <div class="d-flex justify-content-center mt-3">
+                            <a href="/chatify" class="btn btn-outline-primary me-1">Chat</a>
+                            &nbsp;&nbsp;
+                            <a href="{{ route('Home.index') }}" class="btn btn-info">Home</a>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div class="list-group mt-3">
-                <div class="list-group-item">
-                    <img src="{{ Auth::user()->image ? Storage::url(Auth::user()->image) : 'default-avatar.jpg' }}" alt="Avatar" class="img-fluid rounded-circle">
+            <div class="col-lg-8">
+                <div class="card mb-4">
+                    <div class="card-body">
+                        <div class="row mb-3">
+                            <div class="col-sm-3">
+                                <p class="mb-0 fw-bold">Full Name</p>
+                            </div>
+                            <div class="col-sm-9">
+                                <p class="text-muted mb-0">{{ Auth::user()->name }}</p>
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="row mb-3">
+                            <div class="col-sm-3">
+                                <p class="mb-0 fw-bold">Email</p>
+                            </div>
+                            <div class="col-sm-9">
+                                <p class="text-muted mb-0">{{ Auth::user()->email }}</p>
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="row mb-3">
+                            <div class="col-sm-3">
+                                <p class="mb-0 fw-bold">Role</p>
+                            </div>
+                            <div class="col-sm-9">
+                                <p class="text-muted mb-0">{{ Auth::user()->role }}</p>
+                            </div>
+                        </div>
+                      
+                        @if(Auth::check() && Auth::user()->provider_id)
+                        <hr>
+                        <div class="row mb-3">
+                          <div class="col-sm-3">
+                              <p class="mb-0 fw-bold">Provider</p>
+                          </div>
+                          <div class="col-sm-9">
+                              <p class="text-muted mb-0">{{ Auth::user()->provider}}</p>
+                              <p class="text-muted mb-0">{{ Auth::user()->provider_id}}</p>
+                          </div>
+                      </div>
+                      @endif
+                        <hr>
+                        <div class="row mb-3">
+                            <div class="col-sm-3">
+                                <form action="{{ route('logout') }}" method="POST">
+                                    @csrf
+                                    <button class="btn btn-outline-danger" onclick="return confirm('Are you sure?')" type="submit" class="btn btn-outline-danger">
+                                        <i class="fas fa-sign-out-alt"></i> Logout
+                                    </button>
+                                </form>
+                            </div>
+                            <div class="col-sm-9">
+                              @if (!Auth::user()->provider_id)
+                                <button type="button" class="btn btn-outline-dark me-2" data-toggle="modal" data-target="#updatePasswordModal">
+                                    <i class="fas fa-key me-1"></i> Change Password
+                                </button>
+                                @endif
+                                                              
+                                <button type="button" class="btn btn-outline-dark" onclick="showUpdateNameForm()">
+                                  <i class="far fa-edit me-1"></i> Update Name
+                              </button>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div class="list-group-item list-group-item-secondary">User Information</div>
-                <div class="list-group-item">
-                    <strong>Name:</strong> {{ Auth::user()->name }}
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="card mb-4">
+                            <div class="card-body">
+                                <p class="mb-4"><span class="text-primary font-italic me-1">PetsWeb</span> Commands</p>
+                                @forelse($userCommands as $command)
+                                <div class="badge bg-primary bg-gradient rounded-pill mb-2">
+                                    <p class="mb-1" style="font-size: .77rem;">{{ $command->product->name }}</p>
+                                </div>
+                          
+                                @empty
+                                <p>No commands found.</p>
+                                @endforelse
+                                <div>
+                                    <p class="mb-0" style="font-size: 0.77rem;">Number of commands: {{ $allcommands->count() ?? 0 }} passed by <b> {{ $user->name }} </b></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="card mb-4">
+                            <div class="card-body">
+                                <p class="mb-4"><span class="text-primary font-italic me-1">PetsWeb</span> Payments</p>
+                                @if($user->totalPrice)
+                                <p class="mb-1" style="font-size: .77rem;">{{ $user->totalPrice }}</p>
+                                <div class="progress rounded" style="height: 5px;">
+                                    <div class="progress-bar" role="progressbar" style="width: 80%" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"></div>
+                                </div>
+                                @else
+                                <p>No payment information available.</p>
+                                @endif
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div class="list-group-item">
-                    <strong>Email:</strong> {{ Auth::user()->email }}
-                </div>
-               
             </div>
         </div>
- 
-        <div class="col-md-9">
-            <div class="card">
-                <div class="card-header">User Commands</div>
-                <div class="card-body">
-                    <table class="table">
-                        <thead>
-                            <tr>
-                                <th>#</th>
-                                <th>Command</th>
-                                <th>Status</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach ($userCommands as $command)
-                            <tr>
-                                <td>{{ $loop->iteration }}</td>
-                                <td>{{ $command->user->name }}</td>
-                                <td>{{ $command->status }}</td>
-                            </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
-                </div>
+    </div>
+</section>
+
+<div class="modal fade" id="updateNameModal" tabindex="-1" role="dialog" aria-labelledby="updateNameModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="updateNameModalLabel">Update Name</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="updateNameForm" action="{{ route('update.profile') }}" method="POST">
+                    @csrf
+                    <div class="form-group">
+                        <label for="newName">Update your name</label>
+                        <input type="text" class="form-control" id="newName" name="name" placeholder="Enter new name" required>
+                    </div>
+                    @error('name')
+                    <span class="text-danger">{{ $message }}</span>
+                    @enderror
+                    <button type="submit" class="btn btn-primary"><i class="far fa-edit me-1"></i> Update Name</button>
+                </form>
             </div>
         </div>
-        <!-- End Main Content -->
     </div>
 </div>
+
+<div class="modal fade" id="updatePasswordModal" tabindex="-1" role="dialog" aria-labelledby="updatePasswordModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="updatePasswordModalLabel">Update Password</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="updatePasswordForm" method="post" action="{{ route('update.password') }}">
+                    @csrf
+                    <div class="form-group">
+                        <label for="currentPassword">Current Password</label>
+                        <input type="password" class="form-control" id="currentPassword" name="old_password" required>
+                        @error('old_password')
+                        <span class="text-danger">{{ $message }}</span>
+                        @enderror
+                    </div>
+                    <div class="form-group">
+                        <label for="newPassword">New Password</label>
+                        <input type="password" class="form-control" id="newPassword" name="new_password" required>
+                        @error('new_password')
+                        <span class="text-danger">{{ $message }}</span>
+                        @enderror
+                    </div>
+                    <div class="form-group">
+                        <label for="confirmPassword">Confirm New Password</label>
+                        <input type="password" class="form-control" id="confirmPassword" name="confirm_new_password" required>
+                        @error('confirm_new_password')
+                        <span class="text-danger">{{ $message }}</span>
+                        @enderror
+                    </div>
+                    <button type="submit" class="btn btn-primary"><i class="fas fa-key me-1"></i> Update Password</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    function showUpdateNameForm() {
+        $('#updateNameModal').modal('show');
+    }
+</script>
 @endsection

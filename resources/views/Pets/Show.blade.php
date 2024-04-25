@@ -91,30 +91,25 @@
         </div>
     </nav>
 
-
     <section class="py-5">
         <div class="container">
             <div class="row gx-5">
                 <aside class="col-lg-6">
                     <div class="border rounded-4 mb-3 d-flex justify-content-center">
-
+                        <!-- Add any additional content for the aside section if needed -->
                     </div>
                     <div class="d-flex justify-content-center mb-3">
                         <a data-fslightbox="mygalley" class="border mx-1 rounded-2" target="_blank" data-type="image"
-                            href=""
+                            href="{{ Storage::url($products->image) }}"
                             class="item-thumb">
                             <img width="350" height="350" class="rounded-2"
-                                src="{{ Storage::url($products->image) }}" />
+                                src="{{ Storage::url($products->image) }}" alt="Product Image" />
                         </a>
                     </div>
-
                 </aside>
                 <main class="col-lg-6">
                     <div class="ps-lg-3">
-                        <h4 class="title text-dark">
-                            {{ $products->name }}<br />
-
-                        </h4>
+                        <h4 class="title text-dark">{{ $products->name }}</h4>
                         <div class="d-flex flex-row my-3">
                             <div class="text-warning mb-1 me-2">
                                 <i class="fa fa-star"></i>
@@ -122,100 +117,96 @@
                                 <i class="fa fa-star"></i>
                                 <i class="fa fa-star"></i>
                                 <i class="fas fa-star-half-alt"></i>
-                                <span class="ms-1">
-                                    {{ $averageRating }}
-                                </span>
+                                <span class="ms-1">{{ $averageRating }}</span>
                             </div>
-                            <span class="text-muted"><i
-                                    class="fas fa-shopping-basket fa-sm mx-1"></i>
-                                    {{-- @auth --}}
-                                        {{-- <span>: {{ auth()->user()->name }}</span> --}}
-                                    {{-- @endauth --}}
-
+                            <span class="text-muted">
+                                <i class="fas fa-shopping-basket fa-sm mx-1"></i>
+                                @auth 
+                                    <span>: {{ auth()->user()->name }}</span> 
+                                @endauth 
+                            </span>
                         </div>
-
                         <div class="mb-3">
-                            <span class="h5">${{ $products->price }}.00</span>
-                            <span class="text-muted">/per box</span>
+                            <span class="h5">{{ $products->price }}.00</span>
+                            <span class="text-muted">MAD</span>
                         </div>
-
-                        <p>
-                            {{ $products->description }}
-                        </p>
+                   <div class="mb-4 max-width-100">
+    <p class="text-muted border-bottom border-secondary pb-2">Description:</p>
+    <div class="description-container" style="max-height: 3em; overflow: hidden;">
+        <p class="text-justify">{{ $products->description }}</p>
+    </div>
+</div>
 
                         <div class="row">
-                            <dt class="col-3">Sex:</dt>
-                            <dd class="col-9">{{ $products->sex }}</dd>
-
-                            <dt class="col-3">Age</dt>
-                            <dd class="col-9">{{ $products->age }}</dd>
-
-                            <dt class="col-3">Category</dt>
-                            <dd class="col-9">{{ $products->category->name }}</dd>
-
-                            <dt class="col-3">date du creation </dt>
-                            <dd class="col-9">{{ $products->created_at }}</dd>
+                            <div class="col-md-6">
+                                <dl class="row">
+                                    <dt class="col-sm-4">Sex:</dt>
+                                    <dd class="col-sm-8">{{ $products->sex }}</dd>
+    
+                                    <dt class="col-sm-4">Age:</dt>
+                                    <dd class="col-sm-8">{{ $products->age }}</dd>
+                                </dl>
+                            </div>
+                            <div class="col-md-6">
+                                <dl class="row">
+                                    <dt class="col-sm-4">Category:</dt>
+                                    <dd class="col-sm-8">{{ $products->category->name }}</dd>
+    
+                                    <dt class="col-sm-4">Date Created:</dt>
+                                    <dd class="col-sm-8">{{ $products->created_at }}</dd>
+                                </dl>
+                            </div>
                         </div>
-
                         <hr />
-
-
                     </div>
+                </main>
             </div>
-
         </div>
-        </main>
-        </div>
-        </div>
-    </section> 
+    </section>
     <section>
         <div class="container">
             <div class="row">
                 <div class="col-md-8 col-lg-7 col-xl-6 pb-4">
-                    <div class="comment-section border bg-light rounded p-3 shadow">
+                    <div class="comment-section bg-light rounded p-3 shadow">
                         @if ($comments->isNotEmpty())
                             @forelse ($comments as $item)
-                                <div class="comment mt-4 text-justify border bg-light rounded p-3 float-left shadow">
-                                    <div class="d-inline">
-                                        <form action="{{ route('commentes.destroy', $item->id) }}" method="POST">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to delete?')">
-                                                <i class="fas fa-trash"></i>
-                                            </button>
-                                        </form>
-                                        <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#editComment{{ $item->id }}">
-                                            <i class="fas fa-edit"></i>
-                                        </button>
-                                    </div>
-                                    <h5>
-                                        <img src="{{ Storage::url($item->user->avatar) }}" alt="" class="avatar img-fluid rounded-circle" style="width: 50px; height: 50px;">
-
-                                        {{ $item->user->name }}
-
-                                    </h5>
-                                    <span>{{ $item->created_at }}</span>
-                                    <br>
-                                    <p>{{ $item->comments }}</p>
-                                    <span>{{ $item->rate_number }}/10</span>
+                                <div class="comment mt-4 border bg-white rounded p-3 shadow-sm">
                                     <div class="d-flex justify-content-between align-items-center">
-                                        <div class="d-flex flex-row align-items-center">
-                                            <span class="small"></span>
-                                           
-                                            <form action="" method="POST">
+                                        <div class="d-inline">
+                                            <form action="{{ route('commentes.destroy', $item->id) }}" method="POST">
                                                 @csrf
-                                                <button type="submit" class="btn btn-link btn-sm">
-                                                    <i class="far fa-thumbs-up text-primary me-2"></i>
+                                                @method('DELETE')
+                                                <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to delete?')">
+                                                    <i class="fas fa-trash"></i>
                                                 </button>
                                             </form>
+                                            <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#editComment{{ $item->id }}">
+                                                <i class="fas fa-edit"></i>
+                                            </button>
                                         </div>
+                                        <div class="d-flex align-items-center">
+                                            <img src="{{ Storage::url($item->user->avatar) }}" alt="Avatar" class="avatar img-fluid rounded-circle me-2" style="width: 50px; height: 50px;">
+                                            <h5 class="m-0">{{ $item->user->name }}</h5>
+                                        </div>
+                                    </div>
+                                    <span class="text-muted">{{ $item->created_at }}</span>
+                                    <p class="mt-2">{{ $item->comments }}</p>
+                                    <span>{{ $item->rate_number }}/10</span>
+                                    <div class="d-flex justify-content-between align-items-center mt-3">
+                                        <form action="" method="POST">
+                                            @csrf
+                                            <button type="submit" class="btn btn-link btn-sm">
+                                                <i class="far fa-thumbs-up text-primary me-2"></i>
+                                            </button>
+                                        </form>
+                                        <span class="small">Likes: 0</span>
                                     </div>
                                 </div>
                             @empty
-                                <span>No comments exist</span>
+                                <div class="comment mt-4 p-3 bg-white rounded shadow-sm">
+                                    <span>No comments exist</span>
+                                </div>
                             @endforelse
-                        @else
-                            <span>No comments exist</span>
                         @endif
                     </div>
                 </div>
@@ -227,16 +218,12 @@
                         @endisset
                         <input type="hidden" name="products_id" value="{{ $products->id }}">
                         @if (session('success'))
-                            <span class="text-success">
-                                {{ session('success') }}
-                            </span>
+                            <span class="text-success">{{ session('success') }}</span>
                         @endif
                         @if (session('error'))
-                            <div class="alert alert-danger">
-                                {{ session('error') }}
-                            </div>
+                            <div class="alert alert-danger">{{ session('error') }}</div>
                         @endif
-                        <h4>{{ isset($comment) ? 'Update' : 'Leave a' }} comment</h4>
+                        <h4 class="mb-4">{{ isset($comment) ? 'Update' : 'Leave a' }} comment</h4>
                         <div class="form-group">
                             <label for="comments">Message</label>
                             <textarea name="msg" id="comments" cols="30" rows="5" class="form-control" style="background-color: rgb(221, 217, 217);">{{ isset($comment) ? $comment->comments : '' }}</textarea>
@@ -253,6 +240,7 @@
             </div>
         </div>
     </section>
+    
     <footer class="py-5 bg-dark">
         <div class="container">
             <p class="m-0 text-center text-white">Copyright &copy; Your Website 2023</p>

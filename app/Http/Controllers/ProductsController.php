@@ -120,10 +120,10 @@ public function likeProduct(Request $request) {
     $request->validate([
         'product_id' => 'required|exists:products,id',
     ]);
-
+    
     $product = Products::findOrFail($request->product_id);
-//dd($product);
-    $product->increment('likes');
+    
+    $product->increment('likes'); 
 
     return  redirect()->back();
 }

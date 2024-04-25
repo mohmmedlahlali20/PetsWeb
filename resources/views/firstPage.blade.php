@@ -12,60 +12,117 @@
   <link rel="stylesheet" href="{{ asset('css/firststyle.css') }}">
   <style>
     
-   
+    .navbar {
+      background-color: #2c3e50; /* Dark blue background */
+      padding-top: 20px;
+      padding-bottom: 20px;
+    }
+    .navbar-brand {
+      font-weight: bold; /* Bold font for brand */
+      color: #fff; /* White text color */
+    }
+    .navbar-brand:hover {
+      color: #f39c12; /* Hover color for brand */
+    }
+    .navbar-nav .nav-link {
+      color: #fff; /* White text color for links */
+      padding-left: 20px;
+      padding-right: 20px;
+    }
+    .navbar-nav .nav-link:hover {
+      color: #f39c12; /* Hover color for links */
+    }
+    .navbar-toggler {
+      border-color: #fff; /* White border color for toggler */
+    }
+    .navbar-toggler-icon {
+      background-color: #fff; /* White background color for toggler icon */
+    }
 
   </style>
 </head>
 <body class="bsb-pets">
-
-
-
   <nav class="navbar navbar-expand-lg navbar-dark">
-    <div class="container">
-      <a class="navbar-brand" href="#"><i class="fas fa-home"></i> Your Brand</a>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
-      </button>
-  
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    </button>
+    <a class="navbar-brand mx-auto" href="#">
+        <i class="fa fa-paw fa-2x text-gray-300"></i> PETSWEB
+    </a>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav ml-auto">
-          <li class="nav-item active">
-            <a class="nav-link" href="#"><i class="fas fa-home"></i> Home <span class="sr-only">(current)</span></a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#"><i class="fas fa-info-circle"></i> About</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#"><i class="fas fa-cogs"></i> Services</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#"><i class="fas fa-images"></i> Portfolio</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#"><i class="fas fa-envelope"></i> Contact</a>
-          </li>
-          <!-- Dropdown -->
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              <i class="fas fa-bars"></i> Dropdown
-            </a>
-            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <a class="dropdown-item" href="#"><i class="fas fa-arrow-right"></i> Action</a>
-              <a class="dropdown-item" href="#"><i class="fas fa-arrow-right"></i> Another action</a>
-              <div class="dropdown-divider"></div>
-              <a class="dropdown-item" href="#"><i class="fas fa-arrow-right"></i> Something else here</a>
-            </div>
-          </li>
-          <!-- Button for panel -->
-          <li class="nav-item">
-            <a class="nav-link" href="#" data-toggle="modal" data-target="#exampleModal"><i class="fas fa-th-large"></i> Panel</a>
-          </li>
+            <li class="nav-item active">
+                <a class="nav-link" href="{{ route('Home.index') }}"><i class="fas fa-home"></i> Shop now </a>
+            </li>
+            @auth
+            @if(Auth::user()->role == 'admin')
+            <li class="nav-item active">
+                <a class="nav-link" href="{{ route('product.index') }}"><i class="fas fa-home"></i> Dashboard </a>
+            </li>
+            @endif
+            @endauth
+            @auth
+            <li class="nav-item">
+                <a class="nav-link" href="{{ route('profile') }}"><i class="fas fa-images"></i> Profile</a>
+            </li>
+
+            <li class="nav-item dropdown">
+                <a class="nav-link custom-btn dropdown-toggle" href="#" id="userDropdown" role="button"
+                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <i class="fas fa-user-alt fa-lg"></i> {{ auth()->user()->name }}
+                </a>
+                <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
+                    <li><span class="dropdown-item"><strong>Email:</strong> {{ auth()->user()->email }}</span>
+                    </li>
+                    <li>
+                        <hr class="dropdown-divider">
+                    </li>
+                    <li>
+                        <form action="{{ route('logout') }}" method="POST">
+                            @csrf
+                            <button type="submit" class="dropdown-item btn btn-outline-danger">
+                                <i class="fas fa-sign-out-alt fa-lg"></i> Logout
+                            </button>
+                        </form>
+                    </li>
+                </ul>
+            </li>
+            @else
+            <li class="nav-item">
+                <a class="nav-link custom-btn login-btn" href="{{ route('login') }}"><i
+                        class="fas fa-sign-in-alt fa-lg"></i> Login</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link custom-btn register-btn" href="{{ route('register') }}"><i
+                        class="fas fa-user-plus fa-lg"></i> Register</a>
+            </li>
+            @endguest
         </ul>
-      </div>
     </div>
-  </nav>
-  
-  <!-- Button for panel -->
+
+    <ul class="navbar-nav ml-auto">
+        <div class="d-flex align-items-center">
+            <li class="nav-item">
+                <a class="nav-link" href="#" title="Facebook"><i class="fab fa-facebook-f fa-2x"></i></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#" title="Twitter"><i class="fab fa-twitter fa-2x"></i></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#" title="Gmail"><i class="far fa-envelope fa-2x"></i></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#" title="Instagram"><i class="fab fa-instagram fa-2x"></i></a>
+            </li>
+        </div>
+    </ul>
+</nav>
+
+ 
+
+
   <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
       <div class="modal-content">

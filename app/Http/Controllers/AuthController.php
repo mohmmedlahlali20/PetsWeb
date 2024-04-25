@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 
 use App\Models\User;
+use App\Models\commends;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Http\Requests\AuthRequest;
@@ -14,6 +15,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Redirect;
 
 class AuthController extends Controller
@@ -48,30 +50,33 @@ class AuthController extends Controller
     
 
     public function registerPost(AuthRequest $request)
-{
-    // Validate the request data
-    $data = $request->validated();
+    {
+        // Validate the request data
+        $data = $request->validated();
+        
+        $image = null; // Initialize image variable
+        
+        if ($request->hasFile('image')) {
+            $image = $request->file('image')->store('Avatars', 'public');
+        } 
     
-    if ($request->hasFile('image')) {
-        $data['image'] = $request->file('image')->store('Avatrs' , 'public');
-
-    }
-
-    $user = User::create([
-        'name' => $data['name'],
-        'email' => $data['email'],
-        'password' => Hash::make($data['password']),
-        'image' => $data['image']
-    ]);
-//dd($user);
-    if (!$user) {
-        return redirect()->back()->with('error', 'Registration failed');
+        $user = User::create([
+            'name' => $data['name'],
+            'email' => $data['email'],
+            'password' => Hash::make($data['password']),
+            'image' => $image, // Assign the image variable
+        ]);
+    
+        if (!$user) {
+            return redirect()->back()->with('error', 'Registration failed');
+        }
+        
+        auth()->login($user);
+    
+        return redirect()->route('Home.index')->with('success', 'Registration successful');
     }
     
-    auth()->login($user);
-
-    return redirect()->route('Home.index')->with('success', 'Registration successful');
-}
+    
 
 
     
@@ -144,7 +149,75 @@ public function ResetPasswordPost(Request $request){
 public function Profile(){
     $user = Auth::user();
     $userCommands = $user->commands()->get();
-    return view('auth.profile', compact('user' , 'userCommands'));
+    $totalPrice = $user->commands()->sum('total_price');
+    $allcommands = commends::where('user_id', $user->id)->get(); // Assuming Command is your model
+    
+    return view('auth.profile', compact('user', 'userCommands', 'totalPrice' , 'allcommands'));
 }
+
+public function updateProfile(Request $request) {
+    $user = Auth::user();
+    
+    $user->update([
+        'name' => $request->input('name'),
+    ]);
+    
+    return redirect()->route('profile')->with('success', 'Profile updated successfully');
+}
+
+
+public function updatePassword(Request $request) {
+    //dd($request->all());
+    $request->validate([
+        'old_password' => 'required',
+        'new_password' => 'required|string|min:8',
+    ]);
+
+    $user = Auth::user();
+//dd($user);
+
+if (!Hash::check($request->input('old_password'), $user->password)) {
+    return redirect()->back()->with('error', 'The old password you entered is incorrect.');
+}
+
+$newPassword = $request->input('new_password');
+
+if (Hash::needsRehash($newPassword)) {
+    $user->password = Hash::make($newPassword);
+} else {
+    $user->password = $newPassword; 
+}
+
+$user->save();
+
+
+    return redirect()->back()->with('success', 'Password updated successfully.');
+}
+
+
+public function updateImage(Request $request) {
+    $user = Auth::user();
+
+    $request->validate([
+        'image' => 'required|image', 
+    ]);
+
+    if ($request->hasFile('image')) {
+        $imagePath = $request->file('image')->store('Avatrs', 'public');
+        
+        if ($user->image) {
+            Storage::disk('public')->delete($user->image);
+        }
+
+        $user->update([
+            'image' => $imagePath,
+        ]);
+    }
+
+    return redirect()->back()->with('success', 'Image updated successfully.');
+}
+
+
+
 
 }
