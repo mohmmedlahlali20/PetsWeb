@@ -124,7 +124,7 @@ class ProductsController extends Controller
             'product_id' => 'required|exists:products,id',
         ]);
     
-        $product = Product::findOrFail($request->product_id);
+        $product = Products::findOrFail($request->product_id);
     
         $product->increment('likes');
     

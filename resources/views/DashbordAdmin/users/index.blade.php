@@ -14,21 +14,18 @@
                 <th scope="col">Provider</th>
                 <th scope="col">Orders Count</th>
                 <th scope="col">Created At</th>
-                <th scope="col" >Actions</th>
             </tr>
         </thead>
         <tbody>
             @forelse ($users as $user)
             <tr>
-                @php
-                    dump($user->image);
-                @endphp
+                
                 <td>{{ $user->id }}</td>
                 <td>
                     @if ($user->image)
                         <img src="{{ Storage::url($user->image) }}" alt="Avatar" width="50" height="50">
                     @else
-                        <img src="{{ asset('assets/images/usertest.png') }}" width="80" height="50" alt="">
+                        <img src="{{ asset('assets/images/avatar.png') }}" width="80" height="50" alt="">
                     @endif
                 </td>
                 <td>{{ $user->name }}</td>
@@ -37,13 +34,7 @@
                 <td>{{ $user->provider }}</td>
                 <td>{{ $user->commands()->count() }}</td> 
                 <td>{{ $user->created_at }}</td>
-                <td>
-                    <form action="{{ route('ban.user' ,  $user->id) }}" method="POST">
-                        @csrf
-                        @method('DELETE')
-                        <button class="btn btn-danger">cancel</button>
-                    </form>
-                </td>
+                
             </tr>
             @empty
             <tr>

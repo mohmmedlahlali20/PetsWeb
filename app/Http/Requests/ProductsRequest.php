@@ -22,21 +22,18 @@ class ProductsRequest extends FormRequest
     public function rules(): array
     {
         
-        $rules = [
+                
+        return [
             'name' => 'required|min:5',
             'price' => 'required|numeric',
             'description' => 'required|min:20',
             'image' => 'required',
             'category_id' => 'required',
-          //  'sex'=> '',
+          //'sex'=> '',
             'age' => 'required'
         ];
         
-        //if ($this->route()->getActionMethod() !== 'update') {
-          //  $rules['image'] = ''; 
-       // }
-        
-        return $rules;
+ 
         
     }
 }

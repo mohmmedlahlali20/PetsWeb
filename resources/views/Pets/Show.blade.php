@@ -32,12 +32,12 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item active">
-                        <a class="nav-link" href="#"><i class="fas fa-home"></i> Home <span class="sr-only">(current)</span></a>
+                        <a class="nav-link" href="#"><i class="fas fa-home"></i> Home </a>
                     </li>
                     @auth
                     @if(Auth::user()->role == 'admin')
                     <li class="nav-item active">
-                        <a class="nav-link" href="{{ route('product.index') }}"><i class="fas fa-home"></i> Dashboard <span class="sr-only">(current)</span></a>
+                        <a class="nav-link" href="{{ route('product.index') }}"><i class="fas fa-home"></i> Dashboard </a>
                     </li>
                     @endif
                     @endauth
@@ -49,7 +49,7 @@
                         <form action="{{ route('Commandes.index') }}" method="GET">
                             <button type="submit" class="btn custom-btn">
                                 <i class="bi-cart-fill fa-lg me-1"></i>
-                                My Orders ({{ $userCommandCount }})
+                                My Orders 
                             </button>
                         </form>
                     </li>
@@ -81,7 +81,6 @@
                 </ul>
             </div>
     
-            <!-- Social media icons -->
             <ul class="navbar-nav ml-auto">
                 <div class="d-flex align-items-center">
                     <li class="nav-item">
@@ -107,7 +106,6 @@
             <div class="row gx-5">
                 <aside class="col-lg-6">
                     <div class="border rounded-4 mb-3 d-flex justify-content-center">
-                        <!-- Add any additional content for the aside section if needed -->
                     </div>
                     <div class="d-flex justify-content-center mb-3">
                         <a data-fslightbox="mygalley" class="border mx-1 rounded-2" target="_blank" data-type="image"
@@ -153,11 +151,12 @@
                                 <dl class="row">
                                     <dt class="col-sm-4">Sex:</dt>
                                     <dd class="col-sm-8">{{ $products->sex }}</dd>
-    
+                            
                                     <dt class="col-sm-4">Age:</dt>
-                                    <dd class="col-sm-8">{{ $products->age }}</dd>
+                                    <dd class="col-sm-8">{{ $products->age }} months</dd>
                                 </dl>
                             </div>
+                            
                             <div class="col-md-6">
                                 <dl class="row">
                                     <dt class="col-sm-4">Category:</dt>
@@ -183,20 +182,13 @@
                             @forelse ($comments as $item)
                                 <div class="comment mt-4 border bg-white rounded p-3 shadow-sm">
                                     <div class="d-flex justify-content-between align-items-center">
-                                        <div class="d-inline">
-                                            <form action="{{ route('commentes.destroy', $item->id) }}" method="POST">
-                                                @csrf
-                                                @method('DELETE')
-                                                <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to delete?')">
-                                                    <i class="fas fa-trash"></i>
-                                                </button>
-                                            </form>
-                                            <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#editComment{{ $item->id }}">
-                                                <i class="fas fa-edit"></i>
-                                            </button>
-                                        </div>
+                                      
                                         <div class="d-flex align-items-center">
-                                            <img src="{{ Storage::url($item->user->avatar) }}" alt="Avatar" class="avatar img-fluid rounded-circle me-2" style="width: 50px; height: 50px;">
+                                            @if($item->user->image)
+                                            <img src="{{ Storage::url($item->user->image) }}" alt="Avatar" class="avatar img-fluid rounded-circle me-2" style="width: 50px; height: 50px;">
+                                        @else
+                                            <img src="{{ asset('assets/images/avatar.png')  }}" alt="Default Avatar" class="avatar img-fluid rounded-circle me-2" style="width: 50px; height: 50px;">
+                                        @endif
                                             <h5 class="m-0">{{ $item->user->name }}</h5>
                                         </div>
                                     </div>

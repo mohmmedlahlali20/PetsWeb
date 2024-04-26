@@ -28,7 +28,7 @@
 
 <div class="container">
     <h1 class="custom-heading">Add Category</h1>
-    <form method="POST" action="{{ $route }}">
+    <form class="mt-5 mb-5" method="POST" action="{{ $route }}">
         @csrf
         @if ($IsUpdte)
         @method('PUT')

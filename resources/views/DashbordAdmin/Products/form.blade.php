@@ -2,11 +2,13 @@
 @section('title' , ($IsUpdte? 'Update' : 'Create') . ' Products')
             @php
             $route = $IsUpdte ? route('product.update', $product->id) : route('product.store');
-            dump($route);
+        
             @endphp
 @section('content')
         <h1 class="text-center mb-5 mt-5 font-bold">@yield('title')</h1>
-                <form action="{{ $route }}" method="POST" class="form-group" enctype="multipart/form-data">
+     
+        
+                <form action="{{ $route }}" method="POST" class="form-group border p-4 rounded shadow mb-5" enctype="multipart/form-data">
             @csrf
             @if ($IsUpdte)
             @method('PUT')
@@ -19,7 +21,7 @@
                     <input type="text" class="form-control border" value="{{ old('price') ?? $product->price }}" placeholder="Price" name="price">
                 </div>
             </div>
-            <div class="row mb-3">
+            <div class=" mb-3">
                 <div class="col">
                     <textarea class="form-control border" placeholder="Description" name="description">{{ old('description') ?? $product->description }}</textarea>
                 </div>
@@ -58,13 +60,12 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col">
+                <div class="col text-end mt-2 mb-2">
                     @if($IsUpdte)
                     <button type="submit" class="btn btn-primary">Update Products</button>
                     @else
                     <button type="submit" class="btn btn-primary">Add New Products</button>
                     @endif
-
                 </div>
             </div>
                 </form>

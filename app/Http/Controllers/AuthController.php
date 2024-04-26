@@ -51,10 +51,10 @@ class AuthController extends Controller
 
     public function registerPost(AuthRequest $request)
     {
-        // Validate the request data
+        
         $data = $request->validated();
         
-        $image = null; // Initialize image variable
+        $image = null; 
         
         if ($request->hasFile('image')) {
             $image = $request->file('image')->store('Avatars', 'public');
@@ -150,7 +150,7 @@ public function Profile(){
     $user = Auth::user();
     $userCommands = $user->commands()->get();
     $totalPrice = $user->commands()->sum('total_price');
-    $allcommands = commends::where('user_id', $user->id)->get(); // Assuming Command is your model
+    $allcommands = commends::where('user_id', $user->id)->get(); 
     
     return view('auth.profile', compact('user', 'userCommands', 'totalPrice' , 'allcommands'));
 }

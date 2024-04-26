@@ -57,7 +57,7 @@ class FoodController extends Controller
              $validatedData['image'] = $request->file('image')->store('Foods', 'public');
          }
      
-         // Create the product
+  
          Food::create($validatedData);
      
          return redirect()->back()->with('success', 'Food added successfully');

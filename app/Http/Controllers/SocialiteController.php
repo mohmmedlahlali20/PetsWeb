@@ -32,7 +32,7 @@ class SocialiteController extends Controller
 
     Auth::login($user);
 
-    return redirect()->route('Home.index')->with('message', 'Votre message ici');
+    return redirect()->route('Home.index')->with('message', 'You are logged in successfully');
 }
 
 }

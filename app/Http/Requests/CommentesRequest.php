@@ -23,6 +23,7 @@ class CommentesRequest extends FormRequest
     {
         return [
             'comment' => 'required|string',
+            'rate_number' => 'required|numeric|min:1|max:10',
         ];
     }
 }

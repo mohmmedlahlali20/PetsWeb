@@ -157,9 +157,6 @@ public function storeFood(Request $request)
     {
         
  
-       
-    
-        //return redirect()->back()->with('status', 'Update successful');
     }
     
     

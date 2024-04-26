@@ -49,12 +49,30 @@
                             <span class="text-danger">{{ $message }}</span>
                             @enderror
                         </form>
-                        <h5 class="my-3">{{ Auth::user()->name }}
-                            @if($allcommands->count() > 1)
-                            <svg xmlns="http://www.w3.org/2000/svg" class="text-blue-500 h-2.5 w-2.5 inline-block align-middle" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="4" d="M5 13l4 4L19 7"></path>
-                            </svg>
-                        @endif
+                        <div id="starRating">
+                            <h5 class="my-3">
+                                {{ Auth::user()->name }}  
+                            </h5>
+                            @if($allcommands->count() > 2)
+                            <span class="star filled" data-value="1">
+                                <i style="color: yellow" class="fa fa-star"></i>
+                                <i style="color: yellow" class="fa fa-star"></i>
+                            </span>
+                            @endif
+                            @if($allcommands->count() > 5)
+                            <span class="star filled" data-value="1">
+                                <i style="color: yellow" class="fa fa-star"></i>
+                                <i style="color: yellow" class="fa fa-star"></i>
+                                <i style="color: yellow" class="fa fa-star"></i>
+                            </span>
+                            @endif
+                            @if($allcommands->count() > 6)
+                            <span class="star filled" data-value="1">
+                               <h5>clients fidel</h5>
+                            </span>
+                            @endif
+                        </div>
+                        
                         
                         <p class="text-muted mb-1">{{ Auth::user()->email }}</p>
                         <p class="text-muted mb-0">{{ Auth::user()->provider_id }}</p>
@@ -242,5 +260,6 @@
     function showUpdateNameForm() {
         $('#updateNameModal').modal('show');
     }
+
 </script>
 @endsection

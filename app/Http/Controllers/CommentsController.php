@@ -165,7 +165,7 @@ public function CommentsForAccessoir($id) {
 }
 
         public function storeCommentForAccessoir(Request $request, $AccessoirId) {
-dd($request->all());
+//dd($request->all());
             $validator = Validator::make($request->all(), [
                 'comments' => 'required|string',
                 'rate_number' => 'required|numeric|min:1|max:10',

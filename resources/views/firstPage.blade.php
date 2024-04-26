@@ -51,7 +51,7 @@
         <i class="fa fa-paw fa-2x text-gray-300"></i> PETSWEB
     </a>
 
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <div class="collapse navbar-collapse container" id="navbarSupportedContent">
         <ul class="navbar-nav ml-auto">
             <li class="nav-item active">
                 <a class="nav-link" href="{{ route('Home.index') }}"><i class="fas fa-home"></i> Shop now </a>
@@ -102,7 +102,7 @@
         </ul>
     </div>
 
-    <ul class="navbar-nav ml-auto">
+    <ul class="navbar-nav  ">
         <div class="d-flex align-items-center">
             <li class="nav-item">
                 <a class="nav-link" href="#" title="Facebook"><i class="fab fa-facebook-f fa-2x"></i></a>

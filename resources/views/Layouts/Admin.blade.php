@@ -302,24 +302,81 @@
                 
                 
             </div>
-            <footer class="py-4 bg-light mt-auto container">
-                <div class="container-fluid px-4">
-                    <div class="d-flex align-items-center justify-content-around small">
-                        <div class="text-muted">Copyright &copy; Your Website 2021</div>
-                        <div>
-                            <a href="#">Privacy Policy</a>
-                            &middot;
-                            <a href="#">Terms &amp; Conditions</a>
-                        </div>
-                    </div>
-                </div>
-            </footer>
+            <br>
+            <br>
+            <br>
+ 
+<footer class="text-center text-lg-start mt-5 bg-dark text-muted">
+    <section class="d-flex justify-content-center justify-content-lg-between p-4 border-bottom">
+
+        <div class="me-5 d-none d-lg-block">
+            <span>Get connected with us on social networks:</span>
         </div>
+
+        <div>
+            <a href="#" class="me-4 text-reset">
+                <i class="fab fa-facebook-f"></i>
+            </a>
+            <a href="#" class="me-4 text-reset">
+                <i class="fab fa-twitter"></i>
+            </a>
+            <a href="#" class="me-4 text-reset">
+                <i class="fab fa-instagram"></i>
+            </a>
+        </div>
+    </section>
+
+    <section class="">
+        <div class="container text-center text-md-start mt-5">
+            <div class="row mt-3">
+          
+                <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-4">
+         
+                    <h6 class="text-uppercase fw-bold mb-4">
+                        About Us
+                    </h6>
+                    <p>
+                        Learn more about our mission and vision.
+                    </p>
+                </div>
+
+                <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-4">
+                   
+                    <h6 class="text-uppercase fw-bold mb-4">
+                        Shop
+                    </h6>
+                    <p>
+                        <a href="#" class="text-reset">Dog Supplies</a>
+                    </p>
+                    <p>
+                        <a href="#" class="text-reset">Cat Supplies</a>
+                    </p>
+                </div>
+
+                <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-4">
+                    <h6 class="text-uppercase fw-bold mb-4">
+                        Support
+                    </h6>
+                    <p>
+                        <a href="#" class="text-reset">FAQs</a>
+                    </p>
+                    <p>
+                        <a href="#" class="text-reset">Contact Us</a>
+                    </p>
+                </div>
+    
+            </div>
+
+        </div>
+    </section>
+
+    <div class="text-center p-4" style="background-color: rgba(0, 0, 0, 0.05);">
+        © 2024 YourPetStore. All rights reserved.
     </div>
 
-<script>
-   
-</script>
+</footer>
+
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous">
     </script>
     <script src="{{ asset('demo/chart-area-demo.js') }}"></script>
