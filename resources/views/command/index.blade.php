@@ -40,77 +40,88 @@
 </style>
 
 <body>
-    <nav class="navbar navbar-expand-lg navbar-light rbg-nav">
-        <div class="container">
-            <a class="navbar-brand" href="{{ route('Home.index') }}">
-                <img src="assets/images/logo.jpg" alt="Logo" class="logo">
-            </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+    <nav class="navbar navbar-expand-lg ">
+        <div class="container container-fluid">
+            <a class="navbar-brand" href="{{ route('firstPage') }}"><i class="fas fa-home"></i> PETSWEB</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
                 aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
                 <span class="navbar-toggler-icon"></span>
                 <span class="navbar-toggler-icon"></span>
             </button>
+    
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <form class="d-flex" method="get">
-                    <span class="input-group-addon"><i class="bx bxs-map"></i></span>
-                    <input type="search" class="form-control" name="query" placeholder="Search">
-                    &nbsp;
-                    <div class="input-group-append">
-                        <button class="btn btn-primary" type="submit">Search</button>
-                    </div>
-                </form>
-                <ul class="navbar-nav ms-auto mb-2 mb-lg-0 me-2">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="#"><i class="fas fa-home"></i> Home <span class="sr-only">(current)</span></a>
+                    </li>
                     @auth
                     @if(Auth::user()->role == 'admin')
-                    <li class="nav-item ms-lg-2">
-                        <a class="nav-link dashboard-link custom-btn" href="{{ route('product.index') }}">Dashboard</a>
+                    <li class="nav-item active">
+                        <a class="nav-link" href="{{ route('product.index') }}"><i class="fas fa-home"></i> Dashboard <span class="sr-only">(current)</span></a>
                     </li>
                     @endif
+                    @endauth
+                    @auth
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('profile') }}"><i class="fas fa-images"></i> Profile</a>
+                    </li>
+                    <li class="nav-item">
+                        <form action="{{ route('Commandes.index') }}" method="GET">
+                            <button type="submit" class="btn custom-btn">
+                                <i class="bi-cart-fill fa-lg me-1"></i>
+                                My Orders 
+                            </button>
+                        </form>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link custom-btn dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <i class="fas fa-user-alt fa-lg"></i> {{ auth()->user()->name }}
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
+                            <li><span class="dropdown-item"><strong>Email:</strong> {{ auth()->user()->email }}</span></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li>
+                                <form action="{{ route('logout') }}" method="POST">
+                                    @csrf
+                                    <button type="submit" class="dropdown-item btn btn-outline-danger">
+                                        <i class="fas fa-sign-out-alt fa-lg"></i> Logout
+                                    </button>
+                                </form>
+                            </li>
+                        </ul>
+                    </li>
                     @else
                     <li class="nav-item">
-                        <a class="nav-link custom-btn login-btn" href="{{ route('login') }}"><i
-                                class="fas fa-sign-in-alt fa-lg"></i> Login</a>
+                        <a class="nav-link custom-btn login-btn" href="{{ route('login') }}"><i class="fas fa-sign-in-alt fa-lg"></i> Login</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link custom-btn register-btn" href="{{ route('register') }}"><i
-                                class="fas fa-user-plus fa-lg"></i> Register</a>
+                        <a class="nav-link custom-btn register-btn" href="{{ route('register') }}"><i class="fas fa-user-plus fa-lg"></i> Register</a>
                     </li>
-                    @endauth
-
-                    <form action="{{ route('Commandes.index') }}" method="GET" class="ms-lg-2">
-                        <button type="submit" class="btn custom-btn">
-                            <i class="bi-cart-fill fa-lg me-1"></i>
-                            My Orders 
-                        </button>
-                    </form>
-
-                    <div class="ms-lg-2">
-                        @auth
-                        <div class="dropdown">
-                            <button class="btn custom-btn dropdown-toggle" type="button" id="userDropdown"
-                                data-bs-toggle="dropdown" aria-expanded="false">
-                                <i class="fas fa-user-alt fa-lg"></i> {{ auth()->user()->name }}
-                            </button>
-                            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
-                                <li><span class="dropdown-item"><strong>Email:</strong> {{ auth()->user()->email }}</span>
-                                </li>
-                                <li><hr class="dropdown-divider"></li>
-                                <li>
-                                    <form action="{{ route('logout') }}" method="POST">
-                                        @csrf
-                                        <button type="submit" class="dropdown-item btn btn-outline-danger"><i
-                                                class="fas fa-sign-out-alt fa-lg"></i> Logout</button>
-                                    </form>
-                                </li>
-                            </ul>
-                        </div>
-                        @endauth
-                    </div>
+                    @endguest
                 </ul>
             </div>
+    
+            <!-- Social media icons -->
+            <ul class="navbar-nav ml-auto">
+                <div class="d-flex align-items-center">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" title="Facebook"><i class="fab fa-facebook-f fa-2x"></i></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" title="Twitter"><i class="fab fa-twitter fa-2x"></i></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" title="Gmail"><i class="far fa-envelope fa-2x"></i></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" title="Instagram"><i class="fab fa-instagram fa-2x"></i></a>
+                    </li>
+                </div>
+            </ul>
         </div>
     </nav>
+    
     <div class="container">
         @if(session('success'))
         <div class="alert alert-success">
@@ -158,61 +169,56 @@
         <div class="col-md-10">
             <div class="container mt-5">
                 <div class="row">
-                    @forelse ($commands as $commend)
-                    @if ($commend->user_id === auth()->user()->id)
-                    <div class="col-md-6"> <!-- Start of column for one card -->
-                        <div class="card mb-3">
-                            <div class="row no-gutters">
-                                <div class="col-md-4">
-                                    <img src="{{ $commend->food ? Storage::url($commend->food->image) : ($commend->accessoir ? Storage::url($commend->accessoir->image) : Storage::url($commend->product->image)) }}" class="card-img" alt="Product Image">
-                                </div>
-                                <div class="col-md-8">
-                                    <div class="card-body">
-                                        @if ($commend->food)
-                                        <h5 class="card-title"><span class="badge bg-success">Food Name: {{ $commend->food->name }}</span></h5>
-                                        @elseif ($commend->accessoir)
-                                        <h5 class="card-title"><span class="badge bg-primary">Accessory Name: {{ $commend->accessoir->name }}</span></h5>
-                                        @elseif ($commend->product)
-                                        <h5 class="card-title"><span class="badge bg-info">Pet Name: {{ $commend->product->name }}</span></h5>
-                                        <p class="card-text">{{ $commend->product->description }}</p>
-                                        @endif
-                                        <p class="card-text">$ {{ $commend->food ? $commend->food->price : ($commend->accessoir ? $commend->accessoir->price : $commend->product->price) }} MAD</p>
-                                        <form action="{{ route('Commandes.destroy', $commend->id) }}" method="POST">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button class="btn btn-danger"><i class="fas fa-trash"></i> Remove</button>
-                                        </form>
+                    @forelse ($commands as $command)
+                        @if (auth()->check() && $command->user_id === auth()->user()->id)
+                            <div class="col-md-6"> 
+                                <div class="card mb-3">
+                                    <div class="row no-gutters">
+                                        <div class="col-md-4">
+                                            <img src="{{ $command->food ? Storage::url($command->food->image) : ($command->accessoir ? Storage::url($command->accessoir->image) : Storage::url($command->product->image)) }}" class="card-img" alt="Product Image">
+                                        </div>
+                                        <div class="col-md-8">
+                                            <div class="card-body">
+                                                @if ($command->food)
+                                                    <h5 class="card-title"><span class="badge bg-success">Food Name: {{ $command->food->name }}</span></h5>
+                                                @elseif ($command->accessoir)
+                                                    <h5 class="card-title"><span class="badge bg-primary">Accessory Name: {{ $command->accessoir->name }}</span></h5>
+                                                @elseif ($command->product)
+                                                    <h5 class="card-title"><span class="badge bg-info">Pet Name: {{ $command->product->name }}</span></h5>
+                                                    <p class="card-text">{{ Str::limit($command->product->description, 10) }}</p>
+                                                @endif
+                                                <p class="card-text">$ {{ $command->food ? $command->food->price : ($command->accessoir ? $command->accessoir->price : $command->product->price) }} MAD</p>
+                                                <form action="{{ route('Commandes.destroy', $command->id) }}" method="POST">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button class="btn btn-danger"><i class="fas fa-trash"></i> Remove</button>
+                                                </form>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                        </div>
-                    </div> <!-- End of column for one card -->
-                    @endif
+                            </div> 
+                      
+                        @endif
                     @empty
-                    <div class="col-md-6">
-                        <div class="card mt-3">
-                            <div class="card-body">
-                                <div class="alert alert-warning" role="alert">
-                                    You haven't placed any orders yet. Please proceed to make a purchase.
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                      
                     @endforelse
-                    @if($commands->isNotEmpty())
-                    <div class="col-md-12 mt-5 d-flex justify-content-end"> <!-- Start of column for checkout button -->
-                        <form action="{{ route('striptPayment') }}" method="POST">
-                            @csrf
-                            <input type="hidden" name="command_id" value="{{ $commands->first()->id }}">
-                            <button class="btn btn-success" type="submit">Checkout</button>
-                        </form>
-                    </div> <!-- End of column for checkout button -->
-                    @endif
+@if ($commands->count() > 0)
+<div class="col-md-12 mt-5 d-flex justify-content-end"> 
+    <form action="{{ route('striptPayment') }}" method="POST">
+        @csrf
+        <input type="hidden" name="commend_id" value="{{ optional($commands->first())->id }}">
+        <button class="btn btn-success" type="submit">Checkout</button>
+    </form>
+</div> 
+    
+@endif
                 </div>
             </div>
         </div>
     </div>
 </div>
+
 
 
 

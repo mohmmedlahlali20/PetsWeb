@@ -30,7 +30,7 @@ class PaymentsController extends Controller
     public function checkout(Request $request)
 {
     $userName = auth()->user()->name;
-    $commendId = $request->input('command_id');
+    $commendId = $request->input('commend_id');
     $foods = Food::all();
     $foodTotalAmount = 0;
 

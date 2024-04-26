@@ -163,5 +163,16 @@ class AdminController extends Controller
             return redirect()->back()->with('error', 'this command already cancled , or not exist in database ');
         }
     }
+
+
+    public function BanUser($id) {
+        $user = User::find($id);
+    
+  
+    
+        $user->delete();
+    
+        return redirect()->back()->with('success', 'User banned successfully');
+    }
     
 }

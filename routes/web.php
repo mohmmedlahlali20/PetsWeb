@@ -34,6 +34,7 @@ Route::post('/Commandes/foods', [CommendsController::class, 'storeFood'])->name(
 Route::post('/order/accessoir', [CommendsController::class, 'storeAccessoir'])->name('order.accessoir');
 Route::post('/Home' , [ProductsController::class, 'likeProduct'])->name('like.product');                                       
 Route::resource('/Food', FoodController::class);
+
 Route::middleware(['auth' , 'admin'])->group(function () {
   Route::resource('/category' , CategoriesController::class);
   Route::resource('/product', AdminController::class);
@@ -47,6 +48,7 @@ Route::middleware(['auth' , 'admin'])->group(function () {
   Route::get('/Food-data' ,  [FoodController::class , 'GetFood'])->name('food');
   Route::resource('/user', UserController::class);
   Route::get('/all-commends' , [AdminController::class,  'GetCommands'])->name('get.command');
+  Route::delete('users/{id}', [AdminController::class, 'BanUser'])->name('ban.user');
 });
 Route::prefix('auth')->group(function () {
     Route::get('/login', [AuthController::class, 'login'])->name('login');

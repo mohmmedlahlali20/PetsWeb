@@ -20,35 +20,7 @@
     <link href="{{asset('css/font-awesome.min.css')}}" rel="stylesheet" />
 </head>
 <style>
- .navbar {
-      background-color: #2c3e50; /* Dark blue background */
-      padding-top: 20px;
-      padding-bottom: 20px;
-    }
-    .navbar-brand {
-      font-weight: bold; /* Bold font for brand */
-      color: #fff; /* White text color */
-    }
-    .navbar-brand:hover {
-      color: #f39c12; /* Hover color for brand */
-    }
-    .navbar-nav .nav-link {
-      color: #fff; /* White text color for links */
-      padding-left: 20px;
-      padding-right: 20px;
-    }
-    .navbar-nav .nav-link:hover {
-      color: #f39c12; /* Hover color for links */
-    }
-    .navbar-toggler {
-      border-color: #fff; /* White border color for toggler */
-    }
-    .navbar-toggler-icon {
-      background-color: #fff; /* White background color for toggler icon */
-    }
-    .navbar-nav.text-inline .nav-item {
-  margin-right: 10px; /* Adjust spacing between icons */
-}
+
 </style>
 
 <body class="bg-bady">

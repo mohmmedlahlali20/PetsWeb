@@ -27,7 +27,6 @@ return new class extends Migration
             ->nullable()
             ->constrained('users')
             ->onDelete('cascade');  
-            //$table->bigInteger('likes')->default(0);
             $table->unsignedInteger('likes')->default(0);
             $table->timestamps();
             $table->softDeletes();

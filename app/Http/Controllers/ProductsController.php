@@ -35,7 +35,7 @@ class ProductsController extends Controller
         if (!empty($sex)) {
             $productsQuery->where('sex', $sex);
         }
-
+    
         if (!empty($age)) {
             if ($age == '2-6') {
                 $productsQuery->whereBetween('age', [2, 6]);
@@ -46,17 +46,17 @@ class ProductsController extends Controller
             }
         }
     
-
-        $products =  $productsQuery->orderBy('likes', 'DESC')->get();;
-//dd($products);
+        $products = $productsQuery->orderBy('created_at', 'DESC')->get();
+    
         $categories = Categories::with('Products')->has('Products')->get();
-
+    
         $userId = Auth::id();
         $userCommandCount = commends::where('user_id', $userId)->count();
-        
+    
               
         return view('welcome', compact('products', 'categories' , 'userCommandCount'));
     }
+    
 
 
 
@@ -115,18 +115,22 @@ class ProductsController extends Controller
     }
 
 
-  
-public function likeProduct(Request $request) {
-    $request->validate([
-        'product_id' => 'required|exists:products,id',
-    ]);
+    public function likeProduct(Request $request) {
+        if (!Auth::check()) {
+            return redirect()->route('login')->with('error', 'Vous devez vous connecter pour liker un produit.');
+        }
     
-    $product = Products::findOrFail($request->product_id);
+        $request->validate([
+            'product_id' => 'required|exists:products,id',
+        ]);
     
-    $product->increment('likes'); 
-
-    return  redirect()->back();
-}
+        $product = Product::findOrFail($request->product_id);
+    
+        $product->increment('likes');
+    
+        return redirect()->back();
+    }
+    
     
     
 }

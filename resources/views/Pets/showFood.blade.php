@@ -19,77 +19,88 @@
 </head>
 
 <body>
-    <nav class="navbar  navbar-expand-lg navbar-light rbg-nav">
-        <div class="container">
-            <a class="navbar-brand" href="{{ route('Home.index') }}">
-                <img src="{{asset('assets/images/logo.jpg')}}" alt="Logo" class="logo">
-            </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+    <nav class="navbar navbar-expand-lg ">
+        <div class="container container-fluid">
+            <a class="navbar-brand" href="{{ route('firstPage') }}"><i class="fas fa-home"></i> PETSWEB</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
                 aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
                 <span class="navbar-toggler-icon"></span>
                 <span class="navbar-toggler-icon"></span>
             </button>
+    
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <form class="d-flex" method="get">
-                    <span class="input-group-addon"><i class="bx bxs-map"></i></span>
-                    <input type="search" class="form-control" name="query" placeholder="Search">
-                    &nbsp;
-                    <div class="input-group-append">
-                        <button class="btn btn-primary" type="submit">Search</button>
-                    </div>
-                </form>
-                <ul class="navbar-nav ms-auto mb-2 mb-lg-0 me-2">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="#"><i class="fas fa-home"></i> Home <span class="sr-only">(current)</span></a>
+                    </li>
                     @auth
                     @if(Auth::user()->role == 'admin')
-                    <li class="nav-item ms-lg-2">
-                        <a class="nav-link dashboard-link custom-btn" href="{{ route('product.index') }}">Dashboard</a>
+                    <li class="nav-item active">
+                        <a class="nav-link" href="{{ route('product.index') }}"><i class="fas fa-home"></i> Dashboard <span class="sr-only">(current)</span></a>
                     </li>
                     @endif
+                    @endauth
+                    @auth
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('profile') }}"><i class="fas fa-images"></i> Profile</a>
+                    </li>
+                    <li class="nav-item">
+                        <form action="{{ route('Commandes.index') }}" method="GET">
+                            <button type="submit" class="btn custom-btn">
+                                <i class="bi-cart-fill fa-lg me-1"></i>
+                                My Orders ({{ $userCommandCount }})
+                            </button>
+                        </form>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link custom-btn dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <i class="fas fa-user-alt fa-lg"></i> {{ auth()->user()->name }}
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
+                            <li><span class="dropdown-item"><strong>Email:</strong> {{ auth()->user()->email }}</span></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li>
+                                <form action="{{ route('logout') }}" method="POST">
+                                    @csrf
+                                    <button type="submit" class="dropdown-item btn btn-outline-danger">
+                                        <i class="fas fa-sign-out-alt fa-lg"></i> Logout
+                                    </button>
+                                </form>
+                            </li>
+                        </ul>
+                    </li>
                     @else
                     <li class="nav-item">
-                        <a class="nav-link custom-btn login-btn" href="{{ route('login') }}"><i
-                                class="fas fa-sign-in-alt fa-lg"></i> Login</a>
+                        <a class="nav-link custom-btn login-btn" href="{{ route('login') }}"><i class="fas fa-sign-in-alt fa-lg"></i> Login</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link custom-btn register-btn" href="{{ route('register') }}"><i
-                                class="fas fa-user-plus fa-lg"></i> Register</a>
+                        <a class="nav-link custom-btn register-btn" href="{{ route('register') }}"><i class="fas fa-user-plus fa-lg"></i> Register</a>
                     </li>
-                    @endauth
-
-                    <form action="{{ route('Commandes.index') }}" method="GET" class="ms-lg-2">
-                        <button type="submit" class="btn custom-btn">
-                            <i class="bi-cart-fill fa-lg me-1"></i>
-                            My Orders 
-                        </button>
-                    </form>
-
-                    <div class="ms-lg-2">
-                        @auth
-                        <div class="dropdown">
-                            <button class="btn custom-btn dropdown-toggle" type="button" id="userDropdown"
-                                data-bs-toggle="dropdown" aria-expanded="false">
-                                <i class="fas fa-user-alt fa-lg"></i> {{ auth()->user()->name }}
-                            </button>
-                            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
-                                <li><span class="dropdown-item"><strong>Email:</strong> {{ auth()->user()->email }}</span>
-                                </li>
-                                <li><hr class="dropdown-divider"></li>
-                                <li>
-                                    <form action="{{ route('logout') }}" method="POST">
-                                        @csrf
-                                        <button type="submit" class="dropdown-item btn btn-outline-danger"><i
-                                                class="fas fa-sign-out-alt fa-lg"></i> Logout</button>
-                                    </form>
-                                </li>
-                            </ul>
-                        </div>
-                        @endauth
-                    </div>
+                    @endguest
                 </ul>
             </div>
+    
+            <!-- Social media icons -->
+            <ul class="navbar-nav ml-auto">
+                <div class="d-flex align-items-center">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" title="Facebook"><i class="fab fa-facebook-f fa-2x"></i></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" title="Twitter"><i class="fab fa-twitter fa-2x"></i></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" title="Gmail"><i class="far fa-envelope fa-2x"></i></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" title="Instagram"><i class="fab fa-instagram fa-2x"></i></a>
+                    </li>
+                </div>
+            </ul>
         </div>
     </nav>
+    
 
 
     <section class="py-5">

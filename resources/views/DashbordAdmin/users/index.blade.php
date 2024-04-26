@@ -14,7 +14,7 @@
                 <th scope="col">Provider</th>
                 <th scope="col">Orders Count</th>
                 <th scope="col">Created At</th>
-           
+                <th scope="col" >Actions</th>
             </tr>
         </thead>
         <tbody>
@@ -37,10 +37,17 @@
                 <td>{{ $user->provider }}</td>
                 <td>{{ $user->commands()->count() }}</td> 
                 <td>{{ $user->created_at }}</td>
+                <td>
+                    <form action="{{ route('ban.user' ,  $user->id) }}" method="POST">
+                        @csrf
+                        @method('DELETE')
+                        <button class="btn btn-danger">cancel</button>
+                    </form>
+                </td>
             </tr>
             @empty
             <tr>
-                <td colspan="8" align="center">No users exist</td>
+                <td colspan="9" align="center">No users exist</td>
             </tr>
             @endforelse
         </tbody>
