@@ -66,7 +66,7 @@
                         @endif
                     </td>
                     <td>{{ $product->sex }}</td>           
-                    <td>{{ $product->age }}</td>
+                    <td>{{ $product->age }}Months</td>
                     <td>{{ $product->created_at }}</td>
                     <td>
                         <form action="{{ route('product.destroy', $product->id) }}" method="POST">

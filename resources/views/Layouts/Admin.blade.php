@@ -296,6 +296,20 @@
                     </div>
                     @endif
                 </div>
+
+                @if ($errors->any())
+                <div  id="" class="alert alert-danger">
+                @foreach ($errors->all() as $error)
+          
+                    <ul>
+                        <li>
+                            {{ $error }}
+                        </li>
+                    </ul>
+             
+                @endforeach
+            </div>
+            @endif
                 
 
                 @yield('content')

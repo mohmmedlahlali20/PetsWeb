@@ -203,7 +203,6 @@
       <div class="row">
           <div class="col-lg-6 mx-auto">
 
-              <!-- CUSTOM BLOCKQUOTE -->
               <blockquote class="blockquote blockquote-custom bg-white p-5 shadow rounded">
                 <div class="blockquote-custom-icon bg-info shadow-sm"><i class="fa fa-paw text-white"></i></div>
                 <p class="mb-0 mt-2 font-italic">"Pets leave paw prints on our hearts, forever and always. They're not just animals; they're family."</p>
@@ -219,27 +218,36 @@
   <div class="container">
       <h2 class="text-center">Frequently Asked Questions</h2>
       <div class="row">
-          <div class="col-lg-4">
-              <div class="faq-item">
-                  <img src="{{ asset('assets/images/HomePage7.jpeg') }}" alt="FAQ Image 1">
-                  <h3>How do I get started with your product?</h3>
-                  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum varius ex vel ex fermentum, ut ullamcorper justo rhoncus.</p>
+          <div class="col-lg-4 ">
+              <div class="card" style="width: 25rem; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);">
+                <img src="{{ asset('assets/images/HomePage7.jpeg') }}" class="card-img-top" alt="...">
+                <div class="card-body">
+                  <h5 class="card-title">How do I get started with your product?</h5>
+                  <p class="card-text">Nullam vel mauris sit amet neque ultricies varius. Nulla facilisi. Vestibulum auctor urna nec tellus aliquet, nec pulvinar metus convallis.</p>
+                </div>
               </div>
           </div>
-          <div class="col-lg-4">
-              <div class="faq-item">
-                  <img src="{{ asset('assets/images/HomePage8.jpeg')  }}" alt="FAQ Image 2">
-                  <h3>What payment methods do you accept?</h3>
-                  <p>Nullam vel mauris sit amet neque ultricies varius. Nulla facilisi. Vestibulum auctor urna nec tellus aliquet, nec pulvinar metus convallis.</p>
-              </div>
-          </div>
-          <div class="col-lg-4">
-            <div class="faq-item">
-                <img src="{{ asset('assets/images/HomePage9.jpeg') }}" alt="FAQ Image 3">
-                <h3>How can I contact support?</h3>
-                <p>Phasellus sed elit id ipsum tincidunt dapibus. Sed vel mi ut lacus condimentum tristique. Fusce sollicitudin sapien in ipsum molestie.</p>
+           
+              <div class="col-lg-4 ">
+                <div class="card" style="width: 25rem; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);">
+                  <img src="{{ asset('assets/images/HomePage8.jpeg') }}" class="card-img-top" alt="...">
+                  <div class="card-body">
+                    <h5 class="card-title">How do I get started with your product?</h5>
+                    <p class="card-text">Nullam vel mauris sit amet neque ultricies varius. Nulla facilisi. Vestibulum auctor urna nec tellus aliquet, nec pulvinar metus convallis.</p>
+                  </div>
+                </div>
             </div>
-          </div>
+         
+           
+            <div class="col-lg-4 ">
+              <div class="card" style="width: 25rem; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);">
+                <img src="{{ asset('assets/images/HomePage9.jpeg') }}" class="card-img-top" alt="...">
+                <div class="card-body">
+                  <h5 class="card-title">How can I contact support?</h5>
+                  <p class="card-text">Nullam vel mauris sit amet neque ultricies varius. Nulla facilisi. Vestibulum auctor urna nec tellus aliquet, nec pulvinar metus convallis.</p>
+                </div>
+           </div>
+        </div>
       </div>
   </div>
 </section>
