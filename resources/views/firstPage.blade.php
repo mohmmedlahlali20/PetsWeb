@@ -13,30 +13,30 @@
   <style>
     
     .navbar {
-      background-color: #2c3e50; /* Dark blue background */
+      background-color: #2c3e50; 
       padding-top: 20px;
       padding-bottom: 20px;
     }
     .navbar-brand {
-      font-weight: bold; /* Bold font for brand */
-      color: #fff; /* White text color */
+      font-weight: bold; 
+      color: #fff; 
     }
     .navbar-brand:hover {
-      color: #f39c12; /* Hover color for brand */
+      color: #f39c12; 
     }
     .navbar-nav .nav-link {
-      color: #fff; /* White text color for links */
+      color: #fff; 
       padding-left: 20px;
       padding-right: 20px;
     }
     .navbar-nav .nav-link:hover {
-      color: #f39c12; /* Hover color for links */
+      color: #f39c12; 
     }
     .navbar-toggler {
-      border-color: #fff; /* White border color for toggler */
+      border-color: #fff; 
     }
     .navbar-toggler-icon {
-      background-color: #fff; /* White background color for toggler icon */
+      background-color: #fff; 
     }
 
   </style>
@@ -82,7 +82,7 @@
                     <li>
                         <form action="{{ route('logout') }}" method="POST">
                             @csrf
-                            <button type="submit" class="dropdown-item btn btn-outline-danger">
+                            <button type="submit" onclick="return confirm('please stay')" class="dropdown-item btn btn-outline-danger">
                                 <i class="fas fa-sign-out-alt fa-lg"></i> Logout
                             </button>
                         </form>

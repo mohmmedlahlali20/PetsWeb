@@ -108,19 +108,17 @@
           <div class="collapse navbar-collapse" id="navbarSupportedContent">
               <ul class="navbar-nav ml-auto">
                   <li class="nav-item active">
-                      <a class="nav-link" href="#"><i class="fas fa-home"></i> Home <span class="sr-only">(current)</span></a>
+                      <a class="nav-link" href="{{ route('Home.index') }}"><i class="fas fa-home"></i> Home</a>
                   </li>
                   @auth
                   @if(Auth::user()->role == 'admin')
                   <li class="nav-item active">
-                      <a class="nav-link" href="{{ route('product.index') }}"><i class="fas fa-home"></i> Dashboard <span class="sr-only">(current)</span></a>
+                      <a class="nav-link" href="{{ route('product.index') }}"><i class="fas fa-home"></i> Dashboard </a>
                   </li>
                   @endif
                   @endauth
                   @auth
-                  <li class="nav-item">
-                      <a class="nav-link" href="{{ route('profile') }}"><i class="fas fa-images"></i> Profile</a>
-                  </li>
+                 
                   <li class="nav-item">
                       <form action="{{ route('Commandes.index') }}" method="GET">
                           <button type="submit" class="btn custom-btn">
@@ -130,22 +128,28 @@
                       </form>
                   </li>
                   <li class="nav-item dropdown">
-                      <a class="nav-link custom-btn dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                          <i class="fas fa-user-alt fa-lg"></i> {{ auth()->user()->name }}
-                      </a>
-                      <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
-                          <li><span class="dropdown-item"><strong>Email:</strong> {{ auth()->user()->email }}</span></li>
-                          <li><hr class="dropdown-divider"></li>
-                          <li>
-                              <form action="{{ route('logout') }}" method="POST">
-                                  @csrf
-                                  <button type="submit" class="dropdown-item btn btn-outline-danger">
-                                      <i class="fas fa-sign-out-alt fa-lg"></i> Logout
-                                  </button>
-                              </form>
-                          </li>
-                      </ul>
-                  </li>
+                    <a class="nav-link custom-btn dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <i class="fas fa-user-alt fa-lg"></i> {{ auth()->user()->name }}
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
+                        <li><span class="dropdown-item"><strong>Email:</strong> {{ auth()->user()->email }}</span></li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li>
+                            <form action="{{ route('logout') }}" method="POST">
+                                @csrf
+                                <button type="submit" class="dropdown-item btn btn-outline-danger">
+                                    <i class="fas fa-sign-out-alt fa-lg"></i> Logout
+                                </button>
+                            </form>
+                        </li>
+                        <li class="nav-item">
+                            <span class="dropdown-item">
+                                <a class="dropdown-item" href="{{ route('profile') }}"><i class="fas fa-user"></i> Profile</a>
+                            </span>
+                        </li>
+                    </ul>
+                </li>
+                
                   @else
                   <li class="nav-item">
                       <a class="nav-link custom-btn login-btn" href="{{ route('login') }}"><i class="fas fa-sign-in-alt fa-lg"></i> Login</a>
@@ -223,7 +227,7 @@
                 <x-accessoir :Accessoir="$Accessoir" />
                 @endif
             </div>
-            <div class="col-lg-2 bg-b">
+            <div class="col-lg-2 ">
                 <div class="left_sidebar_area">
                     <aside class="left_widgets p_filter_widgets">
                         <div class="l_w_title">
@@ -303,7 +307,7 @@
     </section>
     <div class="container-fluid bg-dark text-light">
         <footer>
-            <div class="row my-5 justify-content-center py-5">
+            <div class="row  justify-content-center py-5">
                 <div class="col-lg-11">
                     <div class="row">
                         <div class="col-xl-8 col-md-4 col-sm-4 col-12 my-auto mx-auto">

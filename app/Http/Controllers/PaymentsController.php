@@ -65,7 +65,7 @@ class PaymentsController extends Controller
                     'currency' => 'MAD',
                     'unit_amount' => $totalAmount * 100, 
                     'product_data' => [
-                        'name' => 'One piece 3amek',
+                        'name' => 'Paid for your commend',
                     ],
                 ],
                 'quantity' => 1,

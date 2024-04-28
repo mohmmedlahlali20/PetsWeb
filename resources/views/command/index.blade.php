@@ -53,12 +53,12 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item active">
-                        <a class="nav-link" href="#"><i class="fas fa-home"></i> Home <span class="sr-only">(current)</span></a>
+                        <a class="nav-link" href="{{ route('Home.index') }}"><i class="fas fa-home"></i> Home</a>
                     </li>
                     @auth
                     @if(Auth::user()->role == 'admin')
                     <li class="nav-item active">
-                        <a class="nav-link" href="{{ route('product.index') }}"><i class="fas fa-home"></i> Dashboard <span class="sr-only">(current)</span></a>
+                        <a class="nav-link" href="{{ route('product.index') }}"><i class="fas fa-home"></i> Dashboard</a>
                     </li>
                     @endif
                     @endauth
@@ -129,95 +129,87 @@
         </div>
         @endif
     </div>
-    @if (session('isPayed'))
-    <div class="container mt-5 d-flex justify-content-center">
-        <div class="card p-4 mt-3">
-           <div class="first d-flex justify-content-between align-items-center mb-3">
-             <div class="info">
-                 <span class="d-block name">Thank you, Alex</span>
-                 <span class="order">Order - 4554645</span>
-                  
-             </div>
-            
-              <img src="https://i.imgur.com/NiAVkEw.png" width="40"/>
-               
  
-           </div>
-               <div class="detail">
-           <span class="d-block summery">Your order has been dispatched. we are delivering you order.</span>
-               </div>
-           <hr>
-           <div class="text">
-         <span class="d-block new mb-1" >Alex Dorlew</span>
-          </div>
-         <span class="d-block address mb-3">672 Conaway Street Bryantiville Massachusetts 02327</span>
-           <div class="  money d-flex flex-row mt-2 align-items-center">
-             <img src="https://i.imgur.com/ppwgjMU.png" width="20" />
-         
-             <span class="ml-2">Cash on Delivery</span> 
- 
-                </div>
-                <div class="last d-flex align-items-center mt-3">
-                 <span class="address-line">CHANGE MY DELIVERY ADDRESS</span>
- 
-                </div>
-         </div>
-     </div>
-@endif
-<div class="container mt-5 mb-5">
-    <div class="row justify-content-center">
-        <div class="col-md-10">
-            <div class="container mt-5">
-                <div class="row">
+
+    <div class="container mt-5 mb-5">
+        <div class="row justify-content-center">
+            <div class="col-md-10">
+                <div class="container mt-5">
+                    <h2 class="text-center mb-4">Liste des commandes</h2>
                     @forelse ($commands as $command)
                         @if (auth()->check() && $command->user_id === auth()->user()->id)
-                            <div class="col-md-6"> 
-                                <div class="card mb-3">
-                                    <div class="row no-gutters">
-                                        <div class="col-md-4">
-                                            <img src="{{ $command->food ? Storage::url($command->food->image) : ($command->accessoir ? Storage::url($command->accessoir->image) : Storage::url($command->product->image)) }}" class="card-img" alt="Product Image">
-                                        </div>
-                                        <div class="col-md-8">
-                                            <div class="card-body">
+                            <div class="card mb-3">
+                                <div class="row no-gutters">
+                                    <div class="col-md-4">
+                                        <img src="{{ $command->food ? Storage::url($command->food->image) : ($command->accessoir ? Storage::url($command->accessoir->image) : Storage::url($command->product->image)) }}" class="card-img" alt="Product Image">
+                                    </div>
+                                    <div class="col-md-8">
+                                        <div class="card-body">
+                                            <h5 class="card-title">
                                                 @if ($command->food)
-                                                    <h5 class="card-title"><span class="badge bg-success">Food Name: {{ $command->food->name }}</span></h5>
+                                                    <span class="badge bg-success">Food Name: {{ $command->food->name }}</span>
                                                 @elseif ($command->accessoir)
-                                                    <h5 class="card-title"><span class="badge bg-primary">Accessory Name: {{ $command->accessoir->name }}</span></h5>
+                                                    <span class="badge bg-primary">Accessory Name: {{ $command->accessoir->name }}</span>
                                                 @elseif ($command->product)
-                                                    <h5 class="card-title"><span class="badge bg-info">Pet Name: {{ $command->product->name }}</span></h5>
+                                                    <span class="badge bg-info">Pet Name: {{ $command->product->name }}</span>
                                                     <p class="card-text">{{ Str::limit($command->product->description, 10) }}</p>
+
                                                 @endif
-                                                <p class="card-text">$ {{ $command->food ? $command->food->price : ($command->accessoir ? $command->accessoir->price : $command->product->price) }} MAD</p>
-                                                <form action="{{ route('Commandes.destroy', $command->id) }}" method="POST">
-                                                    @csrf
-                                                    @method('DELETE')
-                                                    <button class="btn btn-danger"><i class="fas fa-trash"></i> Remove</button>
-                                                </form>
-                                            </div>
+                                            </h5>
+                                            <p class="card-text">$ {{ $command->food ? $command->food->price : ($command->accessoir ? $command->accessoir->price : $command->product->price) }} MAD</p>
+                                            <form action="{{ route('Commandes.destroy', $command->id) }}" method="POST">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button class="btn btn-danger"><i class="fas fa-trash"></i> Remove</button>
+                                            </form>
                                         </div>
                                     </div>
                                 </div>
-                            </div> 
-                      
+                            </div>
                         @endif
                     @empty
-                      
+                        <div class="col-md-12 mt-5 d-flex justify-content-center">
+                            <div class="card p-4 mt-3">
+                                <div class=" d-flex justify-content-between align-items-center mb-3">
+                                    <div class="info">
+                                        <span class="d-block name">Thank you, {{ auth()->user()->name }}</span>
+                                        <span class="order">Order - 4554645</span>
+                                    </div>
+                                    <img src="{{ auth()->user()->image ? Storage::url(auth()->user()->image) : asset('assets/images/avatar.png') }}" width="80" class="rounded circle    " alt="User Image"/>
+                                </div>
+                                <div class="detail">
+                                    <span class="d-block summery">Your order has been dispatched. We are delivering your order.</span>
+                                </div>
+                                <hr>
+                                <div class="text">
+                                    <span class="d-block new mb-1">{{ auth()->user()->name }}</span>
+                                </div>
+                                <span class="d-block address mb-3">{{ auth()->user()->email }}</span>
+                                <div class="money d-flex flex-row mt-2 align-items-center">
+                                    <img src="https://i.imgur.com/ppwgjMU.png" width="20" />
+                                    <span class="ml-2">Cash on Delivery</span> 
+                                </div>
+                                <div class="last d-flex align-items-center mt-3">
+                                    <span class="address-line">CHANGE MY DELIVERY ADDRESS</span>
+                                </div>
+                            </div>
+                        </div>
                     @endforelse
-@if ($commands->count() > 0)
-<div class="col-md-12 mt-5 d-flex justify-content-end"> 
-    <form action="{{ route('striptPayment') }}" method="POST">
-        @csrf
-        <input type="hidden" name="commend_id" value="{{ optional($commands->first())->id }}">
-        <button class="btn btn-success" type="submit">Checkout</button>
-    </form>
-</div> 
-    
-@endif
+                    @if ($commands->count() > 0)
+                        <div class="col-md-12 mt-5 d-flex justify-content-end"> 
+                            <form action="{{ route('striptPayment') }}" method="POST">
+                                @csrf
+                                <input type="hidden" name="commend_id" value="{{ optional($commands->first())->id }}">
+                                <button class="btn btn-success" type="submit">Checkout</button>
+                            </form>
+                        </div>
+                    @endif
                 </div>
             </div>
         </div>
     </div>
-</div>
+    
+    
 
 
 
@@ -226,7 +218,7 @@
 
 
 
-    </footer>
+    
     <!-- Bootstrap core JS-->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
     <!-- Core theme JS-->
