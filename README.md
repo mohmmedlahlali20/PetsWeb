@@ -1,49 +1,35 @@
-<style>
-    body {
-      font-family: Arial, sans-serif;
-      margin: 0;
-      padding: 0;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-      background-color: #f4f4f4;
-    }
-    .queue {
-      background-color: #fff;
-      padding: 20px;
-      border-radius: 8px;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    }
-    h1 {
-      text-align: center;
-    }
-    .queue-form {
-      text-align: center;
-    }
-    .queue-form input[type="email"] {
-      padding: 10px;
-      margin: 10px;
-      width: 300px;
-      border-radius: 4px;
-      border: 1px solid #ccc;
-    }
-    .queue-form input[type="submit"] {
-      padding: 10px 20px;
-      border: none;
-      background-color: #4CAF50;
-      color: white;
-      border-radius: 4px;
-      cursor: pointer;
-    }
-  </style>
-</head>
-<body>
-  <div class="queue">
-    <h1>Inscrivez-vous pour être informé de l'ouverture du site web PET'S</h1>
-    <p>Nous vous enverrons un e-mail dès que notre site web e-commerce de produits pour animaux de compagnie sera lancé!</p>
-    <form class="queue-form" action="inscription.php" method="post">
-      <input type="email" name="email" placeholder="Votre adresse e-mail" required>
-      <input type="submit" value="S'inscrire">
-    </form>
-  </div>
+# File d'attente pour le site web e-commerce PET'S
+
+Ce projet consiste en une simple page web permettant aux utilisateurs de s'inscrire pour être informés de l'ouverture du site web e-commerce PET'S, spécialisé dans les produits pour animaux de compagnie.
+
+## Fonctionnalités
+
+- Les utilisateurs peuvent saisir leur adresse e-mail dans le formulaire pour s'inscrire.
+- Lorsque les utilisateurs s'inscrivent, leurs adresses e-mail sont envoyées à un script backend pour traitement.
+- L'objectif principal est d'informer les utilisateurs dès que le site web PET'S sera lancé.
+
+## Technologies utilisées
+
+- HTML
+- CSS
+-MySql
+-laravel
+
+## Comment utiliser
+
+1. Clonez ce dépôt sur votre machine locale.
+2. Ouvrez le folder `ressource` dans votre navigateur web.
+3. Remplissez le formulaire avec votre adresse e-mail et cliquez sur le bouton "register".
+
+#
+
+## Auteur
+
+Ce projet a été réalisé par [Mohammed Lahlali][def].
+
+---
+
+**Remarque :** Ce projet a été créé à des fins éducatives et démonstratives uniquement. Il peut être étendu pour inclure davantage de fonctionnalités telles que la gestion des abonnements par e-mail, l'intégration avec des services tiers pour l'envoi d'e-mails, etc.
+
+
+[def]: https://github.com/mohmmedlahlali20/PetsWeb
