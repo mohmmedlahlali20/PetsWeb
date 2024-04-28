@@ -32,4 +32,4 @@ Ce projet a été réalisé par [Mohammed Lahlali][def].
 **Remarque :** Ce projet a été créé à des fins éducatives et démonstratives uniquement. Il peut être étendu pour inclure davantage de fonctionnalités telles que la gestion des abonnements par e-mail, l'intégration avec des services tiers pour l'envoi d'e-mails, etc.
 
 
-[def]: https://github.com/mohmmedlahlali20/PetsWeb
+[def]: https://github.com/mohmmedlahlali20
