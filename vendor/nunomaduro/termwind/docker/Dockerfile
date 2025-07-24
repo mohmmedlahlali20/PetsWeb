@@ -1,4 +1,4 @@
-FROM php:8.2-cli-alpine
+FROM php:8.4.8RC1-cli-alpine
 
 # INSTALL AND UPDATE COMPOSER
 COPY --from=composer /usr/bin/composer /usr/bin/composer
